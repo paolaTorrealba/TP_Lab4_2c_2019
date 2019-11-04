@@ -10,7 +10,7 @@ export const environment = {
     databaseURL: "https://comanda-7ba72.firebaseio.com",
     projectId: "comanda-7ba72",
     storageBucket: "comanda-7ba72.appspot.com",
-    messagingSenderId: "328971608295"
+    messagingSenderId: "328971608295",
    
   }
 };

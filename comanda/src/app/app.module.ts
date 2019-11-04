@@ -2,6 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, InjectionToken } from '@angular/core';
 import { environment } from '../environments/environment';
 import { AppRoutingModule } from './app-routing.module';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { AngularFireModule } from '@angular/fire';
@@ -35,6 +36,8 @@ import { LoginComponent } from './componentes/login/login.component';
 import { RegistroComponent } from './componentes/registro/registro.component';
 import { ListaDeEsperaComponent } from './componentes/lista-de-espera/lista-de-espera.component';
 import { HttpClientModule } from '@angular/common/http';
+import { CabeceraComponent } from './componentes/cabecera/cabecera.component';
+import { PieComponent } from './componentes/pie/pie.component';
 
 
 
@@ -63,9 +66,13 @@ import { HttpClientModule } from '@angular/common/http';
     AltaDeClienteComponent,
     LoginComponent,
     RegistroComponent,
-    ListaDeEsperaComponent
+    ListaDeEsperaComponent,
+    CabeceraComponent,
+    PieComponent
   ],
   imports: [
+    FormsModule,
+    ReactiveFormsModule,
     BrowserModule,
     AppRoutingModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),

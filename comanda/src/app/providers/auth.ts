@@ -5,18 +5,31 @@ import { map } from "rxjs/operators";
 import { HttpClient } from '@angular/common/http';
 
 
+export enum perfil {
+  cliente = 'cliente',
+  empleado = 'empleado',
+  socio = 'socio',
+ 
+}
+
+export enum actividad {
+  bartender = 'bartender',
+  cocinero = 'cocinero',
+  cervecero = 'cervezero',
+  mozo = 'mozo'
+}
 export interface usuario {
   correo:string,
   foto:string,
-  tipo:string,
   logueado:boolean,
-  estado:string,
+  activo:boolean,
   dni:string,
   cuil:string,
   nombre:string,
   apellido:string,
   id: string,
   clave: string,
+  perfil:string
 }
 
 export interface mesa {
@@ -161,13 +174,32 @@ export interface chat {
 
 @Injectable()
 export class AuthProvider {
-
+  perfil: perfil;
+  actividad:actividad;
+  empleado:'empleado';
   constructor(private auth: AngularFireAuth,
    private db:AngularFirestore, 
    private http: HttpClient) {
 
   }
 
+  usuarioVacio(){   
+      return {
+          id: '',
+          nombre: '',
+          apellido: '',
+          cuil: '',
+          correo: '',
+          tipo: '',
+          logueado: false,
+          activo: false,
+          dni: '',
+          foto: '',
+          clave: '',
+          Perfil: "cliente"
+      }
+  
+  }
  
   login (email:string,pass:string) {
     return this.auth.auth.signInWithEmailAndPassword(email,pass);
