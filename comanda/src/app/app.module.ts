@@ -38,7 +38,7 @@ import { ListaDeEsperaComponent } from './componentes/lista-de-espera/lista-de-e
 import { HttpClientModule } from '@angular/common/http';
 import { CabeceraComponent } from './componentes/cabecera/cabecera.component';
 import { PieComponent } from './componentes/pie/pie.component';
-
+import { BotonSeleccionadoDirectiva } from '../app/directivas/boton-seleccionado-directiva';
 
 
 
@@ -68,7 +68,8 @@ import { PieComponent } from './componentes/pie/pie.component';
     RegistroComponent,
     ListaDeEsperaComponent,
     CabeceraComponent,
-    PieComponent
+    PieComponent,
+    BotonSeleccionadoDirectiva,
   ],
   imports: [
     FormsModule,

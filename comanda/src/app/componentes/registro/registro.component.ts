@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, ElementRef, ɵConsole } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { finalize } from 'rxjs/operators';
 import { Observable, empty } from 'rxjs';
 import { AngularFireStorage } from '@angular/fire/storage';
@@ -62,7 +62,7 @@ export class RegistroComponent implements OnInit {
       let data = {
       'nombre':this.nombreModel,
       'apellido': this.apellidoModel,
-      'foto': this.urlImagen,
+      'foto': this.imagenUrl,
       'perfil': 'cliente',
       'activo': false,
       'logueado': false,
