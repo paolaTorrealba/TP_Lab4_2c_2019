@@ -28,68 +28,108 @@ import { LoginComponent } from '../login/login.component';
 })
 export class PrincipalComponent implements OnInit {
   acciones: Array<any> = [];
-  usuario;
+  public email;
+  public usuario;
+  public usuarios;
+  public perfil;
   constructor( private router: Router,    
-    private auth: AuthProvider,
-   ) {
-      this.usuario=JSON.parse(localStorage.getItem("usuario"));  
-      
-      
-      console.log(this.usuario.tipo);
-      switch(this.usuario.tipo) {
-        case "cocinero":
-        case "bartender":
-          this.acciones = [
-            { accion: "Pedidos Pendientes", img: "bandeja.png", ruta: PedidosPendientesComponent },
-            { accion: "Nuevo producto", img: "producto.png", ruta: AltaDeProductoComponent },
-            { accion: "Encuesta empleado", img: "encuesta.jpg", ruta: EncuestaEmpleadoComponent },
-          ];        
-          break;
-        case "supervisor":
-          this.acciones = [ 
-            { accion: "Agregar un empleado", img: "nuevo-empleado.jpg", ruta: AltaEmpleadoComponent },
-            { accion: "Nuevo Supervisor", img: "nuevo-empleado.jpg", ruta: AltaSupervisorComponent },
-            { accion: "Confeccionar y ver encuestas", img: "encuesta.jpg", ruta: ListadoSupervisorComponent },
-            { accion: "Nueva mesa", img: "ocupar-mesa.jpg", ruta: AltaDeMesaComponent },
-            { accion: "Ver Estado de Registro de Clientes", img: "nuevo-empleado.jpg", ruta: ListaClientesEstadoComponent },  // quitar despues, es solo para prueba
-            { accion: "Confirmar reservas", img: "reserva.jpg", ruta: ListadoReservaComponent },
-            { accion: "Confirmar pedido por delivery", img: "repartidor.png", ruta: ConfirmarDeliveryComponent },
-          ];
-          break;
-        case "cliente anonimo":
-          this.acciones = [
-            { accion: "Leer código QR", img: "qr.jpg", ruta: HomeClienteComponent },
-           
-          ];
-          break;
-        case "cliente":
-          this.acciones = [
-            { accion: "Reservar", img: "reserva.jpg", ruta: ReservaComponent },
-            { accion: "Leer código QR", img: "qr.jpg", ruta: HomeClienteComponent },
-            { accion: "Pedir platos y bebidas", img: "pedido.jpg", ruta: PedirPlatosComponent},
-            { accion: "Pedir por delivery", img: "pedido.jpg", ruta: PedirPlatosComponent},
-            // { accion: "Estado pedido delivery y chat con el repartidor", img: "chat.png", ruta: MapaRutaComponent},
-            // { accion: "Juego Adivina", img: "ahorcado.png", ruta: JuegoAdivinaNumeroComponent }
-           
-            
-          ];
-          break;
-        case "mozo": 
-          this.acciones = [
-            { accion: "Tomar pedido", img: "pedido.jpg", ruta: ListadoMesasComponent},
-            { accion: "Aceptar/Entregar pedido", img: "pedido.jpg", ruta: ConfirmarPedidoComponent},
-            { accion: "Aceptar clientes en lista de espera", img: "qr.jpg", ruta: ListadoClientesComponent},
-            { accion: "Encuesta empleado", img: "encuesta.jpg", ruta: EncuestaEmpleadoComponent },
-          ]
-          break;
-        case 'repartidor':
-            this.acciones = [
-              // { accion: "Mapa ruta", img: "mapa.jpg", ruta: MapaRutaComponent},
-            ]
+    private auth: AuthProvider) {
+
+      this.email=localStorage.getItem("usuarioComanda");  
+      console.log("email del localstorage", this.email);
+      this.auth.getLista('usuarios').subscribe(lista => {
+        this.usuarios=lista;   
+        console.log("usuarios: ", this.usuarios)  
+        for(let i=0;i<this.usuarios.length;i++){
+          if(this.usuarios[i].correo == this.email) {
+               this.usuario=this.usuarios[i];
+               console.log("el usuario:",this.usuario);
+          }
         }
 
+      });
+      this.obtenerUsuario();
+      this.mostrarMenu();
+
+      
+     
+
+  }
+ 
+  obtenerUsuario(){
+    this.email=localStorage.getItem("usuarioComanda");  
+    console.log("email del localstorage", this.email);
+    this.auth.getLista('usuarios').subscribe(lista => {
+      this.usuarios=lista;   
+      console.log("usuarios: ", this.usuarios)  
+      for(let i=0;i<this.usuarios.length;i++){
+        if(this.usuarios[i].correo == this.email) {
+             this.usuario=this.usuarios[i];
+             localStorage.setItem("perfilUComanda", this.usuario.perfil);
+             console.log("el usuario: ",this.usuario);
+        }
+      }
+
+    });
   }
 
+  mostrarMenu(){
+    this.perfil= localStorage.getItem("perfilUComanda")
+    console.log("el perfil: ",this.perfil);
+    console.log("Muestro el menu para este usuario: ",this.usuario);
+    switch(this.perfil) {
+      case "cocinero": console.log("es cocinero");
+      case "bartender":
+        this.acciones = [
+          { accion: "Pedidos Pendientes", img: "bandeja.png", ruta: PedidosPendientesComponent },
+          { accion: "Nuevo producto", img: "producto.png", ruta: AltaDeProductoComponent },
+          { accion: "Encuesta empleado", img: "encuesta.jpg", ruta: EncuestaEmpleadoComponent },
+        ];        
+        break;
+      case "supervisor":
+        this.acciones = [ 
+          { accion: "Agregar un empleado", img: "nuevo-empleado.jpg", ruta: AltaEmpleadoComponent },
+          { accion: "Nuevo Supervisor", img: "nuevo-empleado.jpg", ruta: AltaSupervisorComponent },
+          { accion: "Confeccionar y ver encuestas", img: "encuesta.jpg", ruta: ListadoSupervisorComponent },
+          { accion: "Nueva mesa", img: "ocupar-mesa.jpg", ruta: AltaDeMesaComponent },
+          { accion: "Ver Estado de Registro de Clientes", img: "nuevo-empleado.jpg", ruta: ListaClientesEstadoComponent },  // quitar despues, es solo para prueba
+          { accion: "Confirmar reservas", img: "reserva.jpg", ruta: ListadoReservaComponent },
+          { accion: "Confirmar pedido por delivery", img: "repartidor.png", ruta: ConfirmarDeliveryComponent },
+        ];
+        break;
+      case "cliente anonimo":
+        this.acciones = [
+          { accion: "Leer código QR", img: "qr.jpg", ruta: HomeClienteComponent },
+         
+        ];
+        break;
+      case "cliente":
+        this.acciones = [
+          { accion: "Reservar", img: "reserva.jpg", ruta: ReservaComponent },
+          { accion: "Leer código QR", img: "qr.jpg", ruta: HomeClienteComponent },
+          { accion: "Pedir platos y bebidas", img: "pedido.jpg", ruta: PedirPlatosComponent},
+          { accion: "Pedir por delivery", img: "pedido.jpg", ruta: PedirPlatosComponent},
+          // { accion: "Estado pedido delivery y chat con el repartidor", img: "chat.png", ruta: MapaRutaComponent},
+          // { accion: "Juego Adivina", img: "ahorcado.png", ruta: JuegoAdivinaNumeroComponent }
+         
+          
+        ];
+        break;
+      case "mozo": 
+        this.acciones = [
+          { accion: "Tomar pedido", img: "pedido.jpg", ruta: ListadoMesasComponent},
+          { accion: "Aceptar/Entregar pedido", img: "pedido.jpg", ruta: ConfirmarPedidoComponent},
+          { accion: "Aceptar clientes en lista de espera", img: "qr.jpg", ruta: ListadoClientesComponent},
+          { accion: "Encuesta empleado", img: "encuesta.jpg", ruta: EncuestaEmpleadoComponent },
+        ]
+        break;
+      case 'repartidor':
+          this.acciones = [
+            // { accion: "Mapa ruta", img: "mapa.jpg", ruta: MapaRutaComponent},
+          ]
+      }
+
+  }
   ionViewDidLoad() {
   }
 

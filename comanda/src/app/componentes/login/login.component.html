@@ -5,3 +5,34 @@
     <div class="image">
     </div>
 </div>
+
+<div class="container register">
+  <div class="row">
+      <div class="col-md-12">
+          <div class="tab-content" id="myTabContent">
+              <div class="tab-pane fade show active text-align form-new" id="home" role="tabpanel" aria-labelledby="home-tab">
+                  <h1 class="register-heading">Ingreso</h1>
+                  <div class="row register-form">
+                      <div class="col-md-12">
+                          <form method="post">
+                              <div class="form-group">
+                                  <input  [(ngModel)]="user.email"  type="text" name="LGform1_user" class="form-control" placeholder="Usuario" value="" required/>
+                              </div>
+                              <div class="form-group">
+                                  <input placeholder="Contraseña"  [(ngModel)]="user.password " type="password" name="LGform1_pwd" class="form-control" value="" required/>
+                              </div>
+                              <div class="buttonsLogin" *ngIf="logeando">
+                                      <!-- <button  class="btn btn-primary" (click)="MoverBarraDeProgreso()" >Ingresar</button> -->
+                                      <button class="btn login" (click)="entrarComoAdmin()" >Entrar como Admin</button>
+                                      <button class="btn login"  (click)="entrarComoInvitado()" >Entrar como Invitado</button>
+                              </div>
+                              
+                             
+                          </form>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+</div>

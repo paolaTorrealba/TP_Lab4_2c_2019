@@ -42,3 +42,21 @@
   </content>
    -->
    <p>principal</p>
+
+    <header>      
+        <title>Menu</title>    
+    </header>
+      <ul>
+        <button  item *ngFor="let p of acciones" (click)="openPage(p.ruta)">
+          {{p.accion}}
+        </button>
+      </ul>
+ 
+  
+    <button button *ngFor="let item of acciones" (click)="openPage(item)">
+      <div class="sombreado"></div>
+      <img src="../../assets/Imagenes/{{item.img}}" />
+      <span>{{item.accion}}</span>
+    </button>
+
+  

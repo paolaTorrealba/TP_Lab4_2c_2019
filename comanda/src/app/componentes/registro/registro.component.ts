@@ -103,9 +103,10 @@ export class RegistroComponent implements OnInit {
   }
 
   crearTest() {
-    this.nombreModel = "cliente";
-    this.emailModel = "cliente@gmail.com";
-    this.passwordModel = "cliente";
+    this.nombreModel = "admin";
+    this.apellidoModel = "admin";
+    this.emailModel = "admin@admin.com";
+    this.passwordModel = "13456";
     this.accepted = true;
   }
 

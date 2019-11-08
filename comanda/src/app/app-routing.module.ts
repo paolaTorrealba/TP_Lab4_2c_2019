@@ -30,6 +30,7 @@ const routes: Routes = [
   { path: '', component: LoginComponent },
   { path: 'login', component: LoginComponent },  
   { path: 'home', component: HomeComponent },  
+  { path: 'principal', component: PrincipalComponent },  
   { path: 'menuprincipal', component: PrincipalComponent },  
   { path: 'registro', component: RegistroComponent},
   { path: 'listaEspera', component: ListaDeEsperaComponent},
