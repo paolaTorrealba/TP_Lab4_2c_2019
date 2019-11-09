@@ -59,7 +59,7 @@ ngOnInit() {
 }
 
 
-Entrar() {  
+entrar() {  
     console.log("usuario que ingres: ",this.user.email);  
     if (! this.auth.login(this.user.email,this.user.password )){
       console.log("Error al loguearse")
@@ -69,49 +69,56 @@ Entrar() {
     else{
       console.log("se logueo",this.user.email )
       localStorage.setItem("usuarioComanda",this.user.email)
+      this.router.navigate(['/principal']);
     } 
 }
 
 ingresoSocio(){
   this.user.email="socio@socio.com";
   this.user.password="111111";
-  this.Entrar();
-  this.router.navigate(['/principal']);
+  localStorage.setItem("perfilUComanda","socio")
+  // this.Entrar();
+  // this.router.navigate(['/principal']);
 }
 
 ingresoCliente(){
   this.user.email="cliente@cliente.com";
   this.user.password="222222";
-  this.Entrar();
-  this.router.navigate(['/principal']);
+  localStorage.setItem("perfilUComanda","cliente")
+  // this.Entrar();
+  // this.router.navigate(['/principal']);
 }
 
 ingresoMozo(){
   this.user.email="mozo@mozo.com";
   this.user.password="333333";
-  this.Entrar();
-  this.router.navigate(['/principal']);
+  localStorage.setItem("perfilUComanda","mozo")
+  // this.Entrar();
+  // this.router.navigate(['/principal']);
 }
 
 ingresoBartender(){
   this.user.email="bartender@bartender.com";
   this.user.password="444444";
-  this.Entrar();
-  this.router.navigate(['/principal']);
+  localStorage.setItem("perfilUComanda","bartender")
+  // this.Entrar();
+  // this.router.navigate(['/principal']);
 }
 
 ingresoCocinero(){
   this.user.email="cocinero@cocinero.com";
   this.user.password="555555";
-  this.Entrar();
-  this.router.navigate(['/principal']);
+  localStorage.setItem("perfilUComanda","cocinero")
+  // this.Entrar();
+  // this.router.navigate(['/principal']);
 }
 
 ingresoCervecero(){
   this.user.email="cervecero@cervecero.com";
   this.user.password="666666";
-  this.Entrar();
-  this.router.navigate(['/principal']);
+  localStorage.setItem("perfilUComanda","cervecero")
+  // this.Entrar();
+  // this.router.navigate(['/principal']);
 }
 
 
