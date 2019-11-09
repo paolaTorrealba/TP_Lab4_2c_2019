@@ -23,6 +23,13 @@ import { PrincipalComponent } from './componentes/principal/principal.component'
 import { RegistroComponent } from './componentes/registro/registro.component';
 import { ListaDeEsperaComponent } from './componentes/lista-de-espera/lista-de-espera.component';
 import { LoginComponent } from './componentes/login/login.component';
+import { PagarFacturaComponent } from './componentes/pagar-factura/pagar-factura.component';
+import { EncuestaClienteComponent } from './componentes/encuesta-cliente/encuesta-cliente.component';
+import { CerrarMesaComponent } from './componentes/cerrar-mesa/cerrar-mesa.component';
+import { FinalizarPedidoComponent } from './componentes/finalizar-pedido/finalizar-pedido.component';
+import { AltaSocioComponent } from './componentes/alta-socio/alta-socio.component';
+import { VerEncuestasComponent } from './componentes/ver-encuestas/ver-encuestas.component';
+import { ConfirmarPagoComponent } from './componentes/confirmar-pago/confirmar-pago.component';
 
 
 
@@ -33,8 +40,33 @@ const routes: Routes = [
   { path: 'principal', component: PrincipalComponent },  
   { path: 'menuprincipal', component: PrincipalComponent },  
   { path: 'registro', component: RegistroComponent},
-  { path: 'listaEspera', component: ListaDeEsperaComponent},
-  { path: 'reserva', component: ReservaComponent},
+  // { path: 'listaEspera', component: ListaDeEsperaComponent},
+  // { path: 'reserva', component: ReservaComponent},
+  { path: 'pedirPlatos', component: PedirPlatosComponent},
+  { path: 'pagarFactura', component: PagarFacturaComponent},
+  { path: 'encuestaCliente', component: EncuestaClienteComponent},
+  { path: 'encuestaEmpleado', component: EncuestaEmpleadoComponent},
+  { path: 'cerrarMesa', component: CerrarMesaComponent},
+  { path: 'finalizarPedido', component: FinalizarPedidoComponent},
+  { path: 'encuestaCliente', component: EncuestaClienteComponent},
+  { path: 'pedidosPendientes', component: PedidosPendientesComponent},
+  { path: 'agregarMesa', component: AltaDeMesaComponent},
+  { path: 'verRegistroClientes', component: ListaClientesEstadoComponent},
+  { path: 'verEncuestas', component: VerEncuestasComponent},
+  { path: 'agregarSocio', component: AltaSocioComponent},
+  { path: 'agregarEmpleado', component: AltaEmpleadoComponent},
+  { path: 'confirmarPago', component: ConfirmarPagoComponent},
+  { path: 'listadoMesas', component: ListadoMesasComponent},
+  { path: 'confirmarPedido', component: ConfirmarPedidoComponent},
+  
+  
+  
+  
+  
+  
+  
+  
+  
   // {
     // path: 'estadisticas',
     // // component: EstadisticasComponent,

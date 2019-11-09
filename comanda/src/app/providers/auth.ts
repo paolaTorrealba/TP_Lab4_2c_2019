@@ -38,8 +38,7 @@ export interface mesa {
   cantidadComensales:string,
   tipo:string,
   estado:string,
-  foto:string,
-  codigo:string
+  codigo
 }
 
 export interface listaEspera {
@@ -143,11 +142,8 @@ export interface pedido {
   id:string,
   tiempoElaboracion: number,
   horaFinalizacion: string,
-  delivery:boolean,
-  foto:string,
-  direccion:string,
-  montoEnvio:number,
-  tiempoEnvio:number
+  foto:string
+  codigo:string
 }
 
 export interface producto {

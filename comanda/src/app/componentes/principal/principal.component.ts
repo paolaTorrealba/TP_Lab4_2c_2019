@@ -18,6 +18,11 @@ import {ListadoClientesComponent} from '../../componentes/listado-clientes/lista
 import {ListadoMesasComponent} from '../../componentes/listado-mesas/listado-mesas.component';
 import {ConfirmarPedidoComponent} from '../../componentes/confirmar-pedido/confirmar-pedido.component';
 import { LoginComponent } from '../login/login.component';
+import { FinalizarPedidoComponent } from '../finalizar-pedido/finalizar-pedido.component';
+import { ConfirmarPagoComponent } from '../confirmar-pago/confirmar-pago.component';
+import { AltaSocioComponent } from '../alta-socio/alta-socio.component';
+import { VerEncuestasComponent } from '../ver-encuestas/ver-encuestas.component';
+import { CerrarMesaComponent } from '../cerrar-mesa/cerrar-mesa.component';
 // import {HomeComponent} from '../../componentes/home/home.component';
 
 
@@ -78,57 +83,59 @@ export class PrincipalComponent implements OnInit {
     console.log("el perfil: ",this.perfil);
     console.log("Muestro el menu para este usuario: ",this.usuario);
     switch(this.perfil) {
-      case "cocinero": console.log("es cocinero");
-      case "bartender":
-        this.acciones = [
-          { accion: "Pedidos Pendientes", img: "bandeja.png", ruta: PedidosPendientesComponent },
-          { accion: "Nuevo producto", img: "producto.png", ruta: AltaDeProductoComponent },
-          { accion: "Encuesta empleado", img: "encuesta.jpg", ruta: EncuestaEmpleadoComponent },
-        ];        
-        break;
-      case "supervisor":
+      case "socio":
         this.acciones = [ 
-          { accion: "Agregar un empleado", img: "nuevo-empleado.jpg", ruta: AltaEmpleadoComponent },
-          { accion: "Nuevo Supervisor", img: "nuevo-empleado.jpg", ruta: AltaSupervisorComponent },
-          { accion: "Confeccionar y ver encuestas", img: "encuesta.jpg", ruta: ListadoSupervisorComponent },
-          { accion: "Nueva mesa", img: "ocupar-mesa.jpg", ruta: AltaDeMesaComponent },
-          { accion: "Ver Estado de Registro de Clientes", img: "nuevo-empleado.jpg", ruta: ListaClientesEstadoComponent },  // quitar despues, es solo para prueba
-          { accion: "Confirmar reservas", img: "reserva.jpg", ruta: ListadoReservaComponent },
-          { accion: "Confirmar pedido por delivery", img: "repartidor.png", ruta: ConfirmarDeliveryComponent },
-        ];
-        break;
-      case "cliente anonimo":
-        this.acciones = [
-          { accion: "Leer código QR", img: "qr.jpg", ruta: HomeClienteComponent },
-         
+          { accion: "Agregar Empleado", img: "nuevo-empleado.jpg", ruta: "agregarEmpleado" },
+          { accion: "Agregar Socio", img: "nuevo-empleado.jpg", ruta: "agregarSocio" },
+          { accion: "Ver encuestas", img: "encuesta.jpg", ruta: "verEncuestas" },
+          { accion: "Agregar mesa", img: "ocupar-mesa.jpg", ruta: "agregarMesa" },
+          { accion: "Ver Registro de Clientes", img: "nuevo-empleado.jpg", ruta: "verRegistroClientes" }, 
+          { accion: "Cerrar Mesa", img: "repartidor.png", ruta: "cerrarMesa"},
+         // { accion: "Confirmar reservas", img: "reserva.jpg", ruta: ListadoReservaComponent },
         ];
         break;
       case "cliente":
         this.acciones = [
-          { accion: "Reservar", img: "reserva.jpg", ruta: ReservaComponent },
-          { accion: "Leer código QR", img: "qr.jpg", ruta: HomeClienteComponent },
-          { accion: "Pedir platos y bebidas", img: "pedido.jpg", ruta: PedirPlatosComponent},
-          { accion: "Pedir por delivery", img: "pedido.jpg", ruta: PedirPlatosComponent},
-          // { accion: "Estado pedido delivery y chat con el repartidor", img: "chat.png", ruta: MapaRutaComponent},
-          // { accion: "Juego Adivina", img: "ahorcado.png", ruta: JuegoAdivinaNumeroComponent }
-         
-          
+                  
+          { accion: "Pedir platos y bebidas", img: "pedido.jpg", ruta: "pedirPlatos"},
+          { accion: "Paga Factura", img: "pedido.png", ruta: "pagarFactura" },
+          { accion: "Encuesta", img: "pedido.png", ruta: "encuestaCliente" },
+          { accion: "Ingresar Codigos", img: "pedido.png", ruta: "encuestaCliente" }
+          // { accion: "Reservar mesa", img: "reserva.jpg", ruta: "reserva" }, 
         ];
         break;
+      case "cocinero": 
+        this.acciones = [
+          { accion: "Pedidos Pendientes", img: "bandeja.png", ruta: "pedidosPendientes" },
+          { accion: "Cerrar Pedido", img: "producto.png", ruta: "finalizarPedido"},
+          { accion: "Encuesta empleado", img: "encuesta.jpg", ruta: "encuestaEmpleado"},
+        ];        
+      break;
+      case "bartender":
+        this.acciones = [
+          { accion: "Pedidos Pendientes", img: "bandeja.png",  ruta: "pedidosPendientes" },
+          { accion: "Cerrar Pedido", img: "producto.png", ruta: "finalizarPedido"},
+          { accion: "Encuesta empleado", img: "encuesta.jpg",  ruta: "encuestaEmpleado"},
+        ];        
+        break;     
+      case "cervecero":
+        this.acciones = [
+          { accion: "Pedidos Pendientes", img: "bandeja.png",  ruta: "pedidosPendientes" },
+          { accion: "Cerrar Pedido", img: "producto.png", ruta: "finalizarPedido"},
+          { accion: "Encuesta empleado", img: "encuesta.jpg",  ruta: "encuestaEmpleado"},
+        ];
+        break;     
       case "mozo": 
         this.acciones = [
-          { accion: "Tomar pedido", img: "pedido.jpg", ruta: ListadoMesasComponent},
-          { accion: "Aceptar/Entregar pedido", img: "pedido.jpg", ruta: ConfirmarPedidoComponent},
-          { accion: "Aceptar clientes en lista de espera", img: "qr.jpg", ruta: ListadoClientesComponent},
-          { accion: "Encuesta empleado", img: "encuesta.jpg", ruta: EncuestaEmpleadoComponent },
+          { accion: "Tomar pedido", img: "pedido.jpg",  ruta: "listadoMesas" },
+          { accion: "Aceptar/Entregar pedido", img: "pedido.jpg", ruta: "confirmarPedido"},
+          { accion: "Cerrar mesa", img: "encuesta.jpg", ruta: "listadoMesas" },
+          { accion: "Confirmar pago", img: "encuesta.jpg", ruta: "confirmarPagoComponent" },
+          { accion: "Encuesta empleado", img: "encuesta.jpg",  ruta: "encuestaEmpleado"},
+          // { accion: "Aceptar clientes en lista de espera", img: "qr.jpg", ruta: ListadoClientesComponent},
         ]
-        break;
-      case 'repartidor':
-          this.acciones = [
-            // { accion: "Mapa ruta", img: "mapa.jpg", ruta: MapaRutaComponent},
-          ]
+        break;        
       }
-
   }
   ionViewDidLoad() {
   }
@@ -146,23 +153,23 @@ export class PrincipalComponent implements OnInit {
 
   private cerrarSersion(){
     this.auth.logOut();
-    this.router.navigate(['/'+LoginComponent]);
-    // this.navCtrl.setRoot(HomeComponent, { 'fromApp': true });
+    // actualizar el estado del usuario a noLogueado.
+    // limpiar el local Storage.
+    localStorage.setItem("usuarioComanda","");
+    localStorage.setItem("perfilUComanda","");
+    this.router.navigate(['/login']);
   }
 
-  openComponent(item) {
-    if(item.accion == 'Pedir por delivery') {
-      localStorage.setItem('delivery','true');
-    }
-    else {
-      localStorage.setItem('delivery','false');
-    }
-    
+  openComponent(item) {   
     this.router.navigate(['/'+item.ruta]);
     // this.navCtrl.setRoot(item.ruta);
   }
 
-  ngOnInit() {
+  ngOnInit() {}
+
+  openPage(item) {
+    console.log(item);
+    this.router.navigate(['/'+item]);
   }
 
 }

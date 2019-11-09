@@ -21,10 +21,14 @@
                               <div class="form-group">
                                   <input placeholder="Contraseña"  [(ngModel)]="user.password " type="password" name="LGform1_pwd" class="form-control" value="" required/>
                               </div>
-                              <div class="buttonsLogin" *ngIf="logeando">
-                                      <!-- <button  class="btn btn-primary" (click)="MoverBarraDeProgreso()" >Ingresar</button> -->
-                                      <button class="btn login" (click)="entrarComoAdmin()" >Entrar como Admin</button>
-                                      <button class="btn login"  (click)="entrarComoInvitado()" >Entrar como Invitado</button>
+                              <div class="buttonsLogin" >
+                                      <p>Ingreso rapido</p>                                      
+                                      <button class="btn login" (click)="ingresoSocio()" >Socio</button>
+                                      <button class="btn login"  (click)="ingresoCliente()" >Cliente</button>
+                                      <button class="btn login" (click)="ingresoBartender()" >Bartender</button>
+                                      <button class="btn login"  (click)="ingresoCocinero()" >Cocinero</button>
+                                      <button class="btn login" (click)="ingresoCervecero()" >Cervecero</button>
+                                      <button class="btn login"  (click)="ingresoMozo()" >Mozo</button>
                               </div>
                               
                              

@@ -34,13 +34,8 @@ export class LoginComponent implements OnInit {
   tipoUser:string;
   user= { email : '', password : ''};
   mensaje:string;
-  semuestra:boolean;
-
-  progreso: number;
-  progresoMensaje="esperando..."; 
-  logeando=true;
+  semuestra:boolean; 
   logueado:boolean
-  ProgresoDeAncho:string;
 
   respuestaAuth: boolean;
   repetidor:any;
@@ -49,8 +44,6 @@ export class LoginComponent implements OnInit {
   private router: Router,
   private auth: AuthProvider
   ) {
-    this.progreso=0;
-    this.ProgresoDeAncho="0%";
     const session = sessionStorage.getItem('user');
     if(session==null)
     {
@@ -65,28 +58,13 @@ export class LoginComponent implements OnInit {
 ngOnInit() {
 }
 
-// Entrar() {
-//   if (this.user === 'email' && this.clave === 'admin') {
-//     this.router.navigate(['/Principal']);
-//   }
-// }
 
-Entrar() {
-
-  // this.auth.loginUser(this.user.email,this.user.password ).then((user) => {
-  //   this.router.navigate(['/Principal']);
-  //   sessionStorage.setItem("user",user.email);
-  //   sessionStorage.setItem("muestra","true");
-  //   }
-  //  this.auth.login(this.user.email,this.user.password );
-    console.log(this.user.email);
-  
+Entrar() {  
+    console.log("usuario que ingres: ",this.user.email);  
     if (! this.auth.login(this.user.email,this.user.password )){
-      console.log("dio falso")
-      this.progreso=0;
-      this.ProgresoDeAncho="0%";
+      console.log("Error al loguearse")
       this.MostarMensaje("Error al loguearse", true);
-      this.logeando = true;
+  
     } 
     else{
       console.log("se logueo",this.user.email )
@@ -94,14 +72,48 @@ Entrar() {
     } 
 }
 
-entrarComoAdmin()
-{
-  this.user.email="admin@admin.com";
-  this.user.password="12345";
-
+ingresoSocio(){
+  this.user.email="socio@socio.com";
+  this.user.password="111111";
   this.Entrar();
   this.router.navigate(['/principal']);
 }
+
+ingresoCliente(){
+  this.user.email="cliente@cliente.com";
+  this.user.password="222222";
+  this.Entrar();
+  this.router.navigate(['/principal']);
+}
+
+ingresoMozo(){
+  this.user.email="mozo@mozo.com";
+  this.user.password="333333";
+  this.Entrar();
+  this.router.navigate(['/principal']);
+}
+
+ingresoBartender(){
+  this.user.email="bartender@bartender.com";
+  this.user.password="444444";
+  this.Entrar();
+  this.router.navigate(['/principal']);
+}
+
+ingresoCocinero(){
+  this.user.email="cocinero@cocinero.com";
+  this.user.password="555555";
+  this.Entrar();
+  this.router.navigate(['/principal']);
+}
+
+ingresoCervecero(){
+  this.user.email="cervecero@cervecero.com";
+  this.user.password="666666";
+  this.Entrar();
+  this.router.navigate(['/principal']);
+}
+
 
 MostarMensaje(mensaje:string,gano:boolean) {
   this.mensaje = mensaje;
