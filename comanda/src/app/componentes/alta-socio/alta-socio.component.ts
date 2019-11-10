@@ -23,7 +23,6 @@ export class AltaSocioComponent implements OnInit {
   usuario: any;
   emailModel: string;
   passwordModel: string;
-  captchaVerificado: boolean;
   accepted: boolean;
   porcentajeUpload: Observable<number>;
   public urlImagen: Observable<string>;
@@ -37,7 +36,7 @@ export class AltaSocioComponent implements OnInit {
     private elRef: ElementRef) {
     this.imgName = "Seleccionar imágen..";
     this.usuario = this.auth.usuarioVacio();
-    this.captchaVerificado = false;
+ 
   }
 
   ngOnInit() { }
@@ -100,19 +99,6 @@ export class AltaSocioComponent implements OnInit {
     }
   }
 
-  resolved(captchaResponse: string) {
-    this.captchaVerificado = true;
-  }
 
-  crearTest() {
-    this.nombreModel = "admin";
-    this.apellidoModel = "admin";
-    this.emailModel = "admin@admin.com";
-    this.passwordModel = "13456";
-    this.accepted = true;
-  }
 
-  changePerfil(perfil) {
-    this.perfil = perfil;
-  }
 }

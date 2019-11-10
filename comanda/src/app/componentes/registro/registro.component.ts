@@ -32,7 +32,9 @@ export class RegistroComponent implements OnInit {
   foto:string;
 
 
-  constructor(private auth: AuthProvider, private storage: AngularFireStorage, private elRef: ElementRef) {
+  constructor(private auth: AuthProvider,
+     private storage: AngularFireStorage, 
+     private elRef: ElementRef) {
     this.imgName = "Seleccionar imágen..";
     this.usuario = this.auth.usuarioVacio();
     this.captchaVerificado = false;

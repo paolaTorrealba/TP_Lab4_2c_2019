@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 import { AngularFireAuth } from "@angular/fire/auth";
 import { AngularFirestore } from "@angular/fire/firestore";
 import { map } from "rxjs/operators";
-import { HttpClient } from '@angular/common/http';
 
 
 export enum perfil {
@@ -33,12 +33,10 @@ export interface usuario {
 }
 
 export interface mesa {
-  id:string,
-  numero:string,
-  cantidadComensales:string,
-  tipo:string,
-  estado:string,
-  codigo
+  id:string;
+  numero:string;
+  cantidadComensales:string; 
+  estado:string;
 }
 
 export interface listaEspera {
@@ -147,26 +145,18 @@ export interface pedido {
 }
 
 export interface producto {
-  tipo:string,
-  descripcion:string,
   nombre:string,
-  foto:string,
+  tipo:string,
+  descripcion:string, 
   tiempoPromedioElaboracion:number; 
-  precio: number;
-  estado :string;
+  precio: number; 
   numeroProducto:number;
-  id:string
+  id:string,
+  foto:string,
 }
 
-export interface chat {
-  tipo:string,
-  correo:string,
-  nombre:string,
-  mensaje:string,
-  fecha:string,
-  id:string,
-  para:string
-}
+
+
 
 @Injectable()
 export class AuthProvider {
@@ -252,7 +242,8 @@ export class AuthProvider {
 
   //-----MESA-----
   guardarMesa(data) {
-    return this.db.collection('mesas').add(data);
+    return this.db.collection('mesas').add(data);    
+   
   }
 
   getMesas() {
@@ -401,15 +392,7 @@ modificarEncuestaCliente(data) {
     return this.db.collection('pedidos').doc(data.id).update(data);
   }
 
-  getChat() {
-    return this.db.collection('mensajes').snapshotChanges().pipe(map(rooms => {
-      return rooms.map(a =>{
-        const data = a.payload.doc.data() as chat;
-        data.id = a.payload.doc.id;
-        return data;
-      })
-    }));
-  }
+ 
 
   nuevoChat(data) {
     return this.db.collection('mensajes').add(data);

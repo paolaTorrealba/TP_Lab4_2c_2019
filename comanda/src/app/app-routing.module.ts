@@ -58,6 +58,7 @@ const routes: Routes = [
   { path: 'confirmarPago', component: ConfirmarPagoComponent},
   { path: 'listadoMesas', component: ListadoMesasComponent},
   { path: 'confirmarPedido', component: ConfirmarPedidoComponent},
+  { path: 'agregarProducto', component: AltaDeProductoComponent},
   
   
   
