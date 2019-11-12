@@ -1,1 +1,13 @@
 <p>pedir-platos works!</p>
+<label>Seleccione los platos:</label>
+<button (click)="mostrarPlatos()" >Platos</button>
+<button (click)="mostrarBebidas()">Bebidas</button>
+
+<ul *ngFor="let item of productos">
+    <p *ngIf="item.tipo===this.tipo">nombre: {{item.nombre}}</p>
+    <p *ngIf="item.tipo===this.tipo">descripcion: {{item.descripcion}}</p>   
+    <p *ngIf="item.tipo===this.tipo">precio: {{item.precio}}</p>
+    <input *ngIf="item.tipo===this.tipo" type="checkbox" ng-model="item" (click)="agregarPedido(item)">
+    <p *ngIf="item.tipo===this.tipo">======================</p>    
+</ul>  
+

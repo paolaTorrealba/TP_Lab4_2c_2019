@@ -34,7 +34,6 @@ import { HomeComponent } from './componentes/home/home.component';
 import { AltaDeClienteComponent } from './componentes/alta-de-cliente/alta-de-cliente.component';
 import { LoginComponent } from './componentes/login/login.component';
 import { RegistroComponent } from './componentes/registro/registro.component';
-import { ListaDeEsperaComponent } from './componentes/lista-de-espera/lista-de-espera.component';
 import { HttpClientModule } from '@angular/common/http';
 import { CabeceraComponent } from './componentes/cabecera/cabecera.component';
 import { PieComponent } from './componentes/pie/pie.component';
@@ -72,7 +71,6 @@ import { ListadoProductosComponent } from './componentes/listado-productos/lista
     AltaDeClienteComponent,
     LoginComponent,
     RegistroComponent,
-    ListaDeEsperaComponent,
     CabeceraComponent,
     PieComponent,
     BotonSeleccionadoDirectiva,

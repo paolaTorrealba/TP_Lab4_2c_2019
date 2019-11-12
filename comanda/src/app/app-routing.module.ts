@@ -21,7 +21,6 @@ import {ConfirmarPedidoComponent} from './componentes/confirmar-pedido/confirmar
 import {HomeComponent} from './componentes/home/home.component';
 import { PrincipalComponent } from './componentes/principal/principal.component';
 import { RegistroComponent } from './componentes/registro/registro.component';
-import { ListaDeEsperaComponent } from './componentes/lista-de-espera/lista-de-espera.component';
 import { LoginComponent } from './componentes/login/login.component';
 import { PagarFacturaComponent } from './componentes/pagar-factura/pagar-factura.component';
 import { EncuestaClienteComponent } from './componentes/encuesta-cliente/encuesta-cliente.component';
