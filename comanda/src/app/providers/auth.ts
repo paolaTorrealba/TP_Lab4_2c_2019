@@ -280,7 +280,7 @@ updateListaEspera(data) {
 
 
   //-----PRODUCTOS------
-  getListaProdcutos(tipo:string) {
+  getListaProductos(tipo:string) {
     return this.db.collection(tipo).snapshotChanges().pipe(map(rooms => {
       return rooms.map(a =>{
         const data = a.payload.doc.data() as producto;

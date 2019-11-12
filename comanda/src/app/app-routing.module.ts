@@ -30,6 +30,7 @@ import { FinalizarPedidoComponent } from './componentes/finalizar-pedido/finaliz
 import { AltaSocioComponent } from './componentes/alta-socio/alta-socio.component';
 import { VerEncuestasComponent } from './componentes/ver-encuestas/ver-encuestas.component';
 import { ConfirmarPagoComponent } from './componentes/confirmar-pago/confirmar-pago.component';
+import { ListadoProductosComponent } from './componentes/listado-productos/listado-productos.component';
 
 
 
@@ -57,6 +58,7 @@ const routes: Routes = [
   { path: 'agregarEmpleado', component: AltaEmpleadoComponent},
   { path: 'confirmarPago', component: ConfirmarPagoComponent},
   { path: 'listadoMesas', component: ListadoMesasComponent},
+  { path: 'listadoProductos', component: ListadoProductosComponent},
   { path: 'confirmarPedido', component: ConfirmarPedidoComponent},
   { path: 'agregarProducto', component: AltaDeProductoComponent},
   

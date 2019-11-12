@@ -90,6 +90,8 @@ export class PrincipalComponent implements OnInit {
           { accion: "Ver encuestas", img: "encuesta.jpg", ruta: "verEncuestas" },
           { accion: "Agregar mesa", img: "ocupar-mesa.jpg", ruta: "agregarMesa" },
           { accion: "Agregar producto", img: "ocupar-mesa.jpg", ruta: "agregarProducto" },
+          { accion: "Listado mesa", img: "ocupar-mesa.jpg", ruta: "listadoMesas" },
+          { accion: "Listado producto", img: "ocupar-mesa.jpg", ruta: "listadoProductos" },
           { accion: "Ver Registro de Clientes", img: "nuevo-empleado.jpg", ruta: "verRegistroClientes" }, 
           { accion: "Cerrar Mesa", img: "repartidor.png", ruta: "cerrarMesa"},
          // { accion: "Confirmar reservas", img: "reserva.jpg", ruta: ListadoReservaComponent },

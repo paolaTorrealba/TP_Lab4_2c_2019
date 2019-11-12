@@ -10,7 +10,16 @@ export interface mesa {
   cantidadComensales:string; 
   estado:string;
 }
-
+export interface producto {
+  nombre:string,
+  tipo:string,
+  descripcion:string, 
+  tiempoPromedioElaboracion:number; 
+  precio: number; 
+  numeroProducto:number;
+  id:string,
+  foto:string,
+}
 
 @Injectable({
   providedIn: 'root'
@@ -33,4 +42,13 @@ export class AuthService {
         })
       }));
     }  
+
+    getListaProductos(tipo:string) {
+      return this.firestore.collection(tipo).snapshotChanges().pipe(map(rooms => {
+        return rooms.map(a =>{
+          const data = a.payload.doc.data() as producto;
+          return data;
+        })
+      }));
+    }
 }

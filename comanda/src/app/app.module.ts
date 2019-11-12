@@ -46,6 +46,7 @@ import { ConfirmarPagoComponent } from './componentes/confirmar-pago/confirmar-p
 import { AltaSocioComponent } from './componentes/alta-socio/alta-socio.component';
 import { VerEncuestasComponent } from './componentes/ver-encuestas/ver-encuestas.component';
 import { CerrarMesaComponent } from './componentes/cerrar-mesa/cerrar-mesa.component';
+import { ListadoProductosComponent } from './componentes/listado-productos/listado-productos.component';
 
 @NgModule({
   declarations: [
@@ -82,6 +83,7 @@ import { CerrarMesaComponent } from './componentes/cerrar-mesa/cerrar-mesa.compo
     AltaSocioComponent,
     VerEncuestasComponent,
     CerrarMesaComponent,
+    ListadoProductosComponent,
   ],
   imports: [
     FormsModule,
