@@ -8,6 +8,12 @@
     <p *ngIf="item.tipo===this.tipo">descripcion: {{item.descripcion}}</p>   
     <p *ngIf="item.tipo===this.tipo">precio: {{item.precio}}</p>
     <input *ngIf="item.tipo===this.tipo" type="checkbox" ng-model="item" (click)="agregarPedido(item)">
-    <p *ngIf="item.tipo===this.tipo">======================</p>    
+    <input *ngIf="item.tipo===this.tipo" type="checkbox" ng-model="item" (click)="quitarPedido(item)">
+    <p *ngIf="item.tipo===this.tipo">======================</p>   
+
 </ul>  
+<p >monto total: {{this.montoTotal}}</p>
+<p >tiempo total: {{this.tiempoTotal}}</p>
+<button (click)="guardarPedido()">Aceptar</button>
+ <!-- EL MOZO AGREGA UNA FOTO -->
 

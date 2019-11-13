@@ -19,7 +19,7 @@ export class AltaDeProductoComponent implements OnInit {
   tipoModel: string
   descripcionModel: string
   tiempopromElaboracionModel: string
-  precioModel: string
+  precioModel: number
   estado: boolean;
   numeroProducto:number;
 
@@ -50,7 +50,7 @@ export class AltaDeProductoComponent implements OnInit {
         tipo:this.tipoModel,
         descripcion:this.descripcionModel, 
         tiempoPromedioElaboracion:this.tiempopromElaboracionModel, 
-        precio: this.precioModel,    
+        precio: this.precioModel,
         numeroProducto:1,       
         foto:this.imagenUrl,
    

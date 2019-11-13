@@ -9,11 +9,20 @@ import { AuthService } from 'src/app/servicios/auth.service';
 })
 export class PedirPlatosComponent implements OnInit {
   productos;
+  usuarios;
+  pedidos;
+  usuarioActual;
+  public tiempoTotal:number;
+  public nombre:string;
+  public apellido:string;
   public listarBebidas:boolean=false;
   public listarPlatos: boolean=false;
   public tipo:string;
+  public montoTotal:number;
   seleccionados: Array<any> = [];
   constructor(private  data:  AuthService) { 
+    this.montoTotal=0;
+    this.tiempoTotal=0;
     this.obtenerProductos();
   }
 
@@ -33,33 +42,72 @@ export class PedirPlatosComponent implements OnInit {
      this.seleccionados.push(item);
      console.log("agrego el item")
      console.log(" this.seleccionados: ",  this.seleccionados)
+     this.montoTotal= this.montoTotal+item.precio;
+     console.log("monto:", this.montoTotal)
+     this.tiempoTotal = this.tiempoTotal+item.tiempoPromedioElaboracion;
+     console.log("item:", item)
+     console.log("item:", item.tiempoPromedioElaboracion)
+     console.log("tiempo:", this.tiempoTotal)
+
+
    }
 
-   mostrarBebidas(){
+   quitarPedido(item){
+     console.log("resto el valor de item" )
+     this.montoTotal= this.montoTotal-item.precio;
+     var indice = this.seleccionados.indexOf(item); 
+     this.seleccionados.splice(indice, 1); 
+     console.log("this.seleccionados: ",this.seleccionados )
+     this.tiempoTotal = this.tiempoTotal-item.tiempoPromedioElaboracion;
+     console.log("tiempo:", this.tiempoTotal)
+  }
 
-    //  this.listarBebidas=true;
-    //  this.listarPlatos=false;
+   mostrarBebidas(){
      this.tipo="bebida";
      console.log("mostrar bebidas", this.listarBebidas)
-    // console.log("productos:",this.productos);
-    // console.log("la longitud:",this.productos.length);
-    // for (let i=0; i<=this.productos.length -1; i++){
-    //   console.log(this.productos[i]);
-    //       if(this.productos[i].tipo=="bebida"){
-    //         this.listaBebidas=this.productos[i];
-    //       }
-    // }
-    // console.log("bebidas:",this.listaBebidas);
    }
 
    mostrarPlatos(){
     this.tipo="plato";
-//     for (let i=0; i<=this.productos.lenght -1; i++){
-//       if(this.productos[i].tipo=="plato"){
-//         this.listaPlatos=this.productos[i];
-//       }
-// }
-// console.log("bebidas:",this.listaPlatos )
+    console.log("mostrar plato", this.listarPlatos)
    }
 
+   obtenerCliente(){
+    let correo= localStorage.getItem("usuarioComanda");
+    this.data.getListaUsuarios("usuarios").subscribe(lista => {
+            this.usuarios=lista; 
+            for (let i=0; i<= this.usuarios.length -1; i++){
+              if (this.usuarios[i].correo==correo){
+                this.nombre=this.usuarios[i].nombre;
+                this.apellido=this.usuarios[i].apellido;
+              }
+            }
+            console.log("usuarios: ",this.usuarios); 
+            console.log("lista: ",lista); 
+  
+      });
+   }
+
+   obtenerPedidos(){
+    this.data.getListaUsuarios("pedidos").subscribe(lista => {
+      this.pedidos=lista; 
+    });
+   }
+   guardarPedido(){
+
+    let data = {
+      correo:localStorage.getItem("usuarioComanda"),
+      nombreCliente:this.nombre,
+      apellidoCliente:this.apellido,
+      estado:"pedido",
+      fecha: new Date(),
+      numero: this.pedidos.length+1,
+      productos: this.seleccionados,
+      montoTotal:this.montoTotal,
+      tiempoElaboracion: this.tiempoTotal,
+      foto:"",
+      codigo:""
+    }
+    // this.data.guardarPedido()
+   }
 }
