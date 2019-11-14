@@ -1,1 +1,10 @@
 <h1>Cerrar Mesa</h1>
+<ul *ngFor="let item of mesas">
+        <div *ngIf="item.estado!=this.estado">
+                   <p >Nro: {{item.numero}}</p>
+                   <p >Estado: {{item.estado}}</p> 
+                   <button (click)="cerrarMesa(item)">Cerrar</button>     
+                                  
+                   <p >======================</p>   
+        </div>
+       </ul> 
