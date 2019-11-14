@@ -19,6 +19,7 @@ export class PedirPlatosComponent implements OnInit {
   public listarBebidas:boolean=false;
   public listarPlatos: boolean=false;
   public tipo:string;
+  public pedidoRealizado:boolean= false;
   public montoTotal:number;
   seleccionados: Array<any> = [];
   constructor(private  data:  AuthService,
@@ -119,6 +120,10 @@ export class PedirPlatosComponent implements OnInit {
     }
     console.log("pedido a guardar: ", data)
     this.auth.guardarPedido(data).then(res =>{
+      this.pedidoRealizado= true;
+      this.seleccionados= [];
+      this.montoTotal=0;
+      this.tiempoTotal=0;
         }).catch(error => {
       console.log(error,"error al guardar el pedido"); 
   });
