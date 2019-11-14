@@ -14,7 +14,21 @@
                         <!-- <p >nombre Cliente: {{item.nombreCliente}}</p>   
                         <p >tiempo restante: {{item.tiempoElaboracion}}</p>        -->
                 </ul>
-                <button (click)="aceptarPedido(item)">Aceptar Pedido</button>
+                <button (click)="generarCodigo(item)">Generar Codigo</button>
+                <p>Codigo Generado: {{this.codigo}}</p>
+                <br>
+                <form class="form-group">
+                                <!-- <label for="customFile">Imágen</label> -->
+                                <div class="custom-file">
+                                  <input type="file" class="custom-file-input" id="customFile" accept=".png, .jpg"
+                                    (change)="ImagenCargada($event)">
+                                  <label class="custom-file-label" for="customFile">{{imgName}}</label>
+                                </div>
+                  </form>
+              
+                 <input #imgPedido type="hidden" [value]="urlImagen | async">
+                <br>
+                 <button (click)="aceptarPedido(item)">Aceptar Pedido</button>
                 <p >======================</p>   
      </div>
     </ul> 
