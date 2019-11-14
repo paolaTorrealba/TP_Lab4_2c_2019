@@ -130,7 +130,7 @@ export class PrincipalComponent implements OnInit {
         break;     
       case "mozo": 
         this.acciones = [
-          { accion: "Tomar pedido", img: "pedido.jpg",  ruta: "listadoMesas" },
+          { accion: "Tomar pedido", img: "pedido.jpg",  ruta: "pedidosPendientes" },
           { accion: "Aceptar/Entregar pedido", img: "pedido.jpg", ruta: "confirmarPedido"},
           { accion: "Cerrar mesa", img: "encuesta.jpg", ruta: "listadoMesas" },
           { accion: "Confirmar pago", img: "encuesta.jpg", ruta: "confirmarPagoComponent" },

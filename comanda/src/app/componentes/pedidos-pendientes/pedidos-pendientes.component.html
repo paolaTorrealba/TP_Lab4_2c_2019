@@ -1,1 +1,21 @@
-<p>pedidos-pendientes works!</p>
+<h1>Pedidos Pendientes </h1>
+
+    <ul *ngFor="let item of pedidos">
+     <div *ngIf="item.estado==estado">
+                <p >Mesa: mesa (agregar)</p>
+                <p >Importe: {{item.montoTotal}}</p>
+                <p >Cliente: {{item.nombreCliente}}</p>   
+                <p >Tiempo Elaboracion: {{item.tiempoElaboracion}} (tiempo restante)</p>       
+                <ul *ngFor="let producto of item.productos">
+                        <p >descripcion: {{producto.descripcion}}</p>
+                        <p >precio: {{producto.precio}}</p>
+                        <p >tiempo Elaboracion: {{producto.tiempoPromedioElaboracion}}</p>
+                        <p >......................</p> 
+                        <!-- <p >nombre Cliente: {{item.nombreCliente}}</p>   
+                        <p >tiempo restante: {{item.tiempoElaboracion}}</p>        -->
+                </ul>
+                <button (click)="aceptarPedido(item)">Aceptar Pedido</button>
+                <p >======================</p>   
+     </div>
+    </ul> 
+

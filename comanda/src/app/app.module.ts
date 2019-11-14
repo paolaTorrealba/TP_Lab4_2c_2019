@@ -46,6 +46,7 @@ import { AltaSocioComponent } from './componentes/alta-socio/alta-socio.componen
 import { VerEncuestasComponent } from './componentes/ver-encuestas/ver-encuestas.component';
 import { CerrarMesaComponent } from './componentes/cerrar-mesa/cerrar-mesa.component';
 import { ListadoProductosComponent } from './componentes/listado-productos/listado-productos.component';
+import { VerPedidoClienteComponent } from './componentes/ver-pedido-cliente/ver-pedido-cliente.component';
 
 @NgModule({
   declarations: [
@@ -82,6 +83,7 @@ import { ListadoProductosComponent } from './componentes/listado-productos/lista
     VerEncuestasComponent,
     CerrarMesaComponent,
     ListadoProductosComponent,
+    VerPedidoClienteComponent,
   ],
   imports: [
     FormsModule,

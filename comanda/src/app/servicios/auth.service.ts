@@ -76,6 +76,7 @@ export class AuthService {
       return this.firestore.collection(tipo).snapshotChanges().pipe(map(rooms => {
         return rooms.map(a =>{
           const data = a.payload.doc.data() as producto;
+          data.id = a.payload.doc.id;
           return data;
         })
       }));
@@ -85,6 +86,7 @@ export class AuthService {
       return this.firestore.collection(tipo).snapshotChanges().pipe(map(rooms => {
         return rooms.map(a =>{
           const data = a.payload.doc.data() as pedido;
+          data.id = a.payload.doc.id;
           return data;
         })
       }));

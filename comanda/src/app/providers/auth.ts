@@ -134,7 +134,6 @@ export interface pedido {
   estado:string,
   fecha:string,
   numero:string,
-  tipo:string,
   productos:Array<any>,
   montoTotal:number,
   id:string,
