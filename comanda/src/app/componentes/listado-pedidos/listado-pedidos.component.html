@@ -1,0 +1,21 @@
+<h1>Listado Pendidos </h1>
+
+<ul *ngFor="let item of pedidos">
+        <div>
+                   <p >Mesa: mesa (agregar)</p>
+                   <p >Importe: {{item.montoTotal}}</p>
+                   <p >Estado: {{item.estado}}</p>
+                   <p >Cliente: {{item.nombreCliente}}</p>   
+                   <p >Tiempo Elaboracion: {{item.tiempoElaboracion}} (tiempo restante)</p>       
+                   <ul *ngFor="let producto of item.productos">
+                           <p >descripcion: {{producto.descripcion}}</p>
+                           <p >precio: {{producto.precio}}</p>
+                           <p >tiempo Elaboracion: {{producto.tiempoPromedioElaboracion}}</p>
+                           <p >......................</p> 
+                           <!-- <p >nombre Cliente: {{item.nombreCliente}}</p>   
+                           <p >tiempo restante: {{item.tiempoElaboracion}}</p>        -->
+                   </ul>
+                                       
+                   <p >======================</p>   
+        </div>
+       </ul> 

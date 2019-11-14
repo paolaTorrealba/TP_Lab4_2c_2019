@@ -28,6 +28,7 @@ import { AltaSocioComponent } from './componentes/alta-socio/alta-socio.componen
 import { VerEncuestasComponent } from './componentes/ver-encuestas/ver-encuestas.component';
 import { ConfirmarPagoComponent } from './componentes/confirmar-pago/confirmar-pago.component';
 import { ListadoProductosComponent } from './componentes/listado-productos/listado-productos.component';
+import { ListadoPedidosComponent } from './componentes/listado-pedidos/listado-pedidos.component';
 
 
 
@@ -56,6 +57,7 @@ const routes: Routes = [
   { path: 'confirmarPago', component: ConfirmarPagoComponent},
   { path: 'listadoMesas', component: ListadoMesasComponent},
   { path: 'listadoProductos', component: ListadoProductosComponent},
+  { path: 'listadoPedidos', component: ListadoPedidosComponent},
   { path: 'confirmarPedido', component: ConfirmarPedidoComponent},
   { path: 'agregarProducto', component: AltaDeProductoComponent},
   

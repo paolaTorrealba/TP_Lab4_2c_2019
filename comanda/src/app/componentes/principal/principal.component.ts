@@ -1,28 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
-import {PedidosPendientesComponent} from '../../componentes/pedidos-pendientes/pedidos-pendientes.component';
-import {AltaDeProductoComponent} from '../../componentes/alta-de-producto/alta-de-producto.component';
-import {EncuestaEmpleadoComponent} from '../../componentes/encuesta-empleado/encuesta-empleado.component';
-import {AltaEmpleadoComponent} from '../../componentes/alta-empleado/alta-empleado.component';
-import {AltaSupervisorComponent} from '../../componentes/alta-supervisor/alta-supervisor.component';
-import {ListaClientesEstadoComponent} from '../../componentes/lista-clientes-estado/lista-clientes-estado.component';
-import {ListadoSupervisorComponent} from '../../componentes/listado-supervisor/listado-supervisor.component';
-import {ListadoReservaComponent} from '../../componentes/listado-reserva/listado-reserva.component';
-import {ConfirmarDeliveryComponent} from '../../componentes/confirmar-delivery/confirmar-delivery.component';
-import {AltaDeMesaComponent} from '../../componentes/alta-de-mesa/alta-de-mesa.component';
-import {HomeClienteComponent} from '../../componentes/home-cliente/home-cliente.component';
-import {PedirPlatosComponent} from '../../componentes/pedir-platos/pedir-platos.component';
-import {ReservaComponent} from '../../componentes/reserva/reserva.component';
 import { AuthProvider } from 'src/app/providers/auth';
-import {ListadoClientesComponent} from '../../componentes/listado-clientes/listado-clientes.component';
-import {ListadoMesasComponent} from '../../componentes/listado-mesas/listado-mesas.component';
-import {ConfirmarPedidoComponent} from '../../componentes/confirmar-pedido/confirmar-pedido.component';
-import { LoginComponent } from '../login/login.component';
-import { FinalizarPedidoComponent } from '../finalizar-pedido/finalizar-pedido.component';
-import { ConfirmarPagoComponent } from '../confirmar-pago/confirmar-pago.component';
-import { AltaSocioComponent } from '../alta-socio/alta-socio.component';
-import { VerEncuestasComponent } from '../ver-encuestas/ver-encuestas.component';
-import { CerrarMesaComponent } from '../cerrar-mesa/cerrar-mesa.component';
+
 // import {HomeComponent} from '../../componentes/home/home.component';
 
 
@@ -51,14 +30,9 @@ export class PrincipalComponent implements OnInit {
                console.log("el usuario:",this.usuario);
           }
         }
-
       });
       this.obtenerUsuario();
       this.mostrarMenu();
-
-      
-     
-
   }
  
   obtenerUsuario(){
@@ -92,6 +66,7 @@ export class PrincipalComponent implements OnInit {
           { accion: "Agregar producto", img: "ocupar-mesa.jpg", ruta: "agregarProducto" },
           { accion: "Listado mesa", img: "ocupar-mesa.jpg", ruta: "listadoMesas" },
           { accion: "Listado producto", img: "ocupar-mesa.jpg", ruta: "listadoProductos" },
+          { accion: "Listado pedidos", img: "ocupar-mesa.jpg", ruta: "listadoPedidos" },
           { accion: "Ver Registro de Clientes", img: "nuevo-empleado.jpg", ruta: "verRegistroClientes" }, 
           { accion: "Cerrar Mesa", img: "repartidor.png", ruta: "cerrarMesa"},
          // { accion: "Confirmar reservas", img: "reserva.jpg", ruta: ListadoReservaComponent },

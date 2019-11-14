@@ -45,6 +45,7 @@ import { VerEncuestasComponent } from './componentes/ver-encuestas/ver-encuestas
 import { CerrarMesaComponent } from './componentes/cerrar-mesa/cerrar-mesa.component';
 import { ListadoProductosComponent } from './componentes/listado-productos/listado-productos.component';
 import { VerPedidoClienteComponent } from './componentes/ver-pedido-cliente/ver-pedido-cliente.component';
+import { ListadoPedidosComponent } from './componentes/listado-pedidos/listado-pedidos.component';
 
 @NgModule({
   declarations: [
@@ -80,6 +81,7 @@ import { VerPedidoClienteComponent } from './componentes/ver-pedido-cliente/ver-
     CerrarMesaComponent,
     ListadoProductosComponent,
     VerPedidoClienteComponent,
+    ListadoPedidosComponent,
   ],
   imports: [
     FormsModule,
