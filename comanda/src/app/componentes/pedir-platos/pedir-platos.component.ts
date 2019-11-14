@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/servicios/auth.service';
+import { AuthProvider } from 'src/app/providers/auth';
 
 
 @Component({
@@ -20,10 +21,13 @@ export class PedirPlatosComponent implements OnInit {
   public tipo:string;
   public montoTotal:number;
   seleccionados: Array<any> = [];
-  constructor(private  data:  AuthService) { 
+  constructor(private  data:  AuthService,
+    private auth: AuthProvider) { 
     this.montoTotal=0;
     this.tiempoTotal=0;
     this.obtenerProductos();
+    this.obtenerPedidos();
+    this.obtenerCliente();
   }
 
   ngOnInit() {}
@@ -76,6 +80,8 @@ export class PedirPlatosComponent implements OnInit {
     let correo= localStorage.getItem("usuarioComanda");
     this.data.getListaUsuarios("usuarios").subscribe(lista => {
             this.usuarios=lista; 
+            console.log("usuarios: ", this.usuarios)
+            console.log("lista: ", lista)
             for (let i=0; i<= this.usuarios.length -1; i++){
               if (this.usuarios[i].correo==correo){
                 this.nombre=this.usuarios[i].nombre;
@@ -89,25 +95,33 @@ export class PedirPlatosComponent implements OnInit {
    }
 
    obtenerPedidos(){
-    this.data.getListaUsuarios("pedidos").subscribe(lista => {
+    this.data.getListaPedidos("pedidos").subscribe(lista => {
       this.pedidos=lista; 
     });
+    console.log("pedidos: ",this.pedidos)
    }
-   guardarPedido(){
 
+   guardarPedido(){
+    this.obtenerPedidos();
+    console.log("cantidad pdidos: ",  this.pedidos.length)
     let data = {
       correo:localStorage.getItem("usuarioComanda"),
       nombreCliente:this.nombre,
       apellidoCliente:this.apellido,
       estado:"pedido",
       fecha: new Date(),
-      numero: this.pedidos.length+1,
+      numero: this.pedidos.length + 1,
       productos: this.seleccionados,
       montoTotal:this.montoTotal,
       tiempoElaboracion: this.tiempoTotal,
       foto:"",
       codigo:""
     }
-    // this.data.guardarPedido()
+    console.log("pedido a guardar: ", data)
+    this.auth.guardarPedido(data).then(res =>{
+        }).catch(error => {
+      console.log(error,"error al guardar el pedido"); 
+  });
+    
    }
 }
