@@ -18,14 +18,12 @@ import { PedidosPendientesComponent } from './componentes/pedidos-pendientes/ped
 import { AltaDeProductoComponent } from './componentes/alta-de-producto/alta-de-producto.component';
 import { EncuestaEmpleadoComponent } from './componentes/encuesta-empleado/encuesta-empleado.component';
 import { AltaEmpleadoComponent } from './componentes/alta-empleado/alta-empleado.component';
-import { AltaSupervisorComponent } from './componentes/alta-supervisor/alta-supervisor.component';
 import { ListadoSupervisorComponent } from './componentes/listado-supervisor/listado-supervisor.component';
 import { AltaDeMesaComponent } from './componentes/alta-de-mesa/alta-de-mesa.component';
 import { ReservaComponent } from './componentes/reserva/reserva.component';
 import { PedirPlatosComponent } from './componentes/pedir-platos/pedir-platos.component';
 import { ListaClientesEstadoComponent } from './componentes/lista-clientes-estado/lista-clientes-estado.component';
 import { ListadoReservaComponent } from './componentes/listado-reserva/listado-reserva.component';
-import { ConfirmarDeliveryComponent } from './componentes/confirmar-delivery/confirmar-delivery.component';
 import { HomeClienteComponent } from './componentes/home-cliente/home-cliente.component';
 import { ListadoClientesComponent } from './componentes/listado-clientes/listado-clientes.component';
 import { ConfirmarPedidoComponent } from './componentes/confirmar-pedido/confirmar-pedido.component';
@@ -55,15 +53,13 @@ import { VerPedidoClienteComponent } from './componentes/ver-pedido-cliente/ver-
     PedidosPendientesComponent,
     AltaDeProductoComponent,
     EncuestaEmpleadoComponent,
-    AltaEmpleadoComponent,
-    AltaSupervisorComponent,
+    AltaEmpleadoComponent, 
     ListadoSupervisorComponent,
     AltaDeMesaComponent,
     ReservaComponent,
     PedirPlatosComponent,
     ListaClientesEstadoComponent,
     ListadoReservaComponent,
-    ConfirmarDeliveryComponent,
     HomeClienteComponent,
     ListadoClientesComponent,
     ConfirmarPedidoComponent,

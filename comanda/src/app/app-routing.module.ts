@@ -5,11 +5,9 @@ import {PedidosPendientesComponent} from './componentes/pedidos-pendientes/pedid
 import {AltaDeProductoComponent} from './componentes/alta-de-producto/alta-de-producto.component';
 import {EncuestaEmpleadoComponent} from './componentes/encuesta-empleado/encuesta-empleado.component';
 import {AltaEmpleadoComponent} from './componentes/alta-empleado/alta-empleado.component';
-import {AltaSupervisorComponent} from './componentes/alta-supervisor/alta-supervisor.component';
 import {ListaClientesEstadoComponent} from './componentes/lista-clientes-estado/lista-clientes-estado.component';
 import {ListadoSupervisorComponent} from './componentes/listado-supervisor/listado-supervisor.component';
 import {ListadoReservaComponent} from './componentes/listado-reserva/listado-reserva.component';
-import {ConfirmarDeliveryComponent} from './componentes/confirmar-delivery/confirmar-delivery.component';
 import {AltaDeMesaComponent} from './componentes/alta-de-mesa/alta-de-mesa.component';
 import {HomeClienteComponent} from './componentes/home-cliente/home-cliente.component';
 import {PedirPlatosComponent} from './componentes/pedir-platos/pedir-platos.component';

@@ -15,7 +15,8 @@
                         <p >tiempo restante: {{item.tiempoElaboracion}}</p>        -->
                 </ul>
                 <button (click)="generarCodigo(item)">Generar Codigo</button>
-                <p>Codigo Generado: {{this.codigo}}</p>
+                
+                <p *ngIf="!this.codigo==''">Codigo Generado: {{this.codigo}}</p>
                 <br>
                 <form class="form-group">
                                 <!-- <label for="customFile">Imágen</label> -->
