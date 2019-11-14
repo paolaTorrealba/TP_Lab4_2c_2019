@@ -9,7 +9,7 @@ export enum perfil {
   cliente = 'cliente',
   empleado = 'empleado',
   socio = 'socio',
- 
+
 }
 
 export enum actividad {
@@ -19,139 +19,140 @@ export enum actividad {
   mozo = 'mozo'
 }
 export interface usuario {
-  correo:string,
-  foto:string,
-  logueado:boolean,
-  activo:boolean,
-  dni:string,
-  cuil:string,
-  nombre:string,
-  apellido:string,
+  correo: string,
+  foto: string,
+  logueado: boolean,
+  activo: boolean,
+  dni: string,
+  cuil: string,
+  nombre: string,
+  apellido: string,
   id: string,
   clave: string,
-  perfil:string
+  perfil: string
 }
 
 export interface mesa {
-  id:string;
-  numero:string;
-  cantidadComensales:string; 
-  estado:string;
+  id: string;
+  numero: string;
+  cantidadComensales: string;
+  estado: string;
+  codigo: string;
 }
 
 export interface listaEspera {
-  id:string,
-  turno:number,
-  nombre:string,
-  apellido:string,
-  correo:string,
-  estado:string,
-  foto:string,
-  
+  id: string,
+  turno: number,
+  nombre: string,
+  apellido: string,
+  correo: string,
+  estado: string,
+  foto: string,
+
 }
 
 
 
 export interface encUsuario {
-  id:string,
-  correo:string,
+  id: string,
+  correo: string,
   pregunta1: {
-    bueno:number,
-    excelente:number,
-    malo:number,
-    mediocre:number,
-    pesimo:number
+    bueno: number,
+    excelente: number,
+    malo: number,
+    mediocre: number,
+    pesimo: number
   },
   pregunta2: {
-    no:number,
-    si:number
+    no: number,
+    si: number
   },
   pregunta3: {
-    item1:number,
-    item2:number,
-    item3:number,
-    item4:number,
-    item5:number,
-    item6:number
+    item1: number,
+    item2: number,
+    item3: number,
+    item4: number,
+    item5: number,
+    item6: number
   },
   pregunta4: {
-    MuyBueno:number,
-    Bueno:number,
-    Normal:number,
-    Malo:number
+    MuyBueno: number,
+    Bueno: number,
+    Normal: number,
+    Malo: number
   },
-  comentarios:Array<any>,
+  comentarios: Array<any>,
   pregunta5: {
-    item1:number,
-    item2:number,
-    item3:number,
-    item4:number
+    item1: number,
+    item2: number,
+    item3: number,
+    item4: number
   },
   pregunta6: {
-    item1:number,
-    item2:number,
-    item3:number,
-    item4:number
+    item1: number,
+    item2: number,
+    item3: number,
+    item4: number
   }
 }
 
 
 export interface encuestaCliente {
   id: string,
-  fecha:string,
+  fecha: string,
   correo: string,
   pregunta1: string,
   respuesta1: string,
-  pregunta2: string,  
+  pregunta2: string,
   respuesta2: string,
-  pregunta3: string,  
+  pregunta3: string,
   respuesta3: string,
-  pregunta4: string,  
+  pregunta4: string,
   respuesta4: string,
-  pregunta5: string,  
+  pregunta5: string,
   respuesta5: string,
-  pregunta6: string,  
+  pregunta6: string,
   respuesta6: string,
   comentario: string
 }
 
 export interface reserva {
-  correo:string,
-  nombre:string,
-  apellido:string,
-  horario:string,
-  foto:string,
-  cantPersonas:string,
-  mesa:string,
-  estado:string,
-  id:string
+  correo: string,
+  nombre: string,
+  apellido: string,
+  horario: string,
+  foto: string,
+  cantPersonas: string,
+  mesa: string,
+  estado: string,
+  id: string
 }
 
 export interface pedido {
-  correo:string,
-  nombreCliente:string,
-  apellidoCliente:string,
-  estado:string,
-  fecha:string,
-  numero:string,
-  productos:Array<any>,
-  montoTotal:number,
-  id:string,
+  correo: string,
+  nombreCliente: string,
+  apellidoCliente: string,
+  estado: string,
+  fecha: string,
+  numero: string,
+  productos: Array<any>,
+  montoTotal: number,
+  id: string,
   tiempoElaboracion: number,
   horaFinalizacion: string,
-  foto:string
-  codigo:string
+  foto: string
+  codigo: string
 }
 
 export interface producto {
-  nombre:string,
-  tipo:string,
-  descripcion:string, 
-  tiempoPromedioElaboracion:number; 
-  precio: number; 
-  numeroProducto:number;
-  id:string,
-  foto:string,
+  nombre: string,
+  tipo: string,
+  descripcion: string,
+  tiempoPromedioElaboracion: number;
+  precio: number;
+  numeroProducto: number;
+  id: string,
+  foto: string,
 }
 
 
@@ -160,43 +161,43 @@ export interface producto {
 @Injectable()
 export class AuthProvider {
   perfil: perfil;
-  actividad:actividad;
-  empleado:'empleado';
+  actividad: actividad;
+  empleado: 'empleado';
   constructor(private auth: AngularFireAuth,
-   private db:AngularFirestore, 
-   private http: HttpClient) {
+    private db: AngularFirestore,
+    private http: HttpClient) {
 
   }
 
-  usuarioVacio(){   
-      return {
-          id: '',
-          nombre: '',
-          apellido: '',
-          cuil: '',
-          correo: '',
-          tipo: '',
-          logueado: false,
-          activo: false,
-          dni: '',
-          foto: '',
-          clave: '',
-          Perfil: "cliente"
-      }
-  
-  }
- 
-  login (email:string,pass:string) {
-    return this.auth.auth.signInWithEmailAndPassword(email,pass);
+  usuarioVacio() {
+    return {
+      id: '',
+      nombre: '',
+      apellido: '',
+      cuil: '',
+      correo: '',
+      tipo: '',
+      logueado: false,
+      activo: false,
+      dni: '',
+      foto: '',
+      clave: '',
+      Perfil: "cliente"
+    }
+
   }
 
-  logOut(){
+  login(email: string, pass: string) {
+    return this.auth.auth.signInWithEmailAndPassword(email, pass);
+  }
+
+  logOut() {
     this.auth.auth.signOut();
   }
 
-  getLista(tipo:string) {
+  getLista(tipo: string) {
     return this.db.collection(tipo).snapshotChanges().pipe(map(rooms => {
-      return rooms.map(a =>{
+      return rooms.map(a => {
         const data = a.payload.doc.data() as usuario;
         data.id = a.payload.doc.id;
         return data;
@@ -204,10 +205,10 @@ export class AuthProvider {
     }));
   }
 
-//-----USUARIOS-----
+  //-----USUARIOS-----
   getUsuarios() {
     return this.db.collection('usuarios').snapshotChanges().pipe(map(rooms => {
-      return rooms.map(a =>{
+      return rooms.map(a => {
         const data = a.payload.doc.data() as usuario;
         data.id = a.payload.doc.id;
         return data;
@@ -231,7 +232,7 @@ export class AuthProvider {
     return this.db.collection('encuestaEmpleado').add(data);
   }
 
-  crearUsuario(correo,pass) {
+  crearUsuario(correo, pass) {
     return this.auth.auth.createUserWithEmailAndPassword(correo, pass);
   }
   //-----CLIENTES-----
@@ -241,47 +242,47 @@ export class AuthProvider {
 
   //-----MESA-----
   guardarMesa(data) {
-    return this.db.collection('mesas').add(data);    
-   
+    return this.db.collection('mesas').add(data);
+
   }
 
   getMesas() {
     return this.db.collection('mesas').snapshotChanges().pipe(map(rooms => {
-      return rooms.map(a =>{
+      return rooms.map(a => {
         const data = a.payload.doc.data() as mesa;
         data.id = a.payload.doc.id;
         return data;
       })
     }));
   }
-  
-//---Lista Espera ---//
 
-guardarListaEspera(data) {
-  return this.db.collection('listaEspera').add(data);
-}
+  //---Lista Espera ---//
 
-getListaEspera() {
-  return this.db.collection('listaEspera').snapshotChanges().pipe(map(rooms => {
-    return rooms.map(a =>{
-      const data = a.payload.doc.data() as listaEspera;
-      data.id = a.payload.doc.id;
-      return data;
-    })
-  }));
-}
+  guardarListaEspera(data) {
+    return this.db.collection('listaEspera').add(data);
+  }
+
+  getListaEspera() {
+    return this.db.collection('listaEspera').snapshotChanges().pipe(map(rooms => {
+      return rooms.map(a => {
+        const data = a.payload.doc.data() as listaEspera;
+        data.id = a.payload.doc.id;
+        return data;
+      })
+    }));
+  }
 
 
-updateListaEspera(data) {
-  return this.db.collection('listaEspera').doc(data.id).update(data);
-}
-//--FIN ---Lista Espera ---//
+  updateListaEspera(data) {
+    return this.db.collection('listaEspera').doc(data.id).update(data);
+  }
+  //--FIN ---Lista Espera ---//
 
 
   //-----PRODUCTOS------
-  getListaProductos(tipo:string) {
+  getListaProductos(tipo: string) {
     return this.db.collection(tipo).snapshotChanges().pipe(map(rooms => {
-      return rooms.map(a =>{
+      return rooms.map(a => {
         const data = a.payload.doc.data() as producto;
         return data;
       })
@@ -298,7 +299,7 @@ updateListaEspera(data) {
 
   getQr() {
     return this.db.collection('qr').snapshotChanges().pipe(map(rooms => {
-      return rooms.map(a =>{
+      return rooms.map(a => {
         const data = a.payload.doc.data() as mesa;
         data.id = a.payload.doc.id;
         return data;
@@ -316,7 +317,7 @@ updateListaEspera(data) {
 
   getEncUsuarios() {
     return this.db.collection('encuestasUsuarios').snapshotChanges().pipe(map(rooms => {
-      return rooms.map(a =>{
+      return rooms.map(a => {
         const data = a.payload.doc.data() as encUsuario;
         data.id = a.payload.doc.id;
         return data;
@@ -328,22 +329,22 @@ updateListaEspera(data) {
   nuevaEncuestaCliente(data) {
     return this.db.collection('encuestaCliente').add(data);
   }
-  getEncuestasClientes(){
-  return this.db.collection('encuestaCliente').snapshotChanges().pipe(map(rooms => {
-    return rooms.map(a =>{
-      const data = a.payload.doc.data() as encuestaCliente;
-      data.id = a.payload.doc.id;
-      return data;
-    })
-  }));
-}
+  getEncuestasClientes() {
+    return this.db.collection('encuestaCliente').snapshotChanges().pipe(map(rooms => {
+      return rooms.map(a => {
+        const data = a.payload.doc.data() as encuestaCliente;
+        data.id = a.payload.doc.id;
+        return data;
+      })
+    }));
+  }
 
-modificarEncuestaCliente(data) {
-  return this.db.collection('encuestaCliente').doc(data.id).update(data);
-  
-}
+  modificarEncuestaCliente(data) {
+    return this.db.collection('encuestaCliente').doc(data.id).update(data);
 
-//---FIN --Encuesta cliente -----//
+  }
+
+  //---FIN --Encuesta cliente -----//
 
   nuevaReserva(data) {
     return this.db.collection('reservas').add(data);
@@ -355,7 +356,7 @@ modificarEncuestaCliente(data) {
 
   getReservas() {
     return this.db.collection('reservas').snapshotChanges().pipe(map(rooms => {
-      return rooms.map(a =>{
+      return rooms.map(a => {
         const data = a.payload.doc.data() as reserva;
         data.id = a.payload.doc.id;
         return data;
@@ -365,7 +366,7 @@ modificarEncuestaCliente(data) {
 
   getProductos() {
     return this.db.collection('productos').snapshotChanges().pipe(map(rooms => {
-      return rooms.map(a =>{
+      return rooms.map(a => {
         const data = a.payload.doc.data() as producto;
         data.id = a.payload.doc.id;
         return data;
@@ -379,7 +380,7 @@ modificarEncuestaCliente(data) {
 
   getPedidos() {
     return this.db.collection('pedidos').snapshotChanges().pipe(map(rooms => {
-      return rooms.map(a =>{
+      return rooms.map(a => {
         const data = a.payload.doc.data() as pedido;
         data.id = a.payload.doc.id;
         return data;
@@ -391,7 +392,7 @@ modificarEncuestaCliente(data) {
     return this.db.collection('pedidos').doc(data.id).update(data);
   }
 
- 
+
 
   nuevoChat(data) {
     return this.db.collection('mensajes').add(data);

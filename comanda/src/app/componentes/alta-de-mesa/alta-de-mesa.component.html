@@ -17,7 +17,13 @@
                     <!-- <div  class="invalid-feedback">
                         <div >Numero requerido</div>
                     </div> -->
-                 </div>  
+                 </div> 
+                 <div class="form-group">
+                    <label for="codigo">Codigo Mesa</label>
+                    <button (click)="generarCodigo()">Generar Codigo</button>
+                    <p *ngIf="!this.codigo==''">Codigo Generado: {{this.codigo}}</p>
+                    <br>                 
+                 </div> 
                  <div class="form-group">
                     <label for="name">Cantidad Comensales</label>
                     <input type="text"  [(ngModel)]="cantidadComensalesModel" class="form-control" name="cantidadComensales" id="cantidadComensales" required autofocus>

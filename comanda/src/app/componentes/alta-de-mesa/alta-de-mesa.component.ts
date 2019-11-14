@@ -2,8 +2,7 @@ import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { AngularFireStorage } from '@angular/fire/storage';
 import { AuthProvider } from 'src/app/providers/auth';
 import { AuthService } from 'src/app/servicios/auth.service';
-import { messaging } from 'firebase';
-import { timer } from 'rxjs';
+
 
 @Component({
   selector: 'app-alta-de-mesa',
@@ -13,32 +12,30 @@ import { timer } from 'rxjs';
 export class AltaDeMesaComponent implements OnInit {
 
   //Datos de la mesa
-  numeroModel: string;
-  cantidadComensalesModel: string
+  public numeroModel: string;
+  public cantidadComensalesModel: string
+  public codigo:string
 
-  mesas;
-  lamesa;
+  public mesas;
+  public lamesa;
  
   constructor( private  data:  AuthService,
-    private auth: AuthProvider,
-    private storage: AngularFireStorage, 
-    private elRef: ElementRef) {  
+    private auth: AuthProvider) {  
 
       this.obtenerMesas();
 
  }
 
-  ngOnInit() {
-   
-
-  }
+  ngOnInit() { }
 
   public agregarMesa() {
-     console.log("agregar Mesa") 
+     console.log("agregar Mesa")
+     console.log("codigo: ", this.codigo) 
      let data= {  
         "numero": this.numeroModel,
         "cantidadComensales": this.cantidadComensalesModel,  
-        "estado": "cerrada"    
+        "estado": "cerrada",
+        "codigo": this.codigo   
      }
 
       
@@ -69,5 +66,18 @@ cambiarEstadoMesa(item) {
   });
 } 
 
+
+generarCodigo(){
+  this.codigo= '';
+  console.log("genero el codigo")   
+  let rString = this.randomString(5, '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ');
+  console.log(rString);       
+}
+
+randomString(length, chars) {    
+ for (var i = length; i > 0; --i) 
+ this.codigo += chars[Math.floor(Math.random() * chars.length)];
+
+}
 
 }

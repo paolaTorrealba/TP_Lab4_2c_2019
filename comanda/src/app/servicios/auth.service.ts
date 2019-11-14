@@ -9,6 +9,7 @@ export interface mesa {
   numero:string;
   cantidadComensales:string; 
   estado:string;
+  codigo: string;
 }
 
 export interface usuario {
