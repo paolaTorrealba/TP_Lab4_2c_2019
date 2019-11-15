@@ -36,9 +36,7 @@ export class AltaDeMesaComponent implements OnInit {
         "cantidadComensales": this.cantidadComensalesModel,  
         "estado": "cerrada",
         "codigo": this.codigo   
-     }
-
-      
+     }     
     console.log("guardo la mesa")
     this.auth.guardarMesa(data).then(res =>{
     }).catch(error => {

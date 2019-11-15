@@ -25,6 +25,14 @@ export interface usuario {
   clave: string,
   perfil:string
 }
+
+export interface reserva {
+  id: string;
+  correo: string;
+  codigoMesa: string;
+  estado: string;
+  
+}
 export interface pedido {
   correo:string,
   nombreCliente:string,
@@ -87,6 +95,16 @@ export class AuthService {
       return this.firestore.collection(tipo).snapshotChanges().pipe(map(rooms => {
         return rooms.map(a =>{
           const data = a.payload.doc.data() as pedido;
+          data.id = a.payload.doc.id;
+          return data;
+        })
+      }));
+    }
+
+    getListaReservas(tipo:string) {
+      return this.firestore.collection(tipo).snapshotChanges().pipe(map(rooms => {
+        return rooms.map(a =>{
+          const data = a.payload.doc.data() as reserva;
           data.id = a.payload.doc.id;
           return data;
         })

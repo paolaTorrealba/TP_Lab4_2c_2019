@@ -40,7 +40,7 @@ const routes: Routes = [
   { path: 'menuprincipal', component: PrincipalComponent },  
   { path: 'registro', component: RegistroComponent},
   // { path: 'listaEspera', component: ListaDeEsperaComponent},
-  // { path: 'reserva', component: ReservaComponent},
+  { path: 'reservaCliente', component: ReservaComponent},
   { path: 'pedirPlatos', component: PedirPlatosComponent},
   { path: 'pagarFactura', component: PagarFacturaComponent},
   { path: 'encuestaCliente', component: EncuestaClienteComponent},

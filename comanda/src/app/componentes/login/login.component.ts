@@ -44,6 +44,8 @@ export class LoginComponent implements OnInit {
   private router: Router,
   private auth: AuthProvider
   ) {
+
+    localStorage.setItem("mesaCliente","sinMesa");
     const session = sessionStorage.getItem('user');
     if(session==null)
     {

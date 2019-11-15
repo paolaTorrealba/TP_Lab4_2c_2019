@@ -1,1 +1,24 @@
-<p>reserva works!</p>
+<h1>Mesas Disponibles</h1>
+<ul *ngFor="let item of mesas">
+  <div *ngIf="item.estado==this.estado">
+      <p>nro: {{item.numero}}</p>
+      <p>cantidad Comensales: {{item.cantidadComensales}}</p>
+      <p>estado: {{item.estado}}</p>
+      <p>codigo: {{item.codigo}}</p> 
+      <br>  
+      <button (click)="seleccionarMesa(item)">Seleccionar</button>   
+      <!-- aca puedo activar el lector de QR para mesa -->
+  </div>       
+</ul>  
+<!-- <form>  
+    <div class="form-group">
+      <label for="codigo">codigo de la mesa</label>
+      <input type="text"  [(ngModel)]="codigoModel" 
+             class="form-control" name="codigo" id="codigo" required autofocus>
+      <div  class="invalid-feedback">
+        <div >Codigo Requerido</div>
+      </div>
+    </div>
+</form>
+
+ -->

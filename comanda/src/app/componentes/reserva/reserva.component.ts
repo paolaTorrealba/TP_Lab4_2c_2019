@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthService } from 'src/app/servicios/auth.service';
+import { AuthProvider } from 'src/app/providers/auth';
 
 @Component({
   selector: 'app-reserva',
@@ -6,12 +8,61 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./reserva.component.scss']
 })
 export class ReservaComponent implements OnInit {
-
-  constructor() {
-    console.log("estoy en reserva")
+  codigoModel: string;
+  public mesas:Array<any> = [];
+  public reservas:Array<any> = [];
+  public estado="cerrada";
+  public correo;
+  constructor(private  data:  AuthService,
+    private auth: AuthProvider) {
+     localStorage.setItem("mesaCliente","sinMesa");
+     this.correo=localStorage.getItem("usuarioComanda");
+     this.obtenerMesas();
+     this.obtenerReservas();
    }
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
+
+  obtenerMesas() {
+    this.data.getListaMesas("mesas").subscribe(lista => {
+        this.mesas=lista; 
+        console.log("Mesas: ",this.mesas); 
+        console.log("lista: ",lista); 
+     
+    });
+    console.log("Mesas: ",this.mesas);  
+   } 
+   obtenerReservas() {
+    this.data.getListaReservas("reservas").subscribe(lista => {
+        this.reservas=lista; 
+        console.log("reservas: ",this.reservas); 
+        console.log("lista: ",lista); 
+     
+    });
+    console.log("reservas: ",this.reservas);  
+   } 
+   
+   seleccionarMesa(item){          
+      item.estado="reservada";    
+      this.auth.updateMesa(item).then(res => {
+        console.log("mesa reservada")
+      });
+      // guardo la reserva
+      this.crearReserva(item);
+    // actualizo el estado de la mesa
+    // en reservas guardo la mesa y el cliente
+   }
+   crearReserva (item){
+          let data= {  
+            "correo": this.correo,       
+            "estado": "activa",
+            "codigoMesa": item.codigo
+          }     
+          console.log("guardo la reserva",data)
+          this.auth.guardarReserva(data).then(res =>{
+          }).catch(error => {
+          console.log(error,"error al guardar la reserva"); 
+       });
+   }
 
 }

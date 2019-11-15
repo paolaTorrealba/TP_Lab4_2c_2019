@@ -117,15 +117,11 @@ export interface encuestaCliente {
 }
 
 export interface reserva {
-  correo: string,
-  nombre: string,
-  apellido: string,
-  horario: string,
-  foto: string,
-  cantPersonas: string,
-  mesa: string,
-  estado: string,
-  id: string
+  id: string;
+  correo: string;
+  codigoMesa: string;
+  estado: string;
+  
 }
 
 export interface pedido {
@@ -243,7 +239,10 @@ export class AuthProvider {
   //-----MESA-----
   guardarMesa(data) {
     return this.db.collection('mesas').add(data);
+  }
 
+  guardarReserva(data) {
+    return this.db.collection('reservas').add(data);
   }
 
   getMesas() {
@@ -346,11 +345,12 @@ export class AuthProvider {
 
   //---FIN --Encuesta cliente -----//
 
-  nuevaReserva(data) {
-    return this.db.collection('reservas').add(data);
-  }
+
 
   confirmarReserva(data) {
+    return this.db.collection('reservas').doc(data.id).update(data);
+  }
+  actualizarReserva(data) {
     return this.db.collection('reservas').doc(data.id).update(data);
   }
 

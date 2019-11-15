@@ -78,8 +78,8 @@ export class PrincipalComponent implements OnInit {
           { accion: "Pedir platos y bebidas", img: "pedido.jpg", ruta: "pedirPlatos"},
           { accion: "Paga Factura", img: "pedido.png", ruta: "pagarFactura" },
           { accion: "Encuesta", img: "pedido.png", ruta: "encuestaCliente" },
-          { accion: "Ingresar Codigos", img: "pedido.png", ruta: "encuestaCliente" }
-          // { accion: "Reservar mesa", img: "reserva.jpg", ruta: "reserva" }, 
+          { accion: "Ingresar Codigos", img: "pedido.png", ruta: "encuestaCliente" },
+          { accion: "Reservar mesa", img: "reserva.jpg", ruta: "reservaCliente" }, 
         ];
         break;
       case "cocinero": 
@@ -107,7 +107,7 @@ export class PrincipalComponent implements OnInit {
         this.acciones = [
           { accion: "Tomar pedido", img: "pedido.jpg",  ruta: "pedidosPendientes" },
           { accion: "Aceptar/Entregar pedido", img: "pedido.jpg", ruta: "confirmarPedido"},
-          { accion: "Cerrar mesa", img: "encuesta.jpg", ruta: "listadoMesas" },
+          { accion: "Cerrar mesa", img: "encuesta.jpg", ruta: "cerrarMesa" },
           { accion: "Confirmar pago", img: "encuesta.jpg", ruta: "confirmarPagoComponent" },
           { accion: "Encuesta empleado", img: "encuesta.jpg",  ruta: "encuestaEmpleado"},
           // { accion: "Aceptar clientes en lista de espera", img: "qr.jpg", ruta: ListadoClientesComponent},
