@@ -45,7 +45,8 @@ export interface pedido {
   id:string,
   tiempoElaboracion: number,
   horaFinalizacion: string,
-  foto:string
+  foto:string,
+  mesa:string,
   codigo:string
 }
 export interface producto {

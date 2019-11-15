@@ -14,6 +14,7 @@ export class PedirPlatosComponent implements OnInit {
   pedidos;
   usuarioActual;
   correo;
+  codigoMesa;
   public activa:string="activa";
   public reservas;
   public tiempoTotal:number;
@@ -43,7 +44,13 @@ export class PedirPlatosComponent implements OnInit {
   obtenerReservas() {
     this.data.getListaReservas("reservas").subscribe(lista => {
         this.reservas=lista;
-        console.log("reservas: ",this.reservas);  
+        console.log("reservas: ",this.reservas); 
+        for (let i=0; i<=this.reservas.length-1; i++){
+          if (this.reservas[i].estado==this.activa
+            && this.reservas[i].correo==this.correo){
+              this.codigoMesa=this.reservas[i].codigoMesa;
+            }
+        } 
     });
     console.log("reservas: ",this.reservas);  
    } 
@@ -131,7 +138,8 @@ export class PedirPlatosComponent implements OnInit {
       montoTotal:this.montoTotal,
       tiempoElaboracion: this.tiempoTotal,
       foto:"",
-      codigo:""
+      codigo:"",
+      mesa:this.codigoMesa
     }
     console.log("pedido a guardar: ", data)
     this.auth.guardarPedido(data).then(res =>{

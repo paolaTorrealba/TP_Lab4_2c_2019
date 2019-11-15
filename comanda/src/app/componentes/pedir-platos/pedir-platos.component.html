@@ -1,7 +1,6 @@
 <h1>Hacer Pedido</h1>
-<ul *ngFor="let r of reservas">
-        <p *ngIf="r.estado===this.activa && r.correo===this.correo">Codigo Mesa: {{r.codigoMesa}}</p>
-</ul> 
+<p >Codigo Mesa: {{this.codigoMesa}}</p>
+
 
 <label>Seleccione los platos:</label>
 <button (click)="mostrarPlatos()" >Platos</button>
