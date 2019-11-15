@@ -14,8 +14,7 @@ export class ReservaComponent implements OnInit {
   public estado="cerrada";
   public correo;
   constructor(private  data:  AuthService,
-    private auth: AuthProvider) {
-     localStorage.setItem("mesaCliente","sinMesa");
+    private auth: AuthProvider) {     
      this.correo=localStorage.getItem("usuarioComanda");
      this.obtenerMesas();
      this.obtenerReservas();
@@ -41,7 +40,7 @@ export class ReservaComponent implements OnInit {
     });
     console.log("reservas: ",this.reservas);  
    } 
-   
+
    seleccionarMesa(item){          
       item.estado="reservada";    
       this.auth.updateMesa(item).then(res => {
@@ -53,6 +52,7 @@ export class ReservaComponent implements OnInit {
     // en reservas guardo la mesa y el cliente
    }
    crearReserva (item){
+     
           let data= {  
             "correo": this.correo,       
             "estado": "activa",

@@ -1,4 +1,8 @@
-<p>pedir-platos works!</p>
+<h1>Hacer Pedido</h1>
+<ul *ngFor="let r of reservas">
+        <p *ngIf="r.estado===this.activa && r.correo===this.correo">Codigo Mesa: {{r.codigoMesa}}</p>
+</ul> 
+
 <label>Seleccione los platos:</label>
 <button (click)="mostrarPlatos()" >Platos</button>
 <button (click)="mostrarBebidas()">Bebidas</button>

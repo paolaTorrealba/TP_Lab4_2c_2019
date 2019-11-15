@@ -13,6 +13,9 @@ export class PedirPlatosComponent implements OnInit {
   usuarios;
   pedidos;
   usuarioActual;
+  correo;
+  public activa:string="activa";
+  public reservas;
   public tiempoTotal:number;
   public nombre:string;
   public apellido:string;
@@ -24,14 +27,26 @@ export class PedirPlatosComponent implements OnInit {
   seleccionados: Array<any> = [];
   constructor(private  data:  AuthService,
     private auth: AuthProvider) { 
+    this.correo=localStorage.getItem("usuarioComanda");
+    console.log("correo", this.correo)
     this.montoTotal=0;
     this.tiempoTotal=0;
+    this.obtenerReservas();
     this.obtenerProductos();
     this.obtenerPedidos();
     this.obtenerCliente();
+   
   }
 
   ngOnInit() {}
+
+  obtenerReservas() {
+    this.data.getListaReservas("reservas").subscribe(lista => {
+        this.reservas=lista;
+        console.log("reservas: ",this.reservas);  
+    });
+    console.log("reservas: ",this.reservas);  
+   } 
 
   obtenerProductos() {
     this.data.getListaProductos("productos").subscribe(lista => {
