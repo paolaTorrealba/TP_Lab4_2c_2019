@@ -1,0 +1,21 @@
+<p>ver-estado-pedido works!</p>
+<ul *ngFor="let item of pedidos">
+        <div *ngIf="item.correo==correo">
+                <p >nombre: {{item.nombre}}</p>  
+                <p >codigo pedido: {{item.codigo}}</p>                      
+                <p >estado: {{item.estado}}</p>
+                <p >mesa: {{item.mesa}}</p> 
+                <p >monto: {{item.montoTotal}}</p> 
+
+                   <ul *ngFor="let producto of item.productos">
+                        <div>
+                            <p >descripcion: {{producto.descripcion}}</p> 
+                            <p >estado: {{producto.estadoProdPedido}}</p> 
+                            <!-- <button (click)="pagar(item)">Pagar</button> -->
+                        </div>     
+                   </ul> 
+                   <br>  
+                   <button (click)="confirmarRecepcion(item)">confirmar Recepcion</button>        
+                    
+        </div>
+       </ul> 

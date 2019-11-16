@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/servicios/auth.service';
 import { AuthProvider } from 'src/app/providers/auth';
-import { AngularFireStorage } from '@angular/fire/storage';
+
 
 @Component({
   selector: 'app-pedidos-pendientes-bartender',

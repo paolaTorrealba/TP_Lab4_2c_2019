@@ -34,6 +34,7 @@ import { PedidosPendientesCocineroComponent } from './componentes/pedidos-pendie
 import { FinalizarPedidoCerveceroComponent } from './componentes/finalizar-pedido-cervecero/finalizar-pedido-cervecero.component';
 import { FinalizarPedidoBartenderComponent } from './componentes/finalizar-pedido-bartender/finalizar-pedido-bartender.component';
 import { FinalizarPedidoCocineroComponent } from './componentes/finalizar-pedido-cocinero/finalizar-pedido-cocinero.component';
+import { VerEstadoPedidoComponent } from './componentes/ver-estado-pedido/ver-estado-pedido.component';
 
 
 
@@ -70,6 +71,7 @@ const routes: Routes = [
   { path: 'finalizarPedidoCervecero', component: FinalizarPedidoCerveceroComponent}, 
   { path: 'finalizarPedidoBartender', component: FinalizarPedidoBartenderComponent},
   { path: 'finalizarPedidoCocinero', component: FinalizarPedidoCocineroComponent},
+  { path: 'verEstadoPedido', component: VerEstadoPedidoComponent},
   
   
   
