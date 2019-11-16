@@ -1,21 +1,21 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/servicios/auth.service';
 import { AuthProvider } from 'src/app/providers/auth';
-import { AngularFireStorage } from '@angular/fire/storage';
 
 @Component({
-  selector: 'app-pedidos-pendientes-cocinero',
-  templateUrl: './pedidos-pendientes-cocinero.component.html',
-  styleUrls: ['./pedidos-pendientes-cocinero.component.scss']
+  selector: 'app-finalizar-pedido-cocinero',
+  templateUrl: './finalizar-pedido-cocinero.component.html',
+  styleUrls: ['./finalizar-pedido-cocinero.component.scss']
 })
-export class PedidosPendientesCocineroComponent implements OnInit {
+export class FinalizarPedidoCocineroComponent implements OnInit {
   public pedidos:Array<any> = [];
   public pendiente:string="pendiente";
   public aceptado:string="aceptado";  
   public enPreparacion:string="en preparacion";
+  public cerrado:string="cerrado";
   public plato:string="plato";
 
-  constructor(private  data:  AuthService,    
+  constructor(private  data:  AuthService,  
     private auth: AuthProvider) { 
       this.obtenerPedidos();
     }
@@ -31,17 +31,17 @@ export class PedidosPendientesCocineroComponent implements OnInit {
    }
 
 
-   tomarPedido(item, producto){    
+   cerrarPedido(item, producto){    
       console.log("item: ", item)
       console.log("producto: ", producto)
       for (let i=0; i<=item.productos.length-1;i++){
         if(item.productos[i].numeroProducto==producto.numeroProducto)
-           producto.estadoProdPedido=this.enPreparacion;
+           producto.estadoProdPedido=this.cerrado;
            item.productos[i]=producto;
       }
 
       this.auth.actualizarPedido(item).then(res => {
-        console.log("pedido en preparacion")
+        console.log("pedido cerrado")
       });
    }
 
