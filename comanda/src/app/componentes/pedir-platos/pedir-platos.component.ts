@@ -26,8 +26,10 @@ export class PedirPlatosComponent implements OnInit {
   public pedidoRealizado:boolean= false;
   public montoTotal:number;
   seleccionados: Array<any> = [];
+
   constructor(private  data:  AuthService,
     private auth: AuthProvider) { 
+
     this.correo=localStorage.getItem("usuarioComanda");
     console.log("correo", this.correo)
     this.montoTotal=0;
@@ -59,14 +61,14 @@ export class PedirPlatosComponent implements OnInit {
     this.data.getListaProductos("productos").subscribe(lista => {
           this.productos=lista; 
           console.log("Productos: ",this.productos); 
-          console.log("lista: ",lista); 
-      
+          console.log("lista: ",lista);       
       });
       console.log("Productos: ",this.productos);  
    } 
 
    agregarPedido(item){
      item.estadoProdPedido="pendiente";
+     item.empleado="";
      this.seleccionados.push(item);
      console.log("agrego el item")
      console.log(" this.seleccionados: ",  this.seleccionados)

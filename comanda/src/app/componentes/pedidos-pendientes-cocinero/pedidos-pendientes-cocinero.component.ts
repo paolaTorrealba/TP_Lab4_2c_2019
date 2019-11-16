@@ -14,9 +14,11 @@ export class PedidosPendientesCocineroComponent implements OnInit {
   public aceptado:string="aceptado";  
   public enPreparacion:string="en preparacion";
   public plato:string="plato";
+  public correo:string;
 
   constructor(private  data:  AuthService,    
     private auth: AuthProvider) { 
+      this.correo=localStorage.getItem("usuarioComanda");
       this.obtenerPedidos();
     }
 
@@ -37,6 +39,7 @@ export class PedidosPendientesCocineroComponent implements OnInit {
       for (let i=0; i<=item.productos.length-1;i++){
         if(item.productos[i].numeroProducto==producto.numeroProducto)
            producto.estadoProdPedido=this.enPreparacion;
+           producto.empleado=this.correo;
            item.productos[i]=producto;
       }
 
