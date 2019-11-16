@@ -64,7 +64,7 @@ const routes: Routes = [
   { path: 'listadoMesas', component: ListadoMesasComponent},
   { path: 'listadoProductos', component: ListadoProductosComponent},
   { path: 'listadoPedidos', component: ListadoPedidosComponent},
-  { path: 'confirmarPedido', component: ConfirmarPedidoComponent},
+  { path: 'entregarPedido', component: ConfirmarPedidoComponent},
   { path: 'agregarProducto', component: AltaDeProductoComponent}, 
   { path: 'pedidosPendientesCervecero', component: PedidosPendientesCerveceroComponent}, 
   { path: 'pedidosPendientesBartender', component: PedidosPendientesBartenderComponent}, 

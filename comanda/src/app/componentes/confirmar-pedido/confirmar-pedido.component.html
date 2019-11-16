@@ -1,1 +1,40 @@
-<h1>Confirmar Pedido</h1>
+<h1>Entregar Pedido</h1>
+
+
+<ul *ngFor="let item of pedidos">
+        <div *ngIf="item.estado==pendiente">
+                   <p >Mesa: {{item.mesa}}</p>
+                   <p >Importe: {{item.montoTotal}}</p>
+                   <p >Estado Pedido: {{item.estado}}</p>
+                   <p >Cliente: {{item.nombreCliente}}</p>   
+                   <p >Tiempo Elaboracion: {{item.tiempoElaboracion}} (tiempo restante)</p>       
+                   <ul *ngFor="let producto of item.productos">
+                           <p >descripcion: {{producto.descripcion}}</p>
+                           <p >precio: {{producto.precio}}</p>
+                           <p >estado producto: {{producto.estadoProdPedido}}</p>
+                           <p >tiempo Elaboracion: {{producto.tiempoPromedioElaboracion}}</p>
+                           <p >......................</p> 
+                           <!-- <p >nombre Cliente: {{item.nombreCliente}}</p>   
+                           <p >tiempo restante: {{item.tiempoElaboracion}}</p>        -->
+                   </ul>
+                   <button (click)="generarCodigo(item)">Generar Codigo</button>
+                   
+                   <p *ngIf="!this.codigo==''">Codigo Generado: {{this.codigo}}</p>
+                   <br>
+                   <form class="form-group">
+                                   <!-- <label for="customFile">Imágen</label> -->
+                                   <div class="custom-file">
+                                     <input type="file" class="custom-file-input" id="customFile" accept=".png, .jpg"
+                                       (change)="ImagenCargada($event)">
+                                     <label class="custom-file-label" for="customFile">{{imgName}}</label>
+                                   </div>
+                     </form>
+                 
+                    <input #imgPedido type="hidden" [value]="urlImagen | async">
+                   <br>
+                    <button (click)="aceptarPedido(item)">Aceptar Pedido</button>
+                   <p >======================</p>   
+        </div>
+       </ul> 
+   
+   
