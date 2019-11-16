@@ -66,6 +66,7 @@ export class PedirPlatosComponent implements OnInit {
    } 
 
    agregarPedido(item){
+     item.estadoProdPedido="pendiente";
      this.seleccionados.push(item);
      console.log("agrego el item")
      console.log(" this.seleccionados: ",  this.seleccionados)
@@ -131,7 +132,7 @@ export class PedirPlatosComponent implements OnInit {
       correo:localStorage.getItem("usuarioComanda"),
       nombreCliente:this.nombre,
       apellidoCliente:this.apellido,
-      estado:"pedido",
+      estado:"pendiente",
       fecha: new Date(),
       numero: this.pedidos.length + 1,
       productos: this.seleccionados,

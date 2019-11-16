@@ -84,22 +84,22 @@ export class PrincipalComponent implements OnInit {
         break;
       case "cocinero": 
         this.acciones = [
-          { accion: "Pedidos Pendientes", img: "bandeja.png", ruta: "pedidosPendientes" },
-          { accion: "Cerrar Pedido", img: "producto.png", ruta: "finalizarPedido"},
+          { accion: "Pedidos Pendientes", img: "bandeja.png", ruta: "pedidosPendientesCocinero" },
+          { accion: "Cerrar Pedido", img: "producto.png", ruta: "finalizarPedidoCocinero"},
           { accion: "Encuesta empleado", img: "encuesta.jpg", ruta: "encuestaEmpleado"},
         ];        
       break;
       case "bartender":
         this.acciones = [
-          { accion: "Pedidos Pendientes", img: "bandeja.png",  ruta: "pedidosPendientes" },
-          { accion: "Cerrar Pedido", img: "producto.png", ruta: "finalizarPedido"},
+          { accion: "Pedidos Pendientes", img: "bandeja.png",  ruta: "pedidosPendientesBartender" },
+          { accion: "Cerrar Pedido", img: "producto.png", ruta: "finalizarPedidoBartender"},
           { accion: "Encuesta empleado", img: "encuesta.jpg",  ruta: "encuestaEmpleado"},
         ];        
         break;     
       case "cervecero":
         this.acciones = [
-          { accion: "Pedidos Pendientes", img: "bandeja.png",  ruta: "pedidosPendientes" },
-          { accion: "Cerrar Pedido", img: "producto.png", ruta: "finalizarPedido"},
+          { accion: "Pedidos Pendientes", img: "bandeja.png",  ruta: "pedidosPendientesCervecero" },
+          { accion: "Cerrar Pedido", img: "producto.png", ruta: "finalizarPedidoCervecero"},
           { accion: "Encuesta empleado", img: "encuesta.jpg",  ruta: "encuestaEmpleado"},
         ];
         break;     

@@ -1,14 +1,16 @@
 <h1>Pedidos Pendientes </h1>
 
     <ul *ngFor="let item of pedidos">
-     <div *ngIf="item.estado==estado">
-                <p >Mesa: mesa (agregar)</p>
+     <div *ngIf="item.estado==pendiente">
+                <p >Mesa: {{item.mesa}}</p>
                 <p >Importe: {{item.montoTotal}}</p>
+                <p >Estado Pedido: {{item.estado}}</p>
                 <p >Cliente: {{item.nombreCliente}}</p>   
                 <p >Tiempo Elaboracion: {{item.tiempoElaboracion}} (tiempo restante)</p>       
                 <ul *ngFor="let producto of item.productos">
                         <p >descripcion: {{producto.descripcion}}</p>
                         <p >precio: {{producto.precio}}</p>
+                        <p >estado producto: {{producto.estadoProdPedido}}</p>
                         <p >tiempo Elaboracion: {{producto.tiempoPromedioElaboracion}}</p>
                         <p >......................</p> 
                         <!-- <p >nombre Cliente: {{item.nombreCliente}}</p>   

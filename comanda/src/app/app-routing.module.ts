@@ -29,6 +29,9 @@ import { VerEncuestasComponent } from './componentes/ver-encuestas/ver-encuestas
 import { ConfirmarPagoComponent } from './componentes/confirmar-pago/confirmar-pago.component';
 import { ListadoProductosComponent } from './componentes/listado-productos/listado-productos.component';
 import { ListadoPedidosComponent } from './componentes/listado-pedidos/listado-pedidos.component';
+import { PedidosPendientesCerveceroComponent } from './componentes/pedidos-pendientes-cervecero/pedidos-pendientes-cervecero.component';
+import { PedidosPendientesBartenderComponent } from './componentes/pedidos-pendientes-bartender/pedidos-pendientes-bartender.component';
+import { PedidosPendientesCocineroComponent } from './componentes/pedidos-pendientes-cocinero/pedidos-pendientes-cocinero.component';
 
 
 
@@ -59,12 +62,11 @@ const routes: Routes = [
   { path: 'listadoProductos', component: ListadoProductosComponent},
   { path: 'listadoPedidos', component: ListadoPedidosComponent},
   { path: 'confirmarPedido', component: ConfirmarPedidoComponent},
-  { path: 'agregarProducto', component: AltaDeProductoComponent},
-  
-  
-  
-  
-  
+  { path: 'agregarProducto', component: AltaDeProductoComponent}, 
+  { path: 'pedidosPendientesCervecero', component: PedidosPendientesCerveceroComponent}, 
+  { path: 'pedidosPendientesBartender', component: PedidosPendientesBartenderComponent}, 
+  { path: 'pedidosPendientesCocinero', component: PedidosPendientesCocineroComponent}, 
+
   
   
   

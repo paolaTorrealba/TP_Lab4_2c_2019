@@ -13,7 +13,7 @@ import { finalize } from 'rxjs/operators';
 export class PedidosPendientesComponent implements OnInit {
   @ViewChild("imgPedido", { static: false }) InputImagenPedido: ElementRef;
   public pedidos:Array<any> = [];
-  public estado:string="pendiente";
+  public pendiente:string="pendiente";
   imgName: string;
   porcentajeUpload: Observable<number>;
   public urlImagen: Observable<string>; 
@@ -45,8 +45,6 @@ export class PedidosPendientesComponent implements OnInit {
     if (!this.imagenUrl ) {
       this.imagenUrl = "assets/imagenes/default-mesa.png";
     }
-
-
       console.log("item: ", item)
       console.log("la imagen: ", this.imagenUrl)
       item.foto=this.imagenUrl;

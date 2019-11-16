@@ -46,6 +46,9 @@ import { CerrarMesaComponent } from './componentes/cerrar-mesa/cerrar-mesa.compo
 import { ListadoProductosComponent } from './componentes/listado-productos/listado-productos.component';
 import { VerPedidoClienteComponent } from './componentes/ver-pedido-cliente/ver-pedido-cliente.component';
 import { ListadoPedidosComponent } from './componentes/listado-pedidos/listado-pedidos.component';
+import { PedidosPendientesCerveceroComponent } from './componentes/pedidos-pendientes-cervecero/pedidos-pendientes-cervecero.component';
+import { PedidosPendientesBartenderComponent } from './componentes/pedidos-pendientes-bartender/pedidos-pendientes-bartender.component';
+import { PedidosPendientesCocineroComponent } from './componentes/pedidos-pendientes-cocinero/pedidos-pendientes-cocinero.component';
 
 @NgModule({
   declarations: [
@@ -82,6 +85,9 @@ import { ListadoPedidosComponent } from './componentes/listado-pedidos/listado-p
     ListadoProductosComponent,
     VerPedidoClienteComponent,
     ListadoPedidosComponent,
+    PedidosPendientesCerveceroComponent,
+    PedidosPendientesBartenderComponent,
+    PedidosPendientesCocineroComponent,
   ],
   imports: [
     FormsModule,
