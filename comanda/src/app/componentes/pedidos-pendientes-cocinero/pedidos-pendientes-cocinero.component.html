@@ -5,10 +5,11 @@
                    
                    <ul *ngFor="let producto of item.productos">
                         <div *ngIf="producto.tipo==plato && producto.estadoProdPedido==pendiente">
-                           <p >descripcion: {{producto.descripcion}}</p>                      
+                           <p >descripcion: {{producto.descripcion}}</p> 
+                           <p >estado de producto en pedido: {{producto.estadoProdPedido}}</p>                       
                            <p >tiempo Estimado: {{producto.tiempoPromedioElaboracion}}</p>
                            <p >Codigo Pedido: {{item.codigo}}</p> 
-                           <button (click)="tomarPedido(item,producto)">Aceptar Pedido</button>
+                           <button (click)="tomarPedido(item,producto)">Tomar Pedido</button>
                         </div>     
                    </ul> 
                    <br>          

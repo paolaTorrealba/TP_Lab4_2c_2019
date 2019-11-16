@@ -4,7 +4,8 @@
 
 <label>Seleccione los platos:</label>
 <button (click)="mostrarPlatos()" >Platos</button>
-<button (click)="mostrarBebidas()">Bebidas</button>
+<button (click)="mostrarCerveza()">Cerveza</button>
+<button (click)="mostrarBarra()">Barra</button>
 <div *ngIf="!pedidoRealizado">
 <ul *ngFor="let item of productos">
     <p *ngIf="item.tipo===this.tipo">nombre: {{item.nombre}}</p>

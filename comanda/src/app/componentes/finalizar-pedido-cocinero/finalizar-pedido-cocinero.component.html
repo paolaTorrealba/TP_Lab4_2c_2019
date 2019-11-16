@@ -3,8 +3,12 @@
 <ul *ngFor="let item of pedidos">
         <div *ngIf="item.estado==aceptado">                   
                    <ul *ngFor="let producto of item.productos">
-                        <div *ngIf="producto.tipo==plato && producto.estadoProdPedido==enPreparacion">
-                           <p >descripcion: {{producto.descripcion}}</p>                      
+                        <div *ngIf="producto.tipo==plato 
+                                  && producto.estadoProdPedido==enPreparacion
+                                  && producto.empleado==correo">
+                           <p >descripcion: {{producto.descripcion}}</p> 
+                           <p >empleado: {{producto.empleado}}</p> 
+                           <p >empleado: {{producto.estadoProdPedido}}</p>                    
                            <p >tiempo Estimado: {{producto.tiempoPromedioElaboracion}}</p>
                            <p >Codigo Pedido: {{item.codigo}}</p> 
                            <button (click)="cerrarPedido(item,producto)">Cerrar Pedido</button>

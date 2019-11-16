@@ -38,7 +38,6 @@ import { PieComponent } from './componentes/pie/pie.component';
 import { BotonSeleccionadoDirectiva } from '../app/directivas/boton-seleccionado-directiva';
 import { PagarFacturaComponent } from './componentes/pagar-factura/pagar-factura.component';
 import { EncuestaClienteComponent } from './componentes/encuesta-cliente/encuesta-cliente.component';
-import { FinalizarPedidoComponent } from './componentes/finalizar-pedido/finalizar-pedido.component';
 import { ConfirmarPagoComponent } from './componentes/confirmar-pago/confirmar-pago.component';
 import { AltaSocioComponent } from './componentes/alta-socio/alta-socio.component';
 import { VerEncuestasComponent } from './componentes/ver-encuestas/ver-encuestas.component';
@@ -79,8 +78,7 @@ import { FinalizarPedidoBartenderComponent } from './componentes/finalizar-pedid
     PieComponent,
     BotonSeleccionadoDirectiva,
     PagarFacturaComponent,
-    EncuestaClienteComponent,
-    FinalizarPedidoComponent,
+    EncuestaClienteComponent, 
     ConfirmarPagoComponent,
     AltaSocioComponent,
     VerEncuestasComponent,

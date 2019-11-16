@@ -379,15 +379,15 @@ export class AuthProvider {
     return this.db.collection('pedidos').add(data);
   }
 
-  getPedidos() {
-    return this.db.collection('pedidos').snapshotChanges().pipe(map(rooms => {
-      return rooms.map(a => {
-        const data = a.payload.doc.data() as pedido;
-        data.id = a.payload.doc.id;
-        return data;
-      })
-    }));
-  }
+  // getPedidos() {
+  //   return this.db.collection('pedidos').snapshotChanges().pipe(map(rooms => {
+  //     return rooms.map(a => {
+  //       const data = a.payload.doc.data() as pedido;
+  //       data.id = a.payload.doc.id;
+  //       return data;
+  //     })
+  //   }));
+  // }
 
   actualizarPedido(data) {
     return this.db.collection('pedidos').doc(data.id).update(data);

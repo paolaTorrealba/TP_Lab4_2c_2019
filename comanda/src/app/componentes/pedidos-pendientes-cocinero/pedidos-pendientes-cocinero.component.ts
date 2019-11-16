@@ -34,15 +34,22 @@ export class PedidosPendientesCocineroComponent implements OnInit {
 
 
    tomarPedido(item, producto){    
-      console.log("item: ", item)
-      console.log("producto: ", producto)
+      // console.log("item: ", item)
+      // console.log("producto: ", producto)
+      // console.log("nro producto en pedido: ", producto.numeroProducto)
       for (let i=0; i<=item.productos.length-1;i++){
-        if(item.productos[i].numeroProducto==producto.numeroProducto)
+        console.log("estoy en el for, ",item.productos[i] )
+        if(item.productos[i].numeroProducto==producto.numeroProducto){ 
            producto.estadoProdPedido=this.enPreparacion;
            producto.empleado=this.correo;
+           console.log("item.productos[i] modificado: ", item.productos[i])
+           console.log("producto ", producto)
+           
            item.productos[i]=producto;
+        }
       }
 
+      console.log("pedido actualizadao: ", item)
       this.auth.actualizarPedido(item).then(res => {
         console.log("pedido en preparacion")
       });

@@ -38,10 +38,11 @@ export class PedidosPendientesBartenderComponent implements OnInit {
       console.log("item: ", item)
       console.log("producto: ", producto)
       for (let i=0; i<=item.productos.length-1;i++){
-        if(item.productos[i].numeroProducto==producto.numeroProducto)
+        if(item.productos[i].numeroProducto==producto.numeroProducto){
            producto.estadoProdPedido=this.enPreparacion;
            producto.empleado=this.correo;
            item.productos[i]=producto;
+        }
       }
 
       this.auth.actualizarPedido(item).then(res => {

@@ -23,7 +23,6 @@ import { LoginComponent } from './componentes/login/login.component';
 import { PagarFacturaComponent } from './componentes/pagar-factura/pagar-factura.component';
 import { EncuestaClienteComponent } from './componentes/encuesta-cliente/encuesta-cliente.component';
 import { CerrarMesaComponent } from './componentes/cerrar-mesa/cerrar-mesa.component';
-import { FinalizarPedidoComponent } from './componentes/finalizar-pedido/finalizar-pedido.component';
 import { AltaSocioComponent } from './componentes/alta-socio/alta-socio.component';
 import { VerEncuestasComponent } from './componentes/ver-encuestas/ver-encuestas.component';
 import { ConfirmarPagoComponent } from './componentes/confirmar-pago/confirmar-pago.component';
@@ -52,7 +51,6 @@ const routes: Routes = [
   { path: 'encuestaCliente', component: EncuestaClienteComponent},
   { path: 'encuestaEmpleado', component: EncuestaEmpleadoComponent},
   { path: 'cerrarMesa', component: CerrarMesaComponent},
-  { path: 'finalizarPedido', component: FinalizarPedidoComponent},
   { path: 'encuestaCliente', component: EncuestaClienteComponent},
   { path: 'pedidosPendientes', component: PedidosPendientesComponent},
   { path: 'agregarMesa', component: AltaDeMesaComponent},

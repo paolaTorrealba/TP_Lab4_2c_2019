@@ -49,8 +49,8 @@ export class AltaDeProductoComponent implements OnInit {
         nombre:this.nombreModel,
         tipo:this.tipoModel,
         descripcion:this.descripcionModel, 
-        tiempoPromedioElaboracion:this.tiempopromElaboracionModel, 
-        precio: this.precioModel,
+        tiempoPromedioElaboracion: Number(this.tiempopromElaboracionModel), 
+        precio: Number(this.precioModel),
         numeroProducto:1,       
         foto:this.imagenUrl,
    

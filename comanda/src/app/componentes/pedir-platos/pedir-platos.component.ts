@@ -20,7 +20,8 @@ export class PedirPlatosComponent implements OnInit {
   public tiempoTotal:number;
   public nombre:string;
   public apellido:string;
-  public listarBebidas:boolean=false;
+  public listarCerveza:boolean=false;
+  public listarBarra:boolean=false;
   public listarPlatos: boolean=false;
   public tipo:string;
   public pedidoRealizado:boolean= false;
@@ -92,10 +93,16 @@ export class PedirPlatosComponent implements OnInit {
      console.log("tiempo:", this.tiempoTotal)
   }
 
-   mostrarBebidas(){
-     this.tipo="bebida";
-     console.log("mostrar bebidas", this.listarBebidas)
+
+  mostrarCerveza(){
+     this.tipo="cerveza";
+     console.log("mostrar bebidas", this.listarCerveza)
    }
+
+   mostrarBarra(){
+    this.tipo="barra";
+    console.log("mostrar barra", this.listarBarra)
+  }
 
    mostrarPlatos(){
     this.tipo="plato";
