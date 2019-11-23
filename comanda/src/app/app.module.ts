@@ -9,7 +9,7 @@ import { AngularFireModule } from '@angular/fire';
 import { AngularFireDatabaseModule } from '@angular/fire/database';
 import { AngularFireStorageModule } from '@angular/fire/storage';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
-
+import { MaterialModule } from './material/material';
 import { AuthProvider } from './providers/auth';
 
 import { AppComponent } from './app.component';
@@ -52,7 +52,7 @@ import { FinalizarPedidoCocineroComponent } from './componentes/finalizar-pedido
 import { FinalizarPedidoCerveceroComponent } from './componentes/finalizar-pedido-cervecero/finalizar-pedido-cervecero.component';
 import { FinalizarPedidoBartenderComponent } from './componentes/finalizar-pedido-bartender/finalizar-pedido-bartender.component';
 import { VerEstadoPedidoComponent } from './componentes/ver-estado-pedido/ver-estado-pedido.component';
-import { CancelarPedidoComponent } from './componenetes/cancelar-pedido/cancelar-pedido.component';
+import { CancelarPedidoComponent } from './componentes/cancelar-pedido/cancelar-pedido.component';
 import { MesaPipe } from './pipes/mesa.pipe';
 
 @NgModule({
@@ -101,6 +101,7 @@ import { MesaPipe } from './pipes/mesa.pipe';
   ],
   imports: [
     FormsModule,
+    MaterialModule,
     ReactiveFormsModule,
     BrowserModule,
     AppRoutingModule,
@@ -111,6 +112,9 @@ import { MesaPipe } from './pipes/mesa.pipe';
     AngularFirestoreModule,
     HttpClientModule
 
+  ],
+  exports: [
+    MaterialModule
   ],
   providers: [ AuthProvider],
   bootstrap: [AppComponent]
