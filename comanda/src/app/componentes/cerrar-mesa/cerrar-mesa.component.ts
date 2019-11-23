@@ -4,6 +4,7 @@ import { AuthProvider } from 'src/app/providers/auth';
 import { AngularFireStorage } from '@angular/fire/storage';
 import { Observable, empty } from 'rxjs';
 import { finalize } from 'rxjs/operators';
+import { EstadoMesa, EstadoReserva } from 'src/app/clases/enum';
 
 @Component({
   selector: 'app-cerrar-mesa',
@@ -13,7 +14,7 @@ import { finalize } from 'rxjs/operators';
 export class CerrarMesaComponent implements OnInit {
   public mesas:Array<any> = [];
   public reservas:Array<any> = [];
-  public estado:string="cerrada";
+  public estado:string=EstadoMesa.cerrada;
   public activa:string="activa";
   constructor(private  data:  AuthService,   
     private auth: AuthProvider) { 
@@ -51,7 +52,7 @@ export class CerrarMesaComponent implements OnInit {
         console.log("reservas ",this.reservas[i])
         console.log("codigo de mesa ",this.reservas[i].codigoMesa)
          if (this.reservas[i].codigoMesa==item.codigo 
-          && this.reservas[i].estado==this.activa){
+          && this.reservas[i].estado==EstadoReserva.activa){
             this.finalizarReserva(this.reservas[i]);                 
           }
       }
@@ -60,7 +61,7 @@ export class CerrarMesaComponent implements OnInit {
    }
 
    finalizarReserva(elemento){     
-      elemento.estado="finalizada";
+      elemento.estado=EstadoReserva.finalizada;
       console.log("elemento: ",elemento)    
       this.auth.actualizarReserva(elemento).then(res => {
         console.log("reserva finalizada")

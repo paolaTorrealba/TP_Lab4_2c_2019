@@ -52,6 +52,8 @@ import { FinalizarPedidoCocineroComponent } from './componentes/finalizar-pedido
 import { FinalizarPedidoCerveceroComponent } from './componentes/finalizar-pedido-cervecero/finalizar-pedido-cervecero.component';
 import { FinalizarPedidoBartenderComponent } from './componentes/finalizar-pedido-bartender/finalizar-pedido-bartender.component';
 import { VerEstadoPedidoComponent } from './componentes/ver-estado-pedido/ver-estado-pedido.component';
+import { CancelarPedidoComponent } from './componenetes/cancelar-pedido/cancelar-pedido.component';
+import { MesaPipe } from './pipes/mesa.pipe';
 
 @NgModule({
   declarations: [
@@ -94,6 +96,8 @@ import { VerEstadoPedidoComponent } from './componentes/ver-estado-pedido/ver-es
     FinalizarPedidoCerveceroComponent,
     FinalizarPedidoBartenderComponent,
     VerEstadoPedidoComponent,
+    CancelarPedidoComponent,
+    MesaPipe,
   ],
   imports: [
     FormsModule,

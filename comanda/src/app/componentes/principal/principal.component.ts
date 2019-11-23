@@ -97,7 +97,8 @@ export class PrincipalComponent implements OnInit {
           { accion: "Encuesta", img: "pedido.png", ruta: "encuestaCliente" },
           { accion: "Ingresar Codigos", img: "pedido.png", ruta: "encuestaCliente" },
           { accion: "Reservar mesa", img: "reserva.jpg", ruta: "reservaCliente" }, 
-          { accion: "Ver mi pedido", img: "reserva.jpg", ruta: "verEstadoPedido" }, 
+          { accion: "Ver mi pedido", img: "reserva.jpg", ruta: "verEstadoPedido" },
+          { accion: "Cancelar Pedido", img: "reserva.jpg", ruta: "verEstadoPedido" },  
         ];
         break;
       case "cocinero": 

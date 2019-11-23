@@ -4,6 +4,7 @@ import { AuthProvider } from 'src/app/providers/auth';
 import { AngularFireStorage } from '@angular/fire/storage';
 import { Observable, empty } from 'rxjs';
 import { finalize } from 'rxjs/operators';
+import { EstadoPedido } from 'src/app/clases/enum';
 
 @Component({
   selector: 'app-pedidos-pendientes',
@@ -49,7 +50,7 @@ export class PedidosPendientesComponent implements OnInit {
       console.log("la imagen: ", this.imagenUrl)
       item.foto=this.imagenUrl;
       item.codigo=this.codigo;
-      item.estado="aceptado";    
+      item.estado=EstadoPedido.aceptado;    
       this.auth.actualizarPedido(item).then(res => {
         console.log("pedido aceptado")
       });

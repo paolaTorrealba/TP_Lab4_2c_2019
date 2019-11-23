@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { AngularFireStorage } from '@angular/fire/storage';
 import { AuthProvider } from 'src/app/providers/auth';
 import { AuthService } from 'src/app/servicios/auth.service';
+import { EstadoMesa } from 'src/app/clases/enum';
 
 
 @Component({
@@ -34,10 +35,10 @@ export class AltaDeMesaComponent implements OnInit {
      let data= {  
         "numero": this.numeroModel,
         "cantidadComensales": this.cantidadComensalesModel,  
-        "estado": "cerrada",
+        "estado": EstadoMesa.cerrada,
         "codigo": this.codigo   
      }     
-    console.log("guardo la mesa")
+    
     this.auth.guardarMesa(data).then(res =>{
     }).catch(error => {
       console.log(error,"error al guardar la mesa"); 

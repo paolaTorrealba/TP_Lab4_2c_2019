@@ -1,6 +1,7 @@
 import { Component, OnInit} from '@angular/core';
 import { AuthService } from 'src/app/servicios/auth.service';
 import { AuthProvider } from 'src/app/providers/auth';
+import { EstadoPedido } from 'src/app/clases/enum';
 
 
 @Component({
@@ -29,10 +30,9 @@ export class ConfirmarPedidoComponent implements OnInit {
     console.log("pedidos: ",this.pedidos)
    }
 
-   entregarPedido(item){   
-      console.log("item: ", item)    
+   entregarPedido(item){ 
 
-      item.estado=this.entregado;    
+      item.estado=EstadoPedido.entregado;    
       this.auth.actualizarPedido(item).then(res => {
         console.log("pedido entregado a cliente")
       });

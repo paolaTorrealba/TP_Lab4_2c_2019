@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/servicios/auth.service';
 import { AuthProvider } from 'src/app/providers/auth';
+import { EstadoMesa, EstadoReserva } from 'src/app/clases/enum';
 
 @Component({
   selector: 'app-reserva',
@@ -8,11 +9,14 @@ import { AuthProvider } from 'src/app/providers/auth';
   styleUrls: ['./reserva.component.scss']
 })
 export class ReservaComponent implements OnInit {
-  codigoModel: string;
+  
+  public codigoModel: string;
+  public correo:string;
   public mesas:Array<any> = [];
   public reservas:Array<any> = [];
-  public estado="cerrada";
-  public correo;
+  public estado=EstadoMesa.cerrada;
+
+
   constructor(private  data:  AuthService,
     private auth: AuthProvider) {     
      this.correo=localStorage.getItem("usuarioComanda");
@@ -31,31 +35,33 @@ export class ReservaComponent implements OnInit {
     });
     console.log("Mesas: ",this.mesas);  
    } 
+
+
    obtenerReservas() {
     this.data.getListaReservas("reservas").subscribe(lista => {
         this.reservas=lista; 
         console.log("reservas: ",this.reservas); 
-        console.log("lista: ",lista); 
-     
+        console.log("lista: ",lista);      
     });
     console.log("reservas: ",this.reservas);  
    } 
 
+
    seleccionarMesa(item){          
-      item.estado="reservada";    
+      item.estado=EstadoMesa.reservada;    
       this.auth.updateMesa(item).then(res => {
         console.log("mesa reservada")
       });
-      // guardo la reserva
       this.crearReserva(item);
-    // actualizo el estado de la mesa
-    // en reservas guardo la mesa y el cliente
+
    }
+
+   
    crearReserva (item){
      
           let data= {  
             "correo": this.correo,       
-            "estado": "activa",
+            "estado": EstadoReserva.activa,
             "codigoMesa": item.codigo
           }     
           console.log("guardo la reserva",data)

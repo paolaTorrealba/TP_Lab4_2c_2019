@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/servicios/auth.service';
 import { AuthProvider } from 'src/app/providers/auth';
+import { EstadoReserva } from 'src/app/clases/enum';
 
 
 @Component({
@@ -49,7 +50,7 @@ export class PedirPlatosComponent implements OnInit {
         this.reservas=lista;
         console.log("reservas: ",this.reservas); 
         for (let i=0; i<=this.reservas.length-1; i++){
-          if (this.reservas[i].estado==this.activa
+          if (this.reservas[i].estado==EstadoReserva.activa
             && this.reservas[i].correo==this.correo){
               this.codigoMesa=this.reservas[i].codigoMesa;
             }

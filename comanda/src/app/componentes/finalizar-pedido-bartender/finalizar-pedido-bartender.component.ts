@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/servicios/auth.service';
 import { AuthProvider } from 'src/app/providers/auth';
+import { EstadoPedido } from 'src/app/clases/enum';
 
 @Component({
   selector: 'app-finalizar-pedido-bartender',
@@ -9,8 +10,8 @@ import { AuthProvider } from 'src/app/providers/auth';
 })
 export class FinalizarPedidoBartenderComponent implements OnInit {
   public pedidos:Array<any> = [];
-  public pendiente:string="pendiente";
-  public aceptado:string="aceptado";  
+  public pendiente:string=EstadoPedido.pendiente;
+  public aceptado:string=EstadoPedido.aceptado;  
   public enPreparacion:string="en preparacion";
   public cerrado:string="cerrado";
   public barra:string="barra";
@@ -40,7 +41,7 @@ export class FinalizarPedidoBartenderComponent implements OnInit {
       console.log("producto: ", producto)
       for (let i=0; i<=item.productos.length-1;i++){
         if(item.productos[i].numeroProducto==producto.numeroProducto){
-           producto.estadoProdPedido=this.cerrado;
+           producto.estadoProdPedido=EstadoPedido.cerrado;
            item.productos[i]=producto;
           }
       }
@@ -62,7 +63,7 @@ export class FinalizarPedidoBartenderComponent implements OnInit {
        }
    }
    if (this.pedidoListo){
-    item.estado=this.listoParaServir;
+    item.estado=EstadoPedido.listoParaServir;
     this.auth.actualizarPedido(item).then(res => {
       console.log("pedido listo para servir")
     });

@@ -3,6 +3,7 @@ import { empty, Observable } from 'rxjs';
 import { finalize } from 'rxjs/operators';
 import { AuthProvider } from 'src/app/providers/auth';
 import { AngularFireStorage } from '@angular/fire/storage';
+import { Perfil } from 'src/app/clases/enum';
 
 @Component({
   selector: 'app-alta-socio',
@@ -64,7 +65,7 @@ export class AltaSocioComponent implements OnInit {
       'nombre':this.nombreModel,
       'apellido': this.apellidoModel,
       'foto': this.imagenUrl,
-      'perfil': 'socio',
+      'perfil': Perfil.socio,
       'activo': false,
       'logueado': false,
       'correo': this.emailModel,

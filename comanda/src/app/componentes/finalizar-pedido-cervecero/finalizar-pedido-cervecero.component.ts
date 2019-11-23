@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/servicios/auth.service';
 import { AuthProvider } from 'src/app/providers/auth';
+import { EstadoPedido } from 'src/app/clases/enum';
 
 @Component({
   selector: 'app-finalizar-pedido-cervecero',
@@ -64,7 +65,7 @@ export class FinalizarPedidoCerveceroComponent implements OnInit {
        }
    }
    if (this.pedidoListo){
-    item.estado=this.listoParaServir;
+    item.estado=EstadoPedido.listoParaServir;
     this.auth.actualizarPedido(item).then(res => {
       console.log("pedido listo para servir")
     });

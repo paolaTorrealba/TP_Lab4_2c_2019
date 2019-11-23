@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/servicios/auth.service';
 import { AuthProvider } from 'src/app/providers/auth';
+import { EstadoPedido } from 'src/app/clases/enum';
 
 @Component({
   selector: 'app-finalizar-pedido-cocinero',
@@ -41,7 +42,7 @@ export class FinalizarPedidoCocineroComponent implements OnInit {
       console.log("producto: ", producto)
       for (let i=0; i<=item.productos.length-1;i++){
         if(item.productos[i].numeroProducto==producto.numeroProducto){
-           producto.estadoProdPedido=this.cerrado;
+           producto.estadoProdPedido=EstadoPedido.cerrado;
            item.productos[i]=producto;
         }
       }
@@ -58,14 +59,14 @@ export class FinalizarPedidoCocineroComponent implements OnInit {
     console.log("item EN LISTO", item) 
    //  recorro la lista de productos
    for (let i=0; i<=item.productos.length-1;i++){
-     if(item.productos[i].estadoProdPedido==this.enPreparacion ||
-       item.productos[i].estadoProdPedido==this.pendiente )  {       
+     if(item.productos[i].estadoProdPedido==EstadoPedido.enPreparacion ||
+       item.productos[i].estadoProdPedido==EstadoPedido.pendiente )  {       
        this.pedidoListo=false; //no esta listo aun
        }
    }
    if (this.pedidoListo){
     console.log("el pedido esta listo: ",this.pedidoListo)
-    item.estado=this.listoParaServir;
+    item.estado=EstadoPedido.listoParaServir;
     console.log("item.estado: ",item.estado)
     console.log("item a guardar: ",item)
     this.auth.actualizarPedido(item).then(res => {
