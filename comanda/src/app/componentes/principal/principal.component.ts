@@ -148,7 +148,7 @@ export class PrincipalComponent implements OnInit {
     // });
   }
 
-  private cerrarSersion(){
+  public cerrarSersion(){
     this.auth.logOut();
     // actualizar el estado del usuario a noLogueado.
     // limpiar el local Storage.
