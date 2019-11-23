@@ -55,6 +55,7 @@ import { VerEstadoPedidoComponent } from './componentes/ver-estado-pedido/ver-es
 import { CancelarPedidoComponent } from './componentes/cancelar-pedido/cancelar-pedido.component';
 import { MesaPipe } from './pipes/mesa.pipe';
 
+
 @NgModule({
   declarations: [
     AppComponent,

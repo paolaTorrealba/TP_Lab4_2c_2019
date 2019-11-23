@@ -1,23 +1,35 @@
+<nav class="dropdownmenu">
+    <ul >
+      <li><a href="/principal">Principal</a></li>
+      <li *ngIf="this.usuario.perfil=='socio'"><a >Encuestas</a>
+        <ul  id="submenu"   >
+            <li><a href="/verEncuestas">Empleados</a></li>
+            <li><a href="/verEncuestas">Clientes</a></li>            
+        </ul>
+      </li>
+      <li *ngIf="this.usuario.perfil=='socio'"><a >Listados</a>
+        <ul id="submenu" >
+          <li><a href="/listadoProductos">Productos</a></li>
+          <li><a href="/listadoPedidos">Pedidos</a></li>
+          <li><a href="/listadoMesas">Mesas</a></li>
+        </ul>
+      </li>
+      
+    </ul>
 
-   <h1>Menu Principal</h1>
-
-    <header>      
-        <title>Menu</title>    
-    </header>
-      <ul>
-        <button  item *ngFor="let p of acciones" (click)="openPage(p.ruta)">
-          {{p.accion}} <br>
-        </button>
-       
-      </ul>
- 
-
-        <button  (click)="cerrarSersion()"> Salir </button>
- 
-    <!-- <button button *ngFor="let item of acciones" (click)="openPage(item)">
-      <div class="sombreado"></div>
-      <img src="../../assets/Imagenes/{{item.img}}" />
-      <span>{{item.accion}}</span>
-    </button> -->
-
-  
+    <ul  >        
+        <li *ngIf="this.usuario.perfil=='cliente'"><a >cliente</a>
+          <ul id="submenu"  >
+              <li><a href="/verEncuestas">Empleados</a></li>
+              <li><a href="/verEncuestas">Clientes</a></li>            
+         </ul>
+        </li>
+        <li *ngIf="this.usuario.perfil=='cliente'"><a >algomas</a>
+          <ul id="submenu" >
+            <li><a href="/listadoProductos">Productos</a></li>
+            <li><a href="/listadoPedidos">Pedidos</a></li>
+            <li><a href="/listadoMesas">Mesas</a></li>
+          </ul>
+        </li>        
+    </ul>
+</nav>
