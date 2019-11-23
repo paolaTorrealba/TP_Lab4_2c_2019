@@ -49,14 +49,14 @@ const routes: Routes = [
 
   // SOCIO
   { path: 'pedidosPendientes', component: PedidosPendientesComponent},
-  { path: 'agregarMesa', component: AltaDeMesaComponent},  
   { path: 'verEncuestas', component: VerEncuestasComponent},
+  { path: 'agregarMesa', component: AltaDeMesaComponent},   
   { path: 'agregarSocio', component: AltaSocioComponent},
-  { path: 'agregarEmpleado', component: AltaEmpleadoComponent},
+  { path: 'agregarEmpleado', component: AltaEmpleadoComponent}, 
+  { path: 'agregarProducto', component: AltaDeProductoComponent}, 
   { path: 'listadoMesas', component: ListadoMesasComponent},
   { path: 'listadoProductos', component: ListadoProductosComponent},
   { path: 'listadoPedidos', component: ListadoPedidosComponent},
-  { path: 'agregarProducto', component: AltaDeProductoComponent}, 
 
   // CLIENTE
   { path: 'pagarFactura', component: PagarFacturaComponent},
