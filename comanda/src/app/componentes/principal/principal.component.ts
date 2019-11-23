@@ -69,7 +69,24 @@ export class PrincipalComponent implements OnInit {
           { accion: "Listado pedidos", img: "ocupar-mesa.jpg", ruta: "listadoPedidos" },
           { accion: "Ver Registro de Clientes", img: "nuevo-empleado.jpg", ruta: "verRegistroClientes" }, 
           { accion: "Cerrar Mesa", img: "repartidor.png", ruta: "cerrarMesa"},
+         
+          { accion: "Ver Ingresos Empleados", img: "repartidor.png", ruta: "cerrarMesa"},
+          { accion: "Ver Operaciones Empleados", img: "repartidor.png", ruta: "cerrarMesa"},
+          { accion: "Ver Operaciones por Empleado", img: "repartidor.png", ruta: "cerrarMesa"},
+          { accion: "ABM Empleados", img: "repartidor.png", ruta: "cerrarMesa"},
+
+          { accion: "Ver Pedido Mas Vendido", img: "repartidor.png", ruta: "cerrarMesa"},
+          { accion: "Ver Pedido Menos Vendido", img: "repartidor.png", ruta: "cerrarMesa"},
+          { accion: "Ver Pedidos Con Demora", img: "repartidor.png", ruta: "cerrarMesa"},
+          { accion: "Ver Pedido Cancelados", img: "repartidor.png", ruta: "cerrarMesa"},
+
+          { accion: "Uso de Mesas", img: "repartidor.png", ruta: "cerrarMesa"},
+          { accion: "Ver Facturacion por Mesa", img: "repartidor.png", ruta: "cerrarMesa"},
+          { accion: "Ver Importes por Mesas", img: "repartidor.png", ruta: "cerrarMesa"},
+          { accion: "Ver Facturacion por Fecha", img: "repartidor.png", ruta: "cerrarMesa"},
          // { accion: "Confirmar reservas", img: "reserva.jpg", ruta: ListadoReservaComponent },
+          { accion: "Ver Comentarios", img: "repartidor.png", ruta: "cerrarMesa"},
+
         ];
         break;
       case "cliente":
