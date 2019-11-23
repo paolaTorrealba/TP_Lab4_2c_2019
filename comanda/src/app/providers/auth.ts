@@ -202,8 +202,12 @@ export class AuthProvider {
     }));
   }
 
-  //-----USUARIOS-----
-  getUsuarios() {
+  //-----------------USUARIOS--------------------
+  crearUsuario(correo, pass) {
+    return this.auth.auth.createUserWithEmailAndPassword(correo, pass);
+  }
+
+  traerUsuarios() {
     return this.db.collection('usuarios').snapshotChanges().pipe(map(rooms => {
       return rooms.map(a => {
         const data = a.payload.doc.data() as usuario;
@@ -213,7 +217,7 @@ export class AuthProvider {
     }));
   }
 
-  updateUsuario(data) {
+  actualizarUsuario(data) {
     return this.db.collection('usuarios').doc(data.id).update(data);
   }
 
@@ -221,17 +225,19 @@ export class AuthProvider {
     return this.db.collection('usuarios').add(data);
   }
 
+
+  //-----------------PEDIDOS--------------------
   guardarPedido(data) {
     return this.db.collection('pedidos').add(data);
   }
 
+
+  //-----------------ENCUESTAS--------------------
   guardarEncuestaEmpleado(data) {
     return this.db.collection('encuestaEmpleado').add(data);
   }
 
-  crearUsuario(correo, pass) {
-    return this.auth.auth.createUserWithEmailAndPassword(correo, pass);
-  }
+ 
   //-----CLIENTES-----
   guardarCliente(data) {
     return this.db.collection('clientes').add(data);
