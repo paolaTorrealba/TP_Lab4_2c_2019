@@ -49,7 +49,7 @@ export class ReservaComponent implements OnInit {
 
    seleccionarMesa(item){          
       item.estado=EstadoMesa.reservada;    
-      this.auth.updateMesa(item).then(res => {
+      this.auth.actualizarMesa(item).then(res => {
         console.log("mesa reservada")
       });
       this.crearReserva(item);

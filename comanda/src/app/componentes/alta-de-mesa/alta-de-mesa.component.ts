@@ -61,7 +61,7 @@ cambiarEstadoMesa(item) {
   console.log("lamesa: ",this.lamesa);
   item.estado= "otro"; 
   console.log("item modificado: ",item);
-  this.auth.updateMesa(item).then(res => {      
+  this.auth.actualizarMesa(item).then(res => {      
   });
 } 
 

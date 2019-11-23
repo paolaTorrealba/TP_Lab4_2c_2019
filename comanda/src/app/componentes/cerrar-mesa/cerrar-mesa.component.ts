@@ -34,7 +34,7 @@ export class CerrarMesaComponent implements OnInit {
    cerrarMesa(item){
       console.log("item: ", item)        
       item.estado=this.estado;    
-      this.auth.updateMesa(item).then(res => {
+      this.auth.actualizarMesa(item).then(res => {
         console.log("mesa actulizada", item)
       });
 
