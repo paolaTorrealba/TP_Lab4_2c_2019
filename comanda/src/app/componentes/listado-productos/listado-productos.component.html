@@ -1,16 +1,4 @@
 <app-principal></app-principal>
-<!-- <h1>Listado de Productos</h1>
-<ul *ngFor="let item of productos">
-    <p>nombre: {{item.nombre}}</p>
-    <p>tipo: {{item.tipo}}</p>
-    <p>descripcion: {{item.descripcion}}</p>
-    <p>tiempoPromedioElaboracion: {{item.tiempoPromedioElaboracion}}</p>
-    <p>precio: {{item.precio}}</p>
-    <p>numeroProducto: {{item.numeroProducto}}</p>
-    <p>foto: {{item.foto}}</p>   
-    <p>======================</p>    
-</ul>   -->
-
 <table mat-table [dataSource]="productos">
         <tr>
             <ng-container matColumnDef="NombreProducto">
@@ -40,3 +28,14 @@
         </div>
       
       </table>
+<!-- <h1>Listado de Productos</h1>
+<ul *ngFor="let item of productos">
+    <p>nombre: {{item.nombre}}</p>
+    <p>tipo: {{item.tipo}}</p>
+    <p>descripcion: {{item.descripcion}}</p>
+    <p>tiempoPromedioElaboracion: {{item.tiempoPromedioElaboracion}}</p>
+    <p>precio: {{item.precio}}</p>
+    <p>numeroProducto: {{item.numeroProducto}}</p>
+    <p>foto: {{item.foto}}</p>   
+    <p>======================</p>    
+</ul>   -->
