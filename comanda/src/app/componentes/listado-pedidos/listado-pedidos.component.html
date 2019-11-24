@@ -1,28 +1,5 @@
 <app-principal></app-principal>
 <h1>Listado Pedidos </h1>
-
-<!-- <ul *ngFor="let item of pedidos">
-        <div>
-                   <p >Mesa: mesa (agregar)</p>
-                   <p >Importe: {{item.montoTotal}}</p>
-                   <p >Estado: {{item.estado}}</p>
-                   <p >Cliente: {{item.nombreCliente}}</p>   
-                   <p >Tiempo Elaboracion: {{item.tiempoElaboracion}} (tiempo restante)</p>       
-                   <ul *ngFor="let producto of item.productos">
-                           <p >descripcion: {{producto.descripcion}}</p>
-                           <p >precio: {{producto.precio}}</p>
-                           <p >empleado: {{producto.empleado}}</p>
-                           <p >estado: {{producto.estadoProdPedido}}</p>
-                           <p >tiempo Elaboracion: {{producto.tiempoPromedioElaboracion}}</p>
-                           <p >......................</p> -->
-                           <!-- <p >nombre Cliente: {{item.nombreCliente}}</p>   
-                           <p >tiempo restante: {{item.tiempoElaboracion}}</p>        -->
-                   <!-- </ul>
-                                       
-                   <p >======================</p>   
-        </div>
-       </ul>   -->
-
        <table mat-table [dataSource]="pedidos">
             <tr>
                 <ng-container matColumnDef="Mesa">
@@ -55,11 +32,6 @@
                 <tr mat-row *matRowDef="let row; columns: columsPedido;"></tr>
             </div>
     </table>
-
-
-    <!-- <mat-nav-list >
-            <a mat-list-item *ngFor="let prod of productos"> {{ prod.descripcion }} </a>
-   </mat-nav-list> -->
 <br>
 <label>Detalle del Pedido:</label>
     <table  mat-table [dataSource]="productos">
@@ -92,3 +64,26 @@
                 <tr mat-row *matRowDef="let row; columns: columsProductoPedido;"></tr>
             </div>
     </table>
+
+    
+<!-- <ul *ngFor="let item of pedidos">
+        <div>
+                   <p >Mesa: mesa (agregar)</p>
+                   <p >Importe: {{item.montoTotal}}</p>
+                   <p >Estado: {{item.estado}}</p>
+                   <p >Cliente: {{item.nombreCliente}}</p>   
+                   <p >Tiempo Elaboracion: {{item.tiempoElaboracion}} (tiempo restante)</p>       
+                   <ul *ngFor="let producto of item.productos">
+                           <p >descripcion: {{producto.descripcion}}</p>
+                           <p >precio: {{producto.precio}}</p>
+                           <p >empleado: {{producto.empleado}}</p>
+                           <p >estado: {{producto.estadoProdPedido}}</p>
+                           <p >tiempo Elaboracion: {{producto.tiempoPromedioElaboracion}}</p>
+                           <p >......................</p> -->
+                           <!-- <p >nombre Cliente: {{item.nombreCliente}}</p>   
+                           <p >tiempo restante: {{item.tiempoElaboracion}}</p>        -->
+                   <!-- </ul>
+                                       
+                   <p >======================</p>   
+        </div>
+       </ul>   -->

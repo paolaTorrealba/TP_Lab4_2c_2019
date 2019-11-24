@@ -56,6 +56,7 @@ import { CancelarPedidoComponent } from './componentes/cancelar-pedido/cancelar-
 import { MesaPipe } from './pipes/mesa.pipe';
 import { TipoFilasDirective } from './directivas/tipo-filas.directive';
 import { EstadoFilaDirective } from './directivas/estado-fila.directive';
+import { MostrarFotoPipe } from './pipes/mostrar-foto.pipe';
 
 
 @NgModule({
@@ -104,6 +105,7 @@ import { EstadoFilaDirective } from './directivas/estado-fila.directive';
     MesaPipe,
     TipoFilasDirective,
     EstadoFilaDirective,
+    MostrarFotoPipe,
   ],
   imports: [
     FormsModule,
