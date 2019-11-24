@@ -10,27 +10,6 @@ import { AuthProvider } from 'src/app/providers/auth';
 })
 export class LoginComponent implements OnInit {
 
-  // nombreModel: string;
-  // apellidoModel: string
-  // dniModel: string;
-  // claveModel:string;
-  // emailModel:string;
-  // passwordModel
-  // constructor() { }
-
-  // ngOnInit() {
-  // }
-
-  // crearTest() {
-  //   this.nombreModel = "admin";
-  //   this.apellidoModel = "admin";
-  //   this.emailModel = "admin@admin.com";
-  //   this.passwordModel = "13456";
-  
-  // }
-
-
-  private subscription: Subscription;
   tipoUser:string;
   user= { email : '', password : ''};
   mensaje:string;
@@ -61,7 +40,7 @@ ngOnInit() {
 }
 
 
-entrar() {  
+Logearse() {  
     console.log("usuario que ingres: ",this.user.email);  
     if (! this.auth.login(this.user.email,this.user.password )){
       console.log("Error al loguearse")

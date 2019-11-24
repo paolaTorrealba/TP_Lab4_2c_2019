@@ -13,67 +13,55 @@ export class AltaEmpleadoComponent implements OnInit {
 
   @ViewChild("imgUsuario", { static: false }) InputImagenUser: ElementRef;
 
-  perfil;
-  imgName: string;
-  nombreModel: string;
-  apellidoModel: string
-  dniModel: string;
-  claveModel:string;
-  perfilModel: any;
-  usuario: any;
-  emailModel: string;
-  passwordModel: string;
-  captchaVerificado: boolean;
-  accepted: boolean;
-  porcentajeUpload: Observable<number>;
+  public imgName: string;
+  public nombreModel: string;
+  public apellidoModel: string
+  public dniModel: string;
+  public claveModel:string="";
+  public perfilModel: any="bartender";
+  public usuario: any;
+  public emailModel: string="";
+  public passwordModel: string;
+  public captchaVerificado: boolean;
+  public accepted: boolean;
+  public porcentajeUpload: Observable<number>;
   public urlImagen: Observable<string>;
-  noCargando = true;
-  imagenUrl : any;
-  foto:string;
+  public noCargando = true;
+  public imagenUrl : any;
+  public foto:string;
 
 
   constructor(private auth: AuthProvider, 
-    private storage: AngularFireStorage, 
-    private elRef: ElementRef) {
+    private storage: AngularFireStorage) {
+
     this.imgName = "Seleccionar imágen..";
     this.usuario = this.auth.usuarioVacio();
-    this.captchaVerificado = false;
-  }
+    }
 
   ngOnInit() { }
-
-  registrarse() {
-    console.log("registro")
-    // this.usuario.perfil = this.auth.perfil[(<HTMLInputElement>document.getElementById("perfil")).value];
-
-    // if (this.usuario.perfil == this.auth.empleado) {
-    //   this.usuario.perfil = this.auth.actividad[(<HTMLInputElement>document.getElementById("actividad")).value];
-    // }
-
-    // this.usuario.correo = this.emailModel;
-    // this.usuario.nombre = this.emailModel;
-    // this.usuario.apellido = this.emailModel;
-    // this.usuario.dni = this.emailModel;
-    // this.usuario.clave = this.emailModel;
-    // this.usuario.foto = this.emailModel;
+  confirmar() {
+    console.log("el perfil",this.perfilModel)    
     this.imagenUrl = this.InputImagenUser.nativeElement.value;
     if (!this.imagenUrl ) {
       this.imagenUrl = "assets/imagenes/default-user.png";
     }
-
-      let data = {
-      'nombre':this.nombreModel,
-      'apellido': this.apellidoModel,
-      'foto': this.imagenUrl,
-      'perfil': 'cocinero',
-      'activo': false,
-      'logueado': false,
-      'correo': this.emailModel,
-      'clave':this.claveModel
+    let data = {
+        'nombre':this.nombreModel,
+        'apellido': this.apellidoModel,
+        'foto': this.imagenUrl,
+        'perfil':this.perfilModel,
+        'activo': false,
+        'logueado': false,
+        'correo': this.emailModel,
+        'clave':this.claveModel
+    }
+    console.log(data)
+    this.auth.guardarUsuario(data);
   }
 
-  console.log("")
-    this.auth.guardarUsuario(data);
+  changePerfil(perfil: any) {
+      this.perfilModel = perfil;
+      console.log("this.perfilModel", this.perfilModel)
   }
 
   ImagenCargada(e) {
