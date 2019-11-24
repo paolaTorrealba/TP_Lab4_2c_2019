@@ -14,7 +14,7 @@ export class ListadoPedidosComponent implements OnInit {
 
   public info:boolean;
   private columsPedido: string[] = ['Mesa', 'Importe', 'Estado', 'Tiempo Elaboracion','Detalle'];
-  private columsProductoPedido: string[] = ['Descripcion'];
+  private columsProductoPedido: string[] = ['Descripcion','Precio','Empleado','Estado Producto','Tiempo Promedio Elaboracion'];
   public pedidos:Array<any> = [];
   public productos:Array<any> = [];
   private dataSourceProd : any;
