@@ -57,6 +57,7 @@ import { MesaPipe } from './pipes/mesa.pipe';
 import { TipoFilasDirective } from './directivas/tipo-filas.directive';
 import { EstadoFilaDirective } from './directivas/estado-fila.directive';
 import { MostrarFotoPipe } from './pipes/mostrar-foto.pipe';
+import { ColorPedidoPendienteDirective } from './directivas/color-pedido-pendiente.directive';
 
 
 @NgModule({
@@ -106,6 +107,7 @@ import { MostrarFotoPipe } from './pipes/mostrar-foto.pipe';
     TipoFilasDirective,
     EstadoFilaDirective,
     MostrarFotoPipe,
+    ColorPedidoPendienteDirective,
   ],
   imports: [
     FormsModule,

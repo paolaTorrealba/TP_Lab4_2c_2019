@@ -3,8 +3,9 @@ import { AuthService } from 'src/app/servicios/auth.service';
 import { AuthProvider } from 'src/app/providers/auth';
 import { AngularFireStorage } from '@angular/fire/storage';
 import { Observable, empty } from 'rxjs';
-import { finalize } from 'rxjs/operators';
+import { finalize, map } from 'rxjs/operators';
 import { EstadoMesa, EstadoReserva } from 'src/app/clases/enum';
+import { MatTableDataSource, MatDialog } from '@angular/material';
 
 @Component({
   selector: 'app-cerrar-mesa',
@@ -16,6 +17,10 @@ export class CerrarMesaComponent implements OnInit {
   public reservas:Array<any> = [];
   public estado:string=EstadoMesa.cerrada;
   public activa:string="activa";
+  private columsMesa: string[] = ['Numero', 'Estado','Codigo','Cerrar'];
+  private dataSource = new MatTableDataSource(this.mesas);
+  private noData = this.dataSource.connect().pipe(map((data: any[]) => data.length === 0));
+
   constructor(private  data:  AuthService,   
     private auth: AuthProvider) { 
     this.obtenerMesas();

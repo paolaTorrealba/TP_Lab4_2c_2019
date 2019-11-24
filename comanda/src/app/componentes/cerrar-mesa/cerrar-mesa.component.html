@@ -1,4 +1,35 @@
-<h1>Mesas Pendientes de Cierre</h1>
+<app-principal></app-principal>
+<br>
+<table mat-table [dataSource]="mesas">
+<tr>
+    <ng-container matColumnDef="Numero">
+        <th mat-header-cell *matHeaderCellDef> Numero </th>
+        <td mat-cell *matCellDef="let element"> {{element.numero}} </td>
+    </ng-container>     
+    <ng-container matColumnDef="Estado">
+        <th mat-header-cell *matHeaderCellDef> Estado </th>
+        <td mat-cell *matCellDef="let element"> {{element.estado}} </td>
+    </ng-container>       
+    <ng-container matColumnDef="Codigo">
+        <th mat-header-cell *matHeaderCellDef> Codigo </th>
+        <td mat-cell *matCellDef="let element">{{element.codigo}} </td>
+    </ng-container> 
+    <ng-container matColumnDef="Cerrar">
+        <th mat-header-cell *matHeaderCellDef> Cerrar </th>
+        <td mat-cell *matCellDef="let element">
+        <button mat-icon-button (click)="cerrarMesa(element)">
+           <mat-icon>check_circle</mat-icon>
+        </button> 
+        </td>    
+    </ng-container>    
+</tr>
+<div>
+        <tr mat-header-row *matHeaderRowDef="columsMesa"></tr>
+        <tr mat-row *matRowDef="let row; columns: columsMesa;"  ></tr>
+</div>
+</table>
+
+<!-- <h1>Mesas Pendientes de Cierre</h1>
 <ul *ngFor="let item of mesas">
         <div *ngIf="item.estado!=this.estado">
                    <p >Nro: {{item.numero}}</p>
@@ -7,4 +38,4 @@
                                   
                    <p >======================</p>   
         </div>
-       </ul> 
+       </ul>  -->
