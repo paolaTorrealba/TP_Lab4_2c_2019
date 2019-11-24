@@ -24,12 +24,15 @@ export class AltaDeMesaComponent implements OnInit {
     private auth: AuthProvider) {  
 
       this.obtenerMesas();
-
+     
  }
 
-  ngOnInit() { }
+  ngOnInit() {
+    this.obtenerMesas(); 
 
-  public agregarMesa() {
+  }
+
+  public confirmar() {
      console.log("agregar Mesa")
      console.log("codigo: ", this.codigo) 
      let data= {  
@@ -48,6 +51,7 @@ export class AltaDeMesaComponent implements OnInit {
   obtenerMesas() {
     this.data.getListaMesas("mesas").subscribe(lista => {
         this.mesas=lista; 
+      
         console.log("Mesas: ",this.mesas); 
         console.log("lista: ",lista); 
         this.lamesa=lista[0];   
