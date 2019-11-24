@@ -1,61 +1,37 @@
-<app-principal></app-principal>
-<h1>Alta de Producto</h1>
-<section class="h-100 registro-pagina">
-    <div class="container h-100">
-      <div class="row justify-content-md-center h-100">
-        <div class="card-wrapper registro-pagina">          
-          <div class="brand">
-            <!-- <img src="/assets/imagenes/logo.jpg"> -->
-          </div>
-
-          <div class="card fat">
-            <div class="card-body">
-           
-              <form>  
+    
+<!-- <form>  
                  <div class="form-group">
                     <label for="nombre">Nombre</label>
                     <input type="text"  [(ngModel)]="nombreModel" 
                            class="form-control" name="nombre" 
                            id="nombre" required autofocus>
-                    <!-- <div  class="invalid-feedback">
-                        <div >Nombre requerido</div>
-                    </div> -->
-                 </div> 
+                  </div> 
                  <div class="form-group">
                     <label for="tipo">Tipo</label>
                     <input type="text"  [(ngModel)]="tipoModel"
                            class="form-control" name="tipo"
                            id="tipo" required autofocus>
-                    <!-- <div  class="invalid-feedback">
-                        <div >Tipo requerido</div>
-                    </div> -->
+                    
                  </div>  
                  <div class="form-group">
                     <label for="descripcion">Descripcion</label>
                     <input type="text"  [(ngModel)]="descripcionModel"
                            class="form-control" name="descripcion"
                            id="descripcion" required autofocus>
-                    <!-- <div  class="invalid-feedback">
-                        <div >Descripcion requerido</div>
-                    </div> -->
-                 </div>  
+                     </div>  
                  <div class="form-group">
                     <label for="tiempoPromElaboracion">Tiempo Promedio Elaboracion</label>
                     <input type="text"  [(ngModel)]="tiempopromElaboracionModel" 
                           class="form-control" name="tiempoPromElaboracion"
                           id="tiempoPromElaboracion" required autofocus>
-                    <!-- <div  class="invalid-feedback">
-                        <div >Tiempo requerido</div>
-                    </div> -->
+                  
                   </div>  
                   <div class="form-group">
                       <label for="precio">Precio</label>
                       <input type="text"  [(ngModel)]="precioModel" 
                             class="form-control" name="precio"
                             id="precio" required autofocus>
-                      <!-- <div  class="invalid-feedback">
-                          <div >Precio requerido</div>
-                      </div> -->
+                    
                   </div> 
                   <form class="form-group">
                       <label for="customFile">Imágen Producto</label>
@@ -65,23 +41,118 @@
                           (change)="ImagenCargada($event)">
                         <label class="custom-file-label" for="customFile">{{imgName}}</label>
                       </div>
-                    </form>
-    
+                    </form>    
                   <input #imgProducto type="hidden" [value]="urlImagen | async">
-    
-                  <ng-container                    >
+                      <ng-container                    >
                     <button  class="btn btn-primary btn-block" (click) ="agregarProducto()">
                       Confirmar
                     </button>
                   </ng-container>                  
-              </form>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-</section>
+ </form> -->
+ <app-principal></app-principal>
+ <br>
+ <h4>Alta de Producto</h4>
+ <section class="h-100 registro-pagina">
+     <div class="container h-100">
+       <div class="row justify-content-md-center h-100">
+         <div class="card-wrapper registro-pagina">  
+           <div class="card fat">
+             <div class="card-body">
+               <h4 class="card-title">Agregar Producto</h4>
+               <form (ngSubmit)="f.form.valid && confirmar()" #f="ngForm" novalidate>
+                 <div class="form-group">
+                   <label for="nombre">Nombre</label>
+                   <input name="nombre" id="nombre" type="text" 
+                          class="form-control" [(ngModel)]="nombreModel" 
+                          #nombre="ngModel"
+                          [ngClass]="{ 'is-invalid': f.submitted && nombre.invalid }"
+                          required autofocus> 
+                   <div  *ngIf="f.submitted && nombre.invalid" class="invalid-feedback">
+                      <div *ngIf="nombre.errors.required">Nombre requerido</div>
+                   </div>
+                 </div>  
+                 <div class="form-group">
+                    <label for="tipo">Tipo</label>
+                    <select  [(ngModel)]="tipoModel" 
+                             class="form-control" name="tipo" 
+                            id="tipo" 
+                            (change)="changeTipo($event.target.value)">
+                      <option value="plato">plato</option>
+                      <option value="cerveza">cerveza</option>
+                      <option value="barra">barra</option>                      
+                    </select>
+                  </div>
+                 <div class="form-group">
+                    <label for="descripcion">Descripcion</label>
+                    <input name="descripcion" id="descripcion" type="text" 
+                         class="form-control" [(ngModel)]="descripcionModel" 
+                         #descripcion="ngModel"
+                         [ngClass]="{ 'is-invalid': f.submitted && descripcion.invalid }"
+                         required autofocus> 
+                    <div  *ngIf="f.submitted && descripcion.invalid" class="invalid-feedback">
+                      <div *ngIf="descripcion.errors.required">Descripcion requerido</div>
+                    </div>
+                </div> 
+   
+                 <div class="form-group">
+                     <label for="tiempoPromElaboracion">Tiempo Promedio Elaboracion</label>
+                     <input name="tiempoPromElaboracion"  id="tiempoPromElaboracion" type="text" 
+                          class="form-control" [(ngModel)]="tiempoPromElaboracionModel" 
+                          #tiempoPromElaboracion="ngModel"
+                          [ngClass]="{ 'is-invalid': f.submitted && tiempoPromElaboracion.invalid }"
+                          required autofocus> 
+                     <div  *ngIf="f.submitted && tiempoPromElaboracion.invalid" class="invalid-feedback">
+                       <div *ngIf="tiempoPromElaboracion.errors.required">Tiempo requerido</div>
+                     </div>
+                 </div>
 
-
-
-
+                 <div class="form-group">
+                    <label for="precio">Precio</label>
+                    <input name="precio"  id="precio" type="text" 
+                         class="form-control" [(ngModel)]="precioModel" 
+                         #precio="ngModel"
+                         [ngClass]="{ 'is-invalid': f.submitted && precio.invalid }"
+                         required autofocus> 
+                    <div  *ngIf="f.submitted && precio.invalid" class="invalid-feedback">
+                      <div *ngIf="precio.errors.required">Precio requerido</div>
+                    </div>
+                </div>
+                 
+                 <!-- carga de imágen -->  
+                 <form class="form-group">
+                     <label for="customFile">Imágen Producto</label>
+                     <div class="custom-file">
+                       <input type="file" class="custom-file-input" 
+                       id="customFile" accept=".png, .jpg"
+                         (change)="ImagenCargada($event)">
+                       <label class="custom-file-label" for="customFile">{{imgName}}</label>
+                     </div>
+                 </form>  
+                 <input #imgProducto type="hidden" [value]="urlImagen | async">    
+                 <form class="margin-bottom">
+                   <div class="custom-control custom-checkbox">
+                     <input type="checkbox" class="custom-control-input" id="customCheck" name="customCheck">
+                   </div>
+                 </form>  
+                 <form class="margin-bottom">
+                 </form>
+   
+                 <div class="form-group no-margin"> 
+           
+                 <div class="form-group no-margin">
+                   <button type="submit" class="btn btn-primary btn-block">
+                       Confirmar
+                   </button>
+                 </div>
+  
+                 </div>         
+               </form>
+             </div>
+           </div>
+         </div>
+       </div>
+     </div>
+   </section>
+ 
+ 
+ 

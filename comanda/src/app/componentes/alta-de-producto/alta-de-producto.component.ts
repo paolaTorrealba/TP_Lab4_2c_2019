@@ -3,6 +3,7 @@ import { finalize } from 'rxjs/operators';
 import { Observable, empty } from 'rxjs';
 import { AngularFireStorage } from '@angular/fire/storage';
 import { AuthProvider } from 'src/app/providers/auth';
+import { TipoProducto } from 'src/app/clases/enum';
 
 @Component({
   selector: 'app-alta-de-producto',
@@ -14,31 +15,29 @@ export class AltaDeProductoComponent implements OnInit {
   @ViewChild("imgProducto", { static: false })
    InputImagenProd: ElementRef;
 
-  //Datos del producto
-  nombreModel: string;
-  tipoModel: string
-  descripcionModel: string
-  tiempopromElaboracionModel: string
-  precioModel: number
-  estado: boolean;
-  numeroProducto:number;
+  public nombreModel: string;
+  public tipoModel= TipoProducto.plato;
+  public descripcionModel: string
+  public tiempoPromElaboracionModel: string
+  public precioModel: number
+  public estado: boolean;
+  public numeroProducto:number;
 
   public urlImagen: Observable<string>;
-  porcentajeUpload: Observable<number>; 
-  imgName: string;
-  noCargando = true;
-  imagenUrl : any;
-  foto:string;
+  public porcentajeUpload: Observable<number>; 
+  public imgName: string;
+  public noCargando = true;
+  public imagenUrl : any;
+  public foto:string;
 
   constructor(private auth: AuthProvider,
-    private storage: AngularFireStorage, 
-    private elRef: ElementRef) {
+    private storage: AngularFireStorage) {
    this.imgName = "Seleccionar imágen..";
  }
 
   ngOnInit() {}
 
-  agregarProducto() {
+  confirmar() {
     console.log("agregar Producto") 
     this.imagenUrl = this.InputImagenProd.nativeElement.value;
     if (!this.imagenUrl ) {
@@ -46,17 +45,16 @@ export class AltaDeProductoComponent implements OnInit {
     }
 
       let data = {
-        nombre:this.nombreModel,
-        tipo:this.tipoModel,
-        descripcion:this.descripcionModel, 
-        tiempoPromedioElaboracion: Number(this.tiempopromElaboracionModel), 
-        precio: Number(this.precioModel),
-        numeroProducto:1,       
-        foto:this.imagenUrl,
-   
-  }
+            nombre:this.nombreModel,
+            tipo:this.tipoModel,
+            descripcion:this.descripcionModel, 
+            tiempoPromedioElaboracion: Number(this.tiempoPromElaboracionModel), 
+            precio: Number(this.precioModel),
+            numeroProducto:1,       
+            foto:this.imagenUrl     
+       }
 
-  console.log("guardo el producto")
+  console.log("guardo el producto", data)
     this.auth.guardarProducto(data);
   }
 
@@ -83,4 +81,10 @@ export class AltaDeProductoComponent implements OnInit {
       this.noCargando = true;
     }
   }
+
+  changeTipo(tipo: any) {
+    this.tipoModel = tipo;
+    console.log("this.tipoModel", this.tipoModel)
+}
+
 }

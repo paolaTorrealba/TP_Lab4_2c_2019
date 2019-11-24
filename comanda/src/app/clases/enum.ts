@@ -33,3 +33,10 @@ export enum EstadoReserva {
     
 };
 
+export enum TipoProducto {
+    plato = "plato",
+    cerveza = "cerveza",
+    barra = "barra",
+    
+};
+
