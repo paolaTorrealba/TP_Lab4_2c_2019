@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import {PedidosPendientesComponent} from './componentes/pedidos-pendientes/pedidos-pendientes.component';
 import {AltaDeProductoComponent} from './componentes/alta-de-producto/alta-de-producto.component';
 import {EncuestaEmpleadoComponent} from './componentes/encuesta-empleado/encuesta-empleado.component';
@@ -35,6 +34,7 @@ import { FinalizarPedidoCerveceroComponent } from './componentes/finalizar-pedid
 import { FinalizarPedidoBartenderComponent } from './componentes/finalizar-pedido-bartender/finalizar-pedido-bartender.component';
 import { FinalizarPedidoCocineroComponent } from './componentes/finalizar-pedido-cocinero/finalizar-pedido-cocinero.component';
 import { VerEstadoPedidoComponent } from './componentes/ver-estado-pedido/ver-estado-pedido.component';
+import { TipoFilasDirective } from './directivas/tipo-filas.directive';
 
 
 

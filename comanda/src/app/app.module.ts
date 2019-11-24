@@ -54,11 +54,13 @@ import { FinalizarPedidoBartenderComponent } from './componentes/finalizar-pedid
 import { VerEstadoPedidoComponent } from './componentes/ver-estado-pedido/ver-estado-pedido.component';
 import { CancelarPedidoComponent } from './componentes/cancelar-pedido/cancelar-pedido.component';
 import { MesaPipe } from './pipes/mesa.pipe';
+import { TipoFilasDirective } from './directivas/tipo-filas.directive';
 
 
 @NgModule({
   declarations: [
     AppComponent,
+    TipoFilasDirective,
     PrincipalComponent,
     PedidosPendientesComponent,
     AltaDeProductoComponent,
@@ -99,6 +101,7 @@ import { MesaPipe } from './pipes/mesa.pipe';
     VerEstadoPedidoComponent,
     CancelarPedidoComponent,
     MesaPipe,
+    TipoFilasDirective,
   ],
   imports: [
     FormsModule,
