@@ -60,6 +60,8 @@ import { MostrarFotoPipe } from './pipes/mostrar-foto.pipe';
 import { ColorPedidoPendienteDirective } from './directivas/color-pedido-pendiente.directive';
 import { PedidoBartenderComponent } from './filtros/pedido-bartender/pedido-bartender.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { PedidoCerveceroComponent } from './filtros/pedido-cervecero/pedido-cervecero.component';
+import { PedidoCocineroComponent } from './filtros/pedido-cocinero/pedido-cocinero.component';
 
 
 @NgModule({
@@ -111,6 +113,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     MostrarFotoPipe,
     ColorPedidoPendienteDirective,
     PedidoBartenderComponent,
+    PedidoCerveceroComponent,
+    PedidoCocineroComponent,
   ],
   imports: [
     FormsModule,
