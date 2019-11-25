@@ -1,2 +1,54 @@
 <app-principal></app-principal>
-<h1>Encuesta de Cliente</h1>
+<br><br>
+<section class="h-100 registro-pagina">
+<div class="container h-100">
+ <div class="row justify-content-md-center h-100">
+    <div class="card-wrapper registro-pagina">  
+        <div class="card fat">
+        <div class="card-body">
+            <h4 class="card-title">Encuesta - FALTA PUNTUACION</h4>
+            <form (ngSubmit)="f.form.valid && guardarEncuesta()" #f="ngForm" novalidate>
+      
+                <div class="form-group">
+                    <label for="pregunta1" class="label" position="floating">{{encuestaCliente.question1}}</label>
+                    <input type="text" class="form-control"  [(ngModel)]="encuestaCliente.answer1Model" name="pregunta1" required>
+                </div>  
+                <div class="form-group">
+                    <label for="pregunta2" class="label" position="floating">{{encuestaCliente.question2}}</label>
+                    <input type="text" class="form-control" [(ngModel)]="encuestaCliente.answer2Model" name="pregunta2" required>
+                </div>  
+                <div class="form-group">
+                    <label for="user" class="label" position="floating">{{encuestaCliente.question3}}</label>
+                    <input type="text" class="form-control" [(ngModel)]="encuestaCliente.answer3Model" name="pregunta3" required>
+                </div>  
+                <div class="form-group">
+                    <label for="user" class="label" position="floating">{{encuestaCliente.question4}}</label>
+                    <input type="text" class="form-control" [(ngModel)]="encuestaCliente.answer4Model" name="pregunta4" required>
+                </div>  
+                <div class="form-group">
+                    <label for="user" class="label" position="floating">{{encuestaCliente.question5}}</label>
+                    <input type="text" class="form-control" [(ngModel)]="encuestaCliente.answer5Model" name="pregunta5" required>
+                </div>  
+                <div class="form-group">
+                    <label for="user" class="label" position="floating">{{encuestaCliente.question6}}</label>
+                    <input type="text" class="form-control" [(ngModel)]="encuestaCliente.answer6Model" name="pregunta6" required>
+                </div> 
+                <div class="form-group">
+                    <label for="user" class="label" position="floating">Comentario</label>
+                    <textarea  class="form-control" [(ngModel)]="encuestaCliente.commentaryModel" name="pregunta7" required rows="3"></textarea>
+                </div>  
+                <div class="form-group no-margin">
+                        <button type="submit" class="btn btn-primary btn-block">
+                                Enviar
+                        </button>
+                </div>    
+  
+     
+    </form>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+
