@@ -58,6 +58,8 @@ import { TipoFilasDirective } from './directivas/tipo-filas.directive';
 import { EstadoFilaDirective } from './directivas/estado-fila.directive';
 import { MostrarFotoPipe } from './pipes/mostrar-foto.pipe';
 import { ColorPedidoPendienteDirective } from './directivas/color-pedido-pendiente.directive';
+import { PedidoBartenderComponent } from './filtros/pedido-bartender/pedido-bartender.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 
 @NgModule({
@@ -108,10 +110,12 @@ import { ColorPedidoPendienteDirective } from './directivas/color-pedido-pendien
     EstadoFilaDirective,
     MostrarFotoPipe,
     ColorPedidoPendienteDirective,
+    PedidoBartenderComponent,
   ],
   imports: [
     FormsModule,
     MaterialModule,
+    BrowserAnimationsModule,
     ReactiveFormsModule,
     BrowserModule,
     AppRoutingModule,
