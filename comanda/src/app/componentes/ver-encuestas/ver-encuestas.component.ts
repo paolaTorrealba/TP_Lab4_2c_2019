@@ -14,7 +14,7 @@ export class VerEncuestasComponent implements OnInit {
   public detalle:Array<any> = [];
   public correo:string;
   public info:boolean;
-  private columsCliente: string[] = ['Correo', 'Fecha','Sexo','Puntaje Mesa','Puntaje Restaurante','Puntaje Mozo','Puntaje Cocinero','Comentarios'];
+  private columsCliente: string[] = ['Correo','Sexo','Puntaje Mesa','Puntaje Restaurante','Puntaje Mozo','Puntaje Cocinero','Comentarios'];
   private dataSource = new MatTableDataSource(this.encuestas);
   private noData = this.dataSource.connect().pipe(map((data: any[]) => data.length === 0));
   
