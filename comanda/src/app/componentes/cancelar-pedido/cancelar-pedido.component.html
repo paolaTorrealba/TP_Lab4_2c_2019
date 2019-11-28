@@ -1,6 +1,6 @@
 <app-principal></app-principal>
 <br><br>
-<h1>------------- Cancelar Pedido --------------</h1><br>
+
 
 <ul *ngFor="let item of pedidos">
         <div *ngIf="item.correo==correo">
@@ -13,7 +13,7 @@
             
                 <button *ngIf="item.estado=='pendiente' || item.estado=='aceptado'"(click)="cancelar(item)">Cancelar Pedido</button> 
                 <div  *ngIf="item.estado!='pendiente' && item.estado!='aceptado'" >
-                    <p>El pedido no se puede cancelar porque esta en estado {{item.estado}} </p>
+                    <p>-- El pedido no se puede cancelar porque esta en estado {{item.estado}}-- </p>
                 </div>
                               
                     
