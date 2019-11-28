@@ -3,6 +3,7 @@ import { AuthService } from 'src/app/servicios/auth.service';
 import { MatTableDataSource, MatDialog } from '@angular/material';
 import { map } from 'rxjs/operators';
 
+
 @Component({
   selector: 'app-listado-mesas',
   templateUrl: './listado-mesas.component.html',
@@ -10,6 +11,8 @@ import { map } from 'rxjs/operators';
 })
 export class ListadoMesasComponent implements OnInit {
   
+  
+
   private columsMesa: string[] = ['NumeroMesa', 'CantidadComensales', 'Estado', 'Codigo'];
   public mesas:Array<any> = []; 
   private dataSource = new MatTableDataSource(this.mesas);
@@ -18,10 +21,17 @@ export class ListadoMesasComponent implements OnInit {
  
   constructor( private  data:  AuthService) {
     this.obtenerMesas();
+   
+
    }
 
+ 
+  
   ngOnInit() {
   }
+
+
+  
 
     obtenerMesas() {
     this.data.getListaMesas("mesas").subscribe(lista => {

@@ -13,7 +13,6 @@
 // import { AngularFireModule } from 'angularfire2';
 import { NgModule } from '@angular/core';
 import { MaterialModule } from './material/material';
-
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 // import { AngularFireAuthModule } from 'angularfire2/auth';
 
@@ -72,6 +71,7 @@ import { PedidoBartenderComponent } from './filtros/pedido-bartender/pedido-bart
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { PedidoCerveceroComponent } from './filtros/pedido-cervecero/pedido-cervecero.component';
 import { PedidoCocineroComponent } from './filtros/pedido-cocinero/pedido-cocinero.component';
+import { ExcelComponent } from './componentes/excel/excel.component';
 
 
 @NgModule({
@@ -125,6 +125,7 @@ import { PedidoCocineroComponent } from './filtros/pedido-cocinero/pedido-cocine
     PedidoBartenderComponent,
     PedidoCerveceroComponent,
     PedidoCocineroComponent,
+    ExcelComponent,
   ],
   imports: [
     FormsModule,

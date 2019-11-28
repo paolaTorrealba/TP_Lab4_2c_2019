@@ -35,6 +35,7 @@ import { FinalizarPedidoBartenderComponent } from './componentes/finalizar-pedid
 import { FinalizarPedidoCocineroComponent } from './componentes/finalizar-pedido-cocinero/finalizar-pedido-cocinero.component';
 import { VerEstadoPedidoComponent } from './componentes/ver-estado-pedido/ver-estado-pedido.component';
 import { TipoFilasDirective } from './directivas/tipo-filas.directive';
+import { ExcelComponent } from './componentes/excel/excel.component';
 
 
 
@@ -48,6 +49,7 @@ const routes: Routes = [
   // { path: 'listaEspera', component: ListaDeEsperaComponent},
 
   // SOCIO
+  { path: 'reportes', component: ExcelComponent},  
   { path: 'pedidosPendientes', component: PedidosPendientesComponent},
   { path: 'verEncuestas', component: VerEncuestasComponent},
   { path: 'agregarMesa', component: AltaDeMesaComponent},   
