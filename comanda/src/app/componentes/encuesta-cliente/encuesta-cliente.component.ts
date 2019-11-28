@@ -4,12 +4,16 @@ import { Router } from '@angular/router';
 import { EncuestaCliente } from 'src/app/clases/encuesta-cliente';
 import { AuthProvider } from 'src/app/providers/auth';
 import {MatRadioModule} from '@angular/material/radio';
+import { timingSafeEqual } from 'crypto';
+import { EstadoPedido } from 'src/app/clases/enum';
 @Component({
   selector: 'app-encuesta-cliente',
   templateUrl: './encuesta-cliente.component.html',
   styleUrls: ['./encuesta-cliente.component.scss']
 })
 export class EncuestaClienteComponent implements OnInit {
+  
+  public pedidos:Array<any> = [];
   private correo:string;
   private encuestaCliente:EncuestaCliente;
   public image: string;
@@ -26,6 +30,7 @@ export class EncuestaClienteComponent implements OnInit {
 
   public email: string ="";
   public name:string="";
+  public hacerEncuesta:boolean=false;
 
   private opinion=3;
    
@@ -35,9 +40,31 @@ export class EncuestaClienteComponent implements OnInit {
      
       this.encuestaCliente = new EncuestaCliente(); 
       this.correo=localStorage.getItem("usuarioComanda");
+      this.obtenerPedidos();
       console.log("encuestaCliente", this.encuestaCliente)
       this.obtenerEncuestasCliente();
+     
    } 
+
+
+   obtenerPedidos(){
+     console.log("obtengo pedidos")
+    this.data.getListaPedidos("pedidos").subscribe(lista => {
+      this.pedidos=lista; 
+      for (let i=0; i<=this.pedidos.length-1;i++){
+        console.log("correos:", this.correo, this.pedidos[i].correo)
+        if (this.pedidos[i].correo== this.correo){
+          if (this.pedidos[i].estado==EstadoPedido.pagado)
+          {
+            this.hacerEncuesta=true;
+          }
+         
+        }
+      }
+      console.log("pedidos: ",this.pedidos); 
+    });
+    console.log("pedidos: ",this.pedidos)
+   }
 
    obtenerEncuestasCliente(){
      console.log("obtengo las encuestas:")

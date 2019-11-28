@@ -12,6 +12,10 @@
                  <br>  
             
                 <button *ngIf="item.estado=='entregado'" (click)="pagar(item)">Pagar Factura</button>        
+                
+                <div  *ngIf="item.estado!='entregado'" >
+                    <p>El pedido no se puede abonar porque esta en estado {{item.estado}} </p>
+                </div>
                     
         </div>
        </ul> 

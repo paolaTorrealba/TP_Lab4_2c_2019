@@ -36,6 +36,7 @@ import { FinalizarPedidoCocineroComponent } from './componentes/finalizar-pedido
 import { VerEstadoPedidoComponent } from './componentes/ver-estado-pedido/ver-estado-pedido.component';
 import { TipoFilasDirective } from './directivas/tipo-filas.directive';
 import { ExcelComponent } from './componentes/excel/excel.component';
+import { CancelarPedidoComponent } from './componentes/cancelar-pedido/cancelar-pedido.component';
 
 
 
@@ -61,6 +62,8 @@ const routes: Routes = [
   { path: 'listadoPedidos', component: ListadoPedidosComponent},
 
   // CLIENTE
+  
+  { path: 'cancelar', component: CancelarPedidoComponent},
   { path: 'pagarFactura', component: PagarFacturaComponent},
   { path: 'encuestaCliente', component: EncuestaClienteComponent},
   { path: 'reservaCliente', component: ReservaComponent},
