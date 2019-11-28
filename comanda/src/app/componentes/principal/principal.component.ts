@@ -20,9 +20,9 @@ export class PrincipalComponent implements OnInit {
   constructor( private router: Router,    
     private auth: AuthProvider) {
 
-      this.elMail= sessionStorage.getItem("user");
-      console.log("session: ", this.elMail)
-      this.email=localStorage.getItem("usuarioComanda");  
+
+      this.email=localStorage.getItem("usuarioComanda"); 
+
       console.log("email del localstorage", this.email);
       this.auth.getLista('usuarios').subscribe(lista => {
         this.usuarios=lista;   
@@ -30,7 +30,7 @@ export class PrincipalComponent implements OnInit {
         for(let i=0;i<this.usuarios.length;i++){
           if(this.usuarios[i].correo == this.email) {
                this.usuario=this.usuarios[i];
-               console.log("el usuario:",this.usuario);
+               console.log("el usuario en constructor:",this.usuario);
           }
         }
       });
@@ -38,6 +38,7 @@ export class PrincipalComponent implements OnInit {
       this.mostrarMenu();
   }
  
+
   obtenerUsuario(){
     this.email=localStorage.getItem("usuarioComanda");  
     console.log("email del localstorage", this.email);
@@ -57,7 +58,7 @@ export class PrincipalComponent implements OnInit {
 
   mostrarMenu(){
     this.perfil= localStorage.getItem("perfilUComanda")
-    console.log("el perfil: ",this.perfil);
+    console.log("Menu para el perfil: ",this.perfil);
     console.log("Muestro el menu para este usuario: ",this.usuario);
     switch(this.perfil) {
       case "socio":
@@ -133,6 +134,7 @@ export class PrincipalComponent implements OnInit {
           { accion: "Cerrar mesa", img: "encuesta.jpg", ruta: "cerrarMesa" },
           { accion: "Confirmar pago", img: "encuesta.jpg", ruta: "confirmarPagoComponent" },
           { accion: "Encuesta empleado", img: "encuesta.jpg",  ruta: "encuestaEmpleado"},
+          
           // { accion: "Aceptar clientes en lista de espera", img: "qr.jpg", ruta: ListadoClientesComponent},
         ]
         break;        

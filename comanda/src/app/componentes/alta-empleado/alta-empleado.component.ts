@@ -18,7 +18,7 @@ export class AltaEmpleadoComponent implements OnInit {
   public apellidoModel: string
   public dniModel: string;
   public claveModel:string="";
-  public perfilModel: any="bartender";
+  public perfilModel:any="bartender";
   public usuario: any;
   public emailModel: string="";
   public passwordModel: string;
@@ -39,6 +39,7 @@ export class AltaEmpleadoComponent implements OnInit {
     }
 
   ngOnInit() { }
+
   confirmar() {
     console.log("el perfil",this.perfilModel)    
     this.imagenUrl = this.InputImagenUser.nativeElement.value;
@@ -57,6 +58,7 @@ export class AltaEmpleadoComponent implements OnInit {
     }
     console.log(data)
     this.auth.guardarUsuario(data);
+    this.auth.crearUsuario(this.emailModel,this.claveModel);
   }
 
   changePerfil(perfil: any) {

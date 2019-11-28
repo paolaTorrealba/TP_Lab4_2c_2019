@@ -29,7 +29,7 @@
           <li><a href="/listadoMesas">Mesas</a></li>
         </ul>
       </li> 
-     
+      <li *ngIf="this.usuario.perfil=='socio'"><a href="/login">Salir</a></li>
     </ul>
 <!-- CLIENTE -->
     <ul>        
@@ -39,6 +39,8 @@
         <li *ngIf="this.usuario.perfil=='cliente'"><a href="/reservaCliente">Seleccionar Mesa</a></li>
         <li *ngIf="this.usuario.perfil=='cliente'"><a href="/verEstadoPedido">Mi Pedido</a></li>
         <li *ngIf="this.usuario.perfil=='cliente'"><a href="/encuestaCliente">Encuesta</a></li>
+        <li *ngIf="this.usuario.perfil=='cliente'"><a href="/login">Salir</a></li>
+
     </ul>
 <!-- MOZO -->
     <ul>        
@@ -48,6 +50,7 @@
         <li *ngIf="this.usuario.perfil=='mozo'"><a href="/verRegistroClientes">Registro de Cliente</a></li>
         <li *ngIf="this.usuario.perfil=='mozo'"><a href="/confirmarPago">Confirmar Pago</a></li>
         <li *ngIf="this.usuario.perfil=='mozo'"><a href="/entregarPedido">Entregar Pedido</a></li>
+        <li *ngIf="this.usuario.perfil=='mozo'"><a href="/login">Salir</a></li>
     </ul>
 <!-- BARTENDER -->
     <ul>        
@@ -55,6 +58,7 @@
         <!-- <li *ngIf="this.usuario.perfil=='bartender'"><a href="/encuestaEmpleado">Hacer Encuesta</a></li> -->
         <li *ngIf="this.usuario.perfil=='bartender'"><a href="/pedidosPendientesBartender">Pedidos Pendientes</a></li>
         <li *ngIf="this.usuario.perfil=='bartender'"><a href="/finalizarPedidoBartender">Cerrar Pedido</a></li>
+        <li *ngIf="this.usuario.perfil=='bartender'"><a href="/login">Salir</a></li>
     </ul>
 <!-- COCINERO -->
     <ul>        
@@ -62,6 +66,7 @@
         <!-- <li *ngIf="this.usuario.perfil=='cocinero'"><a href="/encuestaEmpleado">Hacer Encuesta</a></li> -->
         <li *ngIf="this.usuario.perfil=='cocinero'"><a href="/pedidosPendientesCocinero">Pedidos Pendientes</a></li>
         <li *ngIf="this.usuario.perfil=='cocinero'"><a href="/finalizarPedidoCocinero">Cerrar Pedido</a></li>
+        <li *ngIf="this.usuario.perfil=='cocinero'"><a href="/login">Salir</a></li>
     </ul>
  <!-- CERVECERO -->
     <ul>        
@@ -69,5 +74,9 @@
         <!-- <li *ngIf="this.usuario.perfil=='cervecero'"><a href="/encuestaEmpleado">Hacer Encuesta</a></li> -->
         <li *ngIf="this.usuario.perfil=='cervecero'"><a href="/pedidosPendientesCervecero">Pedidos Pendientes</a></li>
         <li *ngIf="this.usuario.perfil=='cervecero'"><a href="/finalizarPedidoCervecero">Cerrar Pedido</a></li>
+        <li *ngIf="this.usuario.perfil=='cervecero'"><a href="/login">Salir</a></li>
     </ul>
+   
+     
+ 
 </nav>

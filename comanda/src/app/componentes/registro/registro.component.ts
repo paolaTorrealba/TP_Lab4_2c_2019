@@ -3,7 +3,7 @@ import { finalize } from 'rxjs/operators';
 import { Observable, empty } from 'rxjs';
 import { AngularFireStorage } from '@angular/fire/storage';
 // import { AngularFireStorageModule } from '@angular/fire/storage';
-
+import {Router } from '@angular/router';
 import { AuthProvider } from 'src/app/providers/auth';
 import { Perfil } from 'src/app/clases/enum';
 
@@ -36,7 +36,8 @@ export class RegistroComponent implements OnInit {
 
 
   constructor(private auth: AuthProvider, 
-     private storage: AngularFireStorage) {
+     private storage: AngularFireStorage,
+     private router: Router) {
 
     this.imgName = "Seleccionar imágen..";
     this.usuario = this.auth.usuarioVacio();
@@ -64,6 +65,7 @@ export class RegistroComponent implements OnInit {
     console.log("data ",data)
     this.auth.guardarUsuario(data);
     this.auth.crearUsuario(this.emailModel,this.passwordModel);
+    this.router.navigate(['/principal']);
   }
  
 
