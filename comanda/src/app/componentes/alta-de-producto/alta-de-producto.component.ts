@@ -4,6 +4,7 @@ import { Observable, empty } from 'rxjs';
 import { AngularFireStorage } from '@angular/fire/storage';
 import { AuthProvider } from 'src/app/providers/auth';
 import { TipoProducto } from 'src/app/clases/enum';
+import { AuthService } from 'src/app/servicios/auth.service';
 
 @Component({
   selector: 'app-alta-de-producto',
@@ -29,11 +30,22 @@ export class AltaDeProductoComponent implements OnInit {
   public noCargando = true;
   public imagenUrl : any;
   public foto:string;
-
-  constructor(private auth: AuthProvider,
+  public productos:Array<any> = [];
+  constructor(private  data:  AuthService,
+    private  auth:  AuthProvider,
     private storage: AngularFireStorage) {
    this.imgName = "Seleccionar imágen..";
+   this.obtenerProductos();
  }
+
+ obtenerProductos(){
+  console.log("obtengo las encuestas:")
+ this.data.getListaProductos("productos").subscribe(lista => {
+   this.productos=lista; 
+     console.log("productos: ",this.productos); 
+ });
+ console.log("productos: ",this.productos)
+}
 
   ngOnInit() {}
 
@@ -50,7 +62,7 @@ export class AltaDeProductoComponent implements OnInit {
             descripcion:this.descripcionModel, 
             tiempoPromedioElaboracion: Number(this.tiempoPromElaboracionModel), 
             precio: Number(this.precioModel),
-            numeroProducto:1,       
+            numeroProducto:this.productos.length+1,       
             foto:this.imagenUrl     
        }
 
