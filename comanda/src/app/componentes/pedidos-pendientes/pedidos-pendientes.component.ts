@@ -58,7 +58,7 @@ export class PedidosPendientesComponent implements OnInit {
    aceptarPedido(item){
     this.imagenUrl = this.InputImagenPedido.nativeElement.value;
     if (!this.imagenUrl ) {
-      this.imagenUrl = "assets/imagenes/default-mesa.png";
+      this.imagenUrl = "assets/imagenes/default-mesa.jpg";
     }
       console.log("item: ", item)
       console.log("la imagen: ", this.imagenUrl)

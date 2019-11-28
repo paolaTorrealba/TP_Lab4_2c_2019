@@ -53,7 +53,7 @@ export class AltaDeProductoComponent implements OnInit {
     console.log("agregar Producto") 
     this.imagenUrl = this.InputImagenProd.nativeElement.value;
     if (!this.imagenUrl ) {
-      this.imagenUrl = "assets/imagenes/default-prod.png";
+      this.imagenUrl = "assets/imagenes/default-producto.jpg";
     }
 
       let data = {

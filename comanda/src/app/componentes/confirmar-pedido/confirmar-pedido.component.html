@@ -24,11 +24,11 @@
                         </td>    
                 </ng-container>  
                 <ng-container matColumnDef="Entregar">
-                <th mat-header-cell *matHeaderCellDef> Entregar Pedido </th>
-                <td mat-cell *matCellDef="let element">
-                        <button mat-icon-button (click)="entregarPedido(element)">
-                        <mat-icon>check_circle</mat-icon>
-                        </button> 
+                        <th mat-header-cell *matHeaderCellDef> Entregar Pedido </th>
+                        <td mat-cell *matCellDef="let element">
+                                <button *ngIf="element.estado=='listo para servir'" mat-icon-button (click)="entregarPedido(element)">
+                                    <mat-icon>check_circle</mat-icon>
+                                </button> 
                 </td>    
                 </ng-container>  
         </tr>
