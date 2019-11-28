@@ -1,21 +1,25 @@
-<p>ver-estado-pedido works!</p>
+<app-principal></app-principal>
+<br><br>
+<h1>------------- Mi Pedido --------------</h1><br>
+
 <ul *ngFor="let item of pedidos">
         <div *ngIf="item.correo==correo">
-                <p >nombre: {{item.nombre}}</p>  
-                <p >codigo pedido: {{item.codigo}}</p>                      
-                <p >estado: {{item.estado}}</p>
-                <p >mesa: {{item.mesa}}</p> 
-                <p >monto: {{item.montoTotal}}</p> 
+                <p >NOMBRE: {{item.nombreCliente}}</p>  
+                <p >CODIGO PEDIDO: {{item.codigo}}</p>                      
+                <p >ESTADO: {{item.estado}}</p>
+                <p >MESA: {{item.mesa}}</p> 
+                <p >MONTO: {{item.montoTotal}}</p> 
 
                    <ul *ngFor="let producto of item.productos">
                         <div>
-                            <p >descripcion: {{producto.descripcion}}</p> 
-                            <p >estado: {{producto.estadoProdPedido}}</p> 
+                            <p >DESCRIPCION: {{producto.descripcion}}</p> 
+                            <p >ESTADO: {{producto.estadoProdPedido}}</p> 
                             <!-- <button (click)="pagar(item)">Pagar</button> -->
                         </div>     
                    </ul> 
                    <br>  
-                   <button (click)="confirmarRecepcion(item)">confirmar Recepcion</button>        
+                   
+                   <button *ngIf="item.estado==entregado" (click)="confirmarRecepcion(item)">confirmar Recepcion</button>        
                     
         </div>
        </ul> 

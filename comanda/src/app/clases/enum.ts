@@ -18,12 +18,13 @@ export enum Perfil {
 
 export enum EstadoPedido {
     pendiente = "pendiente",
-    cerrado = "cerrado",
-    entregado = "entregado",
-    listoParaServir = "listo para servir",
-    enPreparacion = "enPreparacion",
     aceptado = "aceptado",
-    cancelado = "cancelado",
+    enPreparacion = "enPreparacion",
+    listoParaServir = "listo para servir",
+    entregado = "entregado",
+    pagado="pagado",
+    cerrado = "cerrado",    
+    cancelado = "cancelado", 
   
 };
 
