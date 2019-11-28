@@ -12,7 +12,7 @@ export class FinalizarPedidoBartenderComponent implements OnInit {
   public pedidos:Array<any> = [];
   public pendiente:string=EstadoPedido.pendiente;
   public aceptado:string=EstadoPedido.aceptado;  
-  public enPreparacion:string="en preparacion";
+  public enPreparacion= EstadoPedido.enPreparacion;
   public cerrado:string="cerrado";
   public barra:string="barra";
   public pedidoListo:boolean=false;

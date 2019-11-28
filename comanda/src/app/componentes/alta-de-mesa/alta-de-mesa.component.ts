@@ -1,5 +1,4 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
-import { AngularFireStorage } from '@angular/fire/storage';
 import { AuthProvider } from 'src/app/providers/auth';
 import { AuthService } from 'src/app/servicios/auth.service';
 import { EstadoMesa } from 'src/app/clases/enum';
@@ -25,11 +24,19 @@ export class AltaDeMesaComponent implements OnInit {
 
       this.obtenerMesas();
 
+ 
+     
  }
 
-  ngOnInit() { }
+  ngOnInit() {
+    this.obtenerMesas(); 
+    if (this.mesas != null){
+      this.numeroModel=this.mesas.length+1;  
+    }
 
-  public agregarMesa() {
+  }
+
+  public confirmar() {
      console.log("agregar Mesa")
      console.log("codigo: ", this.codigo) 
      let data= {  
@@ -48,11 +55,18 @@ export class AltaDeMesaComponent implements OnInit {
   obtenerMesas() {
     this.data.getListaMesas("mesas").subscribe(lista => {
         this.mesas=lista; 
+        if (this.mesas != null){
+          this.numeroModel=this.mesas.length+1;  
+        }
         console.log("Mesas: ",this.mesas); 
         console.log("lista: ",lista); 
         this.lamesa=lista[0];   
     });
-    console.log("Mesas: ",this.mesas);  
+    console.log("Mesas: ",this.mesas);
+    if (this.mesas != null){
+      this.numeroModel=this.mesas.length+1;  
+    }
+   
 } 
 
 cambiarEstadoMesa(item) {
@@ -61,7 +75,7 @@ cambiarEstadoMesa(item) {
   console.log("lamesa: ",this.lamesa);
   item.estado= "otro"; 
   console.log("item modificado: ",item);
-  this.auth.updateMesa(item).then(res => {      
+  this.auth.actualizarMesa(item).then(res => {      
   });
 } 
 

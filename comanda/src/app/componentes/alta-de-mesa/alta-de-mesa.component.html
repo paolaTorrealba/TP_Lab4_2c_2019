@@ -1,22 +1,19 @@
-<h1>Alta de Mesa</h1>
+
+<!-- <h1>Alta de Mesa</h1>
 <section class="h-100 registro-pagina">
     <div class="container h-100">
       <div class="row justify-content-md-center h-100">
         <div class="card-wrapper registro-pagina">          
-          <div class="brand">
+          <div class="brand">-->
             <!-- <img src="/assets/imagenes/logo.jpg"> -->
-          </div>
-
+        <!--  </div>
           <div class="card fat">
             <div class="card-body">
-
               <form>  
                  <div class="form-group">
                     <label for="name">Numero Mesa</label>
                     <input type="text"  [(ngModel)]="numeroModel" class="form-control" name="numero" id="numero" required autofocus>
-                    <!-- <div  class="invalid-feedback">
-                        <div >Numero requerido</div>
-                    </div> -->
+                 
                  </div> 
                  <div class="form-group">
                     <label for="codigo">Codigo Mesa</label>
@@ -27,19 +24,13 @@
                  <div class="form-group">
                     <label for="name">Cantidad Comensales</label>
                     <input type="text"  [(ngModel)]="cantidadComensalesModel" class="form-control" name="cantidadComensales" id="cantidadComensales" required autofocus>
-                    <!-- <div  class="invalid-feedback">
-                        <div >Cantidad requerido</div>
-                    </div> -->
+                 
                   </div>     
                   <ng-container                    >
                     <button  class="btn btn-primary btn-block" (click) ="agregarMesa()">
                       Confirmar
                     </button>
-                  </ng-container> 
-                  <!-- <ul *ngFor="let item of mesas">
-                      <p>mesa: {{item.estado}}</p>
-                      <button type="button" (click)="cambiarEstadoMesa(item)" >Votar</button>
-                  </ul>                  -->
+                  </ng-container>                   
               </form>
             </div>
           </div>
@@ -47,7 +38,58 @@
         </div>
       </div>
     </div>
+</section> -->
+
+
+<app-principal></app-principal>
+<br>
+<h4>Alta de Mesa</h4>
+<section class="h-100 registro-pagina">
+    <div class="container h-100">
+      <div class="row justify-content-md-center h-100">
+        <div class="card-wrapper registro-pagina">  
+          <div class="card fat">
+            <div class="card-body">
+              <h4 class="card-title">Agregar Mesa</h4>
+              <form (ngSubmit)="f.form.valid && confirmar()" #f="ngForm" novalidate>
+                  <div class="form-group">
+                      <label for="numero">Número</label>
+                      <input readonly name="numero" id="numero" type="text" 
+                             class="form-control" [(ngModel)]="numeroModel" 
+                             #numero="ngModel"
+                             [ngClass]="{ 'is-invalid': f.submitted && numero.invalid }"
+                             required autofocus > 
+                      <div  *ngIf="f.submitted && numero.invalid" class="invalid-feedback">
+                         <div *ngIf="numero.errors.required">Número requerido</div>
+                      </div>
+                    </div> 
+                    <div class="form-group">
+                        <label for="cantidadComensales">Cantidad Comensales</label>
+                        <input name="cantidadComensales" id="cantidadComensales" type="text" 
+                               class="form-control" [(ngModel)]="cantidadComensalesModel" 
+                               #cantidadComensales="ngModel"
+                               [ngClass]="{ 'is-invalid': f.submitted && numero.invalid }"
+                               required autofocus> 
+                        <div  *ngIf="f.submitted && cantidadComensales.invalid" class="invalid-feedback">
+                           <div *ngIf="cantidadComensales.errors.required">Cantidad Comensales</div>
+                        </div>
+                    </div>       
+                    <div class="form-group">
+                        <label for="codigo">Codigo Mesa</label>
+                        <button type="button" class="btn btn-primary btn-block" (click)="generarCodigo()">Generar Codigo</button>
+                        <br>
+                        <label *ngIf="!this.codigo==''">Codigo Generado: {{this.codigo}}</label>
+                        <br>                 
+                     </div>             
+                     <div class="form-group no-margin">
+                        <button type="submit" class="btn btn-primary btn-block">
+                            Confirmar
+                        </button>
+                      </div>          
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
 </section>
-
-
-

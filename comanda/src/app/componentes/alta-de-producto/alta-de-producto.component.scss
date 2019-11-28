@@ -1,11 +1,11 @@
-.registro-pagina {
+.login-pagina {
 	font-size: 14px;
 	margin-top: 40px;
 	margin-bottom: 80px;
 	text-align: center;
 }
 
-.registro-pagina .brand {
+.login-pagina .brand {
 	width: 90px;
 	height: 90px;
 	overflow: hidden;
@@ -15,47 +15,43 @@
 	box-shadow: 0 0 40px rgba(0,0,0,.05);
 }
 
-.registro-pagina .brand img {
+.login-pagina .brand img {
 	width: 100%;
 }
 
-.registro-pagina .card-wrapper {
+.login-pagina .card-wrapper {
 	width: 400px;
 }
 
-.registro-pagina .card {
+.login-pagina .card {
 	border-color: transparent;
 	box-shadow: 0 0 40px rgba(0,0,0,.05);
 }
 
-.registro-pagina .card.fat {
+.login-pagina .card.fat {
 	padding: 10px;
 }
 
-.registro-pagina .card .card-title {
+.login-pagina .card .card-title {
 	margin-bottom: 30px;
 }
 
-.registro-pagina .form-control {
+.login-pagina .form-control {
 	border-width: 2.3px;
 }
 
-.registro-pagina .form-group label {
+.login-pagina .form-group label {
 	width: 100%;
 }
 
-.registro-pagina .btn.btn-block {
+.login-pagina .btn.btn-block {
 	padding: 12px 10px;
 }
 
-.registro-pagina .margin-top20 {
+.login-pagina .margin-top20 {
 	margin-top: 20px;
 }
 
-.registro-pagina .no-margin {
+.login-pagina .no-margin {
 	margin: 0;
-}
-
-.custom-file-input ~ .custom-file-label::after {
-    content: "Buscar";
 }

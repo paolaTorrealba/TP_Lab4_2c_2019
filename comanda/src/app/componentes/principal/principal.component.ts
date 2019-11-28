@@ -13,13 +13,16 @@ import { AuthProvider } from 'src/app/providers/auth';
 export class PrincipalComponent implements OnInit {
   acciones: Array<any> = [];
   public email;
+  public elMail:string;
   public usuario;
   public usuarios;
   public perfil;
   constructor( private router: Router,    
     private auth: AuthProvider) {
 
-      this.email=localStorage.getItem("usuarioComanda");  
+
+      this.email=localStorage.getItem("usuarioComanda"); 
+
       console.log("email del localstorage", this.email);
       this.auth.getLista('usuarios').subscribe(lista => {
         this.usuarios=lista;   
@@ -27,7 +30,7 @@ export class PrincipalComponent implements OnInit {
         for(let i=0;i<this.usuarios.length;i++){
           if(this.usuarios[i].correo == this.email) {
                this.usuario=this.usuarios[i];
-               console.log("el usuario:",this.usuario);
+               console.log("el usuario en constructor:",this.usuario);
           }
         }
       });
@@ -35,6 +38,7 @@ export class PrincipalComponent implements OnInit {
       this.mostrarMenu();
   }
  
+
   obtenerUsuario(){
     this.email=localStorage.getItem("usuarioComanda");  
     console.log("email del localstorage", this.email);
@@ -54,11 +58,12 @@ export class PrincipalComponent implements OnInit {
 
   mostrarMenu(){
     this.perfil= localStorage.getItem("perfilUComanda")
-    console.log("el perfil: ",this.perfil);
+    console.log("Menu para el perfil: ",this.perfil);
     console.log("Muestro el menu para este usuario: ",this.usuario);
     switch(this.perfil) {
       case "socio":
         this.acciones = [ 
+          { accion: "Reportes", img: "nuevo-empleado.jpg", ruta: "reportes" },
           { accion: "Agregar Empleado", img: "nuevo-empleado.jpg", ruta: "agregarEmpleado" },
           { accion: "Agregar Socio", img: "nuevo-empleado.jpg", ruta: "agregarSocio" },
           { accion: "Ver encuestas", img: "encuesta.jpg", ruta: "verEncuestas" },
@@ -98,7 +103,7 @@ export class PrincipalComponent implements OnInit {
           { accion: "Ingresar Codigos", img: "pedido.png", ruta: "encuestaCliente" },
           { accion: "Reservar mesa", img: "reserva.jpg", ruta: "reservaCliente" }, 
           { accion: "Ver mi pedido", img: "reserva.jpg", ruta: "verEstadoPedido" },
-          { accion: "Cancelar Pedido", img: "reserva.jpg", ruta: "verEstadoPedido" },  
+          { accion: "Cancelar Pedido", img: "reserva.jpg", ruta: "cancelar" },  
         ];
         break;
       case "cocinero": 
@@ -129,6 +134,7 @@ export class PrincipalComponent implements OnInit {
           { accion: "Cerrar mesa", img: "encuesta.jpg", ruta: "cerrarMesa" },
           { accion: "Confirmar pago", img: "encuesta.jpg", ruta: "confirmarPagoComponent" },
           { accion: "Encuesta empleado", img: "encuesta.jpg",  ruta: "encuestaEmpleado"},
+          
           // { accion: "Aceptar clientes en lista de espera", img: "qr.jpg", ruta: ListadoClientesComponent},
         ]
         break;        
@@ -148,7 +154,7 @@ export class PrincipalComponent implements OnInit {
     // });
   }
 
-  private cerrarSersion(){
+  public cerrarSersion(){
     this.auth.logOut();
     // actualizar el estado del usuario a noLogueado.
     // limpiar el local Storage.

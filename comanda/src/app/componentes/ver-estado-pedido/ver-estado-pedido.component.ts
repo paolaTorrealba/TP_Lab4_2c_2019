@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/servicios/auth.service';
 import { AuthProvider } from 'src/app/providers/auth';
+import { EstadoPedido } from 'src/app/clases/enum';
 
 
 @Component({
@@ -10,7 +11,8 @@ import { AuthProvider } from 'src/app/providers/auth';
 })
 export class VerEstadoPedidoComponent implements OnInit {
   public pedidos:Array<any> = [];
-  public recibido:string="recibido"; 
+  public recibido:string="recibido";
+  public entregado:EstadoPedido.entregado;  
   public correo:string;
   
 

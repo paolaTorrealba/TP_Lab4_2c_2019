@@ -1,16 +1,16 @@
-<h1>finalizar-pedido-bartender </h1>
+<app-principal></app-principal><br><br>
+<h4>    Bartender - Finalizar Pedido</h4>
 <ul *ngFor="let item of pedidos">
         <div *ngIf="item.estado==aceptado">                   
                    <ul *ngFor="let producto of item.productos">
-                        <div *ngIf="producto.tipo==barra 
-                                    && producto.estadoProdPedido==enPreparacion
-                                    && producto.empleado==correo">
-                                        && producto.empleado==correo">
-                                        <p >descripcion: {{producto.descripcion}}</p> 
-                                        <p >empleado: {{producto.empleado}}</p> 
-                                        <p >empleado: {{producto.estadoProdPedido}}</p>                    
-                                        <p >tiempo Estimado: {{producto.tiempoPromedioElaboracion}}</p>
-                                        <p >Codigo Pedido: {{item.codigo}}</p> 
+                        <div *ngIf="(producto.tipo==barra) 
+                                    && (producto.estadoProdPedido==enPreparacion) && (producto.empleado==correo)">
+                                
+                                        <p >DESCRIPCION: {{producto.descripcion}}</p> 
+                                        <p >EMPLEADO: {{producto.empleado}}</p> 
+                                        <p >ESTADO PRODUCTO: {{producto.estadoProdPedido}}</p>                    
+                                        <p >TIEMPO ESTIADO: {{producto.tiempoPromedioElaboracion}}</p>
+                                        <p >CODIGO PEDIDO Pedido: {{item.codigo}}</p> 
                            <button (click)="cerrarPedido(item,producto)">Cerrar Pedido</button>
                         </div>     
                    </ul> 

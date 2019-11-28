@@ -1,24 +1,29 @@
-<h1>Hacer Pedido</h1>
-<p >Codigo Mesa: {{this.codigoMesa}}</p>
+<app-principal></app-principal>
+<br><br>
+<h4>Hacer Pedido</h4>
+<h4>-- Recuerde seleccionar una mesa --</h4>
+        <p >Codigo Mesa Seleccionada: {{this.codigoMesa}}</p>
+
+        <p >monto total: {{this.montoTotal}}</p>
+        <p >tiempo total: {{this.tiempoTotal}}</p>
+        <label>Seleccione los platos:</label>
+        <button (click)="mostrarPlatos()" >Platos</button>
+        <button (click)="mostrarCerveza()">Cerveza</button>
+        <button (click)="mostrarBarra()">Barra</button>
+        <div *ngIf="!pedidoRealizado">
+        <ul *ngFor="let item of productos">
+            <p *ngIf="item.tipo===this.tipo">nombre: {{item.nombre}}</p>
+            <p *ngIf="item.tipo===this.tipo">descripcion: {{item.descripcion}}</p>   
+            <p *ngIf="item.tipo===this.tipo">precio: {{item.precio}}</p>
+            <input *ngIf="item.tipo===this.tipo" type="checkbox" ng-model="item" (click)="agregarPedido(item)">
+            <input *ngIf="item.tipo===this.tipo" type="checkbox" ng-model="item" (click)="quitarPedido(item)">
+            <p *ngIf="item.tipo===this.tipo">======================</p>   
+        
+        </ul> 
+        </div> 
+        
+        <button  *ngIf="!pedidoRealizado" (click)="guardarPedido()">Aceptar</button>
+         <!-- EL MOZO AGREGA UNA FOTO -->
 
 
-<label>Seleccione los platos:</label>
-<button (click)="mostrarPlatos()" >Platos</button>
-<button (click)="mostrarCerveza()">Cerveza</button>
-<button (click)="mostrarBarra()">Barra</button>
-<div *ngIf="!pedidoRealizado">
-<ul *ngFor="let item of productos">
-    <p *ngIf="item.tipo===this.tipo">nombre: {{item.nombre}}</p>
-    <p *ngIf="item.tipo===this.tipo">descripcion: {{item.descripcion}}</p>   
-    <p *ngIf="item.tipo===this.tipo">precio: {{item.precio}}</p>
-    <input *ngIf="item.tipo===this.tipo" type="checkbox" ng-model="item" (click)="agregarPedido(item)">
-    <input *ngIf="item.tipo===this.tipo" type="checkbox" ng-model="item" (click)="quitarPedido(item)">
-    <p *ngIf="item.tipo===this.tipo">======================</p>   
-
-</ul> 
-</div> 
-<p >monto total: {{this.montoTotal}}</p>
-<p >tiempo total: {{this.tiempoTotal}}</p>
-<button  *ngIf="!pedidoRealizado" (click)="guardarPedido()">Aceptar</button>
- <!-- EL MOZO AGREGA UNA FOTO -->
 

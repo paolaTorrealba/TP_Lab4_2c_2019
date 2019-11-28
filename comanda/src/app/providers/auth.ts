@@ -2,16 +2,16 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { AngularFireAuth } from "@angular/fire/auth";
 import { AngularFirestore } from "@angular/fire/firestore";
-import { map } from "rxjs/operators";
+// import { AngularFireAuth } from 'angularfire2/auth';
+// import { AngularFirestore } from 'angularfire2/firestore';
 
+import { map } from "rxjs/operators";
 
 export enum perfil {
   cliente = 'cliente',
   empleado = 'empleado',
-  socio = 'socio',
-
+  socio = 'socio'
 }
-
 export enum actividad {
   bartender = 'bartender',
   cocinero = 'cocinero',
@@ -31,7 +31,6 @@ export interface usuario {
   clave: string,
   perfil: string
 }
-
 export interface mesa {
   id: string;
   numero: string;
@@ -39,7 +38,6 @@ export interface mesa {
   estado: string;
   codigo: string;
 }
-
 export interface listaEspera {
   id: string,
   turno: number,
@@ -47,73 +45,27 @@ export interface listaEspera {
   apellido: string,
   correo: string,
   estado: string,
-  foto: string,
-
-}
-
-
-
-export interface encUsuario {
-  id: string,
-  correo: string,
-  pregunta1: {
-    bueno: number,
-    excelente: number,
-    malo: number,
-    mediocre: number,
-    pesimo: number
-  },
-  pregunta2: {
-    no: number,
-    si: number
-  },
-  pregunta3: {
-    item1: number,
-    item2: number,
-    item3: number,
-    item4: number,
-    item5: number,
-    item6: number
-  },
-  pregunta4: {
-    MuyBueno: number,
-    Bueno: number,
-    Normal: number,
-    Malo: number
-  },
-  comentarios: Array<any>,
-  pregunta5: {
-    item1: number,
-    item2: number,
-    item3: number,
-    item4: number
-  },
-  pregunta6: {
-    item1: number,
-    item2: number,
-    item3: number,
-    item4: number
-  }
+  foto: string
 }
 
 
 export interface encuestaCliente {
-  id: string,
-  fecha: string,
-  correo: string,
-  pregunta1: string,
-  respuesta1: string,
-  pregunta2: string,
-  respuesta2: string,
-  pregunta3: string,
-  respuesta3: string,
-  pregunta4: string,
-  respuesta4: string,
-  pregunta5: string,
-  respuesta5: string,
-  pregunta6: string,
-  respuesta6: string,
-  comentario: string
+    id:string; 
+    date:Date;
+    email: string;
+    question1: string; 
+    question2: string; 
+    question3: string; 
+    question4: string;  
+    question5: string;   
+   
+    answer1: string;
+    answer2: string;
+    answer3: string;
+    answer4: string;
+    answer5: string;
+
+    commentary: string;  
 }
 
 export interface reserva {
@@ -184,9 +136,15 @@ export class AuthProvider {
 
   }
 
-  login(email: string, pass: string) {
-    return this.auth.auth.signInWithEmailAndPassword(email, pass);
+  public login(email: string, pass: string) {
+    return this.auth.auth.signInWithEmailAndPassword(email, pass)
+    .then(user=>Promise.resolve(user))
+    .catch(err=>Promise.reject(err));
   }
+
+  public get Session(){
+    return this.auth.authState;
+   }
 
   logOut() {
     this.auth.auth.signOut();
@@ -202,8 +160,12 @@ export class AuthProvider {
     }));
   }
 
-  //-----USUARIOS-----
-  getUsuarios() {
+  //-----------------USUARIOS--------------------
+  crearUsuario(correo, pass) {
+    return this.auth.auth.createUserWithEmailAndPassword(correo, pass);
+  }
+
+  traerUsuarios() {
     return this.db.collection('usuarios').snapshotChanges().pipe(map(rooms => {
       return rooms.map(a => {
         const data = a.payload.doc.data() as usuario;
@@ -213,7 +175,7 @@ export class AuthProvider {
     }));
   }
 
-  updateUsuario(data) {
+  actualizarUsuario(data) {
     return this.db.collection('usuarios').doc(data.id).update(data);
   }
 
@@ -221,32 +183,64 @@ export class AuthProvider {
     return this.db.collection('usuarios').add(data);
   }
 
+
+  //-----------------PEDIDOS--------------------
   guardarPedido(data) {
     return this.db.collection('pedidos').add(data);
   }
 
+  actualizarPedido(data) {
+    return this.db.collection('pedidos').doc(data.id).update(data);
+  }
+
+  //-----------------ENCUESTAS--------------------
   guardarEncuestaEmpleado(data) {
     return this.db.collection('encuestaEmpleado').add(data);
   }
-
-  crearUsuario(correo, pass) {
-    return this.auth.auth.createUserWithEmailAndPassword(correo, pass);
+ guardarEncuestaCliente(data) {
+    return this.db.collection('encuestaCliente').add(data);
   }
-  //-----CLIENTES-----
+
+  traerEncuestasClientes() {
+    return this.db.collection('encuestaCliente').snapshotChanges().pipe(map(rooms => {
+      return rooms.map(a => {
+        const data = a.payload.doc.data() as encuestaCliente;
+        data.id = a.payload.doc.id;
+        return data;
+      })
+    }));
+  }
+
+  // traerEncuestasEmpleados() {
+  //   return this.db.collection('encuestaEmpleado').snapshotChanges().pipe(map(rooms => {
+  //     return rooms.map(a => {
+  //       const data = a.payload.doc.data() as encuestaEmpleado;
+  //       data.id = a.payload.doc.id;
+  //       return data;
+  //     })
+  //   }));
+  // }
+
+  modificarEncuestaCliente(data) {
+    return this.db.collection('encuestaCliente').doc(data.id).update(data);
+
+  }
+
+  //-----------------CLIENTES--------------------
   guardarCliente(data) {
     return this.db.collection('clientes').add(data);
   }
 
-  //-----MESA-----
+  //-----------------MESAS--------------------
   guardarMesa(data) {
     return this.db.collection('mesas').add(data);
   }
 
-  guardarReserva(data) {
-    return this.db.collection('reservas').add(data);
+  actualizarMesa(data) {
+    return this.db.collection('mesas').doc(data.id).update(data);
   }
 
-  getMesas() {
+  traerMesas() {
     return this.db.collection('mesas').snapshotChanges().pipe(map(rooms => {
       return rooms.map(a => {
         const data = a.payload.doc.data() as mesa;
@@ -256,13 +250,36 @@ export class AuthProvider {
     }));
   }
 
-  //---Lista Espera ---//
 
+  //-----------------RESERVAS--------------------
+  guardarReserva(data) {
+    return this.db.collection('reservas').add(data);
+  }
+  
+  confirmarReserva(data) {
+    return this.db.collection('reservas').doc(data.id).update(data);
+  }
+  actualizarReserva(data) {
+    return this.db.collection('reservas').doc(data.id).update(data);
+  }
+
+  traerReservas() {
+    return this.db.collection('reservas').snapshotChanges().pipe(map(rooms => {
+      return rooms.map(a => {
+        const data = a.payload.doc.data() as reserva;
+        data.id = a.payload.doc.id;
+        return data;
+      })
+    }));
+  }
+
+  
+ //-----------------LISTA ESPERA--------------------
   guardarListaEspera(data) {
     return this.db.collection('listaEspera').add(data);
   }
 
-  getListaEspera() {
+  traerListaEspera() {
     return this.db.collection('listaEspera').snapshotChanges().pipe(map(rooms => {
       return rooms.map(a => {
         const data = a.payload.doc.data() as listaEspera;
@@ -272,31 +289,29 @@ export class AuthProvider {
     }));
   }
 
-
-  updateListaEspera(data) {
+  actualizarListaEspera(data) {
     return this.db.collection('listaEspera').doc(data.id).update(data);
   }
-  //--FIN ---Lista Espera ---//
 
 
-  //-----PRODUCTOS------
-  getListaProductos(tipo: string) {
-    return this.db.collection(tipo).snapshotChanges().pipe(map(rooms => {
-      return rooms.map(a => {
-        const data = a.payload.doc.data() as producto;
-        return data;
-      })
-    }));
+  //-----------------PRODUCTOS--------------------
+
+  traerListaProductos() {
+      return this.db.collection('productos').snapshotChanges().pipe(map(rooms => {
+        return rooms.map(a => {
+          const data = a.payload.doc.data() as producto;
+          data.id = a.payload.doc.id;
+          return data;
+        })
+      }));
   }
 
   guardarProducto(data) {
     return this.db.collection('productos').add(data);
   }
 
-  updateMesa(data) {
-    return this.db.collection('mesas').doc(data.id).update(data);
-  }
 
+  //-----------------QR--------------------
   getQr() {
     return this.db.collection('qr').snapshotChanges().pipe(map(rooms => {
       return rooms.map(a => {
@@ -307,96 +322,20 @@ export class AuthProvider {
     }));
   }
 
-  nuevaEncuesta(data) {
-    return this.db.collection('encuestasUsuarios').add(data);
-  }
 
-  modificarEncuesta(data) {
-    return this.db.collection('encuestasUsuarios').doc(data.id).update(data);
-  }
-
-  getEncUsuarios() {
-    return this.db.collection('encuestasUsuarios').snapshotChanges().pipe(map(rooms => {
-      return rooms.map(a => {
-        const data = a.payload.doc.data() as encUsuario;
-        data.id = a.payload.doc.id;
-        return data;
-      })
-    }));
-  }
 
   //---- Encuesta cliente -----//
-  nuevaEncuestaCliente(data) {
-    return this.db.collection('encuestaCliente').add(data);
-  }
-  getEncuestasClientes() {
-    return this.db.collection('encuestaCliente').snapshotChanges().pipe(map(rooms => {
-      return rooms.map(a => {
-        const data = a.payload.doc.data() as encuestaCliente;
-        data.id = a.payload.doc.id;
-        return data;
-      })
-    }));
-  }
-
-  modificarEncuestaCliente(data) {
-    return this.db.collection('encuestaCliente').doc(data.id).update(data);
-
-  }
-
-  //---FIN --Encuesta cliente -----//
+  
 
 
 
-  confirmarReserva(data) {
-    return this.db.collection('reservas').doc(data.id).update(data);
-  }
-  actualizarReserva(data) {
-    return this.db.collection('reservas').doc(data.id).update(data);
-  }
-
-  getReservas() {
-    return this.db.collection('reservas').snapshotChanges().pipe(map(rooms => {
-      return rooms.map(a => {
-        const data = a.payload.doc.data() as reserva;
-        data.id = a.payload.doc.id;
-        return data;
-      })
-    }));
-  }
-
-  getProductos() {
-    return this.db.collection('productos').snapshotChanges().pipe(map(rooms => {
-      return rooms.map(a => {
-        const data = a.payload.doc.data() as producto;
-        data.id = a.payload.doc.id;
-        return data;
-      })
-    }));
-  }
-
-  nuevoPedido(data) {
-    return this.db.collection('pedidos').add(data);
-  }
-
-  // getPedidos() {
-  //   return this.db.collection('pedidos').snapshotChanges().pipe(map(rooms => {
-  //     return rooms.map(a => {
-  //       const data = a.payload.doc.data() as pedido;
-  //       data.id = a.payload.doc.id;
-  //       return data;
-  //     })
-  //   }));
-  // }
-
-  actualizarPedido(data) {
-    return this.db.collection('pedidos').doc(data.id).update(data);
-  }
 
 
 
-  nuevoChat(data) {
-    return this.db.collection('mensajes').add(data);
-  }
+
+  
+
+
+
 
 }

@@ -1,17 +1,26 @@
-import { BrowserModule } from '@angular/platform-browser';
-import { NgModule, InjectionToken } from '@angular/core';
-import { environment } from '../environments/environment';
-import { AppRoutingModule } from './app-routing.module';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+  import { BrowserModule } from '@angular/platform-browser';
+  import { RecaptchaModule } from 'ng-recaptcha';
+  import { environment } from '../environments/environment';
+  import { AppRoutingModule } from './app-routing.module';
 
-import { AngularFireAuthModule } from '@angular/fire/auth';
-import { AngularFireModule } from '@angular/fire';
-import { AngularFireDatabaseModule } from '@angular/fire/database';
-import { AngularFireStorageModule } from '@angular/fire/storage';
-import { AngularFirestoreModule } from '@angular/fire/firestore';
+   import { AngularFireAuthModule } from '@angular/fire/auth';
+   import { AngularFireModule } from '@angular/fire';
+   import { AngularFireDatabaseModule } from '@angular/fire/database';
+   import { AngularFireStorageModule } from '@angular/fire/storage';
+   import { AngularFirestoreModule } from '@angular/fire/firestore';
+// import { AngularFirestoreModule } from 'angularfire2/firestore';
+// import { AngularFirestore } from 'angularfire2/firestore';
+// import { AngularFireModule } from 'angularfire2';
+import { NgModule } from '@angular/core';
+import { MaterialModule } from './material/material';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+// import { AngularFireAuthModule } from 'angularfire2/auth';
+
+// import { AngularFireDatabaseModule } from 'angularfire2/database';
+
+
 
 import { AuthProvider } from './providers/auth';
-
 import { AppComponent } from './app.component';
 import { PrincipalComponent } from './componentes/principal/principal.component';
 import { PedidosPendientesComponent } from './componentes/pedidos-pendientes/pedidos-pendientes.component';
@@ -52,12 +61,23 @@ import { FinalizarPedidoCocineroComponent } from './componentes/finalizar-pedido
 import { FinalizarPedidoCerveceroComponent } from './componentes/finalizar-pedido-cervecero/finalizar-pedido-cervecero.component';
 import { FinalizarPedidoBartenderComponent } from './componentes/finalizar-pedido-bartender/finalizar-pedido-bartender.component';
 import { VerEstadoPedidoComponent } from './componentes/ver-estado-pedido/ver-estado-pedido.component';
-import { CancelarPedidoComponent } from './componenetes/cancelar-pedido/cancelar-pedido.component';
+import { CancelarPedidoComponent } from './componentes/cancelar-pedido/cancelar-pedido.component';
 import { MesaPipe } from './pipes/mesa.pipe';
+import { TipoFilasDirective } from './directivas/tipo-filas.directive';
+import { EstadoFilaDirective } from './directivas/estado-fila.directive';
+import { MostrarFotoPipe } from './pipes/mostrar-foto.pipe';
+import { ColorPedidoPendienteDirective } from './directivas/color-pedido-pendiente.directive';
+import { PedidoBartenderComponent } from './filtros/pedido-bartender/pedido-bartender.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { PedidoCerveceroComponent } from './filtros/pedido-cervecero/pedido-cervecero.component';
+import { PedidoCocineroComponent } from './filtros/pedido-cocinero/pedido-cocinero.component';
+import { ExcelComponent } from './componentes/excel/excel.component';
+
 
 @NgModule({
   declarations: [
     AppComponent,
+    TipoFilasDirective,
     PrincipalComponent,
     PedidosPendientesComponent,
     AltaDeProductoComponent,
@@ -98,10 +118,21 @@ import { MesaPipe } from './pipes/mesa.pipe';
     VerEstadoPedidoComponent,
     CancelarPedidoComponent,
     MesaPipe,
+    TipoFilasDirective,
+    EstadoFilaDirective,
+    MostrarFotoPipe,
+    ColorPedidoPendienteDirective,
+    PedidoBartenderComponent,
+    PedidoCerveceroComponent,
+    PedidoCocineroComponent,
+    ExcelComponent,
   ],
   imports: [
     FormsModule,
-    ReactiveFormsModule,
+    MaterialModule,
+    RecaptchaModule,
+    BrowserAnimationsModule,
+    ReactiveFormsModule,  
     BrowserModule,
     AppRoutingModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
@@ -112,7 +143,10 @@ import { MesaPipe } from './pipes/mesa.pipe';
     HttpClientModule
 
   ],
-  providers: [ AuthProvider],
+  exports: [
+    MaterialModule
+  ],
+  providers: [AuthProvider],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

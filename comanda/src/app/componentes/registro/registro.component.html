@@ -1,63 +1,56 @@
-<section class="h-100 registro-pagina">
-    <div class="container h-100">
-      <div class="row justify-content-md-center h-100">
-        <div class="card-wrapper registro-pagina">
-          <button (click)="crearTest()" class="btn btn-primary btn-block">
-            invitado
-          </button>
-          <div class="brand">
-            <!-- <img src="/assets/imagenes/logo.jpg"> -->
-          </div>
-          <div class="card fat">
-            <div class="card-body">
-              <h4 class="card-title">Creá tu cuenta</h4>
-              <form>
-  
-                <div class="form-group">
-                  <label for="name">Nombre</label>
-                  <input type="text"  [(ngModel)]="nombreModel" class="form-control" name="name" id="name" required autofocus>
-                  <div  class="invalid-feedback">
-                    <div >Nombre requerido</div>
-                  </div>
-                </div>
-  
-                <div class="form-group">
-                    <label for="name">Apellido</label>
-                    <input type="text"  [(ngModel)]="apellidoModel" class="form-control" name="apellido" id="apellido" required autofocus>
-                    <div  class="invalid-feedback">
-                      <div >Apellido requerido</div>
-                    </div>
-                  </div>
+<section class="h-100 login-pagina">
+  <div class="container h-100">
+    <div class="row justify-content-md-center h-100">
+      <div class="card-wrapper registro-pagina">  
+        <div class="card fat">
+          <div class="card-body">
+            <h4 class="card-title">Registro</h4>   
 
+            <form (ngSubmit)="f.form.valid && registrarse()" #f="ngForm" novalidate>
+            
+              <div class="form-group">
+                <label for="nombre">Nombre</label>          
+                <input name="nombre" id="nombre" type="text"
+                       class="form-control" [(ngModel)]="nombreModel" 
+                      #nombre="ngModel" [ngClass]="{ 'is-invalid': f.submitted && nombre.invalid }" 
+                      required autofocus>
+                <div *ngIf="f.submitted && nombre.invalid" class="invalid-feedback">
+                  <div *ngIf="nombre.errors.required">Ingrese el Nombre</div>
+                </div>
+              </div>
 
-                <div class="form-group">
-                  <label for="email">Dirección de Email</label>
-                  <input [(ngModel)]="emailModel" type="email" class="form-control" name="email" id="email" 
-                     required>
-                  <div class="invalid-feedback">
-                    <div >Email requerido</div>
-                  </div>
+              <div class="form-group">
+                <label for="apellido">Apellido</label>          
+                <input name="apellido" id="apellido" type="text"
+                       class="form-control" [(ngModel)]="apellidoModel" 
+                      #apellido="ngModel" [ngClass]="{ 'is-invalid': f.submitted && apellido.invalid }" 
+                      required autofocus>
+                <div *ngIf="f.submitted && apellido.invalid" class="invalid-feedback">
+                  <div *ngIf="apellido.errors.required">Ingrese el Apellido</div>
                 </div>
+              </div>
+              <div class="form-group">
+                <label for="email">Dirección de Email</label>          
+                <input name="email" id="email" type="email"
+                       class="form-control" [(ngModel)]="emailModel" 
+                      #email="ngModel" [ngClass]="{ 'is-invalid': f.submitted && email.invalid }" 
+                      required autofocus>
+                <div *ngIf="f.submitted && email.invalid" class="invalid-feedback">
+                  <div *ngIf="email.errors.required">Ingrese el Email</div>
+                </div>
+            </div>
+              <div class="form-group">
+                <label for="password">Clave</label>          
+                <input name="password" id="password" type="password"
+                       class="form-control" [(ngModel)]="passwordModel" 
+                      #password="ngModel" [ngClass]="{ 'is-invalid': f.submitted && apellido.invalid }" 
+                      required autofocus>
+                <div *ngIf="f.submitted && password.invalid" class="invalid-feedback">
+                  <div *ngIf="password.errors.required">Ingrese la Clave</div>
+                </div>
+              </div>
   
-                <div class="form-group">
-                  <label for="password">Contraseña</label>
-                  <input  [(ngModel)]="claveModel" type="password" class="form-control" name="password" id="password" 
-                   required>
-                  <div  class="invalid-feedback">
-                    <div >Contraseña requerida</div>
-                  </div>
-                </div>
     
-                <!-- <div class="form-group" *ngIf="perfil == 'empleado'">
-                  <label for="actividad">actividad</label>
-                  <select class="form-control" name="actividad" id="actividad">
-                    <option [ngValue]="0">bartender</option>
-                    <option [ngValue]="1">mozo</option>
-                    <option [ngValue]="2">cervecero</option>
-                    <option [ngValue]="3">cocinero</option>
-                  </select>
-                </div> -->
-  
                 <!-- carga de imágen -->
   
                 <form class="form-group">
@@ -73,39 +66,30 @@
   
       
   
-                <form class="margin-bottom">
+                <!-- <form class="margin-bottom">
                   <div class="custom-control custom-checkbox">
-                    <input type="checkbox" class="custom-control-input" id="customCheck" name="customCheck"
-                     
-                     >
+                    <input type="checkbox" class="custom-control-input" id="customCheck" name="customCheck">
                     <label class="custom-control-label" for="customCheck">Acepto los términos y
                       condiciones</label>
                   </div>
-                </form>
+                </form> -->
   
                 <form class="margin-bottom">
-                  <!-- <re-captcha (resolved)="resolved($event)" siteKey="6LeUMq8UAAAAAKO61peKaT7RknpnQe7G5M56hz04">
-                  </re-captcha> -->
+                  <re-captcha (resolved)="resolved($event)" siteKey="6LeUMq8UAAAAAKO61peKaT7RknpnQe7G5M56hz04">
+                  </re-captcha>
                 </form>
   
                 <div class="form-group no-margin">
   
                   <ng-container                    >
-                    <button  class="btn btn-primary btn-block" (click) ="registrarse()">
+                    <button  class="btn btn-primary btn-block" (click) ="registrarse()" *ngIf="this.captchaVerificado">
                       Registrarse
                     </button>
                   </ng-container>
   
-                  <!-- <ng-template >
-                    <button disabled=true class="btn btn-secondary btn-block">
-                      Registrarse
-                    </button>
-                  </ng-template> -->
   
                 </div>
-                <!-- <div class="margin-top20 text-center">
-                  Ya tenés una cuenta? <a routerLink="/loguearse">Ingresá</a>
-                </div> -->
+           
               </form>
             </div>
           </div>

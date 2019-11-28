@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import {PedidosPendientesComponent} from './componentes/pedidos-pendientes/pedidos-pendientes.component';
 import {AltaDeProductoComponent} from './componentes/alta-de-producto/alta-de-producto.component';
 import {EncuestaEmpleadoComponent} from './componentes/encuesta-empleado/encuesta-empleado.component';
@@ -35,6 +34,9 @@ import { FinalizarPedidoCerveceroComponent } from './componentes/finalizar-pedid
 import { FinalizarPedidoBartenderComponent } from './componentes/finalizar-pedido-bartender/finalizar-pedido-bartender.component';
 import { FinalizarPedidoCocineroComponent } from './componentes/finalizar-pedido-cocinero/finalizar-pedido-cocinero.component';
 import { VerEstadoPedidoComponent } from './componentes/ver-estado-pedido/ver-estado-pedido.component';
+import { TipoFilasDirective } from './directivas/tipo-filas.directive';
+import { ExcelComponent } from './componentes/excel/excel.component';
+import { CancelarPedidoComponent } from './componentes/cancelar-pedido/cancelar-pedido.component';
 
 
 
@@ -46,35 +48,50 @@ const routes: Routes = [
   { path: 'menuprincipal', component: PrincipalComponent },  
   { path: 'registro', component: RegistroComponent},
   // { path: 'listaEspera', component: ListaDeEsperaComponent},
-  { path: 'reservaCliente', component: ReservaComponent},
-  { path: 'pedirPlatos', component: PedirPlatosComponent},
-  { path: 'pagarFactura', component: PagarFacturaComponent},
-  { path: 'encuestaCliente', component: EncuestaClienteComponent},
-  { path: 'encuestaEmpleado', component: EncuestaEmpleadoComponent},
-  { path: 'cerrarMesa', component: CerrarMesaComponent},
-  { path: 'encuestaCliente', component: EncuestaClienteComponent},
+
+  // SOCIO
+  { path: 'reportes', component: ExcelComponent},  
   { path: 'pedidosPendientes', component: PedidosPendientesComponent},
-  { path: 'agregarMesa', component: AltaDeMesaComponent},
-  { path: 'verRegistroClientes', component: ListaClientesEstadoComponent},
   { path: 'verEncuestas', component: VerEncuestasComponent},
+  { path: 'agregarMesa', component: AltaDeMesaComponent},   
   { path: 'agregarSocio', component: AltaSocioComponent},
-  { path: 'agregarEmpleado', component: AltaEmpleadoComponent},
-  { path: 'confirmarPago', component: ConfirmarPagoComponent},
+  { path: 'agregarEmpleado', component: AltaEmpleadoComponent}, 
+  { path: 'agregarProducto', component: AltaDeProductoComponent}, 
   { path: 'listadoMesas', component: ListadoMesasComponent},
   { path: 'listadoProductos', component: ListadoProductosComponent},
   { path: 'listadoPedidos', component: ListadoPedidosComponent},
+
+  // CLIENTE
+  
+  { path: 'cancelar', component: CancelarPedidoComponent},
+  { path: 'pagarFactura', component: PagarFacturaComponent},
+  { path: 'encuestaCliente', component: EncuestaClienteComponent},
+  { path: 'reservaCliente', component: ReservaComponent},
+  { path: 'pedirPlatos', component: PedirPlatosComponent},
+  { path: 'verEstadoPedido', component: VerEstadoPedidoComponent}, 
+
+  // MOZO
+  { path: 'encuestaEmpleado', component: EncuestaEmpleadoComponent},
+  { path: 'pedidosPendientes', component: PedidosPendientesComponent},
+  { path: 'cerrarMesa', component: CerrarMesaComponent},
+  { path: 'verRegistroClientes', component: ListaClientesEstadoComponent},  
+  { path: 'confirmarPago', component: ConfirmarPagoComponent},
   { path: 'entregarPedido', component: ConfirmarPedidoComponent},
-  { path: 'agregarProducto', component: AltaDeProductoComponent}, 
-  { path: 'pedidosPendientesCervecero', component: PedidosPendientesCerveceroComponent}, 
-  { path: 'pedidosPendientesBartender', component: PedidosPendientesBartenderComponent}, 
-  { path: 'pedidosPendientesCocinero', component: PedidosPendientesCocineroComponent}, 
-  { path: 'finalizarPedidoCervecero', component: FinalizarPedidoCerveceroComponent}, 
-  { path: 'finalizarPedidoBartender', component: FinalizarPedidoBartenderComponent},
-  { path: 'finalizarPedidoCocinero', component: FinalizarPedidoCocineroComponent},
-  { path: 'verEstadoPedido', component: VerEstadoPedidoComponent},
+
+   // CERVECERO
+   { path: 'encuestaEmpleado', component: EncuestaEmpleadoComponent},
+   { path: 'pedidosPendientesCervecero', component: PedidosPendientesCerveceroComponent}, 
+   { path: 'finalizarPedidoCervecero', component: FinalizarPedidoCerveceroComponent}, 
   
+   // BARTENDER
+   { path: 'encuestaEmpleado', component: EncuestaEmpleadoComponent},
+   { path: 'pedidosPendientesBartender', component: PedidosPendientesBartenderComponent}, 
+   { path: 'finalizarPedidoBartender', component: FinalizarPedidoBartenderComponent},
   
-  
+   // COCINERO  
+   { path: 'encuestaEmpleado', component: EncuestaEmpleadoComponent},
+   { path: 'pedidosPendientesCocinero', component: PedidosPendientesCocineroComponent}, 
+   { path: 'finalizarPedidoCocinero', component: FinalizarPedidoCocineroComponent},
   
   
   // {

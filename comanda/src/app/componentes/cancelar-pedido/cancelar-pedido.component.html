@@ -1,0 +1,21 @@
+<app-principal></app-principal>
+<br><br>
+
+
+<ul *ngFor="let item of pedidos">
+        <div *ngIf="item.correo==correo">
+                <p >NOMBRE: {{item.nombreCliente}}</p>  
+                <p >CODIGO PEDIDO: {{item.codigo}}</p>                      
+                <p >ESTADO: {{item.estado}}</p>
+                <p >MESA: {{item.mesa}}</p> 
+                <p >MONTO: {{item.montoTotal}}</p> 
+                 <br>  
+            
+                <button *ngIf="item.estado=='pendiente' || item.estado=='aceptado'"(click)="cancelar(item)">Cancelar Pedido</button> 
+                <div  *ngIf="item.estado!='pendiente' && item.estado!='aceptado'" >
+                    <p>-- El pedido no se puede cancelar porque esta en estado {{item.estado}}-- </p>
+                </div>
+                              
+                    
+        </div>
+       </ul> 
