@@ -105,9 +105,22 @@
                 </div>
                     
 
+
+                <!-- <div class="form-group">
+                        <label for="comentary">Cantidad Comensales</label>
+                        <textarea  class="form-control" id="comentary"
+                                   name="comentary" required rows="3"
+                                 [(ngModel)]="encuestaCliente.commentary"
+                               #comentary="ngModel"
+                               [ngClass]="{ 'is-invalid': f.submitted && comentary.invalid }"
+                               required autofocus> 
+                        <div  *ngIf="f.submitted && comentary.invalid" class="invalid-feedback">
+                           <div *ngIf="comentary.errors.required">Cantidad Comensales</div>
+                        </div>
+                    </div>      -->
                 <div class="form-group">
                     <label for="comentary" class="label" position="floating">Comentario</label>
-                    <textarea  class="form-control" [(ngModel)]="encuestaCliente.commentaryModel" name="comentary" required rows="3"></textarea>
+                    <textarea  class="form-control" [(ngModel)]="commentaryModel" name="comentary" required rows="3"></textarea>
                 </div>  
                 <div class="form-group no-margin">
                         <button type="submit" class="btn btn-primary btn-block">

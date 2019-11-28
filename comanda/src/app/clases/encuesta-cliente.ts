@@ -14,5 +14,5 @@ export class EncuestaCliente {
     answer4: string= "0";
     answer5: string= "0";
 
-    commentary: string= "";  
+    commentary: string;  
 }
