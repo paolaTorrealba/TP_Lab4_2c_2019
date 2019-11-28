@@ -6,36 +6,108 @@
     <div class="card-wrapper registro-pagina">  
         <div class="card fat">
         <div class="card-body">
-            <h4 class="card-title">Encuesta - FALTA PUNTUACION</h4>
+            <h4 class="card-title">Encuesta Cliente</h4>
             <form (ngSubmit)="f.form.valid && guardarEncuesta()" #f="ngForm" novalidate>
       
                 <div class="form-group">
-                    <label for="pregunta1" class="label" position="floating">{{encuestaCliente.question1}}</label>
-                    <input type="text" class="form-control"  [(ngModel)]="encuestaCliente.answer1Model" name="pregunta1" required>
-                </div>  
+                    <label for="answer1" class="label" position="floating">{{encuestaCliente.question1}}</label>
+                    <select required [(ngModel)]="encuestaCliente.answer1Model" 
+                            class="form-control"name="answer1" required
+                            id="answer1" 
+                            (change)="changeAnswer1($event.target.value)">
+                        <option value="mujer" >Mujer</option>
+                        <option value="hombre">Hombre</option>   
+                    </select>
+                </div>
+                
                 <div class="form-group">
-                    <label for="pregunta2" class="label" position="floating">{{encuestaCliente.question2}}</label>
-                    <input type="text" class="form-control" [(ngModel)]="encuestaCliente.answer2Model" name="pregunta2" required>
-                </div>  
+                    <label for="pregunta2" class="label" position="floating">
+                        {{encuestaCliente.question2}}</label>
+                    <select required [(ngModel)]="encuestaCliente.answer2Model" 
+                      class="form-control"name="pregunta2" required
+                            id="pregunta2" 
+                            (change)="changeAnswer2($event.target.value)">
+                        <option value="0">0</option>
+                        <option value="1">1</option>  
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                        <option value="6">6</option>
+                        <option value="7">7</option>
+                        <option value="8">8</option>
+                        <option value="9">9</option> 
+                        <option value="10">10</option> 
+                    </select>
+                </div>
+
                 <div class="form-group">
-                    <label for="user" class="label" position="floating">{{encuestaCliente.question3}}</label>
-                    <input type="text" class="form-control" [(ngModel)]="encuestaCliente.answer3Model" name="pregunta3" required>
-                </div>  
+                        <label for="pregunta3" class="label" position="floating">
+                            {{encuestaCliente.question3}}</label>
+                        <select required [(ngModel)]="encuestaCliente.answer3Model" 
+                                    class="form-control"name="pregunta3" required
+                                id="pregunta3" 
+                                (change)="changeAnswer3($event.target.value)">
+                            <option value="0">0</option>
+                            <option value="1">1</option>  
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                            <option value="6">6</option>
+                            <option value="7">7</option>
+                            <option value="8">8</option>
+                            <option value="9">9</option> 
+                            <option value="10">10</option> 
+                        </select>
+                </div>
+
                 <div class="form-group">
-                    <label for="user" class="label" position="floating">{{encuestaCliente.question4}}</label>
-                    <input type="text" class="form-control" [(ngModel)]="encuestaCliente.answer4Model" name="pregunta4" required>
-                </div>  
+                        <label for="pregunta4" class="label" position="floating">
+                            {{encuestaCliente.question4}}</label>
+                        <select required [(ngModel)]="encuestaCliente.answer4Model" 
+                                    class="form-control"name="pregunta4" required
+                                id="pregunta4" 
+                                (change)="changeAnswer4($event.target.value)">
+                            <option value="0">0</option>
+                            <option value="1">1</option>  
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                            <option value="6">6</option>
+                            <option value="7">7</option>
+                            <option value="8">8</option>
+                            <option value="9">9</option> 
+                            <option value="10">10</option> 
+                        </select>
+                </div>
+                
                 <div class="form-group">
-                    <label for="user" class="label" position="floating">{{encuestaCliente.question5}}</label>
-                    <input type="text" class="form-control" [(ngModel)]="encuestaCliente.answer5Model" name="pregunta5" required>
-                </div>  
+                        <label for="pregunta5" class="label" position="floating">
+                            {{encuestaCliente.question4}}</label>
+                        <select required [(ngModel)]="encuestaCliente.answer5Model" 
+                                    class="form-control"name="pregunta5" required
+                                id="pregunta5" 
+                                (change)="changeAnswer5($event.target.value)">
+                            <option value="0">0</option>
+                            <option value="1">1</option>  
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                            <option value="6">6</option>
+                            <option value="7">7</option>
+                            <option value="8">8</option>
+                            <option value="9">9</option> 
+                            <option value="10">10</option> 
+                        </select>
+                </div>
+                    
+
                 <div class="form-group">
-                    <label for="user" class="label" position="floating">{{encuestaCliente.question6}}</label>
-                    <input type="text" class="form-control" [(ngModel)]="encuestaCliente.answer6Model" name="pregunta6" required>
-                </div> 
-                <div class="form-group">
-                    <label for="user" class="label" position="floating">Comentario</label>
-                    <textarea  class="form-control" [(ngModel)]="encuestaCliente.commentaryModel" name="pregunta7" required rows="3"></textarea>
+                    <label for="comentary" class="label" position="floating">Comentario</label>
+                    <textarea  class="form-control" [(ngModel)]="encuestaCliente.commentaryModel" name="comentary" required rows="3"></textarea>
                 </div>  
                 <div class="form-group no-margin">
                         <button type="submit" class="btn btn-primary btn-block">

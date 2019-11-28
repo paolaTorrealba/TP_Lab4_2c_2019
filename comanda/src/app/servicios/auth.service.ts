@@ -119,6 +119,10 @@ export class AuthService {
       return this.firestore.collection('pedido').add(data);
     }
 
+    guardarEncuestaCliente(data) {
+      return this.firestore.collection('encuestaCliente').add(data);
+    }
+
     getListaUsuarios(tipo:string) {
       return this.firestore.collection(tipo).snapshotChanges().pipe(map(rooms => {
         return rooms.map(a =>{

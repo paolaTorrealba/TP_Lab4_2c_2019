@@ -50,22 +50,22 @@ export interface listaEspera {
 
 
 export interface encuestaCliente {
-  id: string,
-  fecha: string,
-  correo: string,
-  pregunta1: string,
-  respuesta1: string,
-  pregunta2: string,
-  respuesta2: string,
-  pregunta3: string,
-  respuesta3: string,
-  pregunta4: string,
-  respuesta4: string,
-  pregunta5: string,
-  respuesta5: string,
-  pregunta6: string,
-  respuesta6: string,
-  comentario: string
+    id:string; 
+    date:Date;
+    email: string;
+    question1: string; 
+    question2: string; 
+    question3: string; 
+    question4: string;  
+    question5: string;   
+   
+    answer1: string;
+    answer2: string;
+    answer3: string;
+    answer4: string;
+    answer5: string;
+
+    commentary: string;  
 }
 
 export interface reserva {
