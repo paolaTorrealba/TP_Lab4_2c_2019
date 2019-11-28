@@ -1,5 +1,4 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
-import { AngularFireStorage } from '@angular/fire/storage';
 import { AuthProvider } from 'src/app/providers/auth';
 import { AuthService } from 'src/app/servicios/auth.service';
 import { EstadoMesa } from 'src/app/clases/enum';

@@ -2,7 +2,11 @@ import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { finalize } from 'rxjs/operators';
 import { Observable, empty } from 'rxjs';
 import { AngularFireStorage } from '@angular/fire/storage';
+// import { AngularFireStorageModule } from '@angular/fire/storage';
+
 import { AuthProvider } from 'src/app/providers/auth';
+import { Perfil } from 'src/app/clases/enum';
+
 
 @Component({
   selector: 'app-registro',
@@ -13,28 +17,27 @@ export class RegistroComponent implements OnInit {
  
   @ViewChild("imgUsuario", { static: false }) InputImagenUser: ElementRef;
 
-  perfil;
-  imgName: string;
-  nombreModel: string;
-  apellidoModel: string
-  dniModel: string;
-  claveModel:string;
-  perfilModel: any;
-  usuario: any;
-  emailModel: string;
-  passwordModel: string;
-  captchaVerificado: boolean;
-  accepted: boolean;
-  porcentajeUpload: Observable<number>;
+
+  public imgName: string;
+  public nombreModel: string;
+  public apellidoModel: string
+  public dniModel: string;
+  public claveModel:string;  
+  public emailModel: string;
+  public usuario: any;
+  public passwordModel: string;
+  public captchaVerificado: boolean;
+  public accepted: boolean;
+  public porcentajeUpload: Observable<number>;
   public urlImagen: Observable<string>;
-  noCargando = true;
-  imagenUrl : any;
-  foto:string;
+  public noCargando = true;
+  public imagenUrl : any;
+  public foto:string;
 
 
-  constructor(private auth: AuthProvider,
-     private storage: AngularFireStorage, 
-     private elRef: ElementRef) {
+  constructor(private auth: AuthProvider, 
+     private storage: AngularFireStorage) {
+
     this.imgName = "Seleccionar imágen..";
     this.usuario = this.auth.usuarioVacio();
     this.captchaVerificado = false;
@@ -44,40 +47,27 @@ export class RegistroComponent implements OnInit {
 
   registrarse() {
     console.log("registro")
-    // this.usuario.perfil = this.auth.perfil[(<HTMLInputElement>document.getElementById("perfil")).value];
-
-    // if (this.usuario.perfil == this.auth.empleado) {
-    //   this.usuario.perfil = this.auth.actividad[(<HTMLInputElement>document.getElementById("actividad")).value];
-    // }
-
-    // this.usuario.correo = this.emailModel;
-    // this.usuario.nombre = this.emailModel;
-    // this.usuario.apellido = this.emailModel;
-    // this.usuario.dni = this.emailModel;
-    // this.usuario.clave = this.emailModel;
-    // this.usuario.foto = this.emailModel;
     this.imagenUrl = this.InputImagenUser.nativeElement.value;
     if (!this.imagenUrl ) {
       this.imagenUrl = "assets/imagenes/default-user.png";
     }
-
-      let data = {
-      'nombre':this.nombreModel,
-      'apellido': this.apellidoModel,
-      'foto': this.imagenUrl,
-      'perfil': 'cliente',
-      'activo': false,
-      'logueado': false,
-      'correo': this.emailModel,
-      'clave':this.claveModel
-  }
-
-  console.log("")
+    let data = {
+          'nombre':this.nombreModel,
+          'apellido': this.apellidoModel,
+          'foto': this.imagenUrl,
+          'perfil':Perfil.cliente,
+          'activo': false,
+          'logueado': false,
+          'correo': this.emailModel,
+          'clave':this.passwordModel
+    }
+    console.log("data ",data)
     this.auth.guardarUsuario(data);
+    this.auth.crearUsuario(this.emailModel,this.passwordModel);
   }
+ 
 
   ImagenCargada(e) {
-    console.log("cargar imagen")
     this.noCargando = false;
     const img = e.target.files[0];
 
@@ -105,14 +95,12 @@ export class RegistroComponent implements OnInit {
   }
 
   crearTest() {
-    this.nombreModel = "admin";
-    this.apellidoModel = "admin";
-    this.emailModel = "admin@admin.com";
-    this.passwordModel = "13456";
+    this.nombreModel = "cliente1";
+    this.apellidoModel = "cliente";
+    this.emailModel = "cliente1@cliente.com";
+    this.passwordModel = "123456";
     this.accepted = true;
   }
 
-  changePerfil(perfil) {
-    this.perfil = perfil;
-  }
+  
 }

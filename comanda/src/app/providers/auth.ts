@@ -2,6 +2,9 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { AngularFireAuth } from "@angular/fire/auth";
 import { AngularFirestore } from "@angular/fire/firestore";
+// import { AngularFireAuth } from 'angularfire2/auth';
+// import { AngularFirestore } from 'angularfire2/firestore';
+
 import { map } from "rxjs/operators";
 
 export enum perfil {
@@ -133,9 +136,15 @@ export class AuthProvider {
 
   }
 
-  login(email: string, pass: string) {
-    return this.auth.auth.signInWithEmailAndPassword(email, pass);
+  public login(email: string, pass: string) {
+    return this.auth.auth.signInWithEmailAndPassword(email, pass)
+    .then(user=>Promise.resolve(user))
+    .catch(err=>Promise.reject(err));
   }
+
+  public get Session(){
+    return this.auth.authState;
+   }
 
   logOut() {
     this.auth.auth.signOut();

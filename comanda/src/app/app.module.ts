@@ -1,17 +1,27 @@
-import { BrowserModule } from '@angular/platform-browser';
-import { NgModule, InjectionToken } from '@angular/core';
-import { environment } from '../environments/environment';
-import { AppRoutingModule } from './app-routing.module';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+  import { BrowserModule } from '@angular/platform-browser';
+  import { RecaptchaModule } from 'ng-recaptcha';
+  import { environment } from '../environments/environment';
+  import { AppRoutingModule } from './app-routing.module';
 
-import { AngularFireAuthModule } from '@angular/fire/auth';
-import { AngularFireModule } from '@angular/fire';
-import { AngularFireDatabaseModule } from '@angular/fire/database';
-import { AngularFireStorageModule } from '@angular/fire/storage';
-import { AngularFirestoreModule } from '@angular/fire/firestore';
+   import { AngularFireAuthModule } from '@angular/fire/auth';
+   import { AngularFireModule } from '@angular/fire';
+   import { AngularFireDatabaseModule } from '@angular/fire/database';
+   import { AngularFireStorageModule } from '@angular/fire/storage';
+   import { AngularFirestoreModule } from '@angular/fire/firestore';
+// import { AngularFirestoreModule } from 'angularfire2/firestore';
+// import { AngularFirestore } from 'angularfire2/firestore';
+// import { AngularFireModule } from 'angularfire2';
+import { NgModule } from '@angular/core';
 import { MaterialModule } from './material/material';
-import { AuthProvider } from './providers/auth';
 
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+// import { AngularFireAuthModule } from 'angularfire2/auth';
+
+// import { AngularFireDatabaseModule } from 'angularfire2/database';
+
+
+
+import { AuthProvider } from './providers/auth';
 import { AppComponent } from './app.component';
 import { PrincipalComponent } from './componentes/principal/principal.component';
 import { PedidosPendientesComponent } from './componentes/pedidos-pendientes/pedidos-pendientes.component';
@@ -119,8 +129,9 @@ import { PedidoCocineroComponent } from './filtros/pedido-cocinero/pedido-cocine
   imports: [
     FormsModule,
     MaterialModule,
+    RecaptchaModule,
     BrowserAnimationsModule,
-    ReactiveFormsModule,
+    ReactiveFormsModule,  
     BrowserModule,
     AppRoutingModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
@@ -134,7 +145,7 @@ import { PedidoCocineroComponent } from './filtros/pedido-cocinero/pedido-cocine
   exports: [
     MaterialModule
   ],
-  providers: [ AuthProvider],
+  providers: [AuthProvider],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

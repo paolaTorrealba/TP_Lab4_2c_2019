@@ -11,7 +11,8 @@ export const environment = {
     projectId: "comanda-7ba72",
     storageBucket: "comanda-7ba72.appspot.com",
     messagingSenderId: "328971608295",
-   
+    appId: "1:328971608295:web:94a27ddc94cbbe993c4242",
+    measurementId: "G-P2VHR8VFRD"
   }
 };
 

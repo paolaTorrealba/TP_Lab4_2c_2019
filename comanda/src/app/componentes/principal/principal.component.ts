@@ -13,12 +13,15 @@ import { AuthProvider } from 'src/app/providers/auth';
 export class PrincipalComponent implements OnInit {
   acciones: Array<any> = [];
   public email;
+  public elMail:string;
   public usuario;
   public usuarios;
   public perfil;
   constructor( private router: Router,    
     private auth: AuthProvider) {
 
+      this.elMail= sessionStorage.getItem("user");
+      console.log("session: ", this.elMail)
       this.email=localStorage.getItem("usuarioComanda");  
       console.log("email del localstorage", this.email);
       this.auth.getLista('usuarios').subscribe(lista => {
