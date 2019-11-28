@@ -12,7 +12,7 @@ export class FinalizarPedidoCocineroComponent implements OnInit {
   public pedidos:Array<any> = [];
   public pendiente:string="pendiente";
   public aceptado:string="aceptado";  
-  public enPreparacion:string="en preparacion";
+  public enPreparacion= EstadoPedido.enPreparacion;
   public cerrado:string="cerrado";
   public plato:string="plato";
   public pedidoListo:boolean=false;

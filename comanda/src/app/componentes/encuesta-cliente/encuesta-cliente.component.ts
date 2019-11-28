@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import { EncuestaCliente } from 'src/app/clases/encuesta-cliente';
 import { AuthProvider } from 'src/app/providers/auth';
 import {MatRadioModule} from '@angular/material/radio';
-import { timingSafeEqual } from 'crypto';
+
 import { EstadoPedido } from 'src/app/clases/enum';
 @Component({
   selector: 'app-encuesta-cliente',
