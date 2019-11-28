@@ -13,6 +13,7 @@ export class EncuestaClienteComponent implements OnInit {
   private correo:string;
   private encuestaCliente:EncuestaCliente;
   public image: string;
+  public encuestas:Array<any> = [];
   public  date: any;
   public answer1Model :any="mujer";
   public answer2Model: any="1";
@@ -20,7 +21,7 @@ export class EncuestaClienteComponent implements OnInit {
   public answer4Model: any="1";
   public answer5Model: any="1";
 
-
+  public encuestado:boolean=false;
   public commentaryModel:string= "";
 
   public email: string ="";
@@ -28,48 +29,71 @@ export class EncuestaClienteComponent implements OnInit {
 
   private opinion=3;
    
-  constructor(            
-              private authService: AuthService,    
+  constructor( private  data:  AuthService,
               private router: Router,
               private auth: AuthProvider) {    
-      
+     
       this.encuestaCliente = new EncuestaCliente(); 
       this.correo=localStorage.getItem("usuarioComanda");
       console.log("encuestaCliente", this.encuestaCliente)
+      this.obtenerEncuestasCliente();
    } 
+
+   obtenerEncuestasCliente(){
+     console.log("obtengo las encuestas:")
+    this.data.getListaEncuestas("encuestaCliente").subscribe(lista => {
+      this.encuestas=lista; 
+      for(let i=0; i<this.encuestas.length-1; i++){
+        if (this.encuestas[i].email==this.correo){
+          this.encuestado=true;
+          console.log("=====es el mismo usuario");
+          if (this.encuestas[i].date< new Date()){
+             console.log("es de ayer")
+          }
+        }
+      }
+      console.log("encuestas: ",this.encuestas); 
+    });
+    console.log("encuestas: ",this.encuestas)
+   }
 
   ngOnInit() {}
 
  
 
 guardarEncuesta(){    
-    console.log("commentaryModel", this.commentaryModel)
-    this.encuestaCliente = new EncuestaCliente(); 
-    console.log("guardo encuesta")
-    let data = {    
-      "date":new Date(),
-      "email": localStorage.getItem("usuarioComanda"),
-      "question1": this.encuestaCliente.question1,
-      "question2": this.encuestaCliente.question2,
-      "question3": this.encuestaCliente.question3,
-      "question4": this.encuestaCliente.question4,
-      "question5": this.encuestaCliente.question5,
-      "answer1":this.answer1Model,        
-      "answer2":this.answer2Model,        
-      "answer3":this.answer3Model,       
-      "answer4":this.answer4Model,        
-      "answer5":this.answer5Model,    
-      "commentary": this.commentaryModel
-    }   
-    console.log("guardo encuesta: ",data)
-    this.auth.guardarEncuestaCliente(data).then(res =>{
-      
-    }).catch(error => {
-      console.log(error,"error al guardar la encuesta"); 
-  });
-  
-  
+    if (this.encuestado){
+      console.log("el usuario ya fue encuestado")
+    }
+    else{
+      console.log("commentaryModel", this.commentaryModel)
+      this.encuestaCliente = new EncuestaCliente(); 
+      console.log("guardo encuesta")
+      let data = {    
+        "date":new Date(),
+        "email": localStorage.getItem("usuarioComanda"),
+        "question1": this.encuestaCliente.question1,
+        "question2": this.encuestaCliente.question2,
+        "question3": this.encuestaCliente.question3,
+        "question4": this.encuestaCliente.question4,
+        "question5": this.encuestaCliente.question5,
+        "answer1":this.answer1Model,        
+        "answer2":this.answer2Model,        
+        "answer3":this.answer3Model,       
+        "answer4":this.answer4Model,        
+        "answer5":this.answer5Model,    
+        "commentary": this.commentaryModel
+      }   
+      console.log("guardo encuesta: ",data)
+      this.auth.guardarEncuestaCliente(data).then(res =>{
+        
+      }).catch(error => {
+        console.log(error,"error al guardar la encuesta"); 
+    });
+    }  
   }
+
+
   changeAnswer1(item: any) {
     this.answer1Model = item;
     console.log("this.answer1Model", this.answer1Model)

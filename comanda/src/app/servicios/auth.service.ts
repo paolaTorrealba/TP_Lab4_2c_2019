@@ -52,6 +52,26 @@ export interface pedido {
   mesa:string,
   codigo:string
 }
+
+export interface encuestaCliente {
+  id:string; 
+  date:Date;
+  email: string;
+  question1: string; 
+  question2: string; 
+  question3: string; 
+  question4: string;  
+  question5: string;   
+ 
+  answer1: string;
+  answer2: string;
+  answer3: string;
+  answer4: string;
+  answer5: string;
+
+  commentary: string;  
+}
+
 export interface producto {
   nombre:string,
   tipo:string,
@@ -127,6 +147,16 @@ export class AuthService {
       return this.firestore.collection(tipo).snapshotChanges().pipe(map(rooms => {
         return rooms.map(a =>{
           const data = a.payload.doc.data() as usuario;
+          data.id = a.payload.doc.id;
+          return data;
+        })
+      }));
+    }
+
+    getListaEncuestas(tipo:string) {
+      return this.firestore.collection(tipo).snapshotChanges().pipe(map(rooms => {
+        return rooms.map(a =>{
+          const data = a.payload.doc.data() as encuestaCliente;
           data.id = a.payload.doc.id;
           return data;
         })
