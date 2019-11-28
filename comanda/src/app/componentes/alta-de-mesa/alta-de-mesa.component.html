@@ -54,7 +54,7 @@
               <form (ngSubmit)="f.form.valid && confirmar()" #f="ngForm" novalidate>
                   <div class="form-group">
                       <label for="numero">Número</label>
-                      <input name="numero" id="numero" type="text" 
+                      <input readonly name="numero" id="numero" type="text" 
                              class="form-control" [(ngModel)]="numeroModel" 
                              #numero="ngModel"
                              [ngClass]="{ 'is-invalid': f.submitted && numero.invalid }"

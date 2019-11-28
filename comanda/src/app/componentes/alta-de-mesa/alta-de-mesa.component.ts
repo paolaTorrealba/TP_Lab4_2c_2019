@@ -23,11 +23,16 @@ export class AltaDeMesaComponent implements OnInit {
     private auth: AuthProvider) {  
 
       this.obtenerMesas();
+
+ 
      
  }
 
   ngOnInit() {
     this.obtenerMesas(); 
+    if (this.mesas != null){
+      this.numeroModel=this.mesas.length+1;  
+    }
 
   }
 
@@ -50,12 +55,18 @@ export class AltaDeMesaComponent implements OnInit {
   obtenerMesas() {
     this.data.getListaMesas("mesas").subscribe(lista => {
         this.mesas=lista; 
-      
+        if (this.mesas != null){
+          this.numeroModel=this.mesas.length+1;  
+        }
         console.log("Mesas: ",this.mesas); 
         console.log("lista: ",lista); 
         this.lamesa=lista[0];   
     });
-    console.log("Mesas: ",this.mesas);  
+    console.log("Mesas: ",this.mesas);
+    if (this.mesas != null){
+      this.numeroModel=this.mesas.length+1;  
+    }
+   
 } 
 
 cambiarEstadoMesa(item) {
