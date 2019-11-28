@@ -65,7 +65,7 @@ export class RegistroComponent implements OnInit {
     console.log("data ",data)
     this.auth.guardarUsuario(data);
     this.auth.crearUsuario(this.emailModel,this.passwordModel);
-    this.router.navigate(['/principal']);
+    this.router.navigate(['/login']);
   }
  
 
@@ -94,6 +94,7 @@ export class RegistroComponent implements OnInit {
 
   resolved(captchaResponse: string) {
     this.captchaVerificado = true;
+    console.log("bien el captcha",this.captchaVerificado)
   }
 
   crearTest() {

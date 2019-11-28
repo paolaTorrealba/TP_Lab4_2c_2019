@@ -66,13 +66,13 @@
   
       
   
-                <form class="margin-bottom">
+                <!-- <form class="margin-bottom">
                   <div class="custom-control custom-checkbox">
                     <input type="checkbox" class="custom-control-input" id="customCheck" name="customCheck">
                     <label class="custom-control-label" for="customCheck">Acepto los términos y
                       condiciones</label>
                   </div>
-                </form>
+                </form> -->
   
                 <form class="margin-bottom">
                   <re-captcha (resolved)="resolved($event)" siteKey="6LeUMq8UAAAAAKO61peKaT7RknpnQe7G5M56hz04">
@@ -82,7 +82,7 @@
                 <div class="form-group no-margin">
   
                   <ng-container                    >
-                    <button  class="btn btn-primary btn-block" (click) ="registrarse()">
+                    <button  class="btn btn-primary btn-block" (click) ="registrarse()" *ngIf="this.captchaVerificado">
                       Registrarse
                     </button>
                   </ng-container>
