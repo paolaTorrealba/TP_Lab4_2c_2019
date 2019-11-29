@@ -28,3 +28,7 @@ Para acceder a la aplicación: https://comanda-7ba72.firebaseapp.com
 
 
 <img src="https://github.com/paolaTorrealba/TP_Lab4_2c_2019/blob/master/comanda/src/assets/images/Screenshot_1.png" ></img>
+<img src="https://github.com/paolaTorrealba/TP_Lab4_2c_2019/blob/master/comanda/src/assets/images/Screenshot_2.png" ></img>
+<img src="https://github.com/paolaTorrealba/TP_Lab4_2c_2019/blob/master/comanda/src/assets/images/Screenshot_3.png" ></img>
+<img src="https://github.com/paolaTorrealba/TP_Lab4_2c_2019/blob/master/comanda/src/assets/images/Screenshot_4.png" ></img>
+<img src="https://github.com/paolaTorrealba/TP_Lab4_2c_2019/blob/master/comanda/src/assets/images/Screenshot_5.png" ></img>
