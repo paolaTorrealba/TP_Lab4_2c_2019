@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Routes, RouterModule, ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { AuthProvider } from 'src/app/providers/auth';
+import { UsuarioService } from 'src/app/servicios/usuario.service';
 
 @Component({
   selector: 'app-login',
@@ -10,7 +11,7 @@ import { AuthProvider } from 'src/app/providers/auth';
 })
 export class LoginComponent implements OnInit {
 
-  tipoUser:string;
+
   user= { email : '', password : ''};
   mensaje:string;
   semuestra:boolean; 
@@ -18,7 +19,10 @@ export class LoginComponent implements OnInit {
 
   respuestaAuth: boolean;
   repetidor:any;
-  constructor(
+
+
+  
+  constructor(private  usuarioService: UsuarioService,
   private route: ActivatedRoute,
   private router: Router,
   private auth: AuthProvider
@@ -40,24 +44,28 @@ ngOnInit() {
 }
 
 
-Logearse() {  
-    console.log("usuario que ingres: ",this.user.email);  
-    if (! this.auth.login(this.user.email,this.user.password )){
-      console.log("Error al loguearse")
-      this.MostarMensaje("Error al loguearse", true);
+Logearse() { 
+    console.log(this.usuarioService);
+    console.log("usu, passs: ", this.user.email, this.user.password)
+    this.usuarioService.loguearUsuario(this.user.email, this.user.password);
+        console.log("usuario que ingreso: ",this.user.email); 
+  } 
+    // if (! this.auth.login(this.user.email,this.user.password )){
+    //   console.log("Error al loguearse")
+    //   this.MostarMensaje("Error al loguearse", true);
   
-    } 
-    else{
-      console.log("se logueo",this.user.email )
-      localStorage.setItem("usuarioComanda",this.user.email)
-      this.router.navigate(['/principal']);
-    } 
-}
+    // } 
+    // else{
+    //   console.log("se logueo",this.user.email )
+    //   localStorage.setItem("usuarioComanda",this.user.email)
+    //   this.router.navigate(['/principal']);
+    // } 
+// }
 
 ingresoSocio(){
   this.user.email="socio@socio.com";
   this.user.password="111111";
-  localStorage.setItem("perfilUComanda","socio")
+  // localStorage.setItem("perfilUComanda","socio")
   // this.Entrar();
   // this.router.navigate(['/principal']);
 }
@@ -65,7 +73,7 @@ ingresoSocio(){
 ingresoCliente(){
   this.user.email="cliente@cliente.com";
   this.user.password="222222";
-  localStorage.setItem("perfilUComanda","cliente")
+  // localStorage.setItem("perfilUComanda","cliente")
   // this.Entrar();
   // this.router.navigate(['/principal']);
 }
@@ -73,7 +81,7 @@ ingresoCliente(){
 ingresoMozo(){
   this.user.email="mozo@mozo.com";
   this.user.password="333333";
-  localStorage.setItem("perfilUComanda","mozo")
+  // localStorage.setItem("perfilUComanda","mozo")
   // this.Entrar();
   // this.router.navigate(['/principal']);
 }
@@ -81,7 +89,7 @@ ingresoMozo(){
 ingresoBartender(){
   this.user.email="bartender@bartender.com";
   this.user.password="444444";
-  localStorage.setItem("perfilUComanda","bartender")
+  // localStorage.setItem("perfilUComanda","bartender")
   // this.Entrar();
   // this.router.navigate(['/principal']);
 }
@@ -89,7 +97,7 @@ ingresoBartender(){
 ingresoCocinero(){
   this.user.email="cocinero@cocinero.com";
   this.user.password="555555";
-  localStorage.setItem("perfilUComanda","cocinero")
+  // localStorage.setItem("perfilUComanda","cocinero")
   // this.Entrar();
   // this.router.navigate(['/principal']);
 }
@@ -97,7 +105,7 @@ ingresoCocinero(){
 ingresoCervecero(){
   this.user.email="cervecero@cervecero.com";
   this.user.password="666666";
-  localStorage.setItem("perfilUComanda","cervecero")
+  // localStorage.setItem("perfilUComanda","cervecero")
   // this.Entrar();
   // this.router.navigate(['/principal']);
 }

@@ -6,6 +6,7 @@ import { AngularFirestore } from "@angular/fire/firestore";
 // import { AngularFirestore } from 'angularfire2/firestore';
 
 import { map } from "rxjs/operators";
+import { Perfil } from '../clases/enum';
 
 export enum perfil {
   cliente = 'cliente',
@@ -21,15 +22,13 @@ export enum actividad {
 export interface usuario {
   correo: string,
   foto: string,
-  logueado: boolean,
+  logeado: boolean,
   activo: boolean,
-  dni: string,
-  cuil: string,
   nombre: string,
   apellido: string,
   id: string,
   clave: string,
-  perfil: string
+  perfil: Perfil
 }
 export interface mesa {
   id: string;
@@ -120,15 +119,13 @@ export class AuthProvider {
 
   usuarioVacio() {
     return {
-      id: '',
+      Uid: '',
       nombre: '',
       apellido: '',
-      cuil: '',
       correo: '',
       tipo: '',
-      logueado: false,
+      logeado: false,
       activo: false,
-      dni: '',
       foto: '',
       clave: '',
       Perfil: "cliente"

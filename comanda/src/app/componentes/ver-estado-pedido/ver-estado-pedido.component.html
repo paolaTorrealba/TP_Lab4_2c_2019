@@ -1,6 +1,6 @@
 <app-principal></app-principal>
 <br><br>
-<h1>------------- Mi Pedido --------------</h1><br>
+<h1>--------- Mi Pedido -------</h1><br>
 
 <ul *ngFor="let item of pedidos">
         <div *ngIf="item.correo==correo">
@@ -19,7 +19,7 @@
                    </ul> 
                    <br>  
                    
-                   <button *ngIf="item.estado==entregado" (click)="confirmarRecepcion(item)">confirmar Recepcion</button>        
+                   <button *ngIf="item.estado=='entregado'" (click)="confirmarRecepcion(item)">confirmar Recepcion</button>        
                     
         </div>
        </ul> 

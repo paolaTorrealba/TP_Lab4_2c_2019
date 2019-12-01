@@ -45,8 +45,9 @@ export class FinalizarPedidoCerveceroComponent implements OnInit {
            item.productos[i]=producto;
           }
       }
+      console.log("ANTES DE ACTUALIZACION FINAL", item)
       this.actualizarPedido(item);
-      console.log("pedido a actualizar", item)
+      console.log("ACTUALIZACION FINAL", item)
       this.auth.actualizarPedido(item).then(res => {
         console.log("pedido cerrado")
       });
@@ -61,14 +62,15 @@ export class FinalizarPedidoCerveceroComponent implements OnInit {
    for (let i=0; i<=item.productos.length-1;i++){
      if(item.productos[i].estadoProdPedido==this.enPreparacion ||
        item.productos[i].estadoProdPedido==this.pendiente )  {       
-       this.pedidoListo=false; //no esta listo aun
+        console.log("--TODAVIA NOS E PUEDE CERRAR")  
+        this.pedidoListo=false; //no esta listo aun
        }
    }
    if (this.pedidoListo){
     item.estado=EstadoPedido.listoParaServir;
-    this.auth.actualizarPedido(item).then(res => {
-      console.log("pedido listo para servir")
-    });
+    // this.auth.actualizarPedido(item).then(res => {
+    //   console.log("pedido listo para servir")
+    // });
    }
           
   }

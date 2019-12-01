@@ -62,7 +62,7 @@
                     </div>
                   </form>
   
-                <input #imgUsuario type="hidden" [value]="urlImagen | async">
+                <input #imgUsuario type="text" [value]="urlImagen | async">
   
       
   
@@ -74,15 +74,16 @@
                   </div>
                 </form> -->
   
-                <form class="margin-bottom">
-                  <re-captcha (resolved)="resolved($event)" siteKey="6LeUMq8UAAAAAKO61peKaT7RknpnQe7G5M56hz04">
+                <!-- <form class="margin-bottom">
+                  <re-captcha (resolved)="resolved($event)" siteKey="6LevcsUUAAAAACFQdvv7_T8NGE0mNqObdhqHwW9k"> 
+
                   </re-captcha>
-                </form>
+                </form> -->
   
-                <div class="form-group no-margin">
+                <div *ngIf="urlImagen!=undefined" class="form-group no-margin">
   
-                  <ng-container                    >
-                    <button  class="btn btn-primary btn-block" (click) ="registrarse()" *ngIf="this.captchaVerificado">
+                  <ng-container  >
+                    <button  class="btn btn-primary btn-block" (click) ="registrarse()" >
                       Registrarse
                     </button>
                   </ng-container>

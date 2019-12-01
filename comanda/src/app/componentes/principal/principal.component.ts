@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { AuthProvider } from 'src/app/providers/auth';
-
+import { UsuarioService } from 'src/app/servicios/usuario.service';
+import { DataApiService } from 'src/app/servicios/data-api.service';
+import { take } from 'rxjs/operators';
+import { Perfil } from 'src/app/clases/enum';
 // import {HomeComponent} from '../../componentes/home/home.component';
 
 
@@ -16,48 +19,96 @@ export class PrincipalComponent implements OnInit {
   public elMail:string;
   public usuario;
   public usuarios;
-  public perfil;
-  constructor( private router: Router,    
+  public perfil: Perfil;
+
+  foto = '';
+  nombre = '';
+  logeado:boolean;
+ 
+
+
+  
+  constructor( private router: Router, 
+    private usuarioService: UsuarioService,
+    private dataApi: DataApiService,   
     private auth: AuthProvider) {
 
+      // let logeado = usuarioService.isUserLoggedIn();
+      // console.log("logeado :)", logeado)
 
-      this.email=localStorage.getItem("usuarioComanda"); 
-
-      console.log("email del localstorage", this.email);
-      this.auth.getLista('usuarios').subscribe(lista => {
-        this.usuarios=lista;   
-        console.log("usuarios: ", this.usuarios)  
-        for(let i=0;i<this.usuarios.length;i++){
-          if(this.usuarios[i].correo == this.email) {
-               this.usuario=this.usuarios[i];
-               console.log("el usuario en constructor:",this.usuario);
-          }
-        }
-      });
+      // this.email=localStorage.getItem("usuarioComanda"); 
+      // console.log("email del localstorage", this.email);
+      // this.auth.getLista('usuarios').subscribe(lista => {
+      //   this.usuarios=lista;   
+      //   console.log("usuarios: ", this.usuarios)  
+      //   for(let i=0;i<this.usuarios.length;i++){
+      //     if(this.usuarios[i].correo == this.email) {
+      //          this.usuario=this.usuarios[i];
+      //          console.log("el usuario en constructor:",this.usuario);
+      //     }
+      //   }
+      // });
       this.obtenerUsuario();
       this.mostrarMenu();
   }
  
 
-  obtenerUsuario(){
-    this.email=localStorage.getItem("usuarioComanda");  
-    console.log("email del localstorage", this.email);
-    this.auth.getLista('usuarios').subscribe(lista => {
-      this.usuarios=lista;   
-      console.log("usuarios: ", this.usuarios)  
-      for(let i=0;i<this.usuarios.length;i++){
-        if(this.usuarios[i].correo == this.email) {
-             this.usuario=this.usuarios[i];
-             localStorage.setItem("perfilUComanda", this.usuario.perfil);
-             console.log("el usuario: ",this.usuario);
-        }
-      }
+  // obtenerUsuario(){
+  //   this.email=localStorage.getItem("usuarioComanda");  
+  //   console.log("email del localstorage", this.email);
+  //   this.auth.getLista('usuarios').subscribe(lista => {
+  //     this.usuarios=lista;   
+  //     console.log("usuarios: ", this.usuarios)  
+  //     for(let i=0;i<this.usuarios.length;i++){
+  //       if(this.usuarios[i].correo == this.email) {
+  //            this.usuario=this.usuarios[i];
+  //            localStorage.setItem("perfilUComanda", this.usuario.perfil);
+  //            console.log("el usuario: ",this.usuario);
+  //       }
+  //     }
 
+  //   });
+  // }
+  obtenerUsuario() {
+ 
+    this.usuarioService.EstaLogeado().subscribe(user => {
+      if (user) {
+        console.log("user.uid obtenido",user.uid)
+        this.dataApi.TraerUno(user.uid, 'usuarios').pipe(take(1)).subscribe(userx => {
+
+          if (userx) {
+            if (userx.activo) {
+              console.log("userx activo ok:", userx)
+              this.usuarioService.usuario = userx;
+
+              this.foto = userx.foto;
+              this.nombre = userx.nombre;
+              this.perfil = userx.perfil;
+              this.logeado = true;
+              console.log("usuario logeado:", userx)
+            }
+            else {
+              this.foto = "";
+              this.nombre = "";
+              this.logeado = false;
+              this.perfil = null;
+            }
+          }
+
+        });
+      }
+      else {
+        this.foto = "";
+        this.nombre = "";
+        this.logeado = false;
+        this.perfil = null;
+      }
     });
   }
 
+
   mostrarMenu(){
-    this.perfil= localStorage.getItem("perfilUComanda")
+    // this.perfil= localStorage.getItem("perfilUComanda")
     console.log("Menu para el perfil: ",this.perfil);
     console.log("Muestro el menu para este usuario: ",this.usuario);
     switch(this.perfil) {
@@ -156,10 +207,10 @@ export class PrincipalComponent implements OnInit {
 
   public cerrarSersion(){
     this.auth.logOut();
-    // actualizar el estado del usuario a noLogueado.
+    // actualizar el estado del usuario a noLogeado.
     // limpiar el local Storage.
-    localStorage.setItem("usuarioComanda","");
-    localStorage.setItem("perfilUComanda","");
+    // localStorage.setItem("usuarioComanda","");
+    // localStorage.setItem("perfilUComanda","");
     this.router.navigate(['/login']);
   }
 
@@ -168,7 +219,9 @@ export class PrincipalComponent implements OnInit {
     // this.navCtrl.setRoot(item.ruta);
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.obtenerUsuario();
+  }
 
   openPage(item) {
     console.log(item);

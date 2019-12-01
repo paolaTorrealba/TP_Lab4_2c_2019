@@ -46,21 +46,23 @@ export class FinalizarPedidoCocineroComponent implements OnInit {
            item.productos[i]=producto;
         }
       }
+      console.log("ANTES DE ACTUALIZACION FINAL", item)
       this.actualizarPedido(item);
-      console.log("pedido a actualizar", item)
+      console.log("ACTUALIZACION FINAL", item)
       this.auth.actualizarPedido(item).then(res => {
-        console.log("pedido cerrado")
+        console.log("pedido listo para servir")
       });
    }
 
    actualizarPedido(item){
     console.log("cambio estado a listo") 
     this.pedidoListo=true;
-    console.log("item EN LISTO", item) 
+    console.log("item EN LISTO", this.pedidoListo) 
    //  recorro la lista de productos
    for (let i=0; i<=item.productos.length-1;i++){
      if(item.productos[i].estadoProdPedido==EstadoPedido.enPreparacion ||
-       item.productos[i].estadoProdPedido==EstadoPedido.pendiente )  {       
+       item.productos[i].estadoProdPedido==EstadoPedido.pendiente )  {
+         console.log("--TODAVIA NOS E PUEDE CERRAR")       
        this.pedidoListo=false; //no esta listo aun
        }
    }
@@ -69,10 +71,11 @@ export class FinalizarPedidoCocineroComponent implements OnInit {
     item.estado=EstadoPedido.listoParaServir;
     console.log("item.estado: ",item.estado)
     console.log("item a guardar: ",item)
-    this.auth.actualizarPedido(item).then(res => {
-      console.log("pedido listo para servir")
-    });
+    // this.auth.actualizarPedido(item).then(res => {
+    //   console.log("pedido listo para servir")
+    // });
    }
+   console.log("el pedido aun no esta listo :(")
           
   }
 

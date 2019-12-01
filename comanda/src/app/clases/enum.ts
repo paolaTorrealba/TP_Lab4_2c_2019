@@ -25,6 +25,7 @@ export enum EstadoPedido {
     pagado="pagado",
     cerrado = "cerrado",    
     cancelado = "cancelado", 
+    recibido = "recibido",
   
 };
 

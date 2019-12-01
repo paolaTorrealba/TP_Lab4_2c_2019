@@ -36,7 +36,7 @@ export class VerEstadoPedidoComponent implements OnInit {
    confirmarRecepcion(item){    
     console.log("item: ", item)    
    
-    item.EstadoPedido.recibido;
+    item.estado=EstadoPedido.recibido;
     console.log("item: ", item) 
     this.auth.actualizarPedido(item).then(res => {
       console.log("pedido recibido por el cliente")

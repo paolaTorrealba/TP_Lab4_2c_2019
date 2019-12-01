@@ -6,6 +6,7 @@ import { AngularFirestore } from "@angular/fire/firestore";
 // import { AngularFirestore } from 'angularfire2/firestore';
 
 import { map } from "rxjs/operators";
+import { Perfil } from '../clases/enum';
 
 export interface mesa {
   id:string;
@@ -18,15 +19,13 @@ export interface mesa {
 export interface usuario {
   correo:string,
   foto:string,
-  logueado:boolean,
+  logeado:boolean,
   activo:boolean,
-  dni:string,
-  cuil:string,
   nombre:string,
   apellido:string,
   id: string,
   clave: string,
-  perfil:string
+  perfil:Perfil
 }
 
 export interface reserva {

@@ -1,11 +1,12 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
-import { finalize } from 'rxjs/operators';
+import { finalize, delay } from 'rxjs/operators';
 import { Observable, empty } from 'rxjs';
 import { AngularFireStorage } from '@angular/fire/storage';
 // import { AngularFireStorageModule } from '@angular/fire/storage';
 import {Router } from '@angular/router';
 import { AuthProvider } from 'src/app/providers/auth';
 import { Perfil } from 'src/app/clases/enum';
+import { UsuarioService } from 'src/app/servicios/usuario.service';
 
 
 @Component({
@@ -29,19 +30,21 @@ export class RegistroComponent implements OnInit {
   public captchaVerificado: boolean;
   public accepted: boolean;
   public porcentajeUpload: Observable<number>;
-  public urlImagen: Observable<string>;
+  public urlImagen: Observable<string>=undefined;
   public noCargando = true;
   public imagenUrl : any;
-  public foto:string;
+  public foto:undefined
 
 
-  constructor(private auth: AuthProvider, 
+
+  constructor(private auth: AuthProvider,
+    private usuarioService: UsuarioService,  
      private storage: AngularFireStorage,
      private router: Router) {
 
     this.imgName = "Seleccionar imágen..";
     this.usuario = this.auth.usuarioVacio();
-    this.captchaVerificado = false;
+    // this.captchaVerificado = false;
   }
 
   ngOnInit() { }
@@ -52,46 +55,60 @@ export class RegistroComponent implements OnInit {
     if (!this.imagenUrl ) {
       this.imagenUrl = "assets/imagenes/default-user.png";
     }
-    let data = {
-          'nombre':this.nombreModel,
-          'apellido': this.apellidoModel,
-          'foto': this.imagenUrl,
-          'perfil':Perfil.cliente,
-          'activo': false,
-          'logueado': false,
-          'correo': this.emailModel,
-          'clave':this.passwordModel
-    }
-    console.log("data ",data)
-    this.auth.guardarUsuario(data);
-    this.auth.crearUsuario(this.emailModel,this.passwordModel);
+
+    this.usuario.logeado = false; 
+    this.usuario.apellido = this.apellidoModel; 
+    this.usuario.activo = false; 
+    this.usuario.perfil = Perfil.cliente; 
+    this.usuario.correo = this.emailModel;
+    this.usuario.nombre = this.nombreModel;
+    this.usuario.clave = this.passwordModel;
+    this.usuario.foto = this.InputImagenUser.nativeElement.value;
+    console.log("this.usuario ",this.usuario)
+    this.usuarioService.RegistrarUsuario(this.usuario);
+    // this.auth.guardarUsuario(data);
+    // this.auth.crearUsuario(this.emailModel,this.passwordModel);
     this.router.navigate(['/login']);
   }
  
 
-  ImagenCargada(e) {
+   ImagenCargada(e) {
     this.noCargando = false;
     const img = e.target.files[0];
+    console.log("img: ", img)
 
     if (img != undefined) {
       this.imgName = img.name;
+      console.log("imgName: ", this.imgName)
       const nombreImg = img.name.substr(0, img.name.lastIndexOf('.'));
       const ext = img.name.substr(img.name.lastIndexOf('.') + 1);
       const filePath = "imagenes/usuarios/" + nombreImg + "-" + Date.now() + "." + ext;
       const ref = this.storage.ref(filePath);
       const task = this.storage.upload(filePath, img);
+
       this.porcentajeUpload = task.percentageChanges();
-    
+     
+
       task.snapshotChanges().pipe(finalize(() => this.urlImagen = ref.getDownloadURL())).subscribe();
-      console.log("imagen: ", this.urlImagen);
     }
     else {
       this.imgName = "Seleccionar imágen..";
-      this.urlImagen = empty();
+      this.urlImagen = undefined;
       this.noCargando = true;
     }
+    
+
+        console.log("urlImagen: ", this.urlImagen);
+        this.imgName = "Seleccionar imágen..";
+        this.urlImagen = undefined;
+        this.noCargando = true;
   }
 
+
+   delay(ms: number) {
+     console.log("delay")
+    return new Promise( resolve => setTimeout(resolve, ms) );
+}
   resolved(captchaResponse: string) {
     this.captchaVerificado = true;
     console.log("bien el captcha",this.captchaVerificado)

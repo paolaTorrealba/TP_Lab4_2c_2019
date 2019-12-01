@@ -1,7 +1,7 @@
 <app-principal></app-principal>
 <br>
 <br>
-<h1>Pedidos Pendientes </h1>   
+<h4>Estado de Pedidos </h4>   
     <table mat-table [dataSource]="pedidos">
       <tr>
           <ng-container matColumnDef="Mesa">
@@ -35,7 +35,7 @@
           <ng-container matColumnDef="Aceptar">
             <th mat-header-cell *matHeaderCellDef> Aceptar Pedido </th>
             <td mat-cell *matCellDef="let element">
-                <button mat-icon-button (click)="aceptarPedido(element)">
+                <button *ngIf="element.estado=='pendiente'"  mat-icon-button (click)="aceptarPedido(element)">
                     <mat-icon>check_circle</mat-icon>
                 </button> 
             </td>    
