@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { DataApiService } from './data-api.service';
 import { Perfil } from '../clases/enum';
+import { NotificationsService } from 'angular2-notifications';
 
 
 
@@ -33,7 +34,8 @@ export class UsuarioService {
 
 
      constructor(private afsAuth: AngularFireAuth, 
-      private db: AngularFirestore, 
+      private db: AngularFirestore,
+      private ns: NotificationsService, 
       private router: Router, 
       
        private dataApi: DataApiService) {
@@ -70,7 +72,7 @@ RegistrarUsuario(usuario: UsuarioInterface) {
               (err) => {
                   console.log(err);
                   this.usuarioVacio();
-                  console.log("Error al registrarse", "Sucedió un error al registrarse, intente nuevamente.");
+                  this.ns.error("Error al registrarse", "Sucedió un error al registrarse, intente nuevamente.");
               }
           )
           .then(
@@ -97,32 +99,24 @@ RegistrarUsuario(usuario: UsuarioInterface) {
                       (err) => {
                           console.log(err);
                           this.usuarioVacio();
-                          console.log("Error inesperado", "Sucedió un error inesperado.");
+                          this.ns.error("Error inesperado", "Sucedió un error inesperado.");
                       });
               });
   });
 }
 loguearUsuario(email: string, password: string) {
-  console.log("datos en login",email, password)
   return new Promise(() => {
       this.afsAuth.auth.signInWithEmailAndPassword(email, password)
           .then(
               (userData) => {
-                console.log("userData: ",userData)
-                console.log("userData.user.uid: ",userData.user.uid)
-              
-                  if (userData) {
-                    console.log("traer uno:", userData.user.uid )
+                  if (userData) {                    
                       this.dataApi.TraerUno(userData.user.uid, 'usuarios').pipe(take(1)).subscribe(userx => {
-                        console.log("userx: ", userx)   
-                        if (!userx.activo) {
-                            console.log("No se pudo loguear", "La cuenta es todavía no fue activada por el administrador.");
+                          if (!userx.activo) {                           
                               this.DesloguearUsuario();
                           }
-                          else {
-                              console.log("activo dio true")
+                          else {                              
                               if (userx.perfil == Perfil.socio || userx.perfil == Perfil.cliente) {
-                                console.log ("el suaurio: ", userx, "es:", userx.perfil) 
+                                console.log ("el usuario: ", userx, "es:", userx.perfil) 
                                 var today = new Date();
                                   var date = today.getDate() + '/' + (today.getMonth() + 1) + '/' + today.getFullYear();
 
@@ -155,7 +149,7 @@ loguearUsuario(email: string, password: string) {
               (err) => {
                   console.log(err);
                   this.usuario = this.usuarioVacio();
-                  console.log("Error al loguearse", "La cuenta es inexistente.");
+                  this.ns.error("Error al loguearse", "La cuenta es inexistente.");
               });
   });
 }

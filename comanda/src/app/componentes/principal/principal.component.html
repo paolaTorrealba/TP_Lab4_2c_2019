@@ -34,14 +34,22 @@
 <!-- CLIENTE -->
     <ul>        
         <li *ngIf="this.perfil=='cliente'"><a href="/principal">Principal</a></li>
-        <li *ngIf="this.perfil=='cliente'"><a href="/pagarFactura">Pagar Factura</a></li>
-        <li *ngIf="this.perfil=='cliente'"><a href="/pedirPlatos">Hacer Pedido</a></li>
         <li *ngIf="this.perfil=='cliente'"><a href="/reservaCliente">Seleccionar Mesa</a></li>
-        <li *ngIf="this.perfil=='cliente'"><a href="/verEstadoPedido">Mi Pedido</a></li>
+        <li *ngIf="this.perfil=='cliente'"><a >Mi Pedido</a>
+          <ul id="submenu" >
+              <li *ngIf="this.perfil=='cliente'"><a href="/pedirPlatos">Hacer Pedido</a></li>
+            <li *ngIf="this.perfil=='cliente'" ><a href="/verEstadoPedido">Ver Estado</a></li>
+            <li *ngIf="this.perfil=='cliente'"><a href="/cancelar">Cancelar</a></li>
+            <li *ngIf="this.perfil=='cliente'"><a href="/pagarFactura">Pagar Factura</a></li>
+          </ul>
+        </li> 
+        
         <li *ngIf="this.perfil=='cliente'"><a href="/encuestaCliente">Encuesta</a></li>
-        <li *ngIf="this.perfil=='cliente'"><a href="/cancelar">Cancelar Pedido</a></li>
         <li *ngIf="this.perfil=='cliente'"><a href="/login">Salir</a></li>
 
+    </ul>
+    <ul>        
+        <li *ngIf="this.perfil=='cliente'"><a href="#">{{this.nombre}} | {{this.perfil}}</a></li>      
     </ul>
 <!-- MOZO -->
     <ul>        
@@ -77,9 +85,7 @@
         <li *ngIf="this.perfil=='cervecero'"><a href="/finalizarPedidoCervecero">Cerrar Pedido</a></li>
         <li *ngIf="this.perfil=='cervecero'"><a href="/login">Salir</a></li>
     </ul>
-    <ul>        
-      <li><a href="#">{{this.nombre}} | {{this.perfil}}</a></li>      
-    </ul>
+    
    
   </div>
  

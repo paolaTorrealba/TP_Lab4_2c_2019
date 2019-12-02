@@ -1,5 +1,5 @@
-<app-principal></app-principal>
-<br><br>
+
+<!-- <br><br>
 <h1>Mesas Disponibles</h1>
 <ul *ngFor="let item of mesas">
   <div *ngIf="item.estado==this.estado">
@@ -9,18 +9,42 @@
       <p>codigo: {{item.codigo}}</p> 
       <br>  
       <button (click)="seleccionarMesa(item)">Seleccionar</button>   
-      <!-- aca puedo activar el lector de QR para mesa -->
+        
   </div>       
-</ul>  
-<!-- <form>  
-    <div class="form-group">
-      <label for="codigo">codigo de la mesa</label>
-      <input type="text"  [(ngModel)]="codigoModel" 
-             class="form-control" name="codigo" id="codigo" required autofocus>
-      <div  class="invalid-feedback">
-        <div >Codigo Requerido</div>
-      </div>
-    </div>
-</form>
-
- -->
+</ul>   -->
+<app-principal></app-principal>
+<br><br>
+<h1 style="padding-left: 30%;">Mesas Disponibles</h1>
+<table mat-table [dataSource]="mesas">
+        <tr>
+                <ng-container matColumnDef="Numero Mesa">
+                        <th mat-header-cell *matHeaderCellDef  style="color: black;"> Numero Mesa </th>
+                        <td mat-cell *matCellDef="let element"> {{element.numero}} </td>
+                </ng-container>
+                <ng-container matColumnDef="Codigo Mesa">
+                                <th mat-header-cell *matHeaderCellDef  style="color: black;"> Codigo Mesa </th>
+                                <td mat-cell *matCellDef="let element"> {{element.codigo}} </td>
+                </ng-container>     
+                <ng-container matColumnDef="Estado">
+                        <th mat-header-cell *matHeaderCellDef  style="color: black;"> Estado </th>
+                        <td mat-cell *matCellDef="let element"> {{element.estado | mesa}} </td>
+                </ng-container> 
+                <ng-container matColumnDef="Cantidad Comensales">
+                        <th mat-header-cell *matHeaderCellDef  style="color: black;"> Cantidad Comensales </th>
+                        <td mat-cell *matCellDef="let element"> {{element.cantidadComensales}} </td>
+                </ng-container> 
+                <ng-container matColumnDef="Seleccionar Mesa">
+                        <th mat-header-cell *matHeaderCellDef  style="color: black;"> Seleccionar Mesa </th>
+                        <td mat-cell *matCellDef="let element">
+                        <button *ngIf="element.estado=='cerrada'"  mat-icon-button (click)="seleccionarMesa(element)">
+                            <mat-icon>check_circle</mat-icon>
+                        </button> 
+                        </td>    
+                </ng-container>       
+               
+        </tr>
+        <div>
+                <tr mat-header-row *matHeaderRowDef="columsMesas"></tr>
+                <tr mat-row *matRowDef="let row; columns: columsMesas;" [appEstadoFila]="row.estado" ></tr>
+        </div>
+</table>

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Routes, RouterModule, ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
+import { NotificationsService } from 'angular2-notifications';
 import { AuthProvider } from 'src/app/providers/auth';
 import { UsuarioService } from 'src/app/servicios/usuario.service';
 

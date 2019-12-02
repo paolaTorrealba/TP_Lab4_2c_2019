@@ -146,12 +146,11 @@ export class PrincipalComponent implements OnInit {
         ];
         break;
       case "cliente":
-        this.acciones = [
-                  
+        this.acciones = [                  
           { accion: "Pedir platos y bebidas", img: "pedido.jpg", ruta: "pedirPlatos"},
           { accion: "Paga Factura", img: "pedido.png", ruta: "pagarFactura" },
           { accion: "Encuesta", img: "pedido.png", ruta: "encuestaCliente" },
-          { accion: "Ingresar Codigos", img: "pedido.png", ruta: "encuestaCliente" },
+          // { accion: "Ingresar Codigos", img: "pedido.png", ruta: "encuestaCliente" },
           { accion: "Reservar mesa", img: "reserva.jpg", ruta: "reservaCliente" }, 
           { accion: "Ver mi pedido", img: "reserva.jpg", ruta: "verEstadoPedido" },
           { accion: "Cancelar Pedido", img: "reserva.jpg", ruta: "cancelar" },  

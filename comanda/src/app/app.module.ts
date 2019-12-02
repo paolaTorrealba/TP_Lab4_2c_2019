@@ -2,7 +2,6 @@
   import { RecaptchaModule } from 'ng-recaptcha';
   import { environment } from '../environments/environment';
   import { AppRoutingModule } from './app-routing.module';
-
    import { AngularFireAuthModule } from '@angular/fire/auth';
    import { AngularFireModule } from '@angular/fire';
    import { AngularFireDatabaseModule } from '@angular/fire/database';
@@ -15,11 +14,7 @@ import { NgModule } from '@angular/core';
 import { MaterialModule } from './material/material';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 // import { AngularFireAuthModule } from 'angularfire2/auth';
-
 // import { AngularFireDatabaseModule } from 'angularfire2/database';
-
-
-
 import { AuthProvider } from './providers/auth';
 import { AppComponent } from './app.component';
 import { PrincipalComponent } from './componentes/principal/principal.component';
@@ -72,7 +67,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { PedidoCerveceroComponent } from './filtros/pedido-cervecero/pedido-cervecero.component';
 import { PedidoCocineroComponent } from './filtros/pedido-cocinero/pedido-cocinero.component';
 import { ExcelComponent } from './componentes/excel/excel.component';
-
+import { SimpleNotificationsModule } from 'angular2-notifications';
 
 @NgModule({
   declarations: [
@@ -140,11 +135,20 @@ import { ExcelComponent } from './componentes/excel/excel.component';
     AngularFireAuthModule,
     AngularFireStorageModule,
     AngularFirestoreModule,
-    HttpClientModule
+    HttpClientModule,
+    SimpleNotificationsModule,
+    SimpleNotificationsModule.forRoot({
+      position: ['top', 'right'],
+      timeOut: 4000,
+      showProgressBar: true,
+      pauseOnHover: true,
+      clickToClose: true
+    }),
 
   ],
   exports: [
-    MaterialModule
+    MaterialModule,
+    SimpleNotificationsModule 
   ],
   providers: [AuthProvider],
   bootstrap: [AppComponent]
