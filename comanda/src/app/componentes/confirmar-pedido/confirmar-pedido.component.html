@@ -1,7 +1,10 @@
 <app-principal></app-principal>
 <br><br>
-<h1>Entregar Pedido</h1>
-<table mat-table [dataSource]="pedidos">
+<h3 *ngIf="vacia == true" >
+        <p class= "no-resultados"> No hay pedidos pendientes de entrega<i class="far fa-thumbs-up"></i></p>
+        </h3>
+<div  *ngIf="!vacia == true">
+    <table mat-table [dataSource]="pedidos">
         <tr>
                 <ng-container matColumnDef="Mesa">
                 <th mat-header-cell *matHeaderCellDef> Mesa </th>
@@ -67,6 +70,7 @@
                 <tr mat-row *matRowDef="let row; columns: columsProductoPedido;"></tr>
             </div> 
     </table>
+</div> 
 
 
 <!-- <ul *ngFor="let item of pedidos">

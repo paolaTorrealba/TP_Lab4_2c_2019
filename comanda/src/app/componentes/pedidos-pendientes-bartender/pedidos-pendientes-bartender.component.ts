@@ -13,6 +13,7 @@ import { EstadoPedido, TipoProducto } from 'src/app/clases/enum';
 })
 export class PedidosPendientesBartenderComponent implements OnInit {
 
+  public vacia:boolean;
   public pedidos:Array<any> = [];
   public pedidoSeleccionado:any;
   public productos:Array<any> = [];
@@ -42,7 +43,8 @@ export class PedidosPendientesBartenderComponent implements OnInit {
 
   obtenerPedidos(){
     this.data.getListaPedidos("pedidos").subscribe(lista => {
-        this.pedidos=lista;     
+        this.pedidos=lista;   
+        this.vacia=this.pedidos.length==0;  
         this.dataSource = new MatTableDataSource(this.pedidos);      
     });    
    }

@@ -12,7 +12,7 @@ import { EstadoPedido, TipoProducto } from 'src/app/clases/enum';
   styleUrls: ['./pedidos-pendientes-cervecero.component.scss']
 })
 export class PedidosPendientesCerveceroComponent implements OnInit {
-
+  public vacia:boolean;
   public pedidos:Array<any> = [];
   public pedidoSeleccionado:any;
   public productos:Array<any> = [];
@@ -41,7 +41,8 @@ export class PedidosPendientesCerveceroComponent implements OnInit {
 
   obtenerPedidos(){
     this.data.getListaPedidos("pedidos").subscribe(lista => {
-        this.pedidos=lista;     
+        this.pedidos=lista;
+        this.vacia=this.pedidos.length==0;     
         this.dataSource = new MatTableDataSource(this.pedidos);      
     });    
    }

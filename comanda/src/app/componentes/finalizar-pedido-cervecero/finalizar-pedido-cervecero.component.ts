@@ -10,6 +10,7 @@ import { EstadoPedido } from 'src/app/clases/enum';
 })
 export class FinalizarPedidoCerveceroComponent implements OnInit {
   public pedidos:Array<any> = [];
+  public vacia:boolean;
   public pendiente:string="pendiente";
   public aceptado:string="aceptado";  
   public enPreparacion= EstadoPedido.enPreparacion;
@@ -30,7 +31,7 @@ export class FinalizarPedidoCerveceroComponent implements OnInit {
   obtenerPedidos(){
     this.data.getListaPedidos("pedidos").subscribe(lista => {
       this.pedidos=lista; 
-      console.log("pedidos: ",this.pedidos); 
+      this.vacia=this.pedidos.length==0; 
     });
     console.log("pedidos: ",this.pedidos)
    }

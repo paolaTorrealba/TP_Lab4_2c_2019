@@ -15,7 +15,7 @@ export class ConfirmarPedidoComponent implements OnInit {
   public info:boolean;
   public pedidos:Array<any> = [];
   public productos:Array<any> = [];
-  
+  public vacia:boolean;
   public cerrado=EstadoPedido.cerrado;
   public entregado=EstadoPedido.entregado;
   public listoParaServir= EstadoPedido.listoParaServir;
@@ -36,7 +36,7 @@ export class ConfirmarPedidoComponent implements OnInit {
   obtenerPedidos(){
     this.data.getListaPedidos("pedidos").subscribe(lista => {
       this.pedidos=lista; 
-      console.log("pedidos: ",this.pedidos); 
+      this.vacia=this.pedidos.length==0; 
     });
     console.log("pedidos: ",this.pedidos)
    }

@@ -65,10 +65,13 @@
         <li *ngIf="this.perfil=='mozo'"><a href="/principal">Principal</a></li>
         <li *ngIf="this.perfil=='mozo'"><a href="/pedidosPendientes">Estado de Pedidos</a></li>
         <li *ngIf="this.perfil=='mozo'"><a href="/cerrarMesa">Cerrar Mesa</a></li>
-        <li *ngIf="this.perfil=='mozo'"><a href="/verRegistroClientes">Registro de Cliente</a></li>
+        <!-- <li *ngIf="this.perfil=='mozo'"><a href="/verRegistroClientes">Registro de Cliente</a></li> -->
         <li *ngIf="this.perfil=='mozo'"><a href="/confirmarPago">Confirmar Pago</a></li>
         <li *ngIf="this.perfil=='mozo'"><a href="/entregarPedido">Entregar Pedido</a></li>
         <li *ngIf="this.perfil=='mozo'"><a href="/login">Salir</a></li>
+    </ul>
+    <ul>        
+        <li *ngIf="this.perfil=='mozo'"><a href="/principal">{{this.nombre}} | {{this.perfil}}</a></li>      
     </ul>
 <!-- BARTENDER -->
     <ul>        
@@ -78,6 +81,9 @@
         <li *ngIf="this.perfil=='bartender'"><a href="/finalizarPedidoBartender">Cerrar Pedido</a></li>
         <li *ngIf="this.perfil=='bartender'"><a href="/login">Salir</a></li>
     </ul>
+    <ul>        
+        <li *ngIf="this.perfil=='bartender'"><a href="/principal">{{this.nombre}} | {{this.perfil}}</a></li>      
+    </ul>
 <!-- COCINERO -->
     <ul>        
         <li *ngIf="this.perfil=='cocinero'"><a href="/principal">Principal</a></li>
@@ -85,6 +91,9 @@
         <li *ngIf="this.perfil=='cocinero'"><a href="/pedidosPendientesCocinero">Pedidos Pendientes</a></li>
         <li *ngIf="this.perfil=='cocinero'"><a href="/finalizarPedidoCocinero">Cerrar Pedido</a></li>
         <li *ngIf="this.perfil=='cocinero'"><a href="/login">Salir</a></li>
+    </ul>
+    <ul>        
+        <li *ngIf="this.perfil=='cocinero'"><a href="/principal">{{this.nombre}} | {{this.perfil}}</a></li>      
     </ul>
  <!-- CERVECERO -->
     <ul>        
@@ -94,7 +103,9 @@
         <li *ngIf="this.perfil=='cervecero'"><a href="/finalizarPedidoCervecero">Cerrar Pedido</a></li>
         <li *ngIf="this.perfil=='cervecero'"><a href="/login">Salir</a></li>
     </ul>
-    
+    <ul>        
+        <li *ngIf="this.perfil=='cervecero'"><a href="/principal">{{this.nombre}} | {{this.perfil}}</a></li>      
+    </ul>   
    
   </div>
  

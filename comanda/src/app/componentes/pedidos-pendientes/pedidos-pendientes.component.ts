@@ -16,6 +16,7 @@ import { map } from 'rxjs/operators';
 export class PedidosPendientesComponent implements OnInit {
   @ViewChild("imgPedido", { static: false }) InputImagenPedido: ElementRef;
   
+  public vacia:boolean;
   public info:boolean;
   private columsPedido: string[] = ['Mesa', 'Estado', 'Detalle','Codigo','Codigo Generado','Aceptar','Imágen', 'File'];
   private columsProductoPedido: string[] = ['Descripcion','Precio','Empleado','Estado Producto','Tiempo Promedio Elaboracion','Foto'];
@@ -50,7 +51,7 @@ export class PedidosPendientesComponent implements OnInit {
   obtenerPedidos(){
     this.data.getListaPedidos("pedidos").subscribe(lista => {
       this.pedidos=lista; 
-      console.log("pedidos: ",this.pedidos); 
+      this.vacia=this.pedidos.length==0;
     });
     console.log("pedidos: ",this.pedidos)
    }

@@ -123,12 +123,11 @@ export class AuthProvider {
       nombre: '',
       apellido: '',
       correo: '',
-      tipo: '',
       logeado: false,
       activo: false,
       foto: '',
       clave: '',
-      Perfil: "cliente"
+      perfil: "cliente"
     }
 
   }

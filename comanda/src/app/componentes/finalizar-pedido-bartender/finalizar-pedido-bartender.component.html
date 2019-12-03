@@ -1,6 +1,9 @@
 <app-principal></app-principal><br><br>
-<h4>    Bartender - Finalizar Pedido</h4>
-<ul *ngFor="let item of pedidos">
+<h3 *ngIf="vacia == true" >
+       <p class= "no-resultados"> No hay pedidos para mostrar <i class="far fa-thumbs-up"></i></p>
+ </h3>
+<div  *ngIf="!vacia == true">
+    <ul *ngFor="let item of pedidos">
         <div *ngIf="item.estado==aceptado">                   
                    <ul *ngFor="let producto of item.productos">
                         <div *ngIf="(producto.tipo==barra) 
@@ -17,5 +20,6 @@
                    <br>          
                     
         </div>
-</ul> 
+   </ul> 
+</div>
 

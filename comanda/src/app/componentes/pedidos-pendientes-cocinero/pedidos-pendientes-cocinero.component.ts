@@ -11,6 +11,8 @@ import { EstadoPedido, TipoProducto } from 'src/app/clases/enum';
   styleUrls: ['./pedidos-pendientes-cocinero.component.scss']
 })
 export class PedidosPendientesCocineroComponent implements OnInit {
+  
+  public vacia:boolean;
   public pedidos:Array<any> = [];
   public pedidoSeleccionado:any;
   public productos:Array<any> = [];
@@ -40,7 +42,8 @@ export class PedidosPendientesCocineroComponent implements OnInit {
 
   obtenerPedidos(){
     this.data.getListaPedidos("pedidos").subscribe(lista => {
-        this.pedidos=lista;     
+        this.pedidos=lista; 
+        this.vacia=this.pedidos.length==0;     
         this.dataSource = new MatTableDataSource(this.pedidos);      
     });    
    }

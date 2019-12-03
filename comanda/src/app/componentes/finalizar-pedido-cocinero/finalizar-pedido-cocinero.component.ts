@@ -17,6 +17,7 @@ export class FinalizarPedidoCocineroComponent implements OnInit {
   public plato:string="plato";
   public pedidoListo:boolean=false;
   public correo:string;
+  public vacia:boolean;
   public listoParaServir:string="listoParaServir";
 
   constructor(private  data:  AuthService,  
@@ -30,7 +31,7 @@ export class FinalizarPedidoCocineroComponent implements OnInit {
   obtenerPedidos(){
     this.data.getListaPedidos("pedidos").subscribe(lista => {
       this.pedidos=lista; 
-      console.log("pedidos: ",this.pedidos); 
+      this.vacia=this.pedidos.length==0; 
     });
     console.log("pedidos: ",this.pedidos)
    }
