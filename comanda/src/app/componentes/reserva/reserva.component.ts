@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/servicios/auth.service';
 import { AuthProvider } from 'src/app/providers/auth';
 import { EstadoMesa, EstadoReserva, Perfil } from 'src/app/clases/enum';
-import { MatTableDataSource, MatDialog } from '@angular/material';
+import { MatTableDataSource } from '@angular/material';
 import { map } from 'rxjs/operators';
 import { UsuarioService } from 'src/app/servicios/usuario.service';
 import { DataApiService } from 'src/app/servicios/data-api.service';
@@ -20,11 +20,7 @@ export class ReservaComponent implements OnInit {
   public mesas:Array<any> = [];
   public reservas:Array<any> = [];
   public estado=EstadoMesa.cerrada;
-
-
-  public elMail:string;
-  public usuario;
-  public usuarios;
+  
   public perfil: Perfil;
   foto = '';
   nombre = '';

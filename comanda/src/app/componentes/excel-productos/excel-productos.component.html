@@ -1,0 +1,23 @@
+<app-principal></app-principal> <br><br>   
+<div class="container">    
+<button (click)="exportAsXLSX()" class="btn btn-info mb-4 mt-2">Descargar Excel</button>    
+<table class="table table-striped table-bordered table-hover">    
+ <tr>   
+   <th>Tipo</th> 
+   <th>Descripcion</th>    
+   <th>Nombre</th>    
+   <th>Numero de Producto</th>    
+   <th>Precio</th> 
+   <th>Tiempo Elaboracion</th>    
+        
+ </tr>    
+ <tr *ngFor="let item of productos">    
+   <td>{{item.tipo}}</td>    
+   <td>{{item.descripcion}}</td>    
+   <td>{{item.nombre}}</td>    
+   <td>{{item.numeroProducto}}</td>  
+   <td>{{item.precio}}</td> 
+   <td>{{item.tiempoPromedioElaboracion}}</td>   
+ </tr>    
+</table>    
+</div>   

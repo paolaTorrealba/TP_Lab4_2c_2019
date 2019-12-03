@@ -3,7 +3,13 @@
   <!-- SOCIO -->
     <ul >
       <li *ngIf="this.perfil=='socio'"><a href="/principal">Principal</a></li>
-      <li *ngIf="this.perfil=='socio'"><a href="/reportes">Reportes</a></li>
+      <li *ngIf="this.perfil=='socio'"><a >Reportes</a>
+        <ul  id="submenu">           
+            <li><a href="/reporteMesas">Mesas</a></li> 
+            <li><a href="/reporteProductos">Productos</a></li>   
+            <li><a href="/reporteEmpleados">Empleados</a></li>             
+        </ul>
+      </li>
       <li *ngIf="this.perfil=='socio'"><a >Encuestas</a>
         <ul  id="submenu"   >
             <!-- <li><a href="/verEncuestas">Empleados</a></li> -->
@@ -30,6 +36,9 @@
         </ul>
       </li> 
       <li *ngIf="this.perfil=='socio'"><a href="/login">Salir</a></li>
+      <ul>        
+          <li *ngIf="this.perfil=='socio'"><a href="/principal">{{this.nombre}} | {{this.perfil}}</a></li>      
+      </ul>
     </ul>
 <!-- CLIENTE -->
     <ul>        
@@ -49,7 +58,7 @@
 
     </ul>
     <ul>        
-        <li *ngIf="this.perfil=='cliente'"><a href="#">{{this.nombre}} | {{this.perfil}}</a></li>      
+        <li *ngIf="this.perfil=='cliente'"><a href="/principal">{{this.nombre}} | {{this.perfil}}</a></li>      
     </ul>
 <!-- MOZO -->
     <ul>        

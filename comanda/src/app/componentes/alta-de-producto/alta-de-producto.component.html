@@ -127,7 +127,7 @@
                        <label class="custom-file-label" for="customFile">{{imgName}}</label>
                      </div>
                  </form>  
-                 <input #imgProducto type="hidden" [value]="urlImagen | async">    
+                 <input #imgProducto type="text" [value]="urlImagen | async">    
                  <form class="margin-bottom">
                    <div class="custom-control custom-checkbox">
                      <input type="checkbox" class="custom-control-input" id="customCheck" name="customCheck">
@@ -136,14 +136,12 @@
                  <form class="margin-bottom">
                  </form>
    
-                 <div class="form-group no-margin"> 
-           
-                 <div class="form-group no-margin">
-                   <button type="submit" class="btn btn-primary btn-block">
-                       Confirmar
-                   </button>
-                 </div>
-  
+                 <div *ngIf="urlImagen!=undefined" class="form-group no-margin">
+                    <div class="form-group no-margin">
+                      <button type="submit" class="btn btn-primary btn-block">
+                          Confirmar
+                      </button>
+                    </div>  
                  </div>         
                </form>
              </div>

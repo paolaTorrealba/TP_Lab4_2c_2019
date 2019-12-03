@@ -1,8 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/servicios/auth.service';
 import { AuthProvider } from 'src/app/providers/auth';
-import { EstadoReserva } from 'src/app/clases/enum';
-
+import { EstadoReserva, Perfil } from 'src/app/clases/enum';
+import { UsuarioService } from 'src/app/servicios/usuario.service';
+import { DataApiService } from 'src/app/servicios/data-api.service';
+import { take } from 'rxjs/operators';
+import { MatTableDataSource } from '@angular/material';
+import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-pedir-platos',
@@ -10,36 +14,58 @@ import { EstadoReserva } from 'src/app/clases/enum';
   styleUrls: ['./pedir-platos.component.scss']
 })
 export class PedirPlatosComponent implements OnInit {
-  productos;
-  usuarios;
-  pedidos;
-  usuarioActual;
-  correo;
-  codigoMesa;
+  public productos:Array<any> = [];
+  public usuarios;
+  public pedidos;
+  public usuarioActual;
+  public correo;
+  public codigoMesa;
   public activa:string="activa";
   public reservas;
   public tiempoTotal:number;
   public nombre:string;
   public apellido:string;
-  public listarCerveza:boolean=false;
-  public listarBarra:boolean=false;
-  public listarPlatos: boolean=false;
   public tipo:string;
   public pedidoRealizado:boolean= false;
   public montoTotal:number;
-  seleccionados: Array<any> = [];
+  public seleccionados: Array<any> = [];  
+  public listarCerveza:boolean=false;
+  public listarBarra:boolean=false;
+  public listarPlatos: boolean=false;
+  public perfil: Perfil;
+  foto = ''; 
+  logeado:boolean;
 
+
+  private columsProducto: string[] = ['Foto','Tipo','Descripcion','Precio','Tiempo Promedio Elaboracion','Seleccionar', 'Cancelar'];
+  private dataSource = new MatTableDataSource(this.productos);
+  private noData = this.dataSource.connect().pipe(map((data: any[]) => data.length === 0));
+  
   constructor(private  data:  AuthService,
-    private auth: AuthProvider) { 
+    private auth: AuthProvider,
+    private usuarioService: UsuarioService,
+    private dataApi: DataApiService) { 
 
-    this.correo=localStorage.getItem("usuarioComanda");
-    console.log("correo", this.correo)
     this.montoTotal=0;
     this.tiempoTotal=0;
-    this.obtenerReservas();
+    this.obtenerUsuario();
     this.obtenerProductos();
+    this.obtenerReservas();    
     this.obtenerPedidos();
-    this.obtenerCliente();
+    
+    if(this.productos!=undefined){
+      console.log("Productos cargado: ",this.productos);  
+      this.dataSource = new MatTableDataSource(this.productos);      
+      console.log("this.dataSource asignado: ",this.dataSource)
+      this.aplicarFiltros("");
+      this.dataSource.filterPredicate = function (data, filter: string): boolean {
+          return data.tipo.toLowerCase().includes(filter);
+     };  
+       
+    } 
+
+    
+    // this.obtenerCliente();
    
   }
 
@@ -62,17 +88,25 @@ export class PedirPlatosComponent implements OnInit {
   obtenerProductos() {
     this.data.getListaProductos("productos").subscribe(lista => {
           this.productos=lista; 
-          console.log("Productos: ",this.productos); 
-          console.log("lista: ",lista);       
-      });
-      console.log("Productos: ",this.productos);  
+
+          if(this.productos!=undefined){
+              console.log("Productos cargado: ",this.productos);  
+              this.dataSource = new MatTableDataSource(this.productos);      
+              // console.log("this.dataSource asignado: ",this.dataSource)
+              // this.aplicarFiltros("");
+              // this.dataSource.filterPredicate = function (data, filter: string): boolean {
+              //     return data.tipo.toLowerCase().includes(filter);
+              // };  
+          }               
+      });  
+      
+      
    } 
 
    agregarPedido(item){
      item.estadoProdPedido="pendiente";
      item.empleado="";
-     this.seleccionados.push(item);
-     console.log("agrego el item")
+     this.seleccionados.push(item);   
      console.log(" this.seleccionados: ",  this.seleccionados)
      this.montoTotal= this.montoTotal+item.precio;
      console.log("monto:", this.montoTotal)
@@ -110,27 +144,37 @@ export class PedirPlatosComponent implements OnInit {
     console.log("mostrar plato", this.listarPlatos)
    }
 
-   obtenerCliente(){
-    let correo= localStorage.getItem("usuarioComanda");
-    this.data.getListaUsuarios("usuarios").subscribe(lista => {
-            this.usuarios=lista; 
-            console.log("usuarios: ", this.usuarios)
-            console.log("lista: ", lista)
-            for (let i=0; i<= this.usuarios.length -1; i++){
-              if (this.usuarios[i].correo==correo){
-                this.nombre=this.usuarios[i].nombre;
-                this.apellido=this.usuarios[i].apellido;
-              }
-            }
-            console.log("usuarios: ",this.usuarios); 
-            console.log("lista: ",lista); 
-  
-      });
-   }
+   aplicarFiltros(filterValue: string) {  
+     console.log("entre en aplicar filtros");   
+     if(this.productos!=undefined){
+      console.log("aplicarFiltros", filterValue)
+      this.dataSource.filter = filterValue.trim().toLowerCase();      
+    
+     }
+     else{
+      this.dataSource.filter = filterValue.trim().toLowerCase();      
+     }
+     
+  }
+
+  //  obtenerCliente(){   
+  //   this.data.getListaUsuarios("usuarios").subscribe(lista => {
+  //           this.usuarios=lista; 
+      
+  //           for (let i=0; i<= this.usuarios.length -1; i++){
+  //             if (this.usuarios[i].correo==this.correo){
+  //               this.nombre=this.usuarios[i].nombre;
+  //               this.apellido=this.usuarios[i].apellido;
+  //             }
+  //           }
+            
+  //     });
+  //  }
 
    obtenerPedidos(){
     this.data.getListaPedidos("pedidos").subscribe(lista => {
       this.pedidos=lista; 
+      
     });
     console.log("pedidos: ",this.pedidos)
    }
@@ -139,7 +183,7 @@ export class PedirPlatosComponent implements OnInit {
     this.obtenerPedidos();
     console.log("cantidad pdidos: ",  this.pedidos.length)
     let data = {
-      correo:localStorage.getItem("usuarioComanda"),
+      // correo:localStorage.getItem("usuarioComanda"),
       nombreCliente:this.nombre,
       apellidoCliente:this.apellido,
       estado:"pendiente",
@@ -163,4 +207,47 @@ export class PedirPlatosComponent implements OnInit {
   });
     
    }
+
+   obtenerUsuario() {
+ 
+    this.usuarioService.EstaLogeado().subscribe(user => {
+      if (user) {
+        console.log("user.uid obtenido",user.uid)
+        this.dataApi.TraerUno(user.uid, 'usuarios').pipe(take(1)).subscribe(userx => {
+
+          if (userx) {
+            if (userx.activo) {
+              console.log("userx activo reserva:", userx)
+              this.usuarioService.usuario = userx;
+
+              this.foto = userx.foto;
+              this.correo= userx.correo;
+              this.nombre = userx.nombre;
+              this.apellido = userx.apellido;
+              this.perfil = userx.perfil;
+              this.logeado = true;
+              
+            }
+            else {
+              this.foto = "";
+              this.nombre = "";
+              this.correo= "";
+              this.apellido = "";
+              this.logeado = false;
+              this.perfil = null;
+            }
+          }
+
+        });
+      }
+      else {
+        this.foto = "";
+        this.nombre = "";
+        this.correo= "";
+        this.apellido = "";
+        this.logeado = false;
+        this.perfil = null;
+      }
+    });
+  }
 }

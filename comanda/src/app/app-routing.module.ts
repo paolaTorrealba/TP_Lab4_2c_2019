@@ -35,8 +35,10 @@ import { FinalizarPedidoBartenderComponent } from './componentes/finalizar-pedid
 import { FinalizarPedidoCocineroComponent } from './componentes/finalizar-pedido-cocinero/finalizar-pedido-cocinero.component';
 import { VerEstadoPedidoComponent } from './componentes/ver-estado-pedido/ver-estado-pedido.component';
 import { TipoFilasDirective } from './directivas/tipo-filas.directive';
-import { ExcelComponent } from './componentes/excel/excel.component';
+import { ExcelMesasComponent } from './componentes/excel-mesas/excel-mesas.component';
 import { CancelarPedidoComponent } from './componentes/cancelar-pedido/cancelar-pedido.component';
+import { ExcelProductosComponent } from './componentes/excel-productos/excel-productos.component';
+import { ExcelEmpleadosComponent } from './componentes/excel-empleados/excel-empleados.component';
 
 
 
@@ -50,7 +52,9 @@ const routes: Routes = [
   // { path: 'listaEspera', component: ListaDeEsperaComponent},
 
   // SOCIO
-  { path: 'reportes', component: ExcelComponent},  
+  { path: 'reporteMesas', component: ExcelMesasComponent},
+  { path: 'reporteEmpleados', component: ExcelEmpleadosComponent},
+  { path: 'reporteProductos', component: ExcelProductosComponent},  
   { path: 'pedidosPendientes', component: PedidosPendientesComponent},
   { path: 'verEncuestas', component: VerEncuestasComponent},
   { path: 'agregarMesa', component: AltaDeMesaComponent},   

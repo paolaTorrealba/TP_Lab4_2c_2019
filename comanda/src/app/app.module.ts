@@ -66,8 +66,12 @@ import { PedidoBartenderComponent } from './filtros/pedido-bartender/pedido-bart
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { PedidoCerveceroComponent } from './filtros/pedido-cervecero/pedido-cervecero.component';
 import { PedidoCocineroComponent } from './filtros/pedido-cocinero/pedido-cocinero.component';
-import { ExcelComponent } from './componentes/excel/excel.component';
+import { ProductoTipoComponent } from './filtros/producto-tipo/producto-tipo.component';
+
+import { ExcelMesasComponent } from './componentes/excel-mesas/excel-mesas.component';
 import { SimpleNotificationsModule } from 'angular2-notifications';
+import { ExcelProductosComponent } from './componentes/excel-productos/excel-productos.component';
+import { ExcelEmpleadosComponent } from './componentes/excel-empleados/excel-empleados.component';
 
 @NgModule({
   declarations: [
@@ -119,8 +123,11 @@ import { SimpleNotificationsModule } from 'angular2-notifications';
     ColorPedidoPendienteDirective,
     PedidoBartenderComponent,
     PedidoCerveceroComponent,
+    ProductoTipoComponent,
     PedidoCocineroComponent,
-    ExcelComponent,
+    ExcelMesasComponent,
+    ExcelProductosComponent,
+    ExcelEmpleadosComponent,
   ],
   imports: [
     FormsModule,

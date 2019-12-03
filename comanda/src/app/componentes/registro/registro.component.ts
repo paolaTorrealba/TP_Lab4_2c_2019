@@ -17,9 +17,7 @@ import { UsuarioService } from 'src/app/servicios/usuario.service';
 export class RegistroComponent implements OnInit {
  
   @ViewChild("imgUsuario", { static: false }) InputImagenUser: ElementRef;
-
-
-  public imgName: string;
+  
   public nombreModel: string;
   public apellidoModel: string
   public dniModel: string;
@@ -29,13 +27,13 @@ export class RegistroComponent implements OnInit {
   public passwordModel: string;
   public captchaVerificado: boolean;
   public accepted: boolean;
-  public porcentajeUpload: Observable<number>;
-  public urlImagen: Observable<string>=undefined;
   public noCargando = true;
+  public porcentajeUpload: Observable<number>;
+
+  public imgName: string;
+  public urlImagen: Observable<string>=undefined;
   public imagenUrl : any;
   public foto:undefined
-
-
 
   constructor(private auth: AuthProvider,
     private usuarioService: UsuarioService,  
@@ -65,9 +63,7 @@ export class RegistroComponent implements OnInit {
     this.usuario.clave = this.passwordModel;
     this.usuario.foto = this.InputImagenUser.nativeElement.value;
     console.log("this.usuario ",this.usuario)
-    this.usuarioService.RegistrarUsuario(this.usuario);
-    // this.auth.guardarUsuario(data);
-    // this.auth.crearUsuario(this.emailModel,this.passwordModel);
+    this.usuarioService.RegistrarUsuario(this.usuario);   
     this.router.navigate(['/login']);
   }
  
@@ -86,8 +82,7 @@ export class RegistroComponent implements OnInit {
       const ref = this.storage.ref(filePath);
       const task = this.storage.upload(filePath, img);
 
-      this.porcentajeUpload = task.percentageChanges();
-     
+      this.porcentajeUpload = task.percentageChanges();   
 
       task.snapshotChanges().pipe(finalize(() => this.urlImagen = ref.getDownloadURL())).subscribe();
     }
@@ -96,23 +91,13 @@ export class RegistroComponent implements OnInit {
       this.urlImagen = undefined;
       this.noCargando = true;
     }
-    
-
         console.log("urlImagen: ", this.urlImagen);
         this.imgName = "Seleccionar imágen..";
         this.urlImagen = undefined;
         this.noCargando = true;
   }
 
-
-   delay(ms: number) {
-     console.log("delay")
-    return new Promise( resolve => setTimeout(resolve, ms) );
-}
-  resolved(captchaResponse: string) {
-    this.captchaVerificado = true;
-    console.log("bien el captcha",this.captchaVerificado)
-  }
+  
 
   crearTest() {
     this.nombreModel = "cliente1";

@@ -114,7 +114,9 @@ export class PrincipalComponent implements OnInit {
     switch(this.perfil) {
       case "socio":
         this.acciones = [ 
-          { accion: "Reportes", img: "nuevo-empleado.jpg", ruta: "reportes" },
+          { accion: "Reportes Mesas", img: "nuevo-empleado.jpg", ruta: "reporteMesas" },
+          { accion: "Reportes Productos", img: "nuevo-empleado.jpg", ruta: "reporteProductos" },
+          { accion: "Reportes Empleados", img: "nuevo-empleado.jpg", ruta: "reporteEmpleados" },
           { accion: "Agregar Empleado", img: "nuevo-empleado.jpg", ruta: "agregarEmpleado" },
           { accion: "Agregar Socio", img: "nuevo-empleado.jpg", ruta: "agregarSocio" },
           { accion: "Ver encuestas", img: "encuesta.jpg", ruta: "verEncuestas" },
