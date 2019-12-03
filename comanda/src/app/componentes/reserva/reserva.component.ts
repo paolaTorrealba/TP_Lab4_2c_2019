@@ -44,14 +44,16 @@ export class ReservaComponent implements OnInit {
   obtenerMesas() {
     console.log("---MESAS---")
     this.data.getListaMesas("mesas").subscribe(lista => {
-        this.mesas=lista;      
+        this.mesas=lista;
+        this.dataSource = new MatTableDataSource(this.mesas);
+        this.noData = this.dataSource.connect().pipe(map((data: any[]) => data.length === 0));      
     });
     console.log("Mesas: ",this.mesas);  
    } 
 
 
    obtenerReservas() {  
- 
+      this.tieneReserva=false;
       this.data.getListaReservas("reservas").subscribe(lista => {
           this.reservas=lista; 
           console.log("reservas obtenidas",this.reservas)
@@ -60,13 +62,15 @@ export class ReservaComponent implements OnInit {
               this.reservas[i].estado=="activa"){
               this.miReserva=this.reservas[i].codigoMesa; 
               this.tieneReserva=true;
-              console.log("tiene reserva", this.miReserva) 
+              
             }
           }
-          console.log(this.tieneReserva, "reserva  o no")
-          if (this.tieneReserva!=true && this.tieneReserva!= undefined ){
-            console.log("no tiene reserva")
+         
+          if (!this.tieneReserva ){
+            console.log("no tiene reserva")           
             this.obtenerMesas();
+          
+            
           }
               
       });
@@ -100,6 +104,10 @@ export class ReservaComponent implements OnInit {
         this.correo= "";       
       }
     });
+
+    if (this.tieneReserva ==undefined){
+      this.obtenerMesas();
+    }
   }
 
 
