@@ -1,6 +1,9 @@
 <app-principal></app-principal>
-
-<table mat-table [dataSource]="mesas">
+<h3 *ngIf="vacia == true" >
+        <p class= "no-resultados"> No hay mesas para mostrar <i class="far fa-thumbs-up"></i></p>
+</h3>
+<div  *ngIf="!vacia == true">
+   <table mat-table [dataSource]="mesas">
         <tr>
             <ng-container matColumnDef="NumeroMesa">
                 <th mat-header-cell *matHeaderCellDef> Numero </th>
@@ -25,6 +28,8 @@
         </div>
       
       </table>
+
+</div>
 <!-- <h1>Listado de Mesas</h1>
 <ul *ngFor="let item of mesas">
     <p>nro: {{item.numero}}</p>

@@ -13,6 +13,7 @@ import { map } from 'rxjs/operators';
 export class ListadoPedidosComponent implements OnInit {
 
   public info:boolean;
+  public vacia:boolean;
   private columsPedido: string[] = ['Mesa', 'Importe', 'Estado', 'Tiempo Elaboracion','Detalle'];
   private columsProductoPedido: string[] = ['Descripcion','Precio','Empleado','Estado Producto','Tiempo Promedio Elaboracion'];
   public pedidos:Array<any> = [];
@@ -35,7 +36,7 @@ export class ListadoPedidosComponent implements OnInit {
   obtenerPedidos(){
     this.data.getListaPedidos("pedidos").subscribe(lista => {
       this.pedidos=lista; 
-      console.log("pedidos: ",this.pedidos); 
+      this.vacia=this.pedidos.length==0;      
     });
     console.log("pedidos: ",this.pedidos)
    }

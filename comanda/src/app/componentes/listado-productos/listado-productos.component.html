@@ -1,5 +1,9 @@
 <app-principal></app-principal>
-<table mat-table [dataSource]="productos">
+<h3 *ngIf="vacia == true" >
+        <p class= "no-resultados"> No hay productos para mostrar <i class="far fa-thumbs-up"></i></p>
+</h3>
+<div  *ngIf="!vacia == true">
+   <table mat-table [dataSource]="productos">
         <tr>
             <ng-container matColumnDef="NombreProducto">
                 <th mat-header-cell *matHeaderCellDef> Producto </th>
@@ -27,7 +31,8 @@
             <tr mat-row *matRowDef="let row; columns: columsProducto;" [appTipoFilas]="row.tipo"></tr>
         </div>
       
-      </table>
+    </table>
+</div>
 <!-- <h1>Listado de Productos</h1>
 <ul *ngFor="let item of productos">
     <p>nombre: {{item.nombre}}</p>

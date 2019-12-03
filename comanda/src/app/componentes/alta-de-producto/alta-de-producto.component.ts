@@ -34,7 +34,7 @@ export class AltaDeProductoComponent implements OnInit {
   public foto:undefined
 
   constructor(private  data:  AuthService,
-    private  auth:  AuthProvider,
+    private auth:  AuthProvider,
     private router: Router,
     private storage: AngularFireStorage) {
 

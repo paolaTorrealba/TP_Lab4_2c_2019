@@ -1,6 +1,9 @@
 <app-principal></app-principal>
 <br><br>
-<h1>Listado Pedidos </h1>
+<h3 *ngIf="vacia == true" >
+        <p class= "no-resultados"> No hay pedidos para mostrar <i class="far fa-thumbs-up"></i></p>
+</h3>
+<div  *ngIf="!vacia == true">
        <table mat-table [dataSource]="pedidos">
             <tr>
                 <ng-container matColumnDef="Mesa">
@@ -66,7 +69,7 @@
             </div>
     </table>
 
-    
+</div>
 <!-- <ul *ngFor="let item of pedidos">
         <div>
                    <p >Mesa: mesa (agregar)</p>
