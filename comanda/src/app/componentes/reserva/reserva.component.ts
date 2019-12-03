@@ -19,7 +19,9 @@ export class ReservaComponent implements OnInit {
   public correo:string;
   public mesas:Array<any> = [];
   public reservas:Array<any> = [];
+  public tieneReserva:boolean;
   public estado=EstadoMesa.cerrada;
+  public miReserva:string;
   
   public perfil: Perfil;
   foto = '';
@@ -34,74 +36,74 @@ export class ReservaComponent implements OnInit {
     private usuarioService: UsuarioService,
     private dataApi: DataApiService,
     private auth: AuthProvider) {
-     this.obtenerUsuario();     
-     this.obtenerMesas();
-     this.obtenerReservas();
-
-   }
+           this.obtenerUsuario(); 
+   } 
 
   ngOnInit() {}
 
   obtenerMesas() {
+    console.log("---MESAS---")
     this.data.getListaMesas("mesas").subscribe(lista => {
-        this.mesas=lista; 
-        console.log("Mesas: ",this.mesas); 
-        console.log("lista: ",lista); 
-     
+        this.mesas=lista;      
     });
     console.log("Mesas: ",this.mesas);  
    } 
 
 
-   obtenerReservas() {
-    this.data.getListaReservas("reservas").subscribe(lista => {
-        this.reservas=lista; 
-        console.log("reservas: ",this.reservas); 
-        console.log("lista: ",lista);      
-    });
-    console.log("reservas: ",this.reservas);  
+   obtenerReservas() {  
+ 
+      this.data.getListaReservas("reservas").subscribe(lista => {
+          this.reservas=lista; 
+          console.log("reservas obtenidas",this.reservas)
+          for(let i=0; i<=this.reservas.length-1; i++){
+            if(this.reservas[i].correo==this.correo &&
+              this.reservas[i].estado=="activa"){
+              this.miReserva=this.reservas[i].codigoMesa; 
+              this.tieneReserva=true;
+              console.log("tiene reserva", this.miReserva) 
+            }
+          }
+          console.log(this.tieneReserva, "reserva  o no")
+          if (this.tieneReserva!=true && this.tieneReserva!= undefined ){
+            console.log("no tiene reserva")
+            this.obtenerMesas();
+          }
+              
+      });
+      console.log("reservas: ",this.reservas);  
+  
+    
    } 
 
    obtenerUsuario() {
  
     this.usuarioService.EstaLogeado().subscribe(user => {
-      if (user) {
-        console.log("user.uid obtenido",user.uid)
+      if (user) {      
+        console.log("user: ", user)  
         this.dataApi.TraerUno(user.uid, 'usuarios').pipe(take(1)).subscribe(userx => {
 
-          if (userx) {
-            if (userx.activo) {
-              console.log("userx activo reserva:", userx)
-              this.usuarioService.usuario = userx;
-
-              this.foto = userx.foto;
-              this.correo= userx.correo;
-              this.nombre = userx.nombre;
-              this.perfil = userx.perfil;
-              this.logeado = true;
-              
-            }
-            else {
-              this.foto = "";
-              this.nombre = "";
-              this.correo= "";
-              this.logeado = false;
-              this.perfil = null;
-            }
+          if (userx) {           
+              if (userx.activo) {   
+                console.log("esta activo")   
+                this.usuarioService.usuario = userx;            
+                this.correo= userx.correo;                 
+                this.obtenerReservas(); 
+              }
+              else {  
+                this.correo= "";
+              }
           }
 
         });
       }
-      else {
-        this.foto = "";
-        this.nombre = "";
-        this.correo= "";
-        this.logeado = false;
-        this.perfil = null;
+      else {      
+        this.correo= "";       
       }
     });
   }
-   seleccionarMesa(item){     
+
+
+ seleccionarMesa(item){     
       console.log("item: ", item)  
       console.log("this.correo: ", this.correo)     
       item.estado=EstadoMesa.reservada;  

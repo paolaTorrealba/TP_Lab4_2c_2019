@@ -104,6 +104,8 @@ RegistrarUsuario(usuario: UsuarioInterface) {
               });
   });
 }
+
+
 loguearUsuario(email: string, password: string) {
   return new Promise(() => {
       this.afsAuth.auth.signInWithEmailAndPassword(email, password)
