@@ -15,10 +15,10 @@
 <app-principal></app-principal>
 <br><br>
 <h3 *ngIf="tieneReserva == true" >
-        <p class= "no-resultados"> Ya tenes una mesa reservada<i class="far fa-thumbs-up"></i></p>
+        <p class= "no-resultados"> Ya tenes una mesa reservada! <i class="far fa-thumbs-up"></i></p>
         <p class= "codigo"> Cod. Reserva: [{{this.miReserva}}]</p>
 </h3>
-<!-- <div  *ngIf="!this.correo == undefined"> -->
+
 <div  *ngIf="tieneReserva == false || !this.correo == undefined">
     <h1 style="padding-left: 30%;">Mesas Disponibles</h1>
     <table mat-table [dataSource]="mesas">

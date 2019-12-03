@@ -7,6 +7,8 @@ import { DataApiService } from 'src/app/servicios/data-api.service';
 import { take } from 'rxjs/operators';
 import { MatTableDataSource } from '@angular/material';
 import { map } from 'rxjs/operators';
+import { Router, ActivatedRoute, ParamMap } from '@angular/router';
+
 
 @Component({
   selector: 'app-pedir-platos',
@@ -36,6 +38,9 @@ export class PedirPlatosComponent implements OnInit {
   foto = ''; 
   logeado:boolean;
 
+  public tieneReserva:boolean;
+  public miReserva:string;
+
 
   private columsProducto: string[] = ['Foto','Tipo','Descripcion','Precio','Tiempo Promedio Elaboracion','Seleccionar', 'Cancelar'];
   private dataSource = new MatTableDataSource(this.productos);
@@ -43,6 +48,7 @@ export class PedirPlatosComponent implements OnInit {
   
   constructor(private  data:  AuthService,
     private auth: AuthProvider,
+    private router: Router,
     private usuarioService: UsuarioService,
     private dataApi: DataApiService) { 
 
@@ -71,19 +77,23 @@ export class PedirPlatosComponent implements OnInit {
 
   ngOnInit() {}
 
-  obtenerReservas() {
-    this.data.getListaReservas("reservas").subscribe(lista => {
-        this.reservas=lista;
-        console.log("reservas: ",this.reservas); 
-        for (let i=0; i<=this.reservas.length-1; i++){
-          if (this.reservas[i].estado==EstadoReserva.activa
-            && this.reservas[i].correo==this.correo){
-              this.codigoMesa=this.reservas[i].codigoMesa;
-            }
-        } 
-    });
-    console.log("reservas: ",this.reservas);  
-   } 
+
+  irAReservarMesa(){
+    this.router.navigate(['/reservaCliente']);
+  }
+  // obtenerReservas() {
+  //   this.data.getListaReservas("reservas").subscribe(lista => {
+  //       this.reservas=lista;
+  //       console.log("reservas: ",this.reservas); 
+  //       for (let i=0; i<=this.reservas.length-1; i++){
+  //         if (this.reservas[i].estado==EstadoReserva.activa
+  //           && this.reservas[i].correo==this.correo){
+  //             this.codigoMesa=this.reservas[i].codigoMesa;
+  //           }
+  //       } 
+  //   });
+  //   console.log("reservas: ",this.reservas);  
+  //  } 
 
   obtenerProductos() {
     this.data.getListaProductos("productos").subscribe(lista => {
@@ -173,8 +183,7 @@ export class PedirPlatosComponent implements OnInit {
 
    obtenerPedidos(){
     this.data.getListaPedidos("pedidos").subscribe(lista => {
-      this.pedidos=lista; 
-      
+      this.pedidos=lista;       
     });
     console.log("pedidos: ",this.pedidos)
    }
@@ -208,32 +217,22 @@ export class PedirPlatosComponent implements OnInit {
     
    }
 
-   obtenerUsuario() {
- 
+   obtenerUsuario() { 
     this.usuarioService.EstaLogeado().subscribe(user => {
-      if (user) {
-        console.log("user.uid obtenido",user.uid)
-        this.dataApi.TraerUno(user.uid, 'usuarios').pipe(take(1)).subscribe(userx => {
-
+      if (user) {       
+        this.dataApi.TraerUno(user.uid, 'usuarios')
+        .pipe(take(1)).subscribe(userx => {
           if (userx) {
-            if (userx.activo) {
-              console.log("userx activo reserva:", userx)
-              this.usuarioService.usuario = userx;
-
-              this.foto = userx.foto;
-              this.correo= userx.correo;
-              this.nombre = userx.nombre;
-              this.apellido = userx.apellido;
-              this.perfil = userx.perfil;
-              this.logeado = true;
-              
+            if (userx.activo) {             
+                this.usuarioService.usuario = userx;             
+                this.correo= userx.correo;
+                this.nombre = userx.nombre;            
+                this.perfil = userx.perfil;    
+                this.obtenerReservas();
             }
-            else {
-              this.foto = "";
+            else {             
               this.nombre = "";
-              this.correo= "";
-              this.apellido = "";
-              this.logeado = false;
+              this.correo= ""; 
               this.perfil = null;
             }
           }
@@ -241,13 +240,27 @@ export class PedirPlatosComponent implements OnInit {
         });
       }
       else {
-        this.foto = "";
         this.nombre = "";
-        this.correo= "";
-        this.apellido = "";
-        this.logeado = false;
+        this.correo= "";       
         this.perfil = null;
       }
     });
   }
+
+  obtenerReservas() {  
+    this.tieneReserva=false;
+    this.data.getListaReservas("reservas").subscribe(lista => {
+        this.reservas=lista;         
+        for(let i=0; i<=this.reservas.length-1; i++){
+          if(this.reservas[i].correo==this.correo &&
+            this.reservas[i].estado=="activa"){
+            this.miReserva=this.reservas[i].codigoMesa; 
+            this.tieneReserva=true;              
+          }
+        }         
+                
+    });
+    console.log("reservas: ",this.reservas); 
+ } 
+
 }

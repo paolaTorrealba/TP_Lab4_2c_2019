@@ -1,8 +1,14 @@
 <app-principal></app-principal>
 <br><br>
-<h4>Hacer Pedido</h4>
-<h4>-- Recuerde seleccionar una mesa --</h4>
-        <p >Codigo Mesa Seleccionada: {{this.codigoMesa}}</p>
+<h3 *ngIf="tieneReserva == false && !this.correo == ''" >
+        <p class= "no-resultados"> Aún no reservaste mesa! </p>
+        <button  type="button" class="btn btn-warning" 
+        (click)="irAReservarMesa()" 
+        style="margin-left: 35%;" >Reservar Mesa</button> 
+</h3>
+<div  *ngIf="tieneReserva == true && !this.correo == ''">
+        <h3><p class= "no-resultados"> Codigo Mesa: [{{this.miReserva}}] </p></h3>
+       <h4>Hacer Pedido</h4>
 
         <p >monto total: {{this.montoTotal}}</p>
         <p >tiempo total: {{this.tiempoTotal}}</p>
@@ -11,18 +17,19 @@
         <button (click)="mostrarCerveza()">Cerveza</button>
         <button (click)="mostrarBarra()">Barra</button>
         <div *ngIf="!pedidoRealizado">
-        <ul *ngFor="let item of productos">
-            <p *ngIf="item.tipo===this.tipo">nombre: {{item.nombre}}</p>
-            <p *ngIf="item.tipo===this.tipo">descripcion: {{item.descripcion}}</p>   
-            <p *ngIf="item.tipo===this.tipo">precio: {{item.precio}}</p>
-            <input *ngIf="item.tipo===this.tipo" type="checkbox" ng-model="item" (click)="agregarPedido(item)">
-            <input *ngIf="item.tipo===this.tipo" type="checkbox" ng-model="item" (click)="quitarPedido(item)">
-            <p *ngIf="item.tipo===this.tipo">======================</p>   
-        
-        </ul> 
+            <ul *ngFor="let item of productos">
+                <p *ngIf="item.tipo===this.tipo">nombre: {{item.nombre}}</p>
+                <p *ngIf="item.tipo===this.tipo">descripcion: {{item.descripcion}}</p>   
+                <p *ngIf="item.tipo===this.tipo">precio: {{item.precio}}</p>
+                <input *ngIf="item.tipo===this.tipo" type="checkbox" ng-model="item" (click)="agregarPedido(item)">
+                <input *ngIf="item.tipo===this.tipo" type="checkbox" ng-model="item" (click)="quitarPedido(item)">
+                <p *ngIf="item.tipo===this.tipo">======================</p>   
+            
+            </ul> 
         </div> 
         
-        <button  *ngIf="!pedidoRealizado" (click)="guardarPedido()">Aceptar</button> -->
+        <button  *ngIf="!pedidoRealizado" (click)="guardarPedido()">Aceptar</button> 
+</div>         
          <!-- EL MOZO AGREGA UNA FOTO-->
 
          <!-- <app-principal></app-principal> -->
