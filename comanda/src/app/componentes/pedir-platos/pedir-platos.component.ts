@@ -139,7 +139,8 @@ quitarPedido(item){
     this.data.getListaPedidos("pedidos").subscribe(lista => {
       this.pedidos=lista; 
       for (let i=0; i<=this.pedidos.length-1; i++){
-        if(this.pedidos[i].correoCliente==this.correo){
+        if(this.pedidos[i].correoCliente==this.correo
+          && this.pedidos[i].estado!=EstadoPedido.cancelado){
           this.noTienePedido=false;
         }
       }
@@ -170,6 +171,7 @@ guardarPedido(){
     console.log("pedido a guardar: ", data)
     this.auth.guardarPedido(data).then(res =>{
         this.pedidoRealizado= true;
+        this.noTienePedido=false;
         this.seleccionados= [];
         // this.montoTotal=0;
         // this.tiempoTotal=0;

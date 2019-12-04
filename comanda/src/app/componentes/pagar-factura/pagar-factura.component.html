@@ -1,7 +1,46 @@
 <app-principal></app-principal>
 <br><br>
+<h3 *ngIf="vacia == true" >
+        <p class= "no-resultados"> No hay pedidos para mostrar <i class="far fa-thumbs-up"></i></p>
+</h3>
+<div  *ngIf="!vacia == true ">
+<section class="h-100 registro-pagina">
+<div class="container h-100">
+   <div class="row justify-content-md-center h-100" style="margin-left: -30%;">
+    <div class="card-wrapper registro-pagina">  
+      <div class="card fat">
+        <div class="card-body">
+           <h4 class="card-title" style="margin-left: 20%;FONT-FAMILY: fantasy;">Detalle Factura</h4><br>             
+           <ul *ngFor="let item of pedidos">
+               <div *ngIf="item.correoCliente==correo">    
 
-<p>Abonar la Factura</p>
+                        <h5>Nombre:  {{item.nombreCliente}}</h5> <br> 
+                        <h5>Codigo Pedido:  {{item.codigoPedido}}</h5><br>
+                        <h5>Codigo Mesa:  {{item.codigoMesa}}</h5> <br> 
+                        <h5>Monto: $  {{item.montoTotal}}</h5> 
+                </div>  
+                <br>
+                <br>
+                <br>
+            
+                <button *ngIf="item.estado=='recibido'" type="button" class="btn btn-success" 
+                (click)="pagar(item)">Pagar Factura</button>        
+                
+                <div  *ngIf="item.estado!='recibido' && item.estado!='pagado'" >
+                    <p>El pedido no se puede abonar porque esta en estado {{item.estado}} </p>
+                </div>
+                <div  *ngIf="item.estado=='pagado'" >
+                       <span class="label label-info">-- PAGO RECIBIDO --</span>
+                </div>  
+            </ul>
+      </div>
+</div>
+</div>
+</div>
+</div>
+</section>
+</div>
+<!-- <p>Abonar la Factura</p>
 <p>-----------------</p>
 <ul *ngFor="let item of pedidos">
         <div *ngIf="item.correo==correo">
@@ -19,4 +58,4 @@
                 </div>
                     
         </div>
-       </ul> 
+       </ul>  -->

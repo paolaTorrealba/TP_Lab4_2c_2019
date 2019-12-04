@@ -17,7 +17,7 @@
                     (click)="irVerEstado()" 
                     style="margin-left: 35%;" >Ver Estado</button> 
     </h3>
-    <div *ngIf="hacerPedido">
+    <div *ngIf="hacerPedido &&  noTienePedido">
     <h3 >
          <p class= "no-resultados">Monto a pagar:    $ {{this.montoTotal}}</p>
          <p class= "no-resultados">Tiempo de Espera: {{this.tiempoTotal}} min</p>
