@@ -30,15 +30,17 @@ export class PedirPlatosComponent implements OnInit {
   public tipo:string;
   public pedidoRealizado:boolean= false;
   public montoTotal:number;
-  public seleccionados: Array<any> = [];  
-  public listarCerveza:boolean=false;
-  public listarBarra:boolean=false;
-  public listarPlatos: boolean=false;
+  public seleccionados: Array<any> = []; 
+  public noTienePedido:boolean=true;
+  public hacerPedido:boolean=false;
+  public mostrarDetalle:boolean=false;
+
   public perfil: Perfil;
   foto = ''; 
   logeado:boolean;
   public cantidadPedidos:number=1;
   public tieneReserva:boolean;
+  public mostrar:boolean=true;
   public miReserva:string;
 
   private columsProducto: string[] = ['Tipo','NombreProducto', 'Foto', 'TiempoPromedio','Precio','Seleccionar', 'Cancelar'];
@@ -46,6 +48,11 @@ export class PedirPlatosComponent implements OnInit {
   public productos:Array<any> = []; 
   private dataSource = new MatTableDataSource(this.productos);
   private noData = this.dataSource.connect().pipe(map((data: any[]) => data.length === 0));
+  
+
+  private columsSelecAndCantidad: string[] = ['Tipo','NombreProducto', 'Cantidad'];
+  private dataSourceSelecAndCantidad : any;
+  private noDataSel: any;
   
   constructor(private  data:  AuthService,
     private auth: AuthProvider,
@@ -55,19 +62,41 @@ export class PedirPlatosComponent implements OnInit {
 
     this.montoTotal=0;
     this.tiempoTotal=0;
-    this.obtenerUsuario();    
-  
-    this.obtenerPedidos();   
+    this.obtenerUsuario();
    
-  }
+}
 
-  ngOnInit() {}
+ngOnInit() {}
 
 //  Si no reservo mesa no puede hacer pedidos
 irAReservarMesa(){
     this.router.navigate(['/reservaCliente']);
 }
+
+irVerEstado(){
+  this.router.navigate(['/verEstadoPedido']);
+}
+
+// showInfo(){
+//   if(!this.mostrarDetalle){
+//      for(let i=0; i<=this.seleccionados.length-1;i++){
+
+//      }
+
+//     this.dataSourceSelecAndCantidad = new MatTableDataSource(this.seleccionados); 
+//     this.mostrarDetalle=true;  
+//   }else{
+//     this.mostrarDetalle=false;  
+//   }
+  
+     
+// }
  
+iniciarPedido(){
+  this.obtenerProductos();
+  this.hacerPedido=true;
+  this.mostrar=false;
+}
 
 obtenerProductos() {
     this.data.getListaProductos("productos").subscribe(lista => {
@@ -83,6 +112,7 @@ agregarPedido(item){
      this.seleccionados.push(item);       
      this.montoTotal= this.montoTotal+item.precio;   
      this.tiempoTotal = this.tiempoTotal+item.tiempoPromedioElaboracion;
+    //  this.dataSourceSeleccionados = new MatTableDataSource(this.seleccionados);      
    }
 
 quitarPedido(item){       
@@ -107,7 +137,13 @@ quitarPedido(item){
 
   obtenerPedidos(){
     this.data.getListaPedidos("pedidos").subscribe(lista => {
-      this.pedidos=lista;       
+      this.pedidos=lista; 
+      for (let i=0; i<=this.pedidos.length-1; i++){
+        if(this.pedidos[i].correoCliente==this.correo){
+          this.noTienePedido=false;
+        }
+      }
+      
     });
     console.log("pedidos: ",this.pedidos)
     if (this.pedidos!=undefined){
@@ -120,7 +156,8 @@ guardarPedido(){
     let data = { 
           fotoMesa:"",
           codigoPedido:"", 
-          nombreCliente: this.nombre,     
+          nombreCliente: this.nombre, 
+          correoCliente: this.correo,    
           estado: EstadoPedido.pendiente,
           fecha: new Date(),
           numero: this.cantidadPedidos,
@@ -142,7 +179,7 @@ guardarPedido(){
     
    }
 
-   obtenerUsuario() { 
+obtenerUsuario() { 
     this.usuarioService.EstaLogeado().subscribe(user => {
       if (user) {       
         this.dataApi.TraerUno(user.uid, 'usuarios')
@@ -154,7 +191,7 @@ guardarPedido(){
                 this.nombre = userx.nombre;            
                 this.perfil = userx.perfil;    
                 this.obtenerReservas();
-                this.obtenerProductos();
+                this.obtenerPedidos(); 
             }
             else {             
               this.nombre = "";
@@ -171,6 +208,8 @@ guardarPedido(){
       }
     });
   }
+
+
 // =======RESERVAS ==========
   obtenerReservas() {  
     this.tieneReserva=false;
@@ -186,21 +225,5 @@ guardarPedido(){
     });
     console.log("reservas: ",this.reservas); 
  } 
-
-
- mostrarCerveza(){
-  this.tipo="cerveza";
-  console.log("mostrar bebidas", this.listarCerveza)
-}
-
-mostrarBarra(){
- this.tipo="barra";
- console.log("mostrar barra", this.listarBarra)
-}
-
-mostrarPlatos(){
- this.tipo="plato";
- console.log("mostrar plato", this.listarPlatos)
-}
 
 }
