@@ -52,7 +52,7 @@ export class ListadoPedidosComponent implements OnInit {
         this.productos = [];     
      }
      this.dataSourceProd = new MatTableDataSource(this.productos);
-      this.noDataProd = this.dataSource.connect().pipe(map((data: any[]) => data.length === 0));
+     this.noDataProd = this.dataSource.connect().pipe(map((data: any[]) => data.length === 0));
     
    }
 }

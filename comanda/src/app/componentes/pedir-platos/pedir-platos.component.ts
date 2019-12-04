@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/servicios/auth.service';
 import { AuthProvider } from 'src/app/providers/auth';
-import { EstadoReserva, Perfil } from 'src/app/clases/enum';
+import { EstadoReserva, Perfil, EstadoPedido } from 'src/app/clases/enum';
 import { UsuarioService } from 'src/app/servicios/usuario.service';
 import { DataApiService } from 'src/app/servicios/data-api.service';
 import { take } from 'rxjs/operators';
@@ -16,7 +16,7 @@ import { Router, ActivatedRoute, ParamMap } from '@angular/router';
   styleUrls: ['./pedir-platos.component.scss']
 })
 export class PedirPlatosComponent implements OnInit {
-  public productos:Array<any> = [];
+
   public usuarios;
   public pedidos;
   public usuarioActual;
@@ -37,12 +37,13 @@ export class PedirPlatosComponent implements OnInit {
   public perfil: Perfil;
   foto = ''; 
   logeado:boolean;
-
+  public cantidadPedidos:number=1;
   public tieneReserva:boolean;
   public miReserva:string;
 
-
-  private columsProducto: string[] = ['Foto','Tipo','Descripcion','Precio','Tiempo Promedio Elaboracion','Seleccionar', 'Cancelar'];
+  private columsProducto: string[] = ['Tipo','NombreProducto', 'Foto', 'TiempoPromedio','Precio','Seleccionar', 'Cancelar'];
+    
+  public productos:Array<any> = []; 
   private dataSource = new MatTableDataSource(this.productos);
   private noData = this.dataSource.connect().pipe(map((data: any[]) => data.length === 0));
   
@@ -54,165 +55,89 @@ export class PedirPlatosComponent implements OnInit {
 
     this.montoTotal=0;
     this.tiempoTotal=0;
-    this.obtenerUsuario();
-    this.obtenerProductos();
-    this.obtenerReservas();    
-    this.obtenerPedidos();
-    
-    if(this.productos!=undefined){
-      console.log("Productos cargado: ",this.productos);  
-      this.dataSource = new MatTableDataSource(this.productos);      
-      console.log("this.dataSource asignado: ",this.dataSource)
-      this.aplicarFiltros("");
-      this.dataSource.filterPredicate = function (data, filter: string): boolean {
-          return data.tipo.toLowerCase().includes(filter);
-     };  
-       
-    } 
-
-    
-    // this.obtenerCliente();
+    this.obtenerUsuario();    
+  
+    this.obtenerPedidos();   
    
   }
 
   ngOnInit() {}
 
-
-  irAReservarMesa(){
+//  Si no reservo mesa no puede hacer pedidos
+irAReservarMesa(){
     this.router.navigate(['/reservaCliente']);
-  }
-  // obtenerReservas() {
-  //   this.data.getListaReservas("reservas").subscribe(lista => {
-  //       this.reservas=lista;
-  //       console.log("reservas: ",this.reservas); 
-  //       for (let i=0; i<=this.reservas.length-1; i++){
-  //         if (this.reservas[i].estado==EstadoReserva.activa
-  //           && this.reservas[i].correo==this.correo){
-  //             this.codigoMesa=this.reservas[i].codigoMesa;
-  //           }
-  //       } 
-  //   });
-  //   console.log("reservas: ",this.reservas);  
-  //  } 
+}
+ 
 
-  obtenerProductos() {
+obtenerProductos() {
     this.data.getListaProductos("productos").subscribe(lista => {
-          this.productos=lista; 
+      this.productos=lista;        
+      this.dataSource = new MatTableDataSource(this.productos);      
+  });    
+ }
 
-          if(this.productos!=undefined){
-              console.log("Productos cargado: ",this.productos);  
-              this.dataSource = new MatTableDataSource(this.productos);      
-              // console.log("this.dataSource asignado: ",this.dataSource)
-              // this.aplicarFiltros("");
-              // this.dataSource.filterPredicate = function (data, filter: string): boolean {
-              //     return data.tipo.toLowerCase().includes(filter);
-              // };  
-          }               
-      });  
-      
-      
-   } 
 
-   agregarPedido(item){
-     item.estadoProdPedido="pendiente";
+agregarPedido(item){
+     item.estadoProdPedido=EstadoPedido.pendiente;
      item.empleado="";
-     this.seleccionados.push(item);   
-     console.log(" this.seleccionados: ",  this.seleccionados)
-     this.montoTotal= this.montoTotal+item.precio;
-     console.log("monto:", this.montoTotal)
+     this.seleccionados.push(item);       
+     this.montoTotal= this.montoTotal+item.precio;   
      this.tiempoTotal = this.tiempoTotal+item.tiempoPromedioElaboracion;
-     console.log("item:", item)
-     console.log("item:", item.tiempoPromedioElaboracion)
-     console.log("tiempo:", this.tiempoTotal)
-
-
    }
 
-   quitarPedido(item){
-     console.log("resto el valor de item" )
-     this.montoTotal= this.montoTotal-item.precio;
+quitarPedido(item){       
+    if (this.montoTotal-item.precio>=0) {
+      this.montoTotal= this.montoTotal-item.precio;
+    }
+    else{
+      this.montoTotal=0;
+    }
      var indice = this.seleccionados.indexOf(item); 
-     this.seleccionados.splice(indice, 1); 
-     console.log("this.seleccionados: ",this.seleccionados )
-     this.tiempoTotal = this.tiempoTotal-item.tiempoPromedioElaboracion;
-     console.log("tiempo:", this.tiempoTotal)
+     this.seleccionados.splice(indice, 1);  
+     if(this.tiempoTotal-item.tiempoPromedioElaboracion >=0){
+      this.tiempoTotal = this.tiempoTotal-item.tiempoPromedioElaboracion;   
+     }else {
+      this.tiempoTotal =0;   
+     }    
+  } 
+
+  aplicarFiltros(filterValue: string) { 
+      this.dataSource.filter = filterValue.trim().toLowerCase(); 
   }
 
-
-  mostrarCerveza(){
-     this.tipo="cerveza";
-     console.log("mostrar bebidas", this.listarCerveza)
-   }
-
-   mostrarBarra(){
-    this.tipo="barra";
-    console.log("mostrar barra", this.listarBarra)
-  }
-
-   mostrarPlatos(){
-    this.tipo="plato";
-    console.log("mostrar plato", this.listarPlatos)
-   }
-
-   aplicarFiltros(filterValue: string) {  
-     console.log("entre en aplicar filtros");   
-     if(this.productos!=undefined){
-      console.log("aplicarFiltros", filterValue)
-      this.dataSource.filter = filterValue.trim().toLowerCase();      
-    
-     }
-     else{
-      this.dataSource.filter = filterValue.trim().toLowerCase();      
-     }
-     
-  }
-
-  //  obtenerCliente(){   
-  //   this.data.getListaUsuarios("usuarios").subscribe(lista => {
-  //           this.usuarios=lista; 
-      
-  //           for (let i=0; i<= this.usuarios.length -1; i++){
-  //             if (this.usuarios[i].correo==this.correo){
-  //               this.nombre=this.usuarios[i].nombre;
-  //               this.apellido=this.usuarios[i].apellido;
-  //             }
-  //           }
-            
-  //     });
-  //  }
-
-   obtenerPedidos(){
+  obtenerPedidos(){
     this.data.getListaPedidos("pedidos").subscribe(lista => {
       this.pedidos=lista;       
     });
     console.log("pedidos: ",this.pedidos)
+    if (this.pedidos!=undefined){
+      this.cantidadPedidos= this.pedidos.length+1;
+    }
+    
    }
 
-   guardarPedido(){
-    this.obtenerPedidos();
-    console.log("cantidad pdidos: ",  this.pedidos.length)
-    let data = {
-      // correo:localStorage.getItem("usuarioComanda"),
-      nombreCliente:this.nombre,
-      apellidoCliente:this.apellido,
-      estado:"pendiente",
-      fecha: new Date(),
-      numero: this.pedidos.length + 1,
-      productos: this.seleccionados,
-      montoTotal:this.montoTotal,
-      tiempoElaboracion: this.tiempoTotal,
-      foto:"",
-      codigo:"",
-      mesa:this.codigoMesa
+guardarPedido(){    
+    let data = { 
+          fotoMesa:"",
+          codigoPedido:"", 
+          nombreCliente: this.nombre,     
+          estado: EstadoPedido.pendiente,
+          fecha: new Date(),
+          numero: this.cantidadPedidos,
+          productos: this.seleccionados,
+          montoTotal: this.montoTotal,
+          tiempoElaboracion: this.tiempoTotal,      
+          codigoMesa:this.miReserva
     }
+
     console.log("pedido a guardar: ", data)
     this.auth.guardarPedido(data).then(res =>{
-      this.pedidoRealizado= true;
-      this.seleccionados= [];
-      this.montoTotal=0;
-      this.tiempoTotal=0;
-        }).catch(error => {
-      console.log(error,"error al guardar el pedido"); 
+        this.pedidoRealizado= true;
+        this.seleccionados= [];
+        // this.montoTotal=0;
+        // this.tiempoTotal=0;
+    }).catch(error => {
+        console.log(error,"error al guardar el pedido"); 
   });
     
    }
@@ -229,6 +154,7 @@ export class PedirPlatosComponent implements OnInit {
                 this.nombre = userx.nombre;            
                 this.perfil = userx.perfil;    
                 this.obtenerReservas();
+                this.obtenerProductos();
             }
             else {             
               this.nombre = "";
@@ -236,7 +162,6 @@ export class PedirPlatosComponent implements OnInit {
               this.perfil = null;
             }
           }
-
         });
       }
       else {
@@ -246,7 +171,7 @@ export class PedirPlatosComponent implements OnInit {
       }
     });
   }
-
+// =======RESERVAS ==========
   obtenerReservas() {  
     this.tieneReserva=false;
     this.data.getListaReservas("reservas").subscribe(lista => {
@@ -257,10 +182,25 @@ export class PedirPlatosComponent implements OnInit {
             this.miReserva=this.reservas[i].codigoMesa; 
             this.tieneReserva=true;              
           }
-        }         
-                
+        }       
     });
     console.log("reservas: ",this.reservas); 
  } 
+
+
+ mostrarCerveza(){
+  this.tipo="cerveza";
+  console.log("mostrar bebidas", this.listarCerveza)
+}
+
+mostrarBarra(){
+ this.tipo="barra";
+ console.log("mostrar barra", this.listarBarra)
+}
+
+mostrarPlatos(){
+ this.tipo="plato";
+ console.log("mostrar plato", this.listarPlatos)
+}
 
 }
