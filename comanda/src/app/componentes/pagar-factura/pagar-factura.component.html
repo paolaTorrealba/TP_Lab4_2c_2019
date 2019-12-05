@@ -29,8 +29,8 @@
                 <div  *ngIf="item.estado!='recibido' && item.estado!='pagado'" >
                     <p>El pedido no se puede abonar porque esta en estado {{item.estado}} </p>
                 </div>
-                <div  *ngIf="item.estado=='pagado'" >
-                       <span class="label label-info">-- PAGO RECIBIDO --</span>
+                <div  *ngIf="pagado" >
+                       <p >-- PAGO RECIBIDO --</p>
                 </div>  
             </ul>
       </div>

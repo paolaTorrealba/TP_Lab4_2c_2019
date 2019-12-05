@@ -24,6 +24,7 @@ export class PagarFacturaComponent implements OnInit {
   public perfil: Perfil;
   public nombre: string;
   public vacia:boolean;
+  public pagado:boolean=false;
 
   constructor(private  data:  AuthService,    
     private auth: AuthProvider,
@@ -80,7 +81,7 @@ export class PagarFacturaComponent implements OnInit {
    
    pagar(item){    
     console.log("item: ", item)    
-   
+    this.pagado=true;
     item.estado=EstadoPedido.pagado;
     console.log("item: ", item) 
     this.auth.actualizarPedido(item).then(res => {
