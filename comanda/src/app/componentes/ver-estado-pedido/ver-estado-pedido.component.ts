@@ -85,12 +85,19 @@ export class VerEstadoPedidoComponent implements OnInit {
       for (let i=0; i<=this.pedidos.length-1; i++){
         if(this.pedidos[i].correoCliente==this.correo
           && this.pedidos[i].estado!=EstadoPedido.cancelado){
-            
+    
           this.misPedidos.push( this.pedidos[i])
+          console.log("4 ",this.pedidos)
+          console.log("5 ",this.misPedidos)
         }
       }
-      this.vacia=false;
-      this.dataSource = new MatTableDataSource(this.misPedidos);       
+      this.vacia=this.misPedidos.length==0; 
+      console.log(this.vacia)  
+      console.log("6 ",this.misPedidos)  
+       this.dataSource = new MatTableDataSource(this.misPedidos);      
+      // this.vacia=false;
+      // console.log("6 ",this.misPedidos)
+      // this.dataSource = new MatTableDataSource(this.misPedidos);       
     });
   }
 

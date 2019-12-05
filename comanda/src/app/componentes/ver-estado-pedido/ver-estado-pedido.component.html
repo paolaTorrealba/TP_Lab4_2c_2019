@@ -4,7 +4,7 @@
     <p class= "no-resultados"> No hay pedidos para mostrar <i class="far fa-thumbs-up"></i></p>
 </h3>
 <div  *ngIf="!vacia == true">  
-    <table mat-table [dataSource]="pedidos">
+    <table mat-table [dataSource]="dataSource">
       <tr>
           <ng-container matColumnDef="Nombre Cliente">
                     <th mat-header-cell *matHeaderCellDef>Nombre Cliente </th>
@@ -49,6 +49,7 @@
       </div>
 </table>
 <br><br>
+<div *ngIf="info">
 <label>Detalle del Pedido:</label>
     <table  mat-table [dataSource]="productos">
            <tr>
@@ -74,6 +75,7 @@
                 <tr mat-row *matRowDef="let row; columns: columsProductoPedido;"></tr>
             </div> 
     </table>
+</div>
 </div>
 
 

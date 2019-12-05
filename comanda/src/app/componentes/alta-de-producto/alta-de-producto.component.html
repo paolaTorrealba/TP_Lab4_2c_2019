@@ -127,7 +127,7 @@
                        <label class="custom-file-label" for="customFile">{{imgName}}</label>
                      </div>
                  </form>  
-                 <input #imgProducto type="text" [value]="urlImagen | async">    
+                 <input #imgProducto type="hidden" [value]="urlImagen | async">    
                  <form class="margin-bottom">
                    <div class="custom-control custom-checkbox">
                      <input type="checkbox" class="custom-control-input" id="customCheck" name="customCheck">
