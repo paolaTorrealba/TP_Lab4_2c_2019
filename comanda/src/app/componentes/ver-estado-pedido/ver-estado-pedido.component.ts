@@ -87,13 +87,11 @@ export class VerEstadoPedidoComponent implements OnInit {
           && this.pedidos[i].estado!=EstadoPedido.cancelado){
             
           this.misPedidos.push( this.pedidos[i])
-          this.vacia=false;
-          this.dataSource = new MatTableDataSource(this.misPedidos); 
-               
         }
-      }      
+      }
+      this.vacia=false;
+      this.dataSource = new MatTableDataSource(this.misPedidos);       
     });
-   
   }
 
    

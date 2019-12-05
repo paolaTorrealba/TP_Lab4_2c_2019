@@ -4,7 +4,7 @@
     <p class= "no-resultados"> No hay pedidos para mostrar <i class="far fa-thumbs-up"></i></p>
 </h3>
 <div  *ngIf="!vacia == true">  
-    <table mat-table [dataSource]="dataSource">
+    <table mat-table [dataSource]="pedidos">
       <tr>
           <ng-container matColumnDef="Nombre Cliente">
                     <th mat-header-cell *matHeaderCellDef>Nombre Cliente </th>
@@ -37,7 +37,7 @@
         <ng-container matColumnDef="Confirmar Recepcion">
                 <th mat-header-cell *matHeaderCellDef> Confirmar Recepcion </th>
                 <td mat-cell *matCellDef="let element">
-                    <button *ngIf="element.estadoPedido=='entregado'">
+                    <button *ngIf="element.estado=='entregado'" mat-icon-button (click)="confirmarRecepcion(element)">
                         <mat-icon>check_circle</mat-icon>
                     </button> 
                 </td>    
@@ -78,7 +78,7 @@
 
 
 
-
+<!-- 
 <ul *ngFor="let item of pedidos">
         <div *ngIf="item.correo==correo">
                 <p >NOMBRE: {{item.nombreCliente}}</p>  
@@ -91,12 +91,12 @@
                         <div>
                             <p >DESCRIPCION: {{producto.descripcion}}</p> 
                             <p >ESTADO: {{producto.estadoProdPedido}}</p> 
-                            <!-- <button (click)="pagar(item)">Pagar</button> -->
-                        </div>     
+                          <button (click)="pagar(item)">Pagar</button> -->
+                        <!-- </div>     
                    </ul> 
                    <br>  
                    
-                   <button *ngIf="item.estado=='entregado'" (click)="confirmarRecepcion(item)">confirmar Recepcion</button>        
+                   <button *ngIf="item.estado=='entregado'" (click)="confirmarRecepcion(item)">confirmar Recepcion</button>         -->
                     
-        </div>
-       </ul> 
+        <!-- </div>
+       </ul>   -->
