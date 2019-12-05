@@ -23,7 +23,7 @@
                 <br>
                 <br>
             
-                <button *ngIf="item.estado=='recibido'" type="button" class="btn btn-success" 
+                <button *ngIf="item.correoCliente==correo && item.estado=='recibido'" type="button" class="btn btn-success" 
                 (click)="pagar(item)">Pagar Factura</button>        
                 
                 <div  *ngIf="item.estado!='recibido' && item.estado!='pagado'" >
