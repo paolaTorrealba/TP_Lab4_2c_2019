@@ -21,6 +21,18 @@ export class ColorPedidoPendienteDirective {
     else if (this.estado==EstadoPedido.cancelado){
       this.el.nativeElement.style.backgroundColor = "red";
     }
+    else if (this.estado==EstadoPedido.enPreparacion){
+      this.el.nativeElement.style.backgroundColor = "violet";
+    }
+    else if (this.estado==EstadoPedido.listoParaServir){
+      this.el.nativeElement.style.backgroundColor = "orange";
+    }
+    else if (this.estado==EstadoPedido.entregado){
+      this.el.nativeElement.style.backgroundColor = "pink";
+    }
+    else if (this.estado==EstadoPedido.recibido){
+      this.el.nativeElement.style.backgroundColor = "red";
+    }
       
     else
       this.el.nativeElement.style.backgroundColor = "wheat";

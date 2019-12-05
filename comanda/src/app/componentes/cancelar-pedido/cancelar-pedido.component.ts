@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { EstadoPedido, Perfil } from 'src/app/clases/enum';
+import { EstadoPedido, Perfil, EstadoReserva, EstadoMesa } from 'src/app/clases/enum';
 import { AuthService } from 'src/app/servicios/auth.service';
 import { AuthProvider } from 'src/app/providers/auth';
 import { UsuarioService } from 'src/app/servicios/usuario.service';
@@ -20,7 +20,12 @@ export class CancelarPedidoComponent implements OnInit {
   public correo:string;
   public perfil: Perfil;
   public nombre: string;
+  public tieneReserva:boolean;
   public vacia:boolean;
+  public reservas:Array<any> = [];
+  public mesas:Array<any> = [];
+  public miReserva:any;
+  public miMesa:any;
   
   constructor(private  data:  AuthService,    
     private auth: AuthProvider,
@@ -41,16 +46,60 @@ export class CancelarPedidoComponent implements OnInit {
    }
 
    
-   cancelar(item){    
+cancelar(item){    
     console.log("item: ", item)   
    
     item.estado=EstadoPedido.cancelado;
     console.log("item: ", item) 
     this.auth.actualizarPedido(item).then(res => {
       console.log("pedido cancelado por el cliente")
-    });     
-   
+    }); 
+    this.cancelarReservas(item); 
+    this.cerrarMesa(item); 
  }
+
+ cerrarMesa(item){ 
+   console.log(item)
+  this.data.getListaMesas("mesas").subscribe(lista => {
+        this.mesas=lista; 
+        console.log(this.mesas)        
+        for(let i=0; i<=this.mesas.length-1; i++){
+          if(this.mesas[i].estado==EstadoMesa.reservada &&
+            this.mesas[i].codigo==item.codigoMesa ){
+            this.miMesa=this.mesas[i];                     
+          }
+        }  
+        console.log("mi mesa", this.miMesa)
+        this.miMesa.estado=EstadoMesa.cerrada;
+        console.log("item: ", this.miMesa);       
+        this.auth.actualizarMesa(this.miMesa).then(res => {
+            console.log("mesa cerrada",res);
+        });
+  }) 
+}
+  
+cancelarReservas(item) { 
+  this.tieneReserva=false; 
+  this.data.getListaReservas("reservas").subscribe(lista => {
+      this.reservas=lista;         
+      for(let i=0; i<=this.reservas.length-1; i++){
+        if(this.reservas[i].correo==this.correo &&
+          this.reservas[i].estado=="activa" &&
+          this.reservas[i].codigoMesa==item.codigoMesa ){
+          this.miReserva=this.reservas[i]; 
+          this.tieneReserva=true;              
+        }
+      }         
+      if (this.tieneReserva ){
+          this.miReserva.estado=EstadoReserva.finalizada;       
+          this.auth.actualizarReserva(this.miReserva).then(res =>{
+          }).catch(error => {
+              console.log(error,"error al guardar la reserva"); 
+          });          
+      }              
+  });
+  console.log("reservas: ",this.reservas); 
+} 
 
  obtenerUsuario() { 
   this.usuarioService.EstaLogeado().subscribe(user => {

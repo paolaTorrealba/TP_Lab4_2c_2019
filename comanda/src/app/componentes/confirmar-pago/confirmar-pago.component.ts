@@ -1,9 +1,13 @@
 import { Component, OnInit} from '@angular/core';
 import { AuthService } from 'src/app/servicios/auth.service';
 import { AuthProvider } from 'src/app/providers/auth';
-import { EstadoPedido } from 'src/app/clases/enum';
-import { MatTableDataSource, MatDialog } from '@angular/material';
+import { EstadoPedido, Perfil } from 'src/app/clases/enum';
+import { MatTableDataSource } from '@angular/material';
 import { map } from 'rxjs/operators';
+import { UsuarioService } from 'src/app/servicios/usuario.service';
+import { DataApiService } from 'src/app/servicios/data-api.service';
+import { take } from 'rxjs/operators';
+
 
 @Component({
   selector: 'app-confirmar-pago',
@@ -14,32 +18,33 @@ export class ConfirmarPagoComponent implements OnInit {
 
   public info:boolean;
   public pedidos:Array<any> = [];
+  public pedidosPagados :Array<any> = [];
   public productos:Array<any> = [];
   public vacia:boolean;
   public cerrado=EstadoPedido.cerrado;
   public entregado=EstadoPedido.entregado;
   public listoParaServir= EstadoPedido.listoParaServir;
+  public correo:string;
+  public perfil: Perfil;
+  public nombre: string;
+
 
   private columsPedidos: string[] = ['Mesa', 'Importe','Estado', 'Detalle','Confirmar Pago'];
-  private dataSource = new MatTableDataSource(this.pedidos);
+  private dataSource = new MatTableDataSource(this.pedidosPagados);
   private noData = this.dataSource.connect().pipe(map((data: any[]) => data.length === 0));
   
   private columsProductoPedido: string[] = ['Descripcion','Empleado','Estado Producto','Foto'];
   private dataSourceProd : any;
   private noDataProd: any;
   constructor(private  data:  AuthService,
-       private auth: AuthProvider) { 
-         this.obtenerPedidos();
-    }
-  ngOnInit() {}
+       private auth: AuthProvider,
+       private usuarioService: UsuarioService,
+       private dataApi: DataApiService) {     
+      
+         this.obtenerUsuario();     
+     }
 
-  obtenerPedidos(){
-    this.data.getListaPedidos("pedidos").subscribe(lista => {
-      this.pedidos=lista; 
-      this.vacia=this.pedidos.length==0; 
-    });
-    console.log("pedidos: ",this.pedidos)
-   }
+  ngOnInit() {}
 
    confirmarPago(item){ 
 
@@ -62,5 +67,49 @@ export class ConfirmarPagoComponent implements OnInit {
      this.dataSourceProd = new MatTableDataSource(this.productos);
      this.noDataProd = this.dataSource.connect().pipe(map((data: any[]) => data.length === 0));
    
+  }
+
+  obtenerPedidos(){
+    this.data.getListaPedidos("pedidos").subscribe(lista => {
+        this.pedidos=lista;
+          for (let i=0; i<=this.pedidos.length-1;i++){
+            if(this.pedidos[i].estado==EstadoPedido.pagado){  
+              
+              this.pedidosPagados.push(this.pedidos[i]);
+            }
+          }          
+                
+        this.vacia=this.pedidosPagados.length==0;     
+        this.dataSource = new MatTableDataSource(this.pedidosPagados); 
+        console.log("pagados, ",this.pedidosPagados)     
+    });    
+   }
+
+
+  obtenerUsuario() { 
+    this.usuarioService.EstaLogeado().subscribe(user => {
+      if (user) {       
+        this.dataApi.TraerUno(user.uid, 'usuarios')
+        .pipe(take(1)).subscribe(userx => {
+          if (userx) {
+            if (userx.activo) {             
+                this.usuarioService.usuario = userx;             
+                this.correo= userx.correo;
+                this.nombre = userx.nombre; 
+                this.obtenerPedidos(); 
+            }
+            else {             
+              this.nombre = "";
+              this.correo= "";               
+            }
+          }
+        });
+      }
+      else {
+        this.nombre = "";
+        this.correo= "";      
+       
+      }
+    });
   }
 }

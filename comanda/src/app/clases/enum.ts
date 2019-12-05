@@ -22,10 +22,11 @@ export enum EstadoPedido {
     enPreparacion = "enPreparacion",
     listoParaServir = "listo para servir",
     entregado = "entregado",
+    recibido = "recibido",
     pagado="pagado",
     cerrado = "cerrado",    
     cancelado = "cancelado", 
-    recibido = "recibido",
+    
   
 };
 
