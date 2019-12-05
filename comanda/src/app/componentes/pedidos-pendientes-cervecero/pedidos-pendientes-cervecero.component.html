@@ -63,7 +63,7 @@
                 <ng-container matColumnDef="Tomar Pedido">
                         <th mat-header-cell *matHeaderCellDef> Tomar Pedido </th>
                         <td mat-cell *matCellDef="let prod">
-                        <button mat-icon-button (click)="tomarPedido(prod)">
+                        <button *ngIf="prod.estadoProdPedido=='pendiente'&& tarea==prod.tipo" mat-icon-button (click)="tomarPedido(prod)">
                                 <mat-icon>check_circle</mat-icon>
                         </button> 
                         </td>    

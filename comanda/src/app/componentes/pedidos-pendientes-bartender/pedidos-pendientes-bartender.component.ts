@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/servicios/auth.service';
-import { AuthProvider } from 'src/app/providers/auth';
+import { AuthProvider, perfil } from 'src/app/providers/auth';
 import { EstadoPedido, TipoProducto, Perfil } from 'src/app/clases/enum';
 import { UsuarioService } from 'src/app/servicios/usuario.service';
 import { DataApiService } from 'src/app/servicios/data-api.service';
@@ -15,6 +15,7 @@ import { map } from 'rxjs/operators';
 })
 export class PedidosPendientesBartenderComponent implements OnInit {
 
+  public tarea:string;
   public vacia:boolean;
   public pedidos:Array<any> = [];
   public pedidoSeleccionado:any;
@@ -69,6 +70,17 @@ export class PedidosPendientesBartenderComponent implements OnInit {
     }   
   }
 
+  quePuedePreparar(){
+     if(this.perfil==Perfil.bartender)
+        this.tarea="barra";
+     if(this.perfil==Perfil.cocinero)
+        this.tarea="plato";
+     if(this.perfil==Perfil.cervecero)
+        this.tarea="cerveza";
+        
+     console.log(this.tarea)   
+  }
+
    tomarPedido(producto){  
       for (let i=0; i<=this.pedidoSeleccionado.productos.length-1;i++){
         if(this.pedidoSeleccionado.productos[i].numeroProducto==producto.numeroProducto){
@@ -111,19 +123,21 @@ export class PedidosPendientesBartenderComponent implements OnInit {
             if (userx.activo) {             
                 this.usuarioService.usuario = userx;             
                 this.correo= userx.correo;
-                this.nombre = userx.nombre; 
+                this.nombre = userx.nombre;
+                this.perfil = userx.perfil; 
                 this.obtenerPedidos(); 
+                this.quePuedePreparar()
             }
             else {             
               this.nombre = "";
-              this.correo= "";               
+              this.correo= "";                         
             }
           }
         });
       }
       else {
         this.nombre = "";
-        this.correo= "";      
+        this.correo= "";          
        
       }
     });

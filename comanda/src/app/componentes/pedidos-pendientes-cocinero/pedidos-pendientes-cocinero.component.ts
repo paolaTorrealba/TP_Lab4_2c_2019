@@ -14,7 +14,7 @@ import { map } from 'rxjs/operators';
   styleUrls: ['./pedidos-pendientes-cocinero.component.scss']
 })
 export class PedidosPendientesCocineroComponent implements OnInit {
-  
+  public tarea:string;
   public vacia:boolean;
   public pedidos:Array<any> = [];
   public pedidosAceptados:Array<any> = [];
@@ -110,7 +110,9 @@ obtenerUsuario() {
               this.usuarioService.usuario = userx;             
               this.correo= userx.correo;
               this.nombre = userx.nombre; 
-              this.obtenerPedidos(); 
+              this.perfil = userx.perfil; 
+                this.obtenerPedidos(); 
+                this.quePuedePreparar()
           }
           else {             
             this.nombre = "";
@@ -125,6 +127,16 @@ obtenerUsuario() {
      
     }
   });
+}
+quePuedePreparar(){
+  if(this.perfil==Perfil.bartender)
+     this.tarea="barra";
+  if(this.perfil==Perfil.cocinero)
+     this.tarea="plato";
+  if(this.perfil==Perfil.cervecero)
+     this.tarea="cerveza";
+     
+  console.log(this.tarea)   
 }
 
 }

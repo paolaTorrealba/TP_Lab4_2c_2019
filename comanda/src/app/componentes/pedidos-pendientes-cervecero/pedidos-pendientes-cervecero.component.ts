@@ -32,7 +32,7 @@ export class PedidosPendientesCerveceroComponent implements OnInit {
   private noData = this.dataSource.connect().pipe(map((data: any[]) => data.length === 0));
   private dataSourceProd : any;
   private noDataProd: any;
-
+  public tarea:string;
   public correo:string;
   public perfil: Perfil;
   public nombre: string;
@@ -81,6 +81,18 @@ export class PedidosPendientesCerveceroComponent implements OnInit {
       });
    }
 
+
+   quePuedePreparar(){
+    if(this.perfil==Perfil.bartender)
+       this.tarea="barra";
+    if(this.perfil==Perfil.cocinero)
+       this.tarea="plato";
+    if(this.perfil==Perfil.cervecero)
+       this.tarea="cerveza";
+       
+    console.log(this.tarea)   
+ }
+
    showInfo(item){
         this.pedidoSeleccionado=item;
 
@@ -108,8 +120,10 @@ export class PedidosPendientesCerveceroComponent implements OnInit {
               if (userx.activo) {             
                   this.usuarioService.usuario = userx;             
                   this.correo= userx.correo;
-                  this.nombre = userx.nombre; 
+                  this.nombre = userx.nombre;
+                  this.perfil = userx.perfil; 
                   this.obtenerPedidos(); 
+                  this.quePuedePreparar();
               }
               else {             
                 this.nombre = "";
