@@ -74,6 +74,7 @@ import { ExcelMesasComponent } from './componentes/excel-mesas/excel-mesas.compo
 import { SimpleNotificationsModule } from 'angular2-notifications';
 import { ExcelProductosComponent } from './componentes/excel-productos/excel-productos.component';
 import { ExcelEmpleadosComponent } from './componentes/excel-empleados/excel-empleados.component';
+import { ListadoEmpleadosComponent } from './componentes/listado-empleados/listado-empleados.component';
 
 @NgModule({
   declarations: [
@@ -131,6 +132,7 @@ import { ExcelEmpleadosComponent } from './componentes/excel-empleados/excel-emp
     ExcelMesasComponent,
     ExcelProductosComponent,
     ExcelEmpleadosComponent,
+    ListadoEmpleadosComponent,
   ],
   imports: [
     FormsModule,

@@ -39,6 +39,7 @@ import { ExcelMesasComponent } from './componentes/excel-mesas/excel-mesas.compo
 import { CancelarPedidoComponent } from './componentes/cancelar-pedido/cancelar-pedido.component';
 import { ExcelProductosComponent } from './componentes/excel-productos/excel-productos.component';
 import { ExcelEmpleadosComponent } from './componentes/excel-empleados/excel-empleados.component';
+import { ListadoEmpleadosComponent } from './componentes/listado-empleados/listado-empleados.component';
 
 
 
@@ -63,6 +64,7 @@ const routes: Routes = [
   { path: 'agregarProducto', component: AltaDeProductoComponent}, 
   { path: 'listadoMesas', component: ListadoMesasComponent},
   { path: 'listadoClientes', component: ListadoClientesComponent},
+  { path: 'listadoEmpleados', component: ListadoEmpleadosComponent},
   { path: 'listadoProductos', component: ListadoProductosComponent},
   { path: 'listadoPedidos', component: ListadoPedidosComponent},
 
