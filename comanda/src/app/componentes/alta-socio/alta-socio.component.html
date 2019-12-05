@@ -75,11 +75,11 @@
   
                 <div class="form-group no-margin"> 
           
-                <div class="form-group no-margin">
-                  <button type="submit" class="btn btn-primary btn-block">
-                      Confirmar
-                  </button>
-                </div>
+                  <div *ngIf="urlImagen!=undefined" class="form-group no-margin">
+                    <button type="submit" class="btn btn-primary btn-block">
+                        Confirmar
+                    </button>
+                  </div>
  
                 </div>         
               </form>

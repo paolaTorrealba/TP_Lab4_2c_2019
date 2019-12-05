@@ -1,4 +1,9 @@
 <app-principal></app-principal>
+<br><br>
+<h3 *ngIf="vacia == true" >
+    <p class= "no-resultados"> No hay encuestas para ver<i class="far fa-thumbs-up"></i></p>
+</h3>
+<div  *ngIf="!vacia == true">
 <table mat-table [dataSource]="encuestas">
         <tr>
             <ng-container matColumnDef="Correo">

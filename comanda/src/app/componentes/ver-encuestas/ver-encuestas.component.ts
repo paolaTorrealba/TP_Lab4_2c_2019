@@ -67,7 +67,8 @@ export class VerEncuestasComponent implements OnInit {
     }
     obtenerEncuestas(){
     this.data.getListaEncuestas("encuestaCliente").subscribe(lista => {
-      this.encuestas=lista; 
+      this.encuestas=lista;;
+      this.vacia=this.encuestas.length==0;
       console.log("encuestas: ",this.encuestas); 
     });
     console.log("encuestas: ",this.encuestas)

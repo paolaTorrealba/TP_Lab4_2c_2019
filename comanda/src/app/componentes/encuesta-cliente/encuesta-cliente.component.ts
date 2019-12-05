@@ -22,6 +22,7 @@ export class EncuestaClienteComponent implements OnInit {
   public image: string;
   public encuestas:Array<any> = [];
   public  date: any;
+  public incompleto:boolean;
   public answer1Model :any="mujer";
   public answer2Model: any="1";
   public answer3Model: any="1";
@@ -60,8 +61,9 @@ export class EncuestaClienteComponent implements OnInit {
                 this.correo= userx.correo;
                 this.nombre = userx.nombre;            
                 this.perfil = userx.perfil;    
-                this.obtenerPedidos();                
+                                
                 this.obtenerEncuestasCliente();
+                this.obtenerPedidos();
             }
             else {             
               this.nombre = "";
@@ -83,18 +85,16 @@ export class EncuestaClienteComponent implements OnInit {
     this.data.getListaPedidos("pedidos").subscribe(lista => {
       this.pedidos=lista; 
       for (let i=0; i<=this.pedidos.length-1;i++){
-        console.log("correos:", this.correo, this.pedidos[i].correo)
-        if (this.pedidos[i].correo== this.correo){
+        if (this.pedidos[i].correoCliente== this.correo){
           if (this.pedidos[i].estado==EstadoPedido.pagado)
           {
             this.hacerEncuesta=true;
+            
           }
          
         }
-      }
-      console.log("pedidos: ",this.pedidos); 
+      } 
     });
-    console.log("pedidos: ",this.pedidos)
    }
 
    obtenerEncuestasCliente(){
@@ -102,6 +102,7 @@ export class EncuestaClienteComponent implements OnInit {
     this.data.getListaEncuestas("encuestaCliente").subscribe(lista => {
       this.encuestas=lista; 
       for(let i=0; i<this.encuestas.length-1; i++){
+        console.log(this.encuestas[i],this.correo)
         if (this.encuestas[i].email==this.correo){
           this.encuestado=true;
           console.log("=====es el mismo usuario");
@@ -127,6 +128,11 @@ guardarEncuesta(){
       console.log("commentaryModel", this.commentaryModel)
       this.encuestaCliente = new EncuestaCliente(); 
       console.log("guardo encuesta")
+      if (this.answer1Model==''){
+        this.incompleto=true;
+      }
+
+
       let data = {    
         "date":new Date(),
         "email": this.correo,

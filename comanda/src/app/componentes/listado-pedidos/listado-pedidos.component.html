@@ -8,7 +8,7 @@
             <tr>
                 <ng-container matColumnDef="Mesa">
                     <th mat-header-cell *matHeaderCellDef> Mesa </th>
-                    <td mat-cell *matCellDef="let element"> {{element.mesa}} </td>
+                    <td mat-cell *matCellDef="let element"> {{element.codigoMesa}} </td>
                 </ng-container>
                 <ng-container matColumnDef="Importe">
                     <th mat-header-cell *matHeaderCellDef> Monto Total </th>
@@ -26,7 +26,7 @@
                     <th mat-header-cell *matHeaderCellDef> Detalle </th>
                     <td mat-cell *matCellDef="let element">
                     <button mat-icon-button (click)="showInfo(element)">
-                        <mat-icon>info</mat-icon>
+                        <mat-icon>assignment</mat-icon>
                     </button> 
                 </td>    
                 </ng-container>        
@@ -37,6 +37,7 @@
             </div>
     </table>
 <br>
+<div *ngIf="info">
 <label>Detalle del Pedido:</label>
     <table  mat-table [dataSource]="productos">
            <tr>
@@ -69,6 +70,7 @@
             </div>
     </table>
 
+</div>
 </div>
 <!-- <ul *ngFor="let item of pedidos">
         <div>

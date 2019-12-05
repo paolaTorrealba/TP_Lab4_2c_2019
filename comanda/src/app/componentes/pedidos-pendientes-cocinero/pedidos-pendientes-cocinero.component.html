@@ -30,6 +30,7 @@
       </div>
 </table>
 <br><br>
+<div *ngIf="info">
 <label>Detalle del Pedido:</label>
 <app-pedido-cocinero [filterName]="'Filtro por tipo'" (busquedaEvento)="aplicarFiltros($event)"></app-pedido-cocinero>
 
@@ -80,6 +81,7 @@
             </div> 
   </table>
 </div> 
+</div>
 <!-- <app-principal></app-principal>
 <h1>Cocinero</h1>
 
