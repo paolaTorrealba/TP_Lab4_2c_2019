@@ -32,12 +32,12 @@
           </ng-container> 
           <ng-container matColumnDef="Codigo Generado">
             <th mat-header-cell *matHeaderCellDef> Codigo Generado </th>
-            <td  mat-cell *matCellDef="let element"> {{element.codigoPedido}} </td>                                   
+            <td  mat-cell *matCellDef="let element"> {{element.codigoPedido | codigo}} </td>                                   
           </ng-container>  
           <ng-container matColumnDef="Aceptar">
             <th mat-header-cell *matHeaderCellDef> Aceptar Pedido </th>
             <td mat-cell *matCellDef="let element">
-                <button *ngIf="element.estado=='pendiente'"  mat-icon-button (click)="aceptarPedido(element)">
+                <button *ngIf="element.estado=='pendiente' && !element.codigoPedido==''"  mat-icon-button (click)="aceptarPedido(element)">
                     <mat-icon>check_circle</mat-icon>
                 </button> 
             </td>    

@@ -15,8 +15,13 @@ export class ColorPedidoPendienteDirective {
     if (this.estado==EstadoPedido.pendiente){
       this.el.nativeElement.style.backgroundColor = "lightgreen";
     }
-    else if (this.estado==EstadoPedido.aceptado)
+    else if (this.estado==EstadoPedido.aceptado){
+      this.el.nativeElement.style.backgroundColor = "cyan";
+    }
+    else if (this.estado==EstadoPedido.cancelado){
       this.el.nativeElement.style.backgroundColor = "red";
+    }
+      
     else
       this.el.nativeElement.style.backgroundColor = "wheat";
   }

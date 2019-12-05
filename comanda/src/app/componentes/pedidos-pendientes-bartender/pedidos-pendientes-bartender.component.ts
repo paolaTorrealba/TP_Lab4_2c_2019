@@ -1,10 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/servicios/auth.service';
 import { AuthProvider } from 'src/app/providers/auth';
+import { EstadoPedido, TipoProducto, Perfil } from 'src/app/clases/enum';
+import { UsuarioService } from 'src/app/servicios/usuario.service';
+import { DataApiService } from 'src/app/servicios/data-api.service';
+import { take } from 'rxjs/operators';
+import { MatTableDataSource } from '@angular/material';
 import { map } from 'rxjs/operators';
-import { MatTableDataSource, MatDialog } from '@angular/material';
-import { EstadoPedido, TipoProducto } from 'src/app/clases/enum';
-
 
 @Component({
   selector: 'app-pedidos-pendientes-bartender',
@@ -17,35 +19,47 @@ export class PedidosPendientesBartenderComponent implements OnInit {
   public pedidos:Array<any> = [];
   public pedidoSeleccionado:any;
   public productos:Array<any> = [];
+  public pedidosAceptados:Array<any> = [];
   public pendiente = EstadoPedido.pendiente;
   public aceptado = EstadoPedido.aceptado;  
   public enPreparacion = EstadoPedido.enPreparacion;
   public barra = TipoProducto.barra;
-  public correo:string;
   public info:boolean;
 
   private columsPedido: string[] = [ 'Codigo' ,'Detalle','Descripcion','Tiempo Promedio Elaboracion'];
   private columsProductoPedido: string[] = [ 'Tipo','Descripcion' ,'Precio','Empleado','Estado Producto','Tiempo Promedio Elaboracion','Tomar Pedido','Foto'];
-  private dataSource = new MatTableDataSource(this.pedidos);
+  private dataSource = new MatTableDataSource(this.pedidosAceptados);
   private noData = this.dataSource.connect().pipe(map((data: any[]) => data.length === 0));
   private dataSourceProd : any;
   private noDataProd: any;
 
-  constructor(private  data:  AuthService,    
-    private auth: AuthProvider) { 
+  
+  public correo:string;
+  public perfil: Perfil;
+  public nombre: string;
 
-      this.correo=localStorage.getItem("usuarioComanda");
+  constructor(private  data:  AuthService,    
+    private auth: AuthProvider,
+    private usuarioService: UsuarioService,
+    private dataApi: DataApiService) {     
       this.info=false;
-      this.obtenerPedidos();     
-    }
+      this.obtenerUsuario();     
+  }
 
   ngOnInit() {}
 
   obtenerPedidos(){
     this.data.getListaPedidos("pedidos").subscribe(lista => {
-        this.pedidos=lista;   
-        this.vacia=this.pedidos.length==0;  
-        this.dataSource = new MatTableDataSource(this.pedidos);      
+        this.pedidos=lista;
+             
+          for (let i=0; i<=this.pedidos.length-1;i++){
+            if(this.pedidos[i].estado==EstadoPedido.aceptado){
+              this.pedidosAceptados.push(this.pedidos[i]);
+            }
+          }          
+                
+        this.vacia=this.pedidosAceptados.length==0;     
+        this.dataSource = new MatTableDataSource(this.pedidosAceptados);      
     });    
    }
 
@@ -84,8 +98,34 @@ export class PedidosPendientesBartenderComponent implements OnInit {
        this.info=false;
        this.productos = [];     
     }
-    // this.dataSourceProd = new MatTableDataSource(this.productos);
-    // this.noDataProd = this.dataSource.connect().pipe(map((data: any[]) => data.length === 0));
    
+   
+  }
+
+  obtenerUsuario() { 
+    this.usuarioService.EstaLogeado().subscribe(user => {
+      if (user) {       
+        this.dataApi.TraerUno(user.uid, 'usuarios')
+        .pipe(take(1)).subscribe(userx => {
+          if (userx) {
+            if (userx.activo) {             
+                this.usuarioService.usuario = userx;             
+                this.correo= userx.correo;
+                this.nombre = userx.nombre; 
+                this.obtenerPedidos(); 
+            }
+            else {             
+              this.nombre = "";
+              this.correo= "";               
+            }
+          }
+        });
+      }
+      else {
+        this.nombre = "";
+        this.correo= "";      
+       
+      }
+    });
   }
 }

@@ -64,7 +64,7 @@ export class PedidosPendientesComponent implements OnInit {
       console.log("item: ", item)
       console.log("la imagen: ", this.imagenUrl)
       item.foto=this.imagenUrl;
-      item.codigo=this.codigo;
+      item.codigoPedido=this.codigo;
       item.estado=EstadoPedido.aceptado;    
       this.auth.actualizarPedido(item).then(res => {
         console.log("pedido aceptado")
@@ -100,7 +100,7 @@ export class PedidosPendientesComponent implements OnInit {
      let rString = this.randomString(5, '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ');
      console.log( this.codigo );
 
-     item.codigo= this.codigo ;
+     item.codigoPedido= this.codigo ;
      console.log("guardo item", item)
      this.auth.actualizarPedido(item).then(res => {
       console.log("codigo guardado")

@@ -58,6 +58,8 @@ import { FinalizarPedidoBartenderComponent } from './componentes/finalizar-pedid
 import { VerEstadoPedidoComponent } from './componentes/ver-estado-pedido/ver-estado-pedido.component';
 import { CancelarPedidoComponent } from './componentes/cancelar-pedido/cancelar-pedido.component';
 import { MesaPipe } from './pipes/mesa.pipe';
+import { CodigoPipe } from './pipes/codigo.pipe';
+
 import { TipoFilasDirective } from './directivas/tipo-filas.directive';
 import { EstadoFilaDirective } from './directivas/estado-fila.directive';
 import { MostrarFotoPipe } from './pipes/mostrar-foto.pipe';
@@ -117,6 +119,7 @@ import { ExcelEmpleadosComponent } from './componentes/excel-empleados/excel-emp
     VerEstadoPedidoComponent,
     CancelarPedidoComponent,
     MesaPipe,
+    CodigoPipe,
     TipoFilasDirective,
     EstadoFilaDirective,
     MostrarFotoPipe,
