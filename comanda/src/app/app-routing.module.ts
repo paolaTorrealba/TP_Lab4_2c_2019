@@ -62,6 +62,7 @@ const routes: Routes = [
   { path: 'agregarEmpleado', component: AltaEmpleadoComponent}, 
   { path: 'agregarProducto', component: AltaDeProductoComponent}, 
   { path: 'listadoMesas', component: ListadoMesasComponent},
+  { path: 'listadoClientes', component: ListadoClientesComponent},
   { path: 'listadoProductos', component: ListadoProductosComponent},
   { path: 'listadoPedidos', component: ListadoPedidosComponent},
 

@@ -124,6 +124,7 @@ export class PrincipalComponent implements OnInit {
           { accion: "Agregar producto", img: "ocupar-mesa.jpg", ruta: "agregarProducto" },
           { accion: "Listado mesa", img: "ocupar-mesa.jpg", ruta: "listadoMesas" },
           { accion: "Listado producto", img: "ocupar-mesa.jpg", ruta: "listadoProductos" },
+          { accion: "Listado clientes", img: "ocupar-mesa.jpg", ruta: "listadoClientes" },
           { accion: "Listado pedidos", img: "ocupar-mesa.jpg", ruta: "listadoPedidos" },
           { accion: "Ver Registro de Clientes", img: "nuevo-empleado.jpg", ruta: "verRegistroClientes" }, 
           { accion: "Cerrar Mesa", img: "repartidor.png", ruta: "cerrarMesa"},
