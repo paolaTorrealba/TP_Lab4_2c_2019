@@ -26,7 +26,7 @@ export class PedidosPendientesBartenderComponent implements OnInit {
   public barra = TipoProducto.barra;
   public info:boolean;
 
-  private columsPedido: string[] = [ 'Codigo' ,'Detalle','Descripcion','Tiempo Promedio Elaboracion'];
+  private columsPedido: string[] = [ 'Codigo Pedido' ,'Detalle','Tiempo Elaboracion'];
   private columsProductoPedido: string[] = [ 'Tipo','Descripcion' ,'Precio','Empleado','Estado Producto','Tiempo Promedio Elaboracion','Tomar Pedido','Foto'];
   private dataSource = new MatTableDataSource(this.pedidosAceptados);
   private noData = this.dataSource.connect().pipe(map((data: any[]) => data.length === 0));
