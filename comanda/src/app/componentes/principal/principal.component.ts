@@ -5,7 +5,6 @@ import { UsuarioService } from 'src/app/servicios/usuario.service';
 import { DataApiService } from 'src/app/servicios/data-api.service';
 import { take } from 'rxjs/operators';
 import { Perfil } from 'src/app/clases/enum';
-// import {HomeComponent} from '../../componentes/home/home.component';
 
 
 @Component({
@@ -33,42 +32,12 @@ export class PrincipalComponent implements OnInit {
     private dataApi: DataApiService,   
     private auth: AuthProvider) {
 
-      // let logeado = usuarioService.isUserLoggedIn();
-      // console.log("logeado :)", logeado)
-
-      // this.email=localStorage.getItem("usuarioComanda"); 
-      // console.log("email del localstorage", this.email);
-      // this.auth.getLista('usuarios').subscribe(lista => {
-      //   this.usuarios=lista;   
-      //   console.log("usuarios: ", this.usuarios)  
-      //   for(let i=0;i<this.usuarios.length;i++){
-      //     if(this.usuarios[i].correo == this.email) {
-      //          this.usuario=this.usuarios[i];
-      //          console.log("el usuario en constructor:",this.usuario);
-      //     }
-      //   }
-      // });
+      
       this.obtenerUsuario();
       this.mostrarMenu();
   }
  
 
-  // obtenerUsuario(){
-  //   this.email=localStorage.getItem("usuarioComanda");  
-  //   console.log("email del localstorage", this.email);
-  //   this.auth.getLista('usuarios').subscribe(lista => {
-  //     this.usuarios=lista;   
-  //     console.log("usuarios: ", this.usuarios)  
-  //     for(let i=0;i<this.usuarios.length;i++){
-  //       if(this.usuarios[i].correo == this.email) {
-  //            this.usuario=this.usuarios[i];
-  //            localStorage.setItem("perfilUComanda", this.usuario.perfil);
-  //            console.log("el usuario: ",this.usuario);
-  //       }
-  //     }
-
-  //   });
-  // }
   obtenerUsuario() {
  
     this.usuarioService.EstaLogeado().subscribe(user => {
@@ -107,13 +76,13 @@ export class PrincipalComponent implements OnInit {
   }
 
 
-  mostrarMenu(){
-    // this.perfil= localStorage.getItem("perfilUComanda")
-    console.log("Menu para el perfil: ",this.perfil);
-    console.log("Muestro el menu para este usuario: ",this.usuario);
+  mostrarMenu(){    
     switch(this.perfil) {
       case "socio":
         this.acciones = [ 
+          { accion: "Reportes", img: "nuevo-empleado.jpg", ruta: "reporte" },
+          { accion: "Listados", img: "nuevo-empleado.jpg", ruta: "listado" },
+          { accion: "Altas", img: "nuevo-empleado.jpg", ruta: "alta" },
           { accion: "Reportes Mesas", img: "nuevo-empleado.jpg", ruta: "reporteMesas" },
           { accion: "Reportes Productos", img: "nuevo-empleado.jpg", ruta: "reporteProductos" },
           { accion: "Reportes Empleados", img: "nuevo-empleado.jpg", ruta: "reporteEmpleados" },
@@ -144,7 +113,6 @@ export class PrincipalComponent implements OnInit {
           { accion: "Ver Facturacion por Mesa", img: "repartidor.png", ruta: "cerrarMesa"},
           { accion: "Ver Importes por Mesas", img: "repartidor.png", ruta: "cerrarMesa"},
           { accion: "Ver Facturacion por Fecha", img: "repartidor.png", ruta: "cerrarMesa"},
-         // { accion: "Confirmar reservas", img: "reserva.jpg", ruta: ListadoReservaComponent },
           { accion: "Ver Comentarios", img: "repartidor.png", ruta: "cerrarMesa"},
 
         ];
@@ -154,7 +122,6 @@ export class PrincipalComponent implements OnInit {
           { accion: "Pedir platos y bebidas", img: "pedido.jpg", ruta: "pedirPlatos"},
           { accion: "Paga Factura", img: "pedido.png", ruta: "pagarFactura" },
           { accion: "Encuesta", img: "pedido.png", ruta: "encuestaCliente" },
-          // { accion: "Ingresar Codigos", img: "pedido.png", ruta: "encuestaCliente" },
           { accion: "Reservar mesa", img: "reserva.jpg", ruta: "reservaCliente" }, 
           { accion: "Ver mi pedido", img: "reserva.jpg", ruta: "verEstadoPedido" },
           { accion: "Cancelar Pedido", img: "reserva.jpg", ruta: "cancelar" },  
@@ -199,27 +166,18 @@ export class PrincipalComponent implements OnInit {
 
   logout(){
     console.log("falta hacer el logout");
-    // let alertConfirm = this.error.mostrarMensajeConfimación("¿Quieres cerrar sesión?", "Cerrar sesión");
-    // alertConfirm.present();
-    // alertConfirm.onDidDismiss((confirm) => {
-    //   if (confirm) {
-    //     this.cerrarSersion();
-    //   }
-    // });
+    
   }
 
   public cerrarSersion(){
     this.auth.logOut();
-    // actualizar el estado del usuario a noLogeado.
-    // limpiar el local Storage.
-    // localStorage.setItem("usuarioComanda","");
-    // localStorage.setItem("perfilUComanda","");
+   
     this.router.navigate(['/login']);
   }
 
   openComponent(item) {   
     this.router.navigate(['/'+item.ruta]);
-    // this.navCtrl.setRoot(item.ruta);
+   
   }
 
   ngOnInit() {

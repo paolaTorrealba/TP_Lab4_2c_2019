@@ -31,6 +31,7 @@
     "firebase": "^7.5.0",
     "jspdf-autotable": "^3.2.11",
     "ng-recaptcha": "^5.0.0",
+    "ngx-spinner": "^8.0.3",
     "pdfmake": "^0.1.62",
     "rxjs": "~6.4.0",
     "tslib": "^1.10.0",

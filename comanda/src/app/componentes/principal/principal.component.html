@@ -1,114 +1,34 @@
-<nav class="dropdownmenu navbar-expand-lg text-uppercase">
-  <div class="container">
-  <!-- SOCIO -->
-    <ul >
-      <li *ngIf="this.perfil=='socio'"><a href="/principal">Principal</a></li>
-      <li *ngIf="this.perfil=='socio'"><a >Reportes</a>
-        <ul  id="submenu">           
-            <li><a href="/reporteMesas">Mesas</a></li> 
-            <li><a href="/reporteProductos">Productos</a></li>   
-            <li><a href="/reporteEmpleados">Empleados</a></li>             
-        </ul>
-      </li>
-      <li *ngIf="this.perfil=='socio'"><a >Encuestas</a>
-        <ul  id="submenu"   >
-            <!-- <li><a href="/verEncuestas">Empleados</a></li> -->
-            <li><a href="/verEncuestas">Clientes</a></li>            
-        </ul>
-      </li>
-      <li *ngIf="this.perfil=='socio'"><a >Altas Empleados</a>
-        <ul  id="submenu">          
-            <li><a href="/agregarEmpleado">Alta Empleado</a></li>
-            <li><a href="/agregarSocio">Alta Socio</a></li>            
-        </ul>
-      </li>
-      <li *ngIf="this.perfil=='socio'"><a >Altas Elementos</a>
-        <ul  id="submenu"   >
-            <li><a href="/agregarMesa">Alta Mesa</a></li>
-            <li><a href="/agregarProducto">Alta Producto</a></li> 
-        </ul>
-      </li>
-      <li *ngIf="this.perfil=='socio'"><a >Listados</a>
-        <ul id="submenu" >
-          <li><a href="/listadoProductos">Productos</a></li>
-          <li><a href="/listadoPedidos">Pedidos</a></li>
-          <li><a href="/listadoMesas">Mesas</a></li>
-          <li><a href="/listadoClientes">Clientes</a></li>
-          <li><a href="/listadoEmpleados">Empleados</a></li>
-        </ul>
-      </li> 
-      <li *ngIf="this.perfil=='socio'"><a href="/login">Salir</a></li>
-      <ul>        
-          <li *ngIf="this.perfil=='socio'"><a href="/principal">{{this.nombre}} | {{this.perfil}}</a></li>      
-      </ul>
-    </ul>
-<!-- CLIENTE -->
-    <ul>        
-        <li *ngIf="this.perfil=='cliente'"><a href="/principal">Principal</a></li>
-        <li *ngIf="this.perfil=='cliente'"><a href="/reservaCliente">Seleccionar Mesa</a></li>
-        <li *ngIf="this.perfil=='cliente'"><a >Mi Pedido</a>
-          <ul id="submenu" >
-              <li *ngIf="this.perfil=='cliente'"><a href="/pedirPlatos">Hacer Pedido</a></li>
-            <li *ngIf="this.perfil=='cliente'" ><a href="/verEstadoPedido">Ver Estado</a></li>
-            <li *ngIf="this.perfil=='cliente'"><a href="/cancelar">Cancelar</a></li>
-            <li *ngIf="this.perfil=='cliente'"><a href="/pagarFactura">Pagar Factura</a></li>
-          </ul>
-        </li> 
-        
-        <li *ngIf="this.perfil=='cliente'"><a href="/encuestaCliente">Encuesta</a></li>
-        <li *ngIf="this.perfil=='cliente'"><a href="/login">Salir</a></li>
 
-    </ul>
-    <ul>        
-        <li *ngIf="this.perfil=='cliente'"><a href="/principal">{{this.nombre}} | {{this.perfil}}</a></li>      
-    </ul>
-<!-- MOZO -->
-    <ul>        
-        <li *ngIf="this.perfil=='mozo'"><a href="/principal">Principal</a></li>
-        <li *ngIf="this.perfil=='mozo'"><a href="/pedidosPendientes">Estado de Pedidos</a></li>
-        <li *ngIf="this.perfil=='mozo'"><a href="/cerrarMesa">Cerrar Mesa</a></li>
-        <!-- <li *ngIf="this.perfil=='mozo'"><a href="/verRegistroClientes">Registro de Cliente</a></li> -->
-        <li *ngIf="this.perfil=='mozo'"><a href="/confirmarPago">Confirmar Pago</a></li>
-        <li *ngIf="this.perfil=='mozo'"><a href="/entregarPedido">Entregar Pedido</a></li>
-        <li *ngIf="this.perfil=='mozo'"><a href="/login">Salir</a></li>
-    </ul>
-    <ul>        
-        <li *ngIf="this.perfil=='mozo'"><a href="/principal">{{this.nombre}} | {{this.perfil}}</a></li>      
-    </ul>
-<!-- BARTENDER -->
-    <ul>        
-        <li *ngIf="this.perfil=='bartender'"><a href="/principal">Principal</a></li>
-        <!-- <li *ngIf="this.perfil=='bartender'"><a href="/encuestaEmpleado">Hacer Encuesta</a></li> -->
-        <li *ngIf="this.perfil=='bartender'"><a href="/pedidosPendientesBartender">Pedidos Pendientes</a></li>
-        <li *ngIf="this.perfil=='bartender'"><a href="/finalizarPedidoBartender">Cerrar Pedido</a></li>
-        <li *ngIf="this.perfil=='bartender'"><a href="/login">Salir</a></li>
-    </ul>
-    <ul>        
-        <li *ngIf="this.perfil=='bartender'"><a href="/principal">{{this.nombre}} | {{this.perfil}}</a></li>      
-    </ul>
-<!-- COCINERO -->
-    <ul>        
-        <li *ngIf="this.perfil=='cocinero'"><a href="/principal">Principal</a></li>
-        <!-- <li *ngIf="this.perfil=='cocinero'"><a href="/encuestaEmpleado">Hacer Encuesta</a></li> -->
-        <li *ngIf="this.perfil=='cocinero'"><a href="/pedidosPendientesCocinero">Pedidos Pendientes</a></li>
-        <li *ngIf="this.perfil=='cocinero'"><a href="/finalizarPedidoCocinero">Cerrar Pedido</a></li>
-        <li *ngIf="this.perfil=='cocinero'"><a href="/login">Salir</a></li>
-    </ul>
-    <ul>        
-        <li *ngIf="this.perfil=='cocinero'"><a href="/principal">{{this.nombre}} | {{this.perfil}}</a></li>      
-    </ul>
- <!-- CERVECERO -->
-    <ul>        
-        <li *ngIf="this.perfil=='cervecero'"><a href="/principal">Principal</a></li>
-        <!-- <li *ngIf="this.perfil=='cervecero'"><a href="/encuestaEmpleado">Hacer Encuesta</a></li> -->
-        <li *ngIf="this.perfil=='cervecero'"><a href="/pedidosPendientesCervecero">Pedidos Pendientes</a></li>
-        <li *ngIf="this.perfil=='cervecero'"><a href="/finalizarPedidoCervecero">Cerrar Pedido</a></li>
-        <li *ngIf="this.perfil=='cervecero'"><a href="/login">Salir</a></li>
-    </ul>
-    <ul>        
-        <li *ngIf="this.perfil=='cervecero'"><a href="/principal">{{this.nombre}} | {{this.perfil}}</a></li>      
-    </ul>   
-   
+
+
+<header class="navbar navbar-inverse navbar-fixed-top bs-docs-nav" role="banner">
+  <div class="container">
+    <div class="navbar-header"> 
+      <p class="navbar-brand">Comanda</p>
+    </div>  
+      <ul class="nav navbar-nav navbar-right">        
+        <li *ngIf="this.perfil=='socio'">
+            <a  routerLink="/reporte">Reportes</a>
+        </li> 
+        <li *ngIf="this.perfil=='socio'">
+            <a  routerLink="/alta">Altas Generales</a>
+        </li>   
+        <li *ngIf="this.perfil=='socio'">
+            <a  routerLink="/listado">Listados</a>
+        </li> 
+        <li *ngIf="this.perfil=='socio'">
+            <a  routerLink="/verEncuestas">Encuestas</a>
+        </li> 
+        <!-- <li *ngIf="this.perfil=='socio'">
+            <a  routerLink="/pedidosPendientes">Pedidos</a>
+        </li> -->
+           
+       
+        <li>
+          <a routerLink="/Login">Salir</a>
+        </li>
+        
+      </ul>
+
   </div>
- 
-</nav>
+</header>

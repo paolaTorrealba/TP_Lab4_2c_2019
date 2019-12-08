@@ -8,7 +8,8 @@ import { take } from 'rxjs/operators';
 import { MatTableDataSource } from '@angular/material';
 import { map } from 'rxjs/operators';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
-
+import { NgxSpinnerModule, NgxSpinnerService } from "ngx-spinner";
+import { NotificationsService } from 'angular2-notifications';
 
 @Component({
   selector: 'app-cancelar-pedido',
@@ -29,15 +30,24 @@ export class CancelarPedidoComponent implements OnInit {
   
   constructor(private  data:  AuthService,    
     private auth: AuthProvider,
+    private spinner: NgxSpinnerService,
+    private ns: NotificationsService,
     private usuarioService: UsuarioService,
     private dataApi: DataApiService) { 
       this.obtenerUsuario();     
    
     }
 
-  ngOnInit() {}
+  ngOnInit() {
+    /** spinner starts on init */
+    this.spinner.show();
+      setTimeout(() => {
+          this.spinner.hide();
+      }, 5000);
+  }
 
   obtenerPedidos(){
+  
     this.data.getListaPedidos("pedidos").subscribe(lista => {
       this.pedidos=lista; 
       console.log("pedidos: ",this.pedidos); 
@@ -47,18 +57,17 @@ export class CancelarPedidoComponent implements OnInit {
 
    
 cancelar(item){    
-    console.log("item: ", item)   
    
     item.estado=EstadoPedido.cancelado;
-    console.log("item: ", item) 
     this.auth.actualizarPedido(item).then(res => {
-      console.log("pedido cancelado por el cliente")
+      this.ns.success("Se cancelo el pedido correctamente");
     }); 
     this.cancelarReservas(item); 
     this.cerrarMesa(item); 
  }
 
  cerrarMesa(item){ 
+   
    console.log(item)
   this.data.getListaMesas("mesas").subscribe(lista => {
         this.mesas=lista; 
@@ -68,12 +77,10 @@ cancelar(item){
             this.mesas[i].codigo==item.codigoMesa ){
             this.miMesa=this.mesas[i];                     
           }
-        }  
-        console.log("mi mesa", this.miMesa)
-        this.miMesa.estado=EstadoMesa.cerrada;
-        console.log("item: ", this.miMesa);       
+        }         
+        this.miMesa.estado=EstadoMesa.cerrada;              
         this.auth.actualizarMesa(this.miMesa).then(res => {
-            console.log("mesa cerrada",res);
+            
         });
   }) 
 }
@@ -94,7 +101,7 @@ cancelarReservas(item) {
           this.miReserva.estado=EstadoReserva.finalizada;       
           this.auth.actualizarReserva(this.miReserva).then(res =>{
           }).catch(error => {
-              console.log(error,"error al guardar la reserva"); 
+            this.ns.error("Error al actualizar la reserva");
           });          
       }              
   });

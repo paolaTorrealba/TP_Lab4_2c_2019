@@ -8,7 +8,6 @@ import {ListaClientesEstadoComponent} from './componentes/lista-clientes-estado/
 import {ListadoSupervisorComponent} from './componentes/listado-supervisor/listado-supervisor.component';
 import {ListadoReservaComponent} from './componentes/listado-reserva/listado-reserva.component';
 import {AltaDeMesaComponent} from './componentes/alta-de-mesa/alta-de-mesa.component';
-import {HomeClienteComponent} from './componentes/home-cliente/home-cliente.component';
 import {PedirPlatosComponent} from './componentes/pedir-platos/pedir-platos.component';
 import {ReservaComponent} from './componentes/reserva/reserva.component';
 import { AuthProvider } from 'src/app/providers/auth';
@@ -40,6 +39,13 @@ import { CancelarPedidoComponent } from './componentes/cancelar-pedido/cancelar-
 import { ExcelProductosComponent } from './componentes/excel-productos/excel-productos.component';
 import { ExcelEmpleadosComponent } from './componentes/excel-empleados/excel-empleados.component';
 import { ListadoEmpleadosComponent } from './componentes/listado-empleados/listado-empleados.component';
+import { CardReportesComponent } from './componentes/card-reportes/card-reportes.component';
+import { ReportesComponent } from './componentes/reportes/reportes.component';
+import { ExcelClientesComponent } from './componentes/excel-clientes/excel-clientes.component';
+import { AltasComponent } from './componentes/altas/altas.component';
+import { CardAltasComponent } from './componentes/card-altas/card-altas.component';
+import { CardListadosComponent } from './componentes/card-listados/card-listados.component';
+import { ListadosComponent } from './componentes/listados/listados.component';
 
 
 
@@ -53,20 +59,38 @@ const routes: Routes = [
   // { path: 'listaEspera', component: ListaDeEsperaComponent},
 
   // SOCIO
-  { path: 'reporteMesas', component: ExcelMesasComponent},
-  { path: 'reporteEmpleados', component: ExcelEmpleadosComponent},
-  { path: 'reporteProductos', component: ExcelProductosComponent},  
+
+  
+  { path: 'reporte', component: ReportesComponent, 
+  children:
+      [{path: '' , component: CardReportesComponent},
+       { path: 'reporteMesas', component: ExcelMesasComponent},
+       { path: 'reporteEmpleados', component: ExcelEmpleadosComponent},
+       { path: 'reporteProductos', component: ExcelProductosComponent},
+       { path: 'reporteClientes', component: ExcelClientesComponent}  
+   ]},
+   { path: 'alta', component: AltasComponent, 
+    children:
+      [{path: '' , component: CardAltasComponent},
+      { path: 'agregarMesa', component: AltaDeMesaComponent},   
+      { path: 'agregarSocio', component: AltaSocioComponent},
+      { path: 'agregarEmpleado', component: AltaEmpleadoComponent}, 
+      { path: 'agregarProducto', component: AltaDeProductoComponent}  
+   ]},
+   { path: 'listado', component: ListadosComponent, 
+    children:
+      [{path: '' , component: CardListadosComponent},
+      { path: 'listadoMesas', component: ListadoMesasComponent},
+      { path: 'listadoClientes', component: ListadoClientesComponent},
+      { path: 'listadoEmpleados', component: ListadoEmpleadosComponent},
+      { path: 'listadoProductos', component: ListadoProductosComponent},
+      { path: 'listadoPedidos', component: ListadoPedidosComponent}, 
+   ]},
+ 
   { path: 'pedidosPendientes', component: PedidosPendientesComponent},
   { path: 'verEncuestas', component: VerEncuestasComponent},
-  { path: 'agregarMesa', component: AltaDeMesaComponent},   
-  { path: 'agregarSocio', component: AltaSocioComponent},
-  { path: 'agregarEmpleado', component: AltaEmpleadoComponent}, 
-  { path: 'agregarProducto', component: AltaDeProductoComponent}, 
-  { path: 'listadoMesas', component: ListadoMesasComponent},
-  { path: 'listadoClientes', component: ListadoClientesComponent},
-  { path: 'listadoEmpleados', component: ListadoEmpleadosComponent},
-  { path: 'listadoProductos', component: ListadoProductosComponent},
-  { path: 'listadoPedidos', component: ListadoPedidosComponent},
+   
+  
 
   // CLIENTE
   
