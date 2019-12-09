@@ -27,8 +27,6 @@ import { HomeClienteComponent } from './componentes/home-cliente/home-cliente.co
 import { ListadoClientesComponent } from './componentes/listado-clientes/listado-clientes.component';
 import { ConfirmarPedidoComponent } from './componentes/confirmar-pedido/confirmar-pedido.component';
 import { ListadoMesasComponent } from './componentes/listado-mesas/listado-mesas.component';
-import { HomeComponent } from './componentes/home/home.component';
-import { AltaDeClienteComponent } from './componentes/alta-de-cliente/alta-de-cliente.component';
 import { LoginComponent } from './componentes/login/login.component';
 import { RegistroComponent } from './componentes/registro/registro.component';
 import { HttpClientModule } from '@angular/common/http';
@@ -72,7 +70,6 @@ import { NgxSpinnerModule } from 'ngx-spinner';
 import { CardReportesComponent } from './componentes/card-reportes/card-reportes.component';
 import { ReportesComponent } from './componentes/reportes/reportes.component';
 import { ExcelClientesComponent } from './componentes/excel-clientes/excel-clientes.component';
-import { CardAbmsComponent } from './componentes/card-abms/card-abms.component';
 import { CardListadosComponent } from './componentes/card-listados/card-listados.component';
 import { AltasComponent } from './componentes/altas/altas.component';
 import { CardAltasComponent } from './componentes/card-altas/card-altas.component';
@@ -97,8 +94,6 @@ import { ListadosComponent } from './componentes/listados/listados.component';
     ListadoClientesComponent,
     ConfirmarPedidoComponent,
     ListadoMesasComponent,
-    HomeComponent,
-    AltaDeClienteComponent,
     LoginComponent,
     RegistroComponent,
     CabeceraComponent,
@@ -139,7 +134,6 @@ import { ListadosComponent } from './componentes/listados/listados.component';
     CardReportesComponent,
     ReportesComponent,
     ExcelClientesComponent,
-    CardAbmsComponent,
     CardListadosComponent,    
     AltasComponent,
     CardAltasComponent,

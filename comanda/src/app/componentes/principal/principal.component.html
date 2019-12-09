@@ -1,34 +1,40 @@
-
-
-
 <header class="navbar navbar-inverse navbar-fixed-top bs-docs-nav" role="banner">
   <div class="container">
-    <div class="navbar-header"> 
-      <p class="navbar-brand">Comanda</p>
-    </div>  
-      <ul class="nav navbar-nav navbar-right">        
-        <li *ngIf="this.perfil=='socio'">
-            <a  routerLink="/reporte">Reportes</a>
-        </li> 
-        <li *ngIf="this.perfil=='socio'">
-            <a  routerLink="/alta">Altas Generales</a>
-        </li>   
-        <li *ngIf="this.perfil=='socio'">
-            <a  routerLink="/listado">Listados</a>
-        </li> 
-        <li *ngIf="this.perfil=='socio'">
-            <a  routerLink="/verEncuestas">Encuestas</a>
-        </li> 
-        <!-- <li *ngIf="this.perfil=='socio'">
-            <a  routerLink="/pedidosPendientes">Pedidos</a>
-        </li> -->
-           
-       
+      <div class="navbar-header"> 
+          <p class="navbar-brand">COMANDA</p><br>    
+          <p class="navbar-brand">{{this.perfil}} {{this.nombre}}</p>    
+      </div>  
+      <ul class="nav navbar-nav navbar-right"> 
+        <!--SOCIO  -->       
+        <li *ngIf="this.perfil=='socio'"><a  routerLink="/reporte">Reportes</a></li> 
+        <li *ngIf="this.perfil=='socio'"><a  routerLink="/alta">Altas Generales</a></li>   
+        <li *ngIf="this.perfil=='socio'"><a  routerLink="/listado">Listados</a></li> 
+        <li *ngIf="this.perfil=='socio'"><a  routerLink="/verEncuestas">Encuestas</a></li> 
+        <!--CLIENTE  -->
+        <li *ngIf="this.perfil=='cliente'"><a  routerLink="/reservaCliente">Seleccionar Mesa</a></li> 
+        <li *ngIf="this.perfil=='cliente'"><a  routerLink="/pedirPlatos">Hacer Pedido</a></li>   
+        <li *ngIf="this.perfil=='cliente'"><a  routerLink="/verEstadoPedido">Mi Pedido</a></li> 
+        <li *ngIf="this.perfil=='cliente'"><a  routerLink="/cancelar">Cancelar</a></li> 
+        <li *ngIf="this.perfil=='cliente'"><a  routerLink="/pagarFactura">Pagar Factura</a></li>
+        <li *ngIf="this.perfil=='cliente'"><a routerLink="/encuestaCliente">Encuesta</a></li>
+        <!--BARTENDER  -->           
+        <li *ngIf="this.perfil=='bartender'"><a  routerLink="/pedidosPendientesBartender">Pedidos Pendientes</a></li>   
+        <li *ngIf="this.perfil=='bartender'"><a  routerLink="/finalizarPedidoBartender">Cerrar Pedido</a></li> 
+        <!--COCINERO  -->    
+        <li *ngIf="this.perfil=='cocinero'"><a  routerLink="/pedidosPendientesCocinero">Pedidos Pendientes</a></li> 
+        <li *ngIf="this.perfil=='cocinero'"><a  routerLink="/finalizarPedidoCocinero">Cerrar Pedido</a></li>
+        <!--CERVECERO  -->    
+        <li *ngIf="this.perfil=='cervecero'"><a  routerLink="/pedidosPendientesCervecero">Pedidos Pendientes</a></li> 
+        <li *ngIf="this.perfil=='cervecero'"><a  routerLink="/finalizarPedidoCervecero">Cerrar Pedido</a></li>
+        <!--MOZO  --> 
+        <li *ngIf="this.perfil=='mozo'"><a routerLink="/pedidosPendientes">Estado de Pedidos</a></li>
+        <li *ngIf="this.perfil=='mozo'"><a routerLink="/cerrarMesa">Cerrar Mesa</a></li>
+        <li *ngIf="this.perfil=='mozo'"><a routerLink="/confirmarPago">Confirmar Pago</a></li>
+        <li *ngIf="this.perfil=='mozo'"><a routerLink="/entregarPedido">Entregar Pedido</a></li>
+         
         <li>
-          <a routerLink="/Login">Salir</a>
-        </li>
-        
+          <a routerLink="/login">Salir</a>
+        </li>        
       </ul>
-
-  </div>
+    </div> 
 </header>

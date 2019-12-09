@@ -50,21 +50,7 @@ export class AltaEmpleadoComponent implements OnInit {
     if (!this.imagenUrl ) {
       this.imagenUrl = "assets/imagenes/default-user.png";
     }
-    // let data = {
-    //     'nombre':this.nombreModel,
-    //     'apellido': this.apellidoModel,
-    //     'foto':  this.InputImagenUser.nativeElement.value, 
-    //     'perfil':this.perfilModel,
-    //     'activo': false,
-    //     'logueado': false,
-    //     'correo': this.emailModel,
-    //     'clave':this.claveModel
-    // }
-
-    // console.log(data)
-    // this.auth.guardarUsuario(data);
-    // this.auth.crearUsuario(this.emailModel,this.claveModel);
-
+   
     this.usuario.logeado = false; 
     this.usuario.apellido = this.apellidoModel; 
     this.usuario.activo = false; 

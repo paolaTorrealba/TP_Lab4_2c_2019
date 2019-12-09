@@ -14,7 +14,6 @@ import { AuthProvider } from 'src/app/providers/auth';
 import {ListadoClientesComponent} from './componentes/listado-clientes/listado-clientes.component';
 import {ListadoMesasComponent} from './componentes/listado-mesas/listado-mesas.component';
 import {ConfirmarPedidoComponent} from './componentes/confirmar-pedido/confirmar-pedido.component';
-import {HomeComponent} from './componentes/home/home.component';
 import { PrincipalComponent } from './componentes/principal/principal.component';
 import { RegistroComponent } from './componentes/registro/registro.component';
 import { LoginComponent } from './componentes/login/login.component';
@@ -51,8 +50,7 @@ import { ListadosComponent } from './componentes/listados/listados.component';
 
 const routes: Routes = [
   { path: '', component: LoginComponent },
-  { path: 'login', component: LoginComponent },  
-  { path: 'home', component: HomeComponent },  
+  { path: 'login', component: LoginComponent },   
   { path: 'principal', component: PrincipalComponent },  
   { path: 'menuprincipal', component: PrincipalComponent },  
   { path: 'registro', component: RegistroComponent},

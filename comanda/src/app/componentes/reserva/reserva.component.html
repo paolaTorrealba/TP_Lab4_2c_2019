@@ -1,17 +1,4 @@
 
-<!-- <br><br>
-<h1>Mesas Disponibles</h1>
-<ul *ngFor="let item of mesas">
-  <div *ngIf="item.estado==this.estado">
-      <p>nro: {{item.numero}}</p>
-      <p>cantidad Comensales: {{item.cantidadComensales}}</p>
-      <p>estado: {{item.estado}}</p>
-      <p>codigo: {{item.codigo}}</p> 
-      <br>  
-      <button (click)="seleccionarMesa(item)">Seleccionar</button>   
-        
-  </div>       
-</ul>   -->
 <app-principal></app-principal>
 <br><br>
 <h3 *ngIf="tieneReserva == true" >
@@ -24,23 +11,23 @@
     <table mat-table [dataSource]="mesas">
         <tr>
                 <ng-container matColumnDef="Numero Mesa">
-                        <th mat-header-cell *matHeaderCellDef  style="color: black;"> Numero Mesa </th>
+                        <th style="color: black;font-size: x-large;" mat-header-cell *matHeaderCellDef  > Numero Mesa </th>
                         <td mat-cell *matCellDef="let element"> {{element.numero}} </td>
                 </ng-container>
                 <ng-container matColumnDef="Codigo Mesa">
-                                <th mat-header-cell *matHeaderCellDef  style="color: black;"> Codigo Mesa </th>
-                                <td mat-cell *matCellDef="let element"> {{element.codigo}} </td>
+                        <th style="color: black;font-size: x-large;" mat-header-cell *matHeaderCellDef  > Codigo Mesa </th>
+                        <td mat-cell *matCellDef="let element"> {{element.codigo}} </td>
                 </ng-container>     
                 <ng-container matColumnDef="Estado">
-                        <th mat-header-cell *matHeaderCellDef  style="color: black;"> Estado </th>
+                        <th style="color: black;font-size: x-large;" mat-header-cell *matHeaderCellDef  > Estado </th>
                         <td mat-cell *matCellDef="let element"> {{element.estado | mesa}} </td>
                 </ng-container> 
                 <ng-container matColumnDef="Cantidad Comensales">
-                        <th mat-header-cell *matHeaderCellDef  style="color: black;"> Cantidad Comensales </th>
+                        <th style="color: black;font-size: x-large;" mat-header-cell *matHeaderCellDef > Cantidad Comensales </th>
                         <td mat-cell *matCellDef="let element"> {{element.cantidadComensales}} </td>
                 </ng-container> 
                 <ng-container matColumnDef="Seleccionar Mesa">
-                        <th mat-header-cell *matHeaderCellDef  style="color: black;"> Seleccionar Mesa </th>
+                        <th style="color: black;font-size: x-large;" mat-header-cell *matHeaderCellDef  > Seleccionar Mesa </th>
                         <td mat-cell *matCellDef="let element">
                         <button *ngIf="element.estado=='cerrada'"  mat-icon-button (click)="seleccionarMesa(element)">
                             <mat-icon>check_circle</mat-icon>
