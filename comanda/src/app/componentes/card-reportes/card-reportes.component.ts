@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 
 @Component({
   selector: 'app-card-reportes',
@@ -6,10 +6,16 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./card-reportes.component.scss']
 })
 export class CardReportesComponent implements OnInit {
+  @ViewChild("imgLogin", { static: false })
+  InputImagenLogin: ElementRef;
 
-  constructor() { }
+  constructor() { 
+   
+  }
 
   ngOnInit() {
+  
+    // document.getElementById('socio-img').attributes.getNamedItem;
   }
 
 }
