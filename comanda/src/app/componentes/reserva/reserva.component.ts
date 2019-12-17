@@ -7,6 +7,8 @@ import { map } from 'rxjs/operators';
 import { UsuarioService } from 'src/app/servicios/usuario.service';
 import { DataApiService } from 'src/app/servicios/data-api.service';
 import { take } from 'rxjs/operators';
+import { Router, ActivatedRoute, ParamMap } from '@angular/router';
+
 
 @Component({
   selector: 'app-reserva',
@@ -30,6 +32,7 @@ export class ReservaComponent implements OnInit {
   constructor(private  data:  AuthService,
     private usuarioService: UsuarioService,
     private dataApi: DataApiService,
+    private router: Router,
     private auth: AuthProvider) {
            this.obtenerUsuario(); 
    } 
@@ -44,6 +47,9 @@ export class ReservaComponent implements OnInit {
     });     
    } 
 
+   irAHacerPedido(){
+    this.router.navigate(['/pedirPlatos']);
+   }
    obtenerReservas() {  
       this.tieneReserva=false;
       this.data.getListaReservas("reservas").subscribe(lista => {

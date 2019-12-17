@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/servicios/auth.service';
 import { AuthProvider } from 'src/app/providers/auth';
-import { EstadoPedido, Perfil } from 'src/app/clases/enum';
+import { EstadoPedido, Perfil, EstadoMesa, EstadoReserva } from 'src/app/clases/enum';
 import { Observable, empty } from 'rxjs';
 import { finalize } from 'rxjs/operators';
 import { MatTableDataSource } from '@angular/material';
@@ -24,13 +24,18 @@ export class VerEstadoPedidoComponent implements OnInit {
   public correo:string;
   public nombre:string;
   public perfil:Perfil;
+  public miMesa:any;
   public vacia:boolean;
   public info:boolean;
+  public miReserva:any;
+  public tieneReserva:boolean;
+  public reservas:Array<any> = [];
 
-  private columsPedido: string[] = ['Nombre Cliente', 'Codigo Mesa', 'Estado','Detalle','Codigo Pedido','Monto Total','Confirmar Recepcion'];
+  private columsPedido: string[] = ['Nombre Cliente', 'Codigo Mesa','Codigo Pedido', 'Estado','Detalle','Monto Total','Confirmar Recepcion', 'Cancelar'];
   private columsProductoPedido: string[] = ['Descripcion','Precio','Estado Producto','Tiempo Promedio Elaboracion'];
 
   public pedidos:Array<any> = [];
+  public mesas:Array<any> = [];
   public misPedidos:Array<any> = [];
   public productos:Array<any> = [];
 
@@ -77,10 +82,65 @@ export class VerEstadoPedidoComponent implements OnInit {
       }
     });
   }
+
+// CANCELAR PEDIDOS--------------
+  cancelarPedido(item){   
+    item.estado=EstadoPedido.cancelado;
+    this.auth.actualizarPedido(item).then(res => {
+      
+    }); 
+    
+    this.cancelarReservas(item); 
+    this.cerrarMesa(item); 
+    this.obtenerPedidos(); 
+ }
+
+ cerrarMesa(item){    
+  console.log(item)
+ this.data.getListaMesas("mesas").subscribe(lista => {
+       this.mesas=lista; 
+       console.log(this.mesas)        
+       for(let i=0; i<=this.mesas.length-1; i++){
+         if(this.mesas[i].estado==EstadoMesa.reservada &&
+           this.mesas[i].codigo==item.codigoMesa ){
+           this.miMesa=this.mesas[i];                     
+         }
+       }         
+       this.miMesa.estado=EstadoMesa.cerrada;              
+       this.auth.actualizarMesa(this.miMesa).then(res => {
+           
+       });
+ }) 
+}
+ 
+cancelarReservas(item) { 
+ this.tieneReserva=false; 
+ this.data.getListaReservas("reservas").subscribe(lista => {
+     this.reservas=lista;         
+     for(let i=0; i<=this.reservas.length-1; i++){
+       if(this.reservas[i].correo==this.correo &&
+         this.reservas[i].estado=="activa" &&
+         this.reservas[i].codigoMesa==item.codigoMesa ){
+         this.miReserva=this.reservas[i]; 
+         this.tieneReserva=true;              
+       }
+     }         
+     if (this.tieneReserva ){
+         this.miReserva.estado=EstadoReserva.finalizada;       
+         this.auth.actualizarReserva(this.miReserva).then(res =>{
+         }).catch(error => {
+          
+         });          
+     }              
+ });
+ console.log("reservas: ",this.reservas); 
+} 
+
+// CANCELAR PEDIDO ---- FIN
   obtenerPedidos(){
     this.data.getListaPedidos("pedidos").subscribe(lista => {
       this.pedidos=lista; 
-      console.log("1: ",this.pedidos)
+      console.log("1------- ",this.pedidos)
       console.log("2 ",this.pedidos.length)
       for (let i=0; i<=this.pedidos.length-1; i++){
         if(this.pedidos[i].correoCliente==this.correo
@@ -91,13 +151,12 @@ export class VerEstadoPedidoComponent implements OnInit {
           console.log("5 ",this.misPedidos)
         }
       }
+
       this.vacia=this.misPedidos.length==0; 
       console.log(this.vacia)  
-      console.log("6 ",this.misPedidos)  
+      console.log("6-actualizo DataSource ",this.misPedidos)  
        this.dataSource = new MatTableDataSource(this.misPedidos);      
-      // this.vacia=false;
-      // console.log("6 ",this.misPedidos)
-      // this.dataSource = new MatTableDataSource(this.misPedidos);       
+          
     });
   }
 
@@ -125,5 +184,10 @@ export class VerEstadoPedidoComponent implements OnInit {
   this.dataSourceProd = new MatTableDataSource(this.productos);
    this.noDataProd = this.dataSourceProd.connect().pipe(map((data: any[]) => data.length === 0));
  
+}
+
+irAHacerPedido(){
+   this.router.navigate(['/pedirPlatos']);
+
 }
 }

@@ -40,7 +40,6 @@ import { AltaSocioComponent } from './componentes/alta-socio/alta-socio.componen
 import { VerEncuestasComponent } from './componentes/ver-encuestas/ver-encuestas.component';
 import { CerrarMesaComponent } from './componentes/cerrar-mesa/cerrar-mesa.component';
 import { ListadoProductosComponent } from './componentes/listado-productos/listado-productos.component';
-import { VerPedidoClienteComponent } from './componentes/ver-pedido-cliente/ver-pedido-cliente.component';
 import { ListadoPedidosComponent } from './componentes/listado-pedidos/listado-pedidos.component';
 import { PedidosPendientesCerveceroComponent } from './componentes/pedidos-pendientes-cervecero/pedidos-pendientes-cervecero.component';
 import { PedidosPendientesBartenderComponent } from './componentes/pedidos-pendientes-bartender/pedidos-pendientes-bartender.component';
@@ -106,7 +105,6 @@ import { ListadosComponent } from './componentes/listados/listados.component';
     VerEncuestasComponent,
     CerrarMesaComponent,
     ListadoProductosComponent,
-    VerPedidoClienteComponent,
     ListadoPedidosComponent,
     PedidosPendientesCerveceroComponent,
     PedidosPendientesBartenderComponent,

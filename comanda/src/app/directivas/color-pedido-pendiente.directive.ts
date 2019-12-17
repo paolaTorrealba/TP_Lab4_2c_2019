@@ -11,7 +11,7 @@ export class ColorPedidoPendienteDirective {
   @Input('appColorPedidoPendiente') estado: EstadoPedido;
 
   ngAfterViewInit() {
-    
+    console.log("color pedido:", this.estado)
     if (this.estado==EstadoPedido.pendiente){
       this.el.nativeElement.style.backgroundColor = "lightgreen";
     }

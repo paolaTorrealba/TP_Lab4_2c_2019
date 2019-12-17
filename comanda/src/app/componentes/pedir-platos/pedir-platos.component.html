@@ -10,7 +10,7 @@
     <h3><p class= "no-resultados"> Codigo Mesa: [{{this.miReserva}}] </p></h3>
     <button type="button" class="btn btn-success"
             *ngIf="noTienePedido && mostrar " (click)="iniciarPedido()"
-            style="margin-left: 36%;">Hacer Pedido</button>
+            style="margin-left: 36%;">Ver Carta</button>
     <h3  *ngIf="!noTienePedido" >
            <p class= "no-resultados">Tu pedido ya fue recibido! </p>
             <button  type="button" class="btn btn-warning" 
@@ -25,7 +25,7 @@
     
     <!-- <button type="button"  style="margin-left: 13%;" class="btn btn-success"  
             (click)="showInfo()"> Ver Detalle Pedido</button> -->
-    <button type="button"  style="margin-left: 36%;" class="btn btn-success" *ngIf="!pedidoRealizado" 
+    <button  *ngIf="!pedidoRealizado && montoTotal!=0" type="button"  style="margin-left: 36%;" class="btn btn-success"
             (click)="guardarPedido()"> Confirmar Pedido</button><br><br>
 
 

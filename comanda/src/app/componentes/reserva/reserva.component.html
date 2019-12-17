@@ -4,10 +4,14 @@
 <h3 *ngIf="tieneReserva == true" >
         <p class= "no-resultados"> Ya tenes una mesa reservada! <i class="far fa-thumbs-up"></i></p>
         <p class= "codigo"> Cod. Reserva: [{{this.miReserva}}]</p>
+
+        <button  type="button" class="btn btn-outline-success" 
+        (click)="irAHacerPedido()" 
+        style="margin-left: 35%;" >Hacer Pedido</button> 
 </h3>
 
 <div  *ngIf="tieneReserva == false || !this.correo == undefined">
-    <h1 style="padding-left: 30%;">Mesas Disponibles</h1>
+    <h1 style="padding-left: 30%;">Mesas Disponibles</h1><br>
     <table mat-table [dataSource]="mesas">
         <tr>
                 <ng-container matColumnDef="Numero Mesa">

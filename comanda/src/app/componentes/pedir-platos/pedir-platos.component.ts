@@ -77,20 +77,6 @@ irVerEstado(){
   this.router.navigate(['/verEstadoPedido']);
 }
 
-// showInfo(){
-//   if(!this.mostrarDetalle){
-//      for(let i=0; i<=this.seleccionados.length-1;i++){
-
-//      }
-
-//     this.dataSourceSelecAndCantidad = new MatTableDataSource(this.seleccionados); 
-//     this.mostrarDetalle=true;  
-//   }else{
-//     this.mostrarDetalle=false;  
-//   }
-  
-     
-// }
  
 iniciarPedido(){
   this.obtenerProductos();

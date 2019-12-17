@@ -18,7 +18,7 @@ export class PedidosPendientesComponent implements OnInit {
   
   public vacia:boolean;
   public info:boolean;
-  private columsPedido: string[] = ['Mesa', 'Estado', 'Detalle','Codigo','Codigo Generado','Aceptar','Imágen', 'File'];
+  private columsPedido: string[] = ['Mesa', 'Estado', 'Detalle','Codigo Generado','Imágen','Aceptar'];
   private columsProductoPedido: string[] = ['Descripcion','Precio','Empleado','Estado Producto','Tiempo Promedio Elaboracion','Foto'];
   public pedidos:Array<any> = [];
   public productos:Array<any> = [];
@@ -31,10 +31,11 @@ export class PedidosPendientesComponent implements OnInit {
   public pendiente:EstadoPedido.pendiente;
   public imgName: string;
   public porcentajeUpload: Observable<number>;
-  public urlImagen: Observable<string>; 
+  public urlImagen: Observable<string>=undefined; 
   public imagenUrl : any;
   public noCargando = true;
   public codigo = '';
+  public codigoMesa:string;
 
   constructor(private  data:  AuthService,
     private storage: AngularFireStorage, 
@@ -57,13 +58,15 @@ export class PedidosPendientesComponent implements OnInit {
    }
 
    aceptarPedido(item){
-    this.imagenUrl = this.InputImagenPedido.nativeElement.value;
-    if (!this.imagenUrl ) {
-      this.imagenUrl = "assets/imagenes/default-mesa.jpg";
-    }
-      console.log("item: ", item)
-      console.log("la imagen: ", this.imagenUrl)
-      item.foto=this.imagenUrl;
+  //   this.imagenUrl = this.InputImagenPedido.nativeElement.value;
+   
+  //  console.log("hay foto", this.imagenUrl )
+  //   if (!this.imagenUrl ) {
+  //     this.imagenUrl = "assets/imagenes/default-mesa.jpg";
+  //   }
+  //     console.log("item: ", item)
+  //     console.log("la imagen: ", this.imagenUrl)
+      // item.foto=this.imagenUrl;
       item.codigoPedido=this.codigo;
       item.estado=EstadoPedido.aceptado;    
       this.auth.actualizarPedido(item).then(res => {
@@ -71,29 +74,58 @@ export class PedidosPendientesComponent implements OnInit {
       });
    }
 
-   ImagenCargada(e) {
-    console.log("cargar imagen")
+
+   actualizarPedido(item){
+    this.imagenUrl = this.InputImagenPedido.nativeElement.value;   
+    console.log("hay foto", this.imagenUrl )
+    if (!this.imagenUrl ) {
+      this.imagenUrl = "assets/imagenes/default-mesa.jpg";
+    }
+   
+      item.foto=this.imagenUrl;      
+      this.auth.actualizarPedido(item).then(res => {
+        console.log("pedido actualizado")
+      });
+   }
+
+   ImagenCargada(e,item) {
+     this.codigoMesa=item.codigoMesa;
+    console.log("cargar imagen", item)
     this.noCargando = false;
     const img = e.target.files[0];
+    console.log("img", img)
 
     if (img != undefined) {
+     console.log("cargo algo")
       this.imgName = img.name;
+      console.log("this.imgName", this.imgName)
       const nombreImg = img.name.substr(0, img.name.lastIndexOf('.'));
       const ext = img.name.substr(img.name.lastIndexOf('.') + 1);
       const filePath = "imagenes/pedido/" + nombreImg + "-" + Date.now() + "." + ext;
       const ref = this.storage.ref(filePath);
       const task = this.storage.upload(filePath, img);
       this.porcentajeUpload = task.percentageChanges();
-    
+      console.log("task", task)
       task.snapshotChanges().pipe(finalize(() => this.urlImagen = ref.getDownloadURL())).subscribe();
-      console.log("imagen: ", this.urlImagen);
+      // item.foto=this.urlImagen;
+      //  console.log("guardo imagen", item)
+      // this.auth.actualizarPedido(item).then(res => {
+      //   console.log("imagen  guardado")
+      // });
     }
     else {
       this.imgName = "Seleccionar imágen..";
-      this.urlImagen = empty();
+      this.urlImagen = undefined;
       this.noCargando = true;
     }
+        console.log("urlImagen luego del else", this.urlImagen);
+        this.imgName = "Seleccionar imágen..";
+        this.urlImagen = undefined;
+        this.noCargando = true;
   }
+
+
+
    generarCodigo(item){
      this.codigo= '';
      console.log("genero el codigo")   
