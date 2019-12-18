@@ -73,6 +73,7 @@ import { CardListadosComponent } from './componentes/card-listados/card-listados
 import { AltasComponent } from './componentes/altas/altas.component';
 import { CardAltasComponent } from './componentes/card-altas/card-altas.component';
 import { ListadosComponent } from './componentes/listados/listados.component';
+import { CardClienteComponent } from './componentes/card-cliente/card-cliente.component';
 
 @NgModule({
   declarations: [
@@ -136,6 +137,7 @@ import { ListadosComponent } from './componentes/listados/listados.component';
     AltasComponent,
     CardAltasComponent,
     ListadosComponent,
+    CardClienteComponent,
   ],
   imports: [
     FormsModule,
