@@ -67,13 +67,13 @@ export class PagarFacturaComponent implements OnInit {
     this.data.getListaPedidos("pedidos").subscribe(lista => {
       this.pedidos=lista; 
       this.vacia=this.pedidos.length==0;
-      console.log(this.correo)
       for(let i=0; i<=this.pedidos.length-1;i++){
         if (this.pedidos[i].correoCliente==this.correo
-          && this.pedidos[i].estado==EstadoPedido.recibido)
-            this.miPedido=this.pedidos[i]
-
-      }
+            && this.pedidos[i].estado==EstadoPedido.recibido){
+              this.miPedido=this.pedidos[i]
+              console.log("pedidos: ",this.miPedido)
+        }
+     }
     });
     console.log("pedidos: ",this.pedidos)
    }

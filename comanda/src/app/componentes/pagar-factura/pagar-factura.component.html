@@ -9,30 +9,32 @@
    <div class="row justify-content-md-center h-100" style="margin-left: -30%;">
     <div class="card-wrapper registro-pagina">  
       <div class="card fat">
-        <div class="card-body">
-           <h4 class="card-title" style="margin-left: 20%;FONT-FAMILY: fantasy;">Detalle Factura</h4><br>             
-           <ul *ngFor="let item of pedidos">
-               <div *ngIf="item.correoCliente==correo">    
-
-                        <h5>Nombre:  {{item.nombreCliente}}</h5> <br> 
-                        <h5>Codigo Pedido:  {{item.codigoPedido}}</h5><br>
-                        <h5>Codigo Mesa:  {{item.codigoMesa}}</h5> <br> 
-                        <h5>Monto: $  {{item.montoTotal}}</h5> 
+        <div class="card-body" style="width: 500px;">
+           <h4 class="card-title" style="margin-left: 35%;FONT-FAMILY: fantasy;">Detalle Factura</h4><br>             
+           <!-- <ul *ngFor="let item of pedidos"> -->
+               <!-- <div *ngIf="item.correoCliente==correo">     -->
+                <div *ngIf="miPedido != undefined">  
+                        <h5 style="margin-right: 20%; margin-left: 20%;">- Nombre:  {{miPedido.nombreCliente}}</h5> <br> 
+                        <h5 style="margin-right: 20%; margin-left: 20%;">- Codigo Pedido:  {{miPedido.codigoPedido}}</h5><br>
+                        <h5 style="margin-right: 20%; margin-left: 20%;">- Codigo Mesa:  {{miPedido.codigoMesa}}</h5> <br> 
+                        <h5 style="margin-right: 20%; margin-left: 20%;">- Monto: $  {{miPedido.montoTotal}}</h5> 
+                        <br><br><br>                       
+                        <!-- <button *ngIf="item.correoCliente==correo && item.estado=='recibido'" type="button" class="btn btn-success" 
+                        (click)="pagar(item)">Pagar Factura</button>         -->
+                        <button type="button" class="btn btn-success"  style="margin-left: 40%;"
+                        (click)="pagar(miPedido)">Pagar Factura</button>
+                </div>
+                <div *ngIf="miPedido == undefined">
+                    <h5  style="margin-left: 25%;" >No hay pedido para facturar</h5> 
                 </div>  
-                <br>
-                <br>
-                <br>
-            
-                <button *ngIf="item.correoCliente==correo && item.estado=='recibido'" type="button" class="btn btn-success" 
-                (click)="pagar(item)">Pagar Factura</button>        
-                
-                <div  *ngIf="item.estado!='recibido' && item.estado!='pagado'" >
+                <!-- <div  *ngIf="item.estado!='recibido' && item.estado!='pagado'" > -->
+                <div  *ngIf="miPedido.estado!='recibido' && miPedido.estado!='pagado'" >
                     <p>El pedido no se puede abonar porque esta en estado {{item.estado}} </p>
                 </div>
                 <div  *ngIf="pagado" >
-                       <p >-- PAGO RECIBIDO --</p>
+                    <br><p style="margin-right: 35%; margin-left: 40%;background-color: chartreuse; color:black;"> PAGO RECIBIDO </p>
                 </div>  
-            </ul>
+            <!-- </ul> -->
       </div>
 </div>
 </div>
@@ -40,22 +42,4 @@
 </div>
 </section>
 </div>
-<!-- <p>Abonar la Factura</p>
-<p>-----------------</p>
-<ul *ngFor="let item of pedidos">
-        <div *ngIf="item.correo==correo">
-                <p >NOMBRE: {{item.nombreCliente}}</p>  
-                <p >CODIGO PEDIDO: {{item.codigo}}</p>                      
-                <p >ESTADO: {{item.estado}}</p>
-                <p >MESA: {{item.mesa}}</p> 
-                <p >MONTO: $ {{item.montoTotal}}</p> 
-                 <br>  
-            
-                <button *ngIf="item.estado=='recibido'" (click)="pagar(item)">Pagar Factura</button>        
-                
-                <div  *ngIf="item.estado!='recibido' && item.estado!='pagado'" >
-                    <p>El pedido no se puede abonar porque esta en estado {{item.estado}} </p>
-                </div>
-                    
-        </div>
-       </ul>  -->
+

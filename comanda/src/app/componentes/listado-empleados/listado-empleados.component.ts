@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { EstadoPedido, Perfil, EstadoReserva, EstadoMesa } from 'src/app/clases/enum';
+import { Perfil } from 'src/app/clases/enum';
 import { AuthService } from 'src/app/servicios/auth.service';
 import { AuthProvider } from 'src/app/providers/auth';
 import { UsuarioService } from 'src/app/servicios/usuario.service';
@@ -7,7 +7,6 @@ import { DataApiService } from 'src/app/servicios/data-api.service';
 import { take } from 'rxjs/operators';
 import { MatTableDataSource } from '@angular/material';
 import { map } from 'rxjs/operators';
-import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 
 
 @Component({
@@ -47,8 +46,7 @@ export class ListadoEmpleadosComponent implements OnInit {
             if (userx.activo) {             
                 this.usuarioService.usuario = userx;             
                 this.correo= userx.correo;
-                this.nombre = userx.nombre; 
-               
+                this.nombre = userx.nombre;                
             }
             else {             
               this.nombre = "";
@@ -71,7 +69,8 @@ export class ListadoEmpleadosComponent implements OnInit {
           for (let i=0; i<=this.usuarios.length-1;i++){
             if(this.usuarios[i].perfil==Perfil.bartender
               || this.usuarios[i].perfil==Perfil.cocinero
-              || this.usuarios[i].perfil==Perfil.cervecero ){
+              || this.usuarios[i].perfil==Perfil.cervecero
+              || this.usuarios[i].perfil==Perfil.mozo ){
               this.empleados.push(this.usuarios[i]);
             }
           }          

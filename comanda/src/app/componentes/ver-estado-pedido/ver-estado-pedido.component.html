@@ -11,36 +11,35 @@
       <tr >
           <ng-container matColumnDef="Nombre Cliente">
                <th  style="color: black;font-size: x-large;" mat-header-cell *matHeaderCellDef>Nombre Cliente </th>
-               <td  mat-cell *matCellDef="let element"> {{element.nombreCliente}} </td>
+               <td style="color: black;font-size: large;"  mat-cell *matCellDef="let element"> {{element.nombreCliente}} </td>
           </ng-container> 
           <ng-container matColumnDef="Codigo Mesa">
               <th style="color: black;font-size: x-large;" mat-header-cell *matHeaderCellDef>Código Mesa </th>
-              <td mat-cell *matCellDef="let element"> {{element.codigoMesa}} </td>
+              <td style="color: black;font-size: large;" mat-cell *matCellDef="let element"> {{element.codigoMesa}} </td>
           </ng-container>   
           <ng-container matColumnDef="Codigo Pedido">
                 <th style="color: black;font-size: x-large;" mat-header-cell *matHeaderCellDef> Código Pedido </th>
-                <td  mat-cell *matCellDef="let element"> {{element.codigoPedido}} </td>                                   
+                <td style="color: black;font-size: large;" mat-cell *matCellDef="let element"> {{element.codigoPedido}} </td>                                   
           </ng-container>   
           <ng-container matColumnDef="Estado">
               <th style="color: black;font-size: x-large;" mat-header-cell *matHeaderCellDef> Estado </th>
-              <td mat-cell *matCellDef="let element"> {{element.estado}} </td>
+              <td style="color: black;font-size: large;" mat-cell *matCellDef="let element"> {{element.estado}} </td>
           </ng-container>       
           <ng-container matColumnDef="Detalle">
               <th style="color: black;font-size: x-large;" mat-header-cell *matHeaderCellDef> Detalle </th>
-              <td mat-cell *matCellDef="let element">
+              <td style="color: black;font-size: large;" mat-cell *matCellDef="let element">
                     <button mat-icon-button (click)="showInfo(element)">
                         <mat-icon>assignment</mat-icon>
                     </button> 
               </td>    
-          </ng-container>           
-
+          </ng-container> 
           <ng-container matColumnDef="Monto Total">
                 <th style="color: black;font-size: x-large;" mat-header-cell *matHeaderCellDef> Monto Total </th>
-                <td mat-cell *matCellDef="let element"> {{element.montoTotal}} </td>
+                <td style="color: black;font-size: large;" mat-cell *matCellDef="let element"> {{element.montoTotal}} </td>
         </ng-container>
         <ng-container matColumnDef="Confirmar Recepcion">
                 <th style="color: black;font-size: x-large;" mat-header-cell *matHeaderCellDef> Confirmar Recepción </th>
-                <td mat-cell *matCellDef="let element">
+                <td style="color: black;font-size: large;" mat-cell *matCellDef="let element">
                     <button *ngIf="element.estado=='entregado'" mat-icon-button (click)="confirmarRecepcion(element)">
                         <mat-icon>check_circle</mat-icon>
                     </button> 
@@ -48,7 +47,7 @@
         </ng-container> 
         <ng-container matColumnDef="Cancelar">
                 <th style="color: black;font-size: x-large;" mat-header-cell *matHeaderCellDef> Cancelar </th>
-                <td mat-cell *matCellDef="let element">
+                <td style="color: black;font-size: large;"  mat-cell *matCellDef="let element">
                     <button *ngIf="element.estado=='pendiente'" mat-icon-button (click)="cancelarPedido(element)">
                         <mat-icon>remove_circle</mat-icon>
                     </button> 
@@ -68,19 +67,19 @@
            <tr>
                 <ng-container matColumnDef="Descripcion">
                     <th style="color: black;font-size: x-large;" mat-header-cell *matHeaderCellDef> Descripción </th>
-                    <td mat-cell *matCellDef="let prod">1 {{prod.descripcion}} </td>
+                    <td style="color: black;font-size: large;"  mat-cell *matCellDef="let prod">1 {{prod.descripcion}} </td>
                 </ng-container> 
                 <ng-container matColumnDef="Precio">
                         <th style="color: black;font-size: x-large;" mat-header-cell *matHeaderCellDef> Precio </th>
-                        <td mat-cell *matCellDef="let prod"> {{prod.precio}} </td>
+                        <td style="color: black;font-size: large;"  mat-cell *matCellDef="let prod"> {{prod.precio}} </td>
                 </ng-container>  
                 <ng-container matColumnDef="Estado Producto">
                         <th style="color: black;font-size: x-large;" mat-header-cell *matHeaderCellDef> Estado Producto </th>
-                        <td mat-cell *matCellDef="let prod"> {{prod.estadoProdPedido}} </td>
+                        <td style="color: black;font-size: large;" mat-cell *matCellDef="let prod"> {{prod.estadoProdPedido}} </td>
                 </ng-container> 
                 <ng-container matColumnDef="Tiempo Promedio Elaboracion">
                         <th style="color: black;font-size: x-large;" mat-header-cell *matHeaderCellDef> Tiempo Promedio Elaboración </th>
-                        <td mat-cell *matCellDef="let prod"> {{prod.tiempoPromedioElaboracion}} </td>
+                        <td style="color: black;font-size: large;" mat-cell *matCellDef="let prod"> {{prod.tiempoPromedioElaboracion}} </td>
                 </ng-container>                              
            </tr>
            <div>

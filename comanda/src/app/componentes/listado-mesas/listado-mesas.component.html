@@ -6,20 +6,20 @@
    <table mat-table [dataSource]="mesas">
         <tr>
             <ng-container matColumnDef="NumeroMesa">
-                <th mat-header-cell *matHeaderCellDef> Numero </th>
-                <td mat-cell *matCellDef="let element"> {{element.numero}} </td>
+                <th style="color: black;font-size: x-large;" mat-header-cell *matHeaderCellDef> Número </th>
+                <td style="color: black;font-size: large;" mat-cell *matCellDef="let element"> {{element.numero}} </td>
             </ng-container>
             <ng-container matColumnDef="CantidadComensales">
-                <th mat-header-cell *matHeaderCellDef> Cantidad Comensales </th>
-                <td mat-cell *matCellDef="let element"> {{element.cantidadComensales}} </td>
+                <th style="color: black;font-size: x-large;" mat-header-cell *matHeaderCellDef> Cantidad Comensales </th>
+                <td style="color: black;font-size: large;" mat-cell *matCellDef="let element"> {{element.cantidadComensales}} </td>
             </ng-container>
             <ng-container matColumnDef="Estado">
-                <th mat-header-cell *matHeaderCellDef> Estado</th>
-                <td mat-cell *matCellDef="let element"> {{element.estado}} </td>
+                <th style="color: black;font-size: x-large;" mat-header-cell *matHeaderCellDef> Estado</th>
+                <td style="color: black;font-size: large;" mat-cell *matCellDef="let element"> {{element.estado}} </td>
             </ng-container>
             <ng-container matColumnDef="Codigo">
-                <th mat-header-cell *matHeaderCellDef> Codigo</th>
-                <td mat-cell *matCellDef="let element"> {{element.codigo}} </td>
+                <th style="color: black;font-size: x-large;" mat-header-cell *matHeaderCellDef> Código</th>
+                <td style="color: black;font-size: large;"  mat-cell *matCellDef="let element"> {{element.codigo}} </td>
             </ng-container>
         </tr>
         <div>
