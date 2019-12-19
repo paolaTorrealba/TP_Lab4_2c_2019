@@ -56,12 +56,13 @@ export class ReservaComponent implements OnInit {
           this.reservas=lista;         
           for(let i=0; i<=this.reservas.length-1; i++){
             if(this.reservas[i].correo==this.correo &&
-              this.reservas[i].estado=="activa"){
+              this.reservas[i].estado==EstadoReserva.activa){
               this.miReserva=this.reservas[i].codigoMesa; 
               this.tieneReserva=true;              
             }
-          }         
-          if (!this.tieneReserva ){
+          }      
+          console.log("this.miReserva",this.miReserva)  
+          if (!this.tieneReserva || this.miReserva == undefined){
             console.log("no tiene reserva")           
             this.obtenerMesas();           
           }              
@@ -94,18 +95,22 @@ export class ReservaComponent implements OnInit {
     });
 
     if (this.tieneReserva ==undefined){
+      console.log("this.tieneReserva ==undefined")
       this.obtenerMesas();
     }
   }
 
 
- seleccionarMesa(item){     
+ seleccionarMesa(item){   
+   console.log("mesa a reservar", item)  
       item.estado=EstadoMesa.reservada; 
-      console.log("item: ", item)  
-      this.auth.actualizarMesa(item).then(res => {
-        console.log("mesa reservada",res)
-      });
-      item.correo=this.correo;  
+      console.log("item ********** ", item)  
+      this.auth.actualizarMesa(item).then(res => { 
+      }).catch(error => {
+        console.log(error,"error al guardar la mesa"); 
+     });
+      // item.correo=this.correo;  
+      console.log("creo reserva con esta mesa", item)
       this.crearReserva(item);
    }
 
@@ -120,7 +125,7 @@ export class ReservaComponent implements OnInit {
           this.auth.guardarReserva(data).then(res =>{
           }).catch(error => {
               console.log(error,"error al guardar la reserva"); 
-       });
+          });
    }
 
 }

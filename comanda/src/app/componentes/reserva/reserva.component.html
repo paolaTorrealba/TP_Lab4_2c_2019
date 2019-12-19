@@ -7,7 +7,7 @@
         </div>
     </div>
 <div *ngIf="tieneReserva != undefined" >
-<h3 *ngIf="tieneReserva == true" >
+<h3 *ngIf="tieneReserva == true && miReserva!=undefined" >
         <p class= "no-resultados"> Ya tenes una mesa reservada! <i class="far fa-thumbs-up"></i></p>
         <p class= "codigo"> Cod. Reserva: [{{this.miReserva}}]</p>
 

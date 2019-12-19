@@ -39,7 +39,7 @@ export class CerrarMesaComponent implements OnInit {
     private dataApi: DataApiService,   
     private auth: AuthProvider) { 
     this.obtenerUsuario();
-    this.obtenerMesas();
+    // this.obtenerMesas();
     this.obtubeMesas=false;
   }
 
@@ -99,14 +99,16 @@ export class CerrarMesaComponent implements OnInit {
    obtenerPedidos(){
     this.data.getListaPedidos("pedidos").subscribe(lista => {
       this.pedidos=lista;
+    
       for (let i=0; i<=this.pedidos.length-1;i++){
         if(this.pedidos[i].estado==EstadoPedido.cerrado){ 
           this.pedidosCerrados.push(this.pedidos[i])          
         }
       }
+      
       // this.vacia=this.pedidosCerrados.length==0; 
       console.log("this.vacia", this.vacia)
-      this.obtenerMesas();
+      // this.obtenerMesas();
       
     });
     
