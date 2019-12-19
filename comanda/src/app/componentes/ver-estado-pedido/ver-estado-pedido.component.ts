@@ -154,13 +154,17 @@ cancelarReservas(item) {
           console.log("5 ",this.misPedidos)
         }
       }
-
+   
       this.vacia=this.misPedidos.length==0; 
       console.log(this.vacia)  
-      console.log("6-actualizo DataSource ",this.misPedidos)  
+      
        this.dataSource = new MatTableDataSource(this.misPedidos);      
           
     });
+    if ( this.misPedidos==undefined || this.misPedidos.length==0 )
+    {
+      this.vacia=true;
+    } 
   }
 
    

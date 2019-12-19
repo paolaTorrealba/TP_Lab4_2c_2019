@@ -76,10 +76,15 @@ export class ConfirmarPagoComponent implements OnInit {
             if(this.pedidos[i].estado==EstadoPedido.pagado){  
               
               this.pedidosPagados.push(this.pedidos[i]);
+              this.vacia=this.pedidosPagados.length==0;    
             }
-          }          
+          }     
+          if ( this.pedidosPagados==undefined || this.pedidosPagados.length==0 )
+          {
+            this.vacia=true;
+          }   
                 
-        this.vacia=this.pedidosPagados.length==0;     
+        
         this.dataSource = new MatTableDataSource(this.pedidosPagados); 
         console.log("pagados, ",this.pedidosPagados)     
     });    

@@ -27,6 +27,10 @@ export class ListadoProductosComponent implements OnInit {
         this.vacia=this.productos.length==0;
      
     });
+    if ( this.productos==undefined || this.productos.length==0 )
+    {
+      this.vacia=true;
+    }  
     console.log("Productos: ",this.productos);  
 } 
 

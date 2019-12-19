@@ -56,6 +56,10 @@ export class PedidosPendientesComponent implements OnInit {
       this.pedidos=lista; 
       this.vacia=this.pedidos.length==0;
     });
+    if ( this.pedidos==undefined || this.pedidos.length==0 )
+    {
+      this.vacia=true;
+    }
     console.log("pedidos: ",this.pedidos)
    }
 

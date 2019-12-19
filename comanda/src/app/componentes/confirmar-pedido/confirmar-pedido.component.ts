@@ -52,10 +52,14 @@ export class ConfirmarPedidoComponent implements OnInit {
             if(this.pedidos[i].estado==EstadoPedido.listoParaServir){  
               console.log(this.pedidos[i].estado, "estado")
               this.pedidosListos.push(this.pedidos[i]);
+              this.vacia=this.pedidosListos.length==0;
             }
           }          
-                
-        this.vacia=this.pedidosListos.length==0;     
+          if ( this.pedidosListos==undefined || this.pedidosListos.length==0 )
+          {
+            this.vacia=true;
+          }         
+          
         this.dataSource = new MatTableDataSource(this.pedidosListos); 
         console.log("listos, ",this.pedidosListos)     
     });    

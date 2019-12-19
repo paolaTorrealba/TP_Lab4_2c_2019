@@ -69,8 +69,13 @@ export class VerEncuestasComponent implements OnInit {
     this.data.getListaEncuestas("encuestaCliente").subscribe(lista => {
       this.encuestas=lista;;
       this.vacia=this.encuestas.length==0;
-      console.log("encuestas: ",this.encuestas); 
+      
     });
+    if ( this.encuestas==undefined || this.encuestas.length==0 )
+    {
+      this.vacia=true;
+    } 
+    
     console.log("encuestas: ",this.encuestas)
    }
   ngOnInit() {

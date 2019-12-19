@@ -75,6 +75,10 @@ export class PagarFacturaComponent implements OnInit {
         }
      }
     });
+    if ( this.miPedido==undefined  )
+    {
+      this.vacia=true;
+    }  
     console.log("pedidos: ",this.pedidos)
    }
 
