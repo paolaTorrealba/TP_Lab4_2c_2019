@@ -1,7 +1,14 @@
 import { Component, OnInit } from '@angular/core';
-import { EstadoPedido } from 'src/app/clases/enum';
+import { EstadoPedido, Perfil } from 'src/app/clases/enum';
 import { AuthService } from 'src/app/servicios/auth.service';
 import { AuthProvider } from 'src/app/providers/auth';
+import { UsuarioService } from 'src/app/servicios/usuario.service';
+import { DataApiService } from 'src/app/servicios/data-api.service';
+import { take } from 'rxjs/operators';
+import { MatTableDataSource } from '@angular/material';
+import { map } from 'rxjs/operators';
+import { Router, ActivatedRoute, ParamMap } from '@angular/router';
+
 
 @Component({
   selector: 'app-pagar-factura',
@@ -11,28 +18,75 @@ import { AuthProvider } from 'src/app/providers/auth';
 export class PagarFacturaComponent implements OnInit {
 
   public pedidos:Array<any> = [];
+  public miPedido: any;
   public entregado:EstadoPedido.entregado;  
   public correo:string;
+  public perfil: Perfil;
+  public nombre: string;
+  public vacia:boolean;
+  public pagado:boolean=false;
+
   constructor(private  data:  AuthService,    
-    private auth: AuthProvider) { 
-      this.correo=localStorage.getItem("usuarioComanda");
-      this.obtenerPedidos();
+    private auth: AuthProvider,
+    private usuarioService: UsuarioService,
+    private dataApi: DataApiService) { 
+      this.obtenerUsuario();
+
     }
 
   ngOnInit() {}
 
+
+  obtenerUsuario() { 
+    this.usuarioService.EstaLogeado().subscribe(user => {
+      if (user) {       
+        this.dataApi.TraerUno(user.uid, 'usuarios')
+        .pipe(take(1)).subscribe(userx => {
+          if (userx) {
+            if (userx.activo) {             
+                this.usuarioService.usuario = userx;             
+                this.correo= userx.correo;
+                this.nombre = userx.nombre; 
+                this.obtenerPedidos(); 
+            }
+            else {             
+              this.nombre = "";
+              this.correo= "";               
+            }
+          }
+        });
+      }
+      else {
+        this.nombre = "";
+        this.correo= "";      
+       
+      }
+    });
+  }
   obtenerPedidos(){
     this.data.getListaPedidos("pedidos").subscribe(lista => {
       this.pedidos=lista; 
-      console.log("pedidos: ",this.pedidos); 
+      this.vacia=this.pedidos.length==0;
+      for(let i=0; i<=this.pedidos.length-1;i++){
+        if (this.pedidos[i].correoCliente==this.correo
+            && this.pedidos[i].estado==EstadoPedido.recibido){
+              this.miPedido=this.pedidos[i]
+              console.log("pedidos: ",this.miPedido)
+        }
+     }
     });
+    if ( this.miPedido==undefined  )
+    {
+      console.log("pedido undefinde", this.miPedido)
+      this.vacia=true;
+    }  
     console.log("pedidos: ",this.pedidos)
    }
 
    
    pagar(item){    
     console.log("item: ", item)    
-   
+    this.pagado=true;
     item.estado=EstadoPedido.pagado;
     console.log("item: ", item) 
     this.auth.actualizarPedido(item).then(res => {

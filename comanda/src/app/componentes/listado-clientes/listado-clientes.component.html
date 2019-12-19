@@ -1,2 +1,39 @@
-<app-principal></app-principal>
-<h1>Listado de Clientes</h1>
+<!-- <app-principal></app-principal> -->
+<br><br>
+<h3 *ngIf="vacia == true" >
+        <p class= "no-resultados"> No hay clientes para mostrar <i class="far fa-thumbs-up"></i></p>
+</h3>
+<div  *ngIf="!vacia == true">
+   <table mat-table [dataSource]="dataSource">
+        <tr>
+            <ng-container matColumnDef="Nombre">
+                <th style="color: black;font-size: x-large;" mat-header-cell *matHeaderCellDef> Nombre </th>
+                <td style="color: black;font-size: large;"  mat-cell *matCellDef="let element"> {{element.nombre}} </td>
+            </ng-container>
+            <ng-container matColumnDef="Apellido">
+                <th style="color: black;font-size: x-large;" mat-header-cell *matHeaderCellDef> Apellido</th>
+                <td style="color: black;font-size: large;"  mat-cell *matCellDef="let element"> {{element.apellido}} </td>
+            </ng-container>
+            <ng-container matColumnDef="Perfil">
+                <th style="color: black;font-size: x-large;" mat-header-cell *matHeaderCellDef> Perfil</th>
+                <td style="color: black;font-size: large;"  mat-cell *matCellDef="let element"> {{element.perfil}} </td>
+            </ng-container>
+            <ng-container matColumnDef="Email">
+                <th style="color: black;font-size: x-large;" mat-header-cell *matHeaderCellDef> Email </th>
+                <td style="color: black;font-size: large;"  mat-cell *matCellDef="let element"> {{element.correo}} </td>
+            </ng-container>           
+            <ng-container matColumnDef="Foto">
+                <th style="color: black;font-size: x-large;" mat-header-cell *matHeaderCellDef> Foto </th>
+                <td style="color: black;font-size: large;"  mat-cell *matCellDef="let element" style="padding-top: 1%;padding-bottom: 1%;">
+                        <img style="width: 100px;" src="{{element.foto}}" class="md-card-image" alt="image caption"/>
+                </td>
+        </ng-container> 
+        </tr>
+        <div>
+            <tr mat-header-row *matHeaderRowDef="columsClientes"></tr>
+            <tr mat-row *matRowDef="let row; columns: columsClientes;" ></tr>
+        </div>
+      
+      </table>
+
+</div>

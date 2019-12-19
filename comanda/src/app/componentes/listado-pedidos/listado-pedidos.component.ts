@@ -13,6 +13,7 @@ import { map } from 'rxjs/operators';
 export class ListadoPedidosComponent implements OnInit {
 
   public info:boolean;
+  public vacia:boolean;
   private columsPedido: string[] = ['Mesa', 'Importe', 'Estado', 'Tiempo Elaboracion','Detalle'];
   private columsProductoPedido: string[] = ['Descripcion','Precio','Empleado','Estado Producto','Tiempo Promedio Elaboracion'];
   public pedidos:Array<any> = [];
@@ -35,8 +36,12 @@ export class ListadoPedidosComponent implements OnInit {
   obtenerPedidos(){
     this.data.getListaPedidos("pedidos").subscribe(lista => {
       this.pedidos=lista; 
-      console.log("pedidos: ",this.pedidos); 
+      this.vacia=this.pedidos.length==0;      
     });
+    if ( this.pedidos==undefined || this.pedidos.length==0 )
+          {
+            this.vacia=true;
+          }   
     console.log("pedidos: ",this.pedidos)
    }
 
@@ -51,7 +56,7 @@ export class ListadoPedidosComponent implements OnInit {
         this.productos = [];     
      }
      this.dataSourceProd = new MatTableDataSource(this.productos);
-      this.noDataProd = this.dataSource.connect().pipe(map((data: any[]) => data.length === 0));
+     this.noDataProd = this.dataSource.connect().pipe(map((data: any[]) => data.length === 0));
     
    }
 }

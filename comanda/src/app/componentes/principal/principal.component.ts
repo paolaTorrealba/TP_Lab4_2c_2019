@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { AuthProvider } from 'src/app/providers/auth';
-
-// import {HomeComponent} from '../../componentes/home/home.component';
+import { UsuarioService } from 'src/app/servicios/usuario.service';
+import { DataApiService } from 'src/app/servicios/data-api.service';
+import { take } from 'rxjs/operators';
+import { Perfil } from 'src/app/clases/enum';
 
 
 @Component({
@@ -16,54 +18,74 @@ export class PrincipalComponent implements OnInit {
   public elMail:string;
   public usuario;
   public usuarios;
-  public perfil;
-  constructor( private router: Router,    
+  public perfil: Perfil;
+
+  foto = '';
+  nombre = '';
+  logeado:boolean;
+ 
+
+
+  
+  constructor( private router: Router, 
+    private usuarioService: UsuarioService,
+    private dataApi: DataApiService,   
     private auth: AuthProvider) {
 
-
-      this.email=localStorage.getItem("usuarioComanda"); 
-
-      console.log("email del localstorage", this.email);
-      this.auth.getLista('usuarios').subscribe(lista => {
-        this.usuarios=lista;   
-        console.log("usuarios: ", this.usuarios)  
-        for(let i=0;i<this.usuarios.length;i++){
-          if(this.usuarios[i].correo == this.email) {
-               this.usuario=this.usuarios[i];
-               console.log("el usuario en constructor:",this.usuario);
-          }
-        }
-      });
+      
       this.obtenerUsuario();
       this.mostrarMenu();
   }
  
 
-  obtenerUsuario(){
-    this.email=localStorage.getItem("usuarioComanda");  
-    console.log("email del localstorage", this.email);
-    this.auth.getLista('usuarios').subscribe(lista => {
-      this.usuarios=lista;   
-      console.log("usuarios: ", this.usuarios)  
-      for(let i=0;i<this.usuarios.length;i++){
-        if(this.usuarios[i].correo == this.email) {
-             this.usuario=this.usuarios[i];
-             localStorage.setItem("perfilUComanda", this.usuario.perfil);
-             console.log("el usuario: ",this.usuario);
-        }
-      }
+  obtenerUsuario() {
+ 
+    this.usuarioService.EstaLogeado().subscribe(user => {
+      if (user) {
+        console.log("user.uid obtenido",user.uid)
+        this.dataApi.TraerUno(user.uid, 'usuarios').pipe(take(1)).subscribe(userx => {
 
+          if (userx) {
+            if (userx.activo) {
+              console.log("userx activo ok:", userx)
+              this.usuarioService.usuario = userx;
+
+              this.foto = userx.foto;
+              this.nombre = userx.nombre;
+              this.perfil = userx.perfil;
+              this.logeado = true;
+              console.log("usuario logeado:", userx)
+            }
+            else {
+              this.foto = "";
+              this.nombre = "";
+              this.logeado = false;
+              this.perfil = null;
+            }
+          }
+
+        });
+      }
+      else {
+        this.foto = "";
+        this.nombre = "";
+        this.logeado = false;
+        this.perfil = null;
+      }
     });
   }
 
-  mostrarMenu(){
-    this.perfil= localStorage.getItem("perfilUComanda")
-    console.log("Menu para el perfil: ",this.perfil);
-    console.log("Muestro el menu para este usuario: ",this.usuario);
+
+  mostrarMenu(){    
     switch(this.perfil) {
       case "socio":
         this.acciones = [ 
-          { accion: "Reportes", img: "nuevo-empleado.jpg", ruta: "reportes" },
+          { accion: "Reportes", img: "nuevo-empleado.jpg", ruta: "reporte" },
+          { accion: "Listados", img: "nuevo-empleado.jpg", ruta: "listado" },
+          { accion: "Altas", img: "nuevo-empleado.jpg", ruta: "alta" },
+          { accion: "Reportes Mesas", img: "nuevo-empleado.jpg", ruta: "reporteMesas" },
+          { accion: "Reportes Productos", img: "nuevo-empleado.jpg", ruta: "reporteProductos" },
+          { accion: "Reportes Empleados", img: "nuevo-empleado.jpg", ruta: "reporteEmpleados" },
           { accion: "Agregar Empleado", img: "nuevo-empleado.jpg", ruta: "agregarEmpleado" },
           { accion: "Agregar Socio", img: "nuevo-empleado.jpg", ruta: "agregarSocio" },
           { accion: "Ver encuestas", img: "encuesta.jpg", ruta: "verEncuestas" },
@@ -71,7 +93,9 @@ export class PrincipalComponent implements OnInit {
           { accion: "Agregar producto", img: "ocupar-mesa.jpg", ruta: "agregarProducto" },
           { accion: "Listado mesa", img: "ocupar-mesa.jpg", ruta: "listadoMesas" },
           { accion: "Listado producto", img: "ocupar-mesa.jpg", ruta: "listadoProductos" },
+          { accion: "Listado clientes", img: "ocupar-mesa.jpg", ruta: "listadoClientes" },
           { accion: "Listado pedidos", img: "ocupar-mesa.jpg", ruta: "listadoPedidos" },
+          { accion: "Listado empleados", img: "ocupar-mesa.jpg", ruta: "listadoEmpleados" },
           { accion: "Ver Registro de Clientes", img: "nuevo-empleado.jpg", ruta: "verRegistroClientes" }, 
           { accion: "Cerrar Mesa", img: "repartidor.png", ruta: "cerrarMesa"},
          
@@ -89,18 +113,15 @@ export class PrincipalComponent implements OnInit {
           { accion: "Ver Facturacion por Mesa", img: "repartidor.png", ruta: "cerrarMesa"},
           { accion: "Ver Importes por Mesas", img: "repartidor.png", ruta: "cerrarMesa"},
           { accion: "Ver Facturacion por Fecha", img: "repartidor.png", ruta: "cerrarMesa"},
-         // { accion: "Confirmar reservas", img: "reserva.jpg", ruta: ListadoReservaComponent },
           { accion: "Ver Comentarios", img: "repartidor.png", ruta: "cerrarMesa"},
 
         ];
         break;
       case "cliente":
-        this.acciones = [
-                  
+        this.acciones = [                  
           { accion: "Pedir platos y bebidas", img: "pedido.jpg", ruta: "pedirPlatos"},
           { accion: "Paga Factura", img: "pedido.png", ruta: "pagarFactura" },
           { accion: "Encuesta", img: "pedido.png", ruta: "encuestaCliente" },
-          { accion: "Ingresar Codigos", img: "pedido.png", ruta: "encuestaCliente" },
           { accion: "Reservar mesa", img: "reserva.jpg", ruta: "reservaCliente" }, 
           { accion: "Ver mi pedido", img: "reserva.jpg", ruta: "verEstadoPedido" },
           { accion: "Cancelar Pedido", img: "reserva.jpg", ruta: "cancelar" },  
@@ -145,30 +166,23 @@ export class PrincipalComponent implements OnInit {
 
   logout(){
     console.log("falta hacer el logout");
-    // let alertConfirm = this.error.mostrarMensajeConfimación("¿Quieres cerrar sesión?", "Cerrar sesión");
-    // alertConfirm.present();
-    // alertConfirm.onDidDismiss((confirm) => {
-    //   if (confirm) {
-    //     this.cerrarSersion();
-    //   }
-    // });
+    
   }
 
   public cerrarSersion(){
     this.auth.logOut();
-    // actualizar el estado del usuario a noLogueado.
-    // limpiar el local Storage.
-    localStorage.setItem("usuarioComanda","");
-    localStorage.setItem("perfilUComanda","");
+   
     this.router.navigate(['/login']);
   }
 
   openComponent(item) {   
     this.router.navigate(['/'+item.ruta]);
-    // this.navCtrl.setRoot(item.ruta);
+   
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.obtenerUsuario();
+  }
 
   openPage(item) {
     console.log(item);

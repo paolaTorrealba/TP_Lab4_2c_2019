@@ -11,6 +11,7 @@ import { map } from 'rxjs/operators';
 export class ListadoProductosComponent implements OnInit {
   private columsProducto: string[] = ['NombreProducto', 'Tipo', 'Descripcion', 'TiempoPromedio','Precio'];
 
+  public vacia:boolean;
   public productos:Array<any> = []; 
   private dataSource = new MatTableDataSource(this.productos);
   private noData = this.dataSource.connect().pipe(map((data: any[]) => data.length === 0));
@@ -23,10 +24,13 @@ export class ListadoProductosComponent implements OnInit {
   obtenerProductos() {
     this.data.getListaProductos("productos").subscribe(lista => {
         this.productos=lista; 
-        console.log("Productos: ",this.productos); 
-        console.log("lista: ",lista); 
+        this.vacia=this.productos.length==0;
      
     });
+    if ( this.productos==undefined || this.productos.length==0 )
+    {
+      this.vacia=true;
+    }  
     console.log("Productos: ",this.productos);  
 } 
 

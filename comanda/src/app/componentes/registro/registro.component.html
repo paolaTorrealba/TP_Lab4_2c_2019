@@ -4,7 +4,7 @@
       <div class="card-wrapper registro-pagina">  
         <div class="card fat">
           <div class="card-body">
-            <h4 class="card-title">Registro</h4>   
+            <h4 class="card-title">Registro Clientes</h4>   
 
             <form (ngSubmit)="f.form.valid && registrarse()" #f="ngForm" novalidate>
             
@@ -40,7 +40,7 @@
                 </div>
             </div>
               <div class="form-group">
-                <label for="password">Clave</label>          
+                <label for="password">Clave (mínimo  caracteres)</label>          
                 <input name="password" id="password" type="password"
                        class="form-control" [(ngModel)]="passwordModel" 
                       #password="ngModel" [ngClass]="{ 'is-invalid': f.submitted && apellido.invalid }" 
@@ -74,22 +74,23 @@
                   </div>
                 </form> -->
   
-                <form class="margin-bottom">
-                  <re-captcha (resolved)="resolved($event)" siteKey="6LeUMq8UAAAAAKO61peKaT7RknpnQe7G5M56hz04">
+                <!-- <form class="margin-bottom">
+                  <re-captcha (resolved)="resolved($event)" siteKey="6LevcsUUAAAAACFQdvv7_T8NGE0mNqObdhqHwW9k"> 
+
                   </re-captcha>
-                </form>
-  
-                <div class="form-group no-margin">
-  
-                  <ng-container                    >
-                    <button  class="btn btn-primary btn-block" (click) ="registrarse()" *ngIf="this.captchaVerificado">
+                </form> -->
+                <div *ngIf="urlImagen == undefined  && cargoImagen" class="d-flex justify-content-center">
+                  <div class="spinner-grow text-primary" style="width: 3rem; height: 3rem; margin-top: 10%;" role="status">
+                    <span class="sr-only">Loading...</span>
+                  </div>
+                </div>
+                <div *ngIf="urlImagen!=undefined" class="form-group no-margin">
+                   <ng-container  >
+                    <button  class="btn btn-primary btn-block" (click) ="registrarse()" >
                       Registrarse
                     </button>
-                  </ng-container>
-  
-  
-                </div>
-           
+                  </ng-container> 
+                </div>           
               </form>
             </div>
           </div>

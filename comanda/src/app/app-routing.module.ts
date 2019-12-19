@@ -8,14 +8,12 @@ import {ListaClientesEstadoComponent} from './componentes/lista-clientes-estado/
 import {ListadoSupervisorComponent} from './componentes/listado-supervisor/listado-supervisor.component';
 import {ListadoReservaComponent} from './componentes/listado-reserva/listado-reserva.component';
 import {AltaDeMesaComponent} from './componentes/alta-de-mesa/alta-de-mesa.component';
-import {HomeClienteComponent} from './componentes/home-cliente/home-cliente.component';
 import {PedirPlatosComponent} from './componentes/pedir-platos/pedir-platos.component';
 import {ReservaComponent} from './componentes/reserva/reserva.component';
 import { AuthProvider } from 'src/app/providers/auth';
 import {ListadoClientesComponent} from './componentes/listado-clientes/listado-clientes.component';
 import {ListadoMesasComponent} from './componentes/listado-mesas/listado-mesas.component';
 import {ConfirmarPedidoComponent} from './componentes/confirmar-pedido/confirmar-pedido.component';
-import {HomeComponent} from './componentes/home/home.component';
 import { PrincipalComponent } from './componentes/principal/principal.component';
 import { RegistroComponent } from './componentes/registro/registro.component';
 import { LoginComponent } from './componentes/login/login.component';
@@ -35,31 +33,62 @@ import { FinalizarPedidoBartenderComponent } from './componentes/finalizar-pedid
 import { FinalizarPedidoCocineroComponent } from './componentes/finalizar-pedido-cocinero/finalizar-pedido-cocinero.component';
 import { VerEstadoPedidoComponent } from './componentes/ver-estado-pedido/ver-estado-pedido.component';
 import { TipoFilasDirective } from './directivas/tipo-filas.directive';
-import { ExcelComponent } from './componentes/excel/excel.component';
+import { ExcelMesasComponent } from './componentes/excel-mesas/excel-mesas.component';
 import { CancelarPedidoComponent } from './componentes/cancelar-pedido/cancelar-pedido.component';
+import { ExcelProductosComponent } from './componentes/excel-productos/excel-productos.component';
+import { ExcelEmpleadosComponent } from './componentes/excel-empleados/excel-empleados.component';
+import { ListadoEmpleadosComponent } from './componentes/listado-empleados/listado-empleados.component';
+import { CardReportesComponent } from './componentes/card-reportes/card-reportes.component';
+import { ReportesComponent } from './componentes/reportes/reportes.component';
+import { ExcelClientesComponent } from './componentes/excel-clientes/excel-clientes.component';
+import { AltasComponent } from './componentes/altas/altas.component';
+import { CardAltasComponent } from './componentes/card-altas/card-altas.component';
+import { CardListadosComponent } from './componentes/card-listados/card-listados.component';
+import { ListadosComponent } from './componentes/listados/listados.component';
 
 
 
 const routes: Routes = [
   { path: '', component: LoginComponent },
-  { path: 'login', component: LoginComponent },  
-  { path: 'home', component: HomeComponent },  
+  { path: 'login', component: LoginComponent },   
   { path: 'principal', component: PrincipalComponent },  
   { path: 'menuprincipal', component: PrincipalComponent },  
   { path: 'registro', component: RegistroComponent},
   // { path: 'listaEspera', component: ListaDeEsperaComponent},
 
   // SOCIO
-  { path: 'reportes', component: ExcelComponent},  
+
+  
+  { path: 'reporte', component: ReportesComponent, 
+  children:
+      [{path: '' , component: CardReportesComponent},
+       { path: 'reporteMesas', component: ExcelMesasComponent},
+       { path: 'reporteEmpleados', component: ExcelEmpleadosComponent},
+       { path: 'reporteProductos', component: ExcelProductosComponent},
+       { path: 'reporteClientes', component: ExcelClientesComponent}  
+   ]},
+   { path: 'alta', component: AltasComponent, 
+    children:
+      [{path: '' , component: CardAltasComponent},
+      { path: 'agregarMesa', component: AltaDeMesaComponent},   
+      { path: 'agregarSocio', component: AltaSocioComponent},
+      { path: 'agregarEmpleado', component: AltaEmpleadoComponent}, 
+      { path: 'agregarProducto', component: AltaDeProductoComponent}  
+   ]},
+   { path: 'listado', component: ListadosComponent, 
+    children:
+      [{path: '' , component: CardListadosComponent},
+      { path: 'listadoMesas', component: ListadoMesasComponent},
+      { path: 'listadoClientes', component: ListadoClientesComponent},
+      { path: 'listadoEmpleados', component: ListadoEmpleadosComponent},
+      { path: 'listadoProductos', component: ListadoProductosComponent},
+      { path: 'listadoPedidos', component: ListadoPedidosComponent}, 
+   ]},
+ 
   { path: 'pedidosPendientes', component: PedidosPendientesComponent},
   { path: 'verEncuestas', component: VerEncuestasComponent},
-  { path: 'agregarMesa', component: AltaDeMesaComponent},   
-  { path: 'agregarSocio', component: AltaSocioComponent},
-  { path: 'agregarEmpleado', component: AltaEmpleadoComponent}, 
-  { path: 'agregarProducto', component: AltaDeProductoComponent}, 
-  { path: 'listadoMesas', component: ListadoMesasComponent},
-  { path: 'listadoProductos', component: ListadoProductosComponent},
-  { path: 'listadoPedidos', component: ListadoPedidosComponent},
+   
+  
 
   // CLIENTE
   

@@ -1,59 +1,3 @@
-<!-- <div class="notfound">
-    <div class="title">
-      <h2>La Comanda</h2>
-    </div>
-    <div class="image">agregar imagen</div>
-</div>
-
-<div class="container register">
-  <div class="row">
-      <div class="col-md-12">
-          <div class="tab-content" id="myTabContent">
-              <div class="tab-pane fade show active text-align form-new" id="home" role="tabpanel" aria-labelledby="home-tab">
-                  <h1 class="register-heading">Ingreso</h1>
-                  <div class="row register-form">
-                      <div class="col-md-12">
-                          <form method="post">
-
-
-                              <div class="form-group">
-                                  <input  [(ngModel)]="user.email"  type="text" name="LGform1_user" class="form-control" placeholder="Usuario" value="" required/>
-                              </div>
-
-                              <div class="form-group">
-                                  <input placeholder="Contraseña"  [(ngModel)]="user.password " type="password" name="LGform1_pwd" class="form-control" value="" required/>
-                              </div>
-
-                              <div class="buttonsLogin" >
-                                      <p>Ingreso rapido</p>                                      
-                                      <button class="btn login" (click)="ingresoSocio()" >Socio</button>
-                                      <button class="btn login"  (click)="ingresoCliente()" >Cliente</button>
-                                      <button class="btn login" (click)="ingresoBartender()" >Bartender</button>
-                                      <button class="btn login"  (click)="ingresoCocinero()" >Cocinero</button>
-                                      <button class="btn login" (click)="ingresoCervecero()" >Cervecero</button>
-                                      <button class="btn login"  (click)="ingresoMozo()" >Mozo</button>
-                              </div>
-                              <br>
-
-                              <button class="btn login"  (click)="entrar()" >Ingresar</button>
-                              
-
-                              <div class="margin-top20 text-center">
-                                    Registrar nueva cuenta <a routerLink="/registro">Registro</a>
-                              </div>
-
-
-
-
-                          </form>
-                      </div>
-                  </div>
-              </div>
-          </div>
-      </div>
-  </div>
-</div> -->
-
 <section class="h-100 login-pagina">
   <div class="container h-100">
     <div class="row justify-content-md-center h-100">
@@ -61,7 +5,7 @@
         <div class="card fat">
           <div class="card-body">
             <h4 class="card-title">Ingreso</h4>
-            <!-- agrego perfiles -->
+           
             <div class="buttonsLogin" >
                <p>Perfiles prederminados</p>
                 <button class="btn login" (click)="ingresoSocio()" >Socio</button>
@@ -102,7 +46,7 @@
                       </button>
                   </div>
                   <div class="margin-top20 text-center">
-                          Registrar nueva cuenta<a routerLink="/registro">  Registro</a>
+                          ¿No tenes cuenta aún? <a routerLink="/registro">  Registrarse</a>
                    </div>
             </form>
           </div>

@@ -1,83 +1,41 @@
-<nav class="dropdownmenu">
-
-  <!-- SOCIO -->
-    <ul >
-      <li *ngIf="this.usuario.perfil=='socio'"><a href="/principal">Principal</a></li>
-      <li *ngIf="this.usuario.perfil=='socio'"><a href="/reportes">Reportes</a></li>
-      <li *ngIf="this.usuario.perfil=='socio'"><a >Encuestas</a>
-        <ul  id="submenu"   >
-            <!-- <li><a href="/verEncuestas">Empleados</a></li> -->
-            <li><a href="/verEncuestas">Clientes</a></li>            
-        </ul>
-      </li>
-      <li *ngIf="this.usuario.perfil=='socio'"><a >Altas Empleados</a>
-        <ul  id="submenu">          
-            <li><a href="/agregarEmpleado">Alta Empleado</a></li>
-            <li><a href="/agregarSocio">Alta Socio</a></li>            
-        </ul>
-      </li>
-      <li *ngIf="this.usuario.perfil=='socio'"><a >Altas Elementos</a>
-        <ul  id="submenu"   >
-            <li><a href="/agregarMesa">Alta Mesa</a></li>
-            <li><a href="/agregarProducto">Alta Producto</a></li> 
-        </ul>
-      </li>
-      <li *ngIf="this.usuario.perfil=='socio'"><a >Listados</a>
-        <ul id="submenu" >
-          <li><a href="/listadoProductos">Productos</a></li>
-          <li><a href="/listadoPedidos">Pedidos</a></li>
-          <li><a href="/listadoMesas">Mesas</a></li>
-        </ul>
-      </li> 
-      <li *ngIf="this.usuario.perfil=='socio'"><a href="/login">Salir</a></li>
-    </ul>
-<!-- CLIENTE -->
-    <ul>        
-        <li *ngIf="this.usuario.perfil=='cliente'"><a href="/principal">Principal</a></li>
-        <li *ngIf="this.usuario.perfil=='cliente'"><a href="/pagarFactura">Pagar Factura</a></li>
-        <li *ngIf="this.usuario.perfil=='cliente'"><a href="/pedirPlatos">Hacer Pedido</a></li>
-        <li *ngIf="this.usuario.perfil=='cliente'"><a href="/reservaCliente">Seleccionar Mesa</a></li>
-        <li *ngIf="this.usuario.perfil=='cliente'"><a href="/verEstadoPedido">Mi Pedido</a></li>
-        <li *ngIf="this.usuario.perfil=='cliente'"><a href="/encuestaCliente">Encuesta</a></li>
-        <li *ngIf="this.usuario.perfil=='cliente'"><a href="/cancelar">Cancelar Pedido</a></li>
-        <li *ngIf="this.usuario.perfil=='cliente'"><a href="/login">Salir</a></li>
-
-    </ul>
-<!-- MOZO -->
-    <ul>        
-        <li *ngIf="this.usuario.perfil=='mozo'"><a href="/principal">Principal</a></li>
-        <li *ngIf="this.usuario.perfil=='mozo'"><a href="/pedidosPendientes">Estado de Pedidos</a></li>
-        <li *ngIf="this.usuario.perfil=='mozo'"><a href="/cerrarMesa">Cerrar Mesa</a></li>
-        <li *ngIf="this.usuario.perfil=='mozo'"><a href="/verRegistroClientes">Registro de Cliente</a></li>
-        <li *ngIf="this.usuario.perfil=='mozo'"><a href="/confirmarPago">Confirmar Pago</a></li>
-        <li *ngIf="this.usuario.perfil=='mozo'"><a href="/entregarPedido">Entregar Pedido</a></li>
-        <li *ngIf="this.usuario.perfil=='mozo'"><a href="/login">Salir</a></li>
-    </ul>
-<!-- BARTENDER -->
-    <ul>        
-        <li *ngIf="this.usuario.perfil=='bartender'"><a href="/principal">Principal</a></li>
-        <!-- <li *ngIf="this.usuario.perfil=='bartender'"><a href="/encuestaEmpleado">Hacer Encuesta</a></li> -->
-        <li *ngIf="this.usuario.perfil=='bartender'"><a href="/pedidosPendientesBartender">Pedidos Pendientes</a></li>
-        <li *ngIf="this.usuario.perfil=='bartender'"><a href="/finalizarPedidoBartender">Cerrar Pedido</a></li>
-        <li *ngIf="this.usuario.perfil=='bartender'"><a href="/login">Salir</a></li>
-    </ul>
-<!-- COCINERO -->
-    <ul>        
-        <li *ngIf="this.usuario.perfil=='cocinero'"><a href="/principal">Principal</a></li>
-        <!-- <li *ngIf="this.usuario.perfil=='cocinero'"><a href="/encuestaEmpleado">Hacer Encuesta</a></li> -->
-        <li *ngIf="this.usuario.perfil=='cocinero'"><a href="/pedidosPendientesCocinero">Pedidos Pendientes</a></li>
-        <li *ngIf="this.usuario.perfil=='cocinero'"><a href="/finalizarPedidoCocinero">Cerrar Pedido</a></li>
-        <li *ngIf="this.usuario.perfil=='cocinero'"><a href="/login">Salir</a></li>
-    </ul>
- <!-- CERVECERO -->
-    <ul>        
-        <li *ngIf="this.usuario.perfil=='cervecero'"><a href="/principal">Principal</a></li>
-        <!-- <li *ngIf="this.usuario.perfil=='cervecero'"><a href="/encuestaEmpleado">Hacer Encuesta</a></li> -->
-        <li *ngIf="this.usuario.perfil=='cervecero'"><a href="/pedidosPendientesCervecero">Pedidos Pendientes</a></li>
-        <li *ngIf="this.usuario.perfil=='cervecero'"><a href="/finalizarPedidoCervecero">Cerrar Pedido</a></li>
-        <li *ngIf="this.usuario.perfil=='cervecero'"><a href="/login">Salir</a></li>
-    </ul>
-   
-     
- 
-</nav>
+<header class="navbar navbar-inverse navbar-fixed-top bs-docs-nav" role="banner">
+  <div class="container">
+      <div class="navbar-header"> 
+          <p class="navbar-brand">COMANDA</p><br>    
+          <p class="navbar-brand">{{this.perfil}} {{this.nombre}}</p>    
+      </div>  
+      <ul class="nav navbar-nav navbar-right"> 
+        <!--SOCIO  -->       
+        <li *ngIf="this.perfil=='socio'"><a  routerLink="/reporte">Reportes</a></li> 
+        <li *ngIf="this.perfil=='socio'"><a  routerLink="/alta">Altas Generales</a></li>   
+        <li *ngIf="this.perfil=='socio'"><a  routerLink="/listado">Listados</a></li> 
+        <li *ngIf="this.perfil=='socio'"><a  routerLink="/verEncuestas">Encuestas</a></li> 
+        <!--CLIENTE  -->
+        <li *ngIf="this.perfil=='cliente'"><a  routerLink="/reservaCliente">Seleccionar Mesa</a></li> 
+        <li *ngIf="this.perfil=='cliente'"><a  routerLink="/pedirPlatos">Hacer Pedido</a></li>   
+        <li *ngIf="this.perfil=='cliente'"><a  routerLink="/verEstadoPedido">Mi Pedido</a></li> 
+        <!-- <li *ngIf="this.perfil=='cliente'"><a  routerLink="/cancelar">Cancelar</a></li>  -->
+        <li *ngIf="this.perfil=='cliente'"><a  routerLink="/pagarFactura">Pagar Factura</a></li>
+        <li *ngIf="this.perfil=='cliente'"><a routerLink="/encuestaCliente">Encuesta</a></li>
+        <!--BARTENDER  -->           
+        <li *ngIf="this.perfil=='bartender'"><a  routerLink="/pedidosPendientesBartender">Pedidos Pendientes</a></li>   
+        <li *ngIf="this.perfil=='bartender'"><a  routerLink="/finalizarPedidoBartender">Cerrar Pedido</a></li> 
+        <!--COCINERO  -->    
+        <li *ngIf="this.perfil=='cocinero'"><a  routerLink="/pedidosPendientesCocinero">Pedidos Pendientes</a></li> 
+        <li *ngIf="this.perfil=='cocinero'"><a  routerLink="/finalizarPedidoCocinero">Cerrar Pedido</a></li>
+        <!--CERVECERO  -->    
+        <li *ngIf="this.perfil=='cervecero'"><a  routerLink="/pedidosPendientesCervecero">Pedidos Pendientes</a></li> 
+        <li *ngIf="this.perfil=='cervecero'"><a  routerLink="/finalizarPedidoCervecero">Cerrar Pedido</a></li>
+        <!--MOZO  --> 
+        <li *ngIf="this.perfil=='mozo'"><a routerLink="/pedidosPendientes">Estado de Pedidos</a></li>
+        <li *ngIf="this.perfil=='mozo'"><a routerLink="/cerrarMesa">Cerrar Mesa</a></li>
+        <li *ngIf="this.perfil=='mozo'"><a routerLink="/confirmarPago">Confirmar Pago</a></li>
+        <li *ngIf="this.perfil=='mozo'"><a routerLink="/entregarPedido">Entregar Pedido</a></li>
+         
+        <li>
+          <a routerLink="/login">Salir</a>
+        </li>        
+      </ul>
+    </div> 
+</header>
+<!-- <div  *ngIf="this.perfil=='socio'" ><img id="socio-img" src="../../../assets/imagenes/default-user.jpg"/></div> -->

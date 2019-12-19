@@ -1,10 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/servicios/auth.service';
-import { Router } from '@angular/router';
 import { EncuestaCliente } from 'src/app/clases/encuesta-cliente';
 import { AuthProvider } from 'src/app/providers/auth';
 import {MatRadioModule} from '@angular/material/radio';
-
+import { UsuarioService } from 'src/app/servicios/usuario.service';
+import { DataApiService } from 'src/app/servicios/data-api.service';
+import { take } from 'rxjs/operators';
+import { Router, ActivatedRoute, ParamMap } from '@angular/router';
+import { Perfil } from 'src/app/clases/enum';
 import { EstadoPedido } from 'src/app/clases/enum';
 @Component({
   selector: 'app-encuesta-cliente',
@@ -19,6 +22,7 @@ export class EncuestaClienteComponent implements OnInit {
   public image: string;
   public encuestas:Array<any> = [];
   public  date: any;
+  public incompleto:boolean;
   public answer1Model :any="mujer";
   public answer2Model: any="1";
   public answer3Model: any="1";
@@ -32,38 +36,65 @@ export class EncuestaClienteComponent implements OnInit {
   public name:string="";
   public hacerEncuesta:boolean=false;
 
+  public nombre:string;
+  public perfil:Perfil;
+  public vacia:boolean;
   private opinion=3;
    
   constructor( private  data:  AuthService,
               private router: Router,
-              private auth: AuthProvider) {    
-     
-      this.encuestaCliente = new EncuestaCliente(); 
-      this.correo=localStorage.getItem("usuarioComanda");
-      this.obtenerPedidos();
-      console.log("encuestaCliente", this.encuestaCliente)
-      this.obtenerEncuestasCliente();
-     
-   } 
+              private auth: AuthProvider,
+              private usuarioService: UsuarioService,
+              private dataApi: DataApiService) {    
+              this.obtenerUsuario(); 
+              this.encuestaCliente = new EncuestaCliente();
+    } 
 
-
+   obtenerUsuario() { 
+    this.usuarioService.EstaLogeado().subscribe(user => {
+      if (user) {       
+        this.dataApi.TraerUno(user.uid, 'usuarios')
+        .pipe(take(1)).subscribe(userx => {
+          if (userx) {
+            if (userx.activo) {             
+                this.usuarioService.usuario = userx;             
+                this.correo= userx.correo;
+                this.nombre = userx.nombre;            
+                this.perfil = userx.perfil;    
+                                
+                this.obtenerEncuestasCliente();
+                this.obtenerPedidos();
+            }
+            else {             
+              this.nombre = "";
+              this.correo= ""; 
+              this.perfil = null;
+            }
+          }
+        });
+      }
+      else {
+        this.nombre = "";
+        this.correo= "";       
+        this.perfil = null;
+      }
+    });
+  }
    obtenerPedidos(){
      console.log("obtengo pedidos")
     this.data.getListaPedidos("pedidos").subscribe(lista => {
       this.pedidos=lista; 
       for (let i=0; i<=this.pedidos.length-1;i++){
-        console.log("correos:", this.correo, this.pedidos[i].correo)
-        if (this.pedidos[i].correo== this.correo){
+        if (this.pedidos[i].correoCliente== this.correo){
           if (this.pedidos[i].estado==EstadoPedido.pagado)
           {
             this.hacerEncuesta=true;
+            
           }
          
         }
-      }
-      console.log("pedidos: ",this.pedidos); 
+      } 
     });
-    console.log("pedidos: ",this.pedidos)
    }
 
    obtenerEncuestasCliente(){
@@ -71,6 +102,7 @@ export class EncuestaClienteComponent implements OnInit {
     this.data.getListaEncuestas("encuestaCliente").subscribe(lista => {
       this.encuestas=lista; 
       for(let i=0; i<this.encuestas.length-1; i++){
+        console.log(this.encuestas[i],this.correo)
         if (this.encuestas[i].email==this.correo){
           this.encuestado=true;
           console.log("=====es el mismo usuario");
@@ -96,9 +128,14 @@ guardarEncuesta(){
       console.log("commentaryModel", this.commentaryModel)
       this.encuestaCliente = new EncuestaCliente(); 
       console.log("guardo encuesta")
+      if (this.answer1Model==''){
+        this.incompleto=true;
+      }
+
+
       let data = {    
         "date":new Date(),
-        "email": localStorage.getItem("usuarioComanda"),
+        "email": this.correo,
         "question1": this.encuestaCliente.question1,
         "question2": this.encuestaCliente.question2,
         "question3": this.encuestaCliente.question3,

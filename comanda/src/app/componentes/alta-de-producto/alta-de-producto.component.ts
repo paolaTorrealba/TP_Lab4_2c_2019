@@ -5,6 +5,7 @@ import { AngularFireStorage } from '@angular/fire/storage';
 import { AuthProvider } from 'src/app/providers/auth';
 import { TipoProducto } from 'src/app/clases/enum';
 import { AuthService } from 'src/app/servicios/auth.service';
+import {Router } from '@angular/router';
 
 @Component({
   selector: 'app-alta-de-producto',
@@ -23,26 +24,29 @@ export class AltaDeProductoComponent implements OnInit {
   public precioModel: number
   public estado: boolean;
   public numeroProducto:number;
-
-  public urlImagen: Observable<string>;
-  public porcentajeUpload: Observable<number>; 
-  public imgName: string;
+  public porcentajeUpload: Observable<number>;
   public noCargando = true;
-  public imagenUrl : any;
-  public foto:string;
+  public cargoImagen: boolean;
   public productos:Array<any> = [];
+
+  public imgName: string;
+  public urlImagen: Observable<string>=undefined;
+  public imagenUrl : any;
+  public foto:undefined
+
   constructor(private  data:  AuthService,
-    private  auth:  AuthProvider,
+    private auth:  AuthProvider,
+    private router: Router,
     private storage: AngularFireStorage) {
-   this.imgName = "Seleccionar imágen..";
-   this.obtenerProductos();
+
+        this.imgName = "Seleccionar imágen..";
+        this.obtenerProductos();
+        this.cargoImagen=false;
  }
 
- obtenerProductos(){
-  console.log("obtengo las encuestas:")
+ obtenerProductos(){  
  this.data.getListaProductos("productos").subscribe(lista => {
-   this.productos=lista; 
-     console.log("productos: ",this.productos); 
+   this.productos=lista;      
  });
  console.log("productos: ",this.productos)
 }
@@ -50,12 +54,11 @@ export class AltaDeProductoComponent implements OnInit {
   ngOnInit() {}
 
   confirmar() {
-    console.log("agregar Producto") 
-    this.imagenUrl = this.InputImagenProd.nativeElement.value;
-    if (!this.imagenUrl ) {
-      this.imagenUrl = "assets/imagenes/default-producto.jpg";
-    }
-
+      console.log("agregar Producto") 
+      this.imagenUrl = this.InputImagenProd.nativeElement.value;
+      if (!this.imagenUrl ) {
+        this.imagenUrl = "assets/imagenes/default-producto.jpg";
+      }
       let data = {
             nombre:this.nombreModel,
             tipo:this.tipoModel,
@@ -63,35 +66,42 @@ export class AltaDeProductoComponent implements OnInit {
             tiempoPromedioElaboracion: Number(this.tiempoPromElaboracionModel), 
             precio: Number(this.precioModel),
             numeroProducto:this.productos.length+1,       
-            foto:this.imagenUrl     
-       }
+            foto:this.InputImagenProd.nativeElement.value 
+      }
+      console.log("guardo el producto", data)
+      this.auth.guardarProducto(data);
+      this.router.navigate(['/principal']);
+    }
 
-  console.log("guardo el producto", data)
-    this.auth.guardarProducto(data);
-  }
-
-  ImagenCargada(e) {
-    console.log("cargar imagen")
+  ImagenCargada(e) { 
+    this.cargoImagen=true;   
     this.noCargando = false;
     const img = e.target.files[0];
+    console.log("cargar imagen")
 
     if (img != undefined) {
       this.imgName = img.name;
+      console.log("imgName: ", this.imgName)
       const nombreImg = img.name.substr(0, img.name.lastIndexOf('.'));
       const ext = img.name.substr(img.name.lastIndexOf('.') + 1);
       const filePath = "imagenes/productos/" + nombreImg + "-" + Date.now() + "." + ext;
       const ref = this.storage.ref(filePath);
       const task = this.storage.upload(filePath, img);
+      
       this.porcentajeUpload = task.percentageChanges();
     
       task.snapshotChanges().pipe(finalize(() => this.urlImagen = ref.getDownloadURL())).subscribe();
-      console.log("imagen: ", this.urlImagen);
+     
     }
     else {
       this.imgName = "Seleccionar imágen..";
-      this.urlImagen = empty();
+      this.urlImagen = undefined;
       this.noCargando = true;
     }
+    console.log("urlImagen: ", this.urlImagen);
+    this.imgName = "Seleccionar imágen..";
+    this.urlImagen = undefined;
+    this.noCargando = true;
   }
 
   changeTipo(tipo: any) {

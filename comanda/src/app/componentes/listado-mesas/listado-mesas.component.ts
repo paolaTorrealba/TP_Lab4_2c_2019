@@ -12,7 +12,7 @@ import { map } from 'rxjs/operators';
 export class ListadoMesasComponent implements OnInit {
   
   
-
+  public vacia:boolean;
   private columsMesa: string[] = ['NumeroMesa', 'CantidadComensales', 'Estado', 'Codigo'];
   public mesas:Array<any> = []; 
   private dataSource = new MatTableDataSource(this.mesas);
@@ -20,24 +20,16 @@ export class ListadoMesasComponent implements OnInit {
  
  
   constructor( private  data:  AuthService) {
-    this.obtenerMesas();
-   
+    this.obtenerMesas();  
 
-   }
-
- 
+   } 
   
-  ngOnInit() {
-  }
-
-
-  
+  ngOnInit() {}  
 
     obtenerMesas() {
     this.data.getListaMesas("mesas").subscribe(lista => {
         this.mesas=lista; 
-        console.log("Mesas: ",this.mesas); 
-        console.log("lista: ",lista); 
+        this.vacia=this.mesas.length==0;
      
     });
     console.log("Mesas: ",this.mesas);  

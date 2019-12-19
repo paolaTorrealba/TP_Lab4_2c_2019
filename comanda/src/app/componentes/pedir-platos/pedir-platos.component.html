@@ -1,29 +1,120 @@
 <app-principal></app-principal>
 <br><br>
-<h4>Hacer Pedido</h4>
-<h4>-- Recuerde seleccionar una mesa --</h4>
-        <p >Codigo Mesa Seleccionada: {{this.codigoMesa}}</p>
+<div *ngIf="tieneReserva == undefined" class="d-flex justify-content-center">
+    <div class="spinner-grow text-primary" style="width: 3rem; height: 3rem; margin-top: 10%;" role="status">
+      <span class="sr-only">Loading...</span>
+    </div>
+</div>
+<div *ngIf="tieneReserva != undefined" >
+<h3 *ngIf="tieneReserva == false && !this.correo == ''" >
+        <p class= "no-resultados"> Aún no reservaste mesa! </p>
+        <button  type="button" class="btn btn-warning" 
+        (click)="irAReservarMesa()" 
+        style="margin-left: 35%;" >Reservar Mesa</button> 
+</h3>
+<div  *ngIf="tieneReserva == true && !this.correo == ''">
+    <h3><p class= "no-resultados"> Codigo Mesa: [{{this.miReserva}}] </p></h3>
+    <button type="button" class="btn btn-success"
+            *ngIf="noTienePedido && mostrar " (click)="iniciarPedido()"
+            style="margin-left: 36%;">Ver Carta</button>
+    <h3  *ngIf="!noTienePedido" >
+           <p class= "no-resultados">Tu pedido ya fue recibido! </p>
+            <button  type="button" class="btn btn-warning" 
+                    (click)="irVerEstado()" 
+                    style="margin-left: 35%;" >Ver Estado</button> 
+    </h3>
+    <div *ngIf="hacerPedido &&  noTienePedido">
+    <h3 >
+         <p class= "no-resultados">Monto a pagar:    $ {{this.montoTotal}}</p>
+         <p class= "no-resultados">Tiempo de Espera: {{this.tiempoTotal}} min</p>
+    </h3>     
+    
+    <!-- <button type="button"  style="margin-left: 13%;" class="btn btn-success"  
+            (click)="showInfo()"> Ver Detalle Pedido</button> -->
+    <button  *ngIf="!pedidoRealizado && montoTotal!=0" type="button"  style="margin-left: 36%;" class="btn btn-success"
+            (click)="guardarPedido()"> Confirmar Pedido</button><br><br>
 
-        <p >monto total: {{this.montoTotal}}</p>
-        <p >tiempo total: {{this.tiempoTotal}}</p>
-        <label>Seleccione los platos:</label>
-        <button (click)="mostrarPlatos()" >Platos</button>
-        <button (click)="mostrarCerveza()">Cerveza</button>
-        <button (click)="mostrarBarra()">Barra</button>
-        <div *ngIf="!pedidoRealizado">
-        <ul *ngFor="let item of productos">
-            <p *ngIf="item.tipo===this.tipo">nombre: {{item.nombre}}</p>
-            <p *ngIf="item.tipo===this.tipo">descripcion: {{item.descripcion}}</p>   
-            <p *ngIf="item.tipo===this.tipo">precio: {{item.precio}}</p>
-            <input *ngIf="item.tipo===this.tipo" type="checkbox" ng-model="item" (click)="agregarPedido(item)">
-            <input *ngIf="item.tipo===this.tipo" type="checkbox" ng-model="item" (click)="quitarPedido(item)">
-            <p *ngIf="item.tipo===this.tipo">======================</p>   
+
+<!-- <div *ngIf="mostrarDetalle">
+        <table mat-table [dataSource]="dataSourceSelecAndCantidad">
+                <tr>
+                    <ng-container matColumnDef="Tipo">
+                        <th mat-header-cell *matHeaderCellDef> Tipo </th>
+                        <td mat-cell *matCellDef="let element"> {{element.tipo}} </td>
+                    </ng-container>
+                    <ng-container matColumnDef="NombreProducto">
+                        <th mat-header-cell *matHeaderCellDef> Producto </th>
+                        <td mat-cell *matCellDef="let element"> {{element.nombre}} </td>
+                    </ng-container>               
+                   
+                    <ng-container matColumnDef="Cantidad">
+                        <th mat-header-cell *matHeaderCellDef> Cantidad</th>
+                        <td mat-cell *matCellDef="let element"> {{element.cantidad}}</td>
+                    </ng-container>                     
+                </tr>
+                <div>
+                    <tr mat-header-row *matHeaderRowDef="columsSelecAndCantidad"></tr>
+                    <tr mat-row *matRowDef="let row; columns: columsSelecAndCantidad;" [appTipoFilas]="row.tipo"></tr>
+                </div>          
+            </table>
+</div>    -->
+    
+    <app-pedido-bartender style="margin-left: 20%;"
+          [filterName]="'Filtro por tipo'" 
+          (busquedaEvento)="aplicarFiltros($event)">
+    </app-pedido-bartender><mat-icon>filter_list</mat-icon>
+    
+    <table mat-table [dataSource]="dataSource">
+            <tr>
+                <ng-container matColumnDef="Tipo">
+                            <th mat-header-cell *matHeaderCellDef> Tipo </th>
+                            <td mat-cell *matCellDef="let element"> {{element.tipo}} </td>
+                        </ng-container>
+                <ng-container matColumnDef="NombreProducto">
+                    <th mat-header-cell *matHeaderCellDef> Producto </th>
+                    <td mat-cell *matCellDef="let element"> {{element.nombre}} </td>
+                </ng-container>               
+                <ng-container matColumnDef="Foto">
+                    <th mat-header-cell *matHeaderCellDef> Foto </th>
+                    <td mat-cell *matCellDef="let element" style="padding-top: 1%;padding-bottom: 1%;">
+                        <img style="width: 100px;" src="{{element.foto}}" class="md-card-image" alt="image caption"/>
+                    </td>
+                </ng-container>  
+                <ng-container matColumnDef="TiempoPromedio">
+                    <th mat-header-cell *matHeaderCellDef> Tiempo Promedio</th>
+                    <td mat-cell *matCellDef="let element"> {{element.tiempoPromedioElaboracion}} min.</td>
+                </ng-container>
+                <ng-container matColumnDef="Precio">
+                        <th mat-header-cell *matHeaderCellDef> Precio</th>
+                        <td mat-cell *matCellDef="let element">$ {{element.precio}} </td>
+                </ng-container>
+                <ng-container matColumnDef="Seleccionar">
+                        <th mat-header-cell *matHeaderCellDef> Seleccionar </th>
+                        <td mat-cell *matCellDef="let element">
+                        <button mat-icon-button (click)="agregarPedido(element)">
+                                <mat-icon>shopping_cart</mat-icon>
+                        </button> 
+                        </td>    
+                </ng-container>
+                <ng-container matColumnDef="Cancelar">
+                        <th mat-header-cell *matHeaderCellDef> Cancelar </th>
+                        <td mat-cell *matCellDef="let element">
+                        <button mat-icon-button (click)="quitarPedido(element)">
+                                <mat-icon>remove_shopping_cart</mat-icon>
+                        </button> 
+                        </td>    
+                </ng-container>
+            </tr>
+            <div>
+                <tr mat-header-row *matHeaderRowDef="columsProducto"></tr>
+                <tr mat-row *matRowDef="let row; columns: columsProducto;" [appTipoFilas]="row.tipo"></tr>
+            </div>          
+        </table>
+    </div>
+</div>
+</div>
         
-        </ul> 
-        </div> 
+  
+         <!-- EL MOZO AGREGA UNA FOTO-->
+
         
-        <button  *ngIf="!pedidoRealizado" (click)="guardarPedido()">Aceptar</button>
-         <!-- EL MOZO AGREGA UNA FOTO -->
-
-
-

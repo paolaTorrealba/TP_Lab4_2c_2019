@@ -16,8 +16,9 @@ import { map } from 'rxjs/operators';
 export class PedidosPendientesComponent implements OnInit {
   @ViewChild("imgPedido", { static: false }) InputImagenPedido: ElementRef;
   
+  public vacia:boolean;
   public info:boolean;
-  private columsPedido: string[] = ['Mesa', 'Estado', 'Detalle','Codigo','Codigo Generado','Aceptar','Imágen', 'File'];
+  private columsPedido: string[] = ['Mesa', 'Estado', 'Detalle','Codigo Generado','Imágen','Aceptar'];
   private columsProductoPedido: string[] = ['Descripcion','Precio','Empleado','Estado Producto','Tiempo Promedio Elaboracion','Foto'];
   public pedidos:Array<any> = [];
   public productos:Array<any> = [];
@@ -30,10 +31,12 @@ export class PedidosPendientesComponent implements OnInit {
   public pendiente:EstadoPedido.pendiente;
   public imgName: string;
   public porcentajeUpload: Observable<number>;
-  public urlImagen: Observable<string>; 
+  public urlImagen: Observable<string>=undefined; 
   public imagenUrl : any;
   public noCargando = true;
+  public cargoImagen:boolean;
   public codigo = '';
+  public codigoMesa:string;
 
   constructor(private  data:  AuthService,
     private storage: AngularFireStorage, 
@@ -42,6 +45,7 @@ export class PedidosPendientesComponent implements OnInit {
       this.info=false;
       this.imgName = "Seleccionar imágen..";
       this.obtenerPedidos();
+      this.cargoImagen=false;
     }
 
   ngOnInit() {
@@ -50,56 +54,92 @@ export class PedidosPendientesComponent implements OnInit {
   obtenerPedidos(){
     this.data.getListaPedidos("pedidos").subscribe(lista => {
       this.pedidos=lista; 
-      console.log("pedidos: ",this.pedidos); 
+      this.vacia=this.pedidos.length==0;
     });
+    if ( this.pedidos==undefined || this.pedidos.length==0 )
+    {
+      this.vacia=true;
+    }
     console.log("pedidos: ",this.pedidos)
    }
 
    aceptarPedido(item){
-    this.imagenUrl = this.InputImagenPedido.nativeElement.value;
-    if (!this.imagenUrl ) {
-      this.imagenUrl = "assets/imagenes/default-mesa.jpg";
-    }
-      console.log("item: ", item)
-      console.log("la imagen: ", this.imagenUrl)
-      item.foto=this.imagenUrl;
-      item.codigo=this.codigo;
+  //   this.imagenUrl = this.InputImagenPedido.nativeElement.value;
+   
+  //  console.log("hay foto", this.imagenUrl )
+  //   if (!this.imagenUrl ) {
+  //     this.imagenUrl = "assets/imagenes/default-mesa.jpg";
+  //   }
+  //     console.log("item: ", item)
+  //     console.log("la imagen: ", this.imagenUrl)
+      // item.foto=this.imagenUrl;
+      item.codigoPedido=this.codigo;
       item.estado=EstadoPedido.aceptado;    
       this.auth.actualizarPedido(item).then(res => {
         console.log("pedido aceptado")
       });
    }
 
-   ImagenCargada(e) {
-    console.log("cargar imagen")
+
+   actualizarPedido(item){
+    this.imagenUrl = this.InputImagenPedido.nativeElement.value;   
+    console.log("hay foto", this.imagenUrl )
+    if (!this.imagenUrl ) {
+      this.imagenUrl = "assets/imagenes/default-mesa.jpg";
+    }
+   
+      item.foto=this.imagenUrl;      
+      this.auth.actualizarPedido(item).then(res => {
+        console.log("pedido actualizado")
+      });
+   }
+
+   ImagenCargada(e,item) {
+    this.cargoImagen=true;
+     this.codigoMesa=item.codigoMesa;
+    console.log("cargar imagen", item)
     this.noCargando = false;
     const img = e.target.files[0];
+    console.log("img", img)
 
     if (img != undefined) {
+     console.log("cargo algo")
       this.imgName = img.name;
+      console.log("this.imgName", this.imgName)
       const nombreImg = img.name.substr(0, img.name.lastIndexOf('.'));
       const ext = img.name.substr(img.name.lastIndexOf('.') + 1);
       const filePath = "imagenes/pedido/" + nombreImg + "-" + Date.now() + "." + ext;
       const ref = this.storage.ref(filePath);
       const task = this.storage.upload(filePath, img);
       this.porcentajeUpload = task.percentageChanges();
-    
+      console.log("task", task)
       task.snapshotChanges().pipe(finalize(() => this.urlImagen = ref.getDownloadURL())).subscribe();
-      console.log("imagen: ", this.urlImagen);
+      // item.foto=this.urlImagen;
+      //  console.log("guardo imagen", item)
+      // this.auth.actualizarPedido(item).then(res => {
+      //   console.log("imagen  guardado")
+      // });
     }
     else {
       this.imgName = "Seleccionar imágen..";
-      this.urlImagen = empty();
+      this.urlImagen = undefined;
       this.noCargando = true;
     }
+        console.log("urlImagen luego del else", this.urlImagen);
+        this.imgName = "Seleccionar imágen..";
+        this.urlImagen = undefined;
+        this.noCargando = true;
   }
+
+
+
    generarCodigo(item){
      this.codigo= '';
      console.log("genero el codigo")   
      let rString = this.randomString(5, '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ');
      console.log( this.codigo );
 
-     item.codigo= this.codigo ;
+     item.codigoPedido= this.codigo ;
      console.log("guardo item", item)
      this.auth.actualizarPedido(item).then(res => {
       console.log("codigo guardado")

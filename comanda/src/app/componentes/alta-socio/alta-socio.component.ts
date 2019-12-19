@@ -21,6 +21,7 @@ export class AltaSocioComponent implements OnInit {
   public dniModel: string;
   public claveModel:string;
   public usuario: any;
+  public cargoImagen:boolean;
   public emailModel: string;
   public accepted: boolean;
   public porcentajeUpload: Observable<number>;
@@ -34,7 +35,8 @@ export class AltaSocioComponent implements OnInit {
     private storage: AngularFireStorage) {
 
     this.imgName = "Seleccionar imágen..";
-    this.usuario = this.auth.usuarioVacio(); 
+    this.usuario = this.auth.usuarioVacio();
+    this.cargoImagen=false; 
   }
 
   ngOnInit() { }
@@ -59,6 +61,7 @@ export class AltaSocioComponent implements OnInit {
   }
 
   ImagenCargada(e) {
+    this.cargoImagen=true; 
     console.log("cargar imagen")
     this.noCargando = false;
     const img = e.target.files[0];

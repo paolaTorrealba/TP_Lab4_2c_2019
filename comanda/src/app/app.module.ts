@@ -1,25 +1,15 @@
-  import { BrowserModule } from '@angular/platform-browser';
-  import { RecaptchaModule } from 'ng-recaptcha';
-  import { environment } from '../environments/environment';
-  import { AppRoutingModule } from './app-routing.module';
-
-   import { AngularFireAuthModule } from '@angular/fire/auth';
-   import { AngularFireModule } from '@angular/fire';
-   import { AngularFireDatabaseModule } from '@angular/fire/database';
-   import { AngularFireStorageModule } from '@angular/fire/storage';
-   import { AngularFirestoreModule } from '@angular/fire/firestore';
-// import { AngularFirestoreModule } from 'angularfire2/firestore';
-// import { AngularFirestore } from 'angularfire2/firestore';
-// import { AngularFireModule } from 'angularfire2';
+import { BrowserModule } from '@angular/platform-browser';
+import { RecaptchaModule } from 'ng-recaptcha';
+import { environment } from '../environments/environment';
+import { AppRoutingModule } from './app-routing.module';
+import { AngularFireAuthModule } from '@angular/fire/auth';
+import { AngularFireModule } from '@angular/fire';
+import { AngularFireDatabaseModule } from '@angular/fire/database';
+import { AngularFireStorageModule } from '@angular/fire/storage';
+import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { NgModule } from '@angular/core';
 import { MaterialModule } from './material/material';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-// import { AngularFireAuthModule } from 'angularfire2/auth';
-
-// import { AngularFireDatabaseModule } from 'angularfire2/database';
-
-
-
 import { AuthProvider } from './providers/auth';
 import { AppComponent } from './app.component';
 import { PrincipalComponent } from './componentes/principal/principal.component';
@@ -37,8 +27,6 @@ import { HomeClienteComponent } from './componentes/home-cliente/home-cliente.co
 import { ListadoClientesComponent } from './componentes/listado-clientes/listado-clientes.component';
 import { ConfirmarPedidoComponent } from './componentes/confirmar-pedido/confirmar-pedido.component';
 import { ListadoMesasComponent } from './componentes/listado-mesas/listado-mesas.component';
-import { HomeComponent } from './componentes/home/home.component';
-import { AltaDeClienteComponent } from './componentes/alta-de-cliente/alta-de-cliente.component';
 import { LoginComponent } from './componentes/login/login.component';
 import { RegistroComponent } from './componentes/registro/registro.component';
 import { HttpClientModule } from '@angular/common/http';
@@ -52,7 +40,6 @@ import { AltaSocioComponent } from './componentes/alta-socio/alta-socio.componen
 import { VerEncuestasComponent } from './componentes/ver-encuestas/ver-encuestas.component';
 import { CerrarMesaComponent } from './componentes/cerrar-mesa/cerrar-mesa.component';
 import { ListadoProductosComponent } from './componentes/listado-productos/listado-productos.component';
-import { VerPedidoClienteComponent } from './componentes/ver-pedido-cliente/ver-pedido-cliente.component';
 import { ListadoPedidosComponent } from './componentes/listado-pedidos/listado-pedidos.component';
 import { PedidosPendientesCerveceroComponent } from './componentes/pedidos-pendientes-cervecero/pedidos-pendientes-cervecero.component';
 import { PedidosPendientesBartenderComponent } from './componentes/pedidos-pendientes-bartender/pedidos-pendientes-bartender.component';
@@ -63,6 +50,7 @@ import { FinalizarPedidoBartenderComponent } from './componentes/finalizar-pedid
 import { VerEstadoPedidoComponent } from './componentes/ver-estado-pedido/ver-estado-pedido.component';
 import { CancelarPedidoComponent } from './componentes/cancelar-pedido/cancelar-pedido.component';
 import { MesaPipe } from './pipes/mesa.pipe';
+import { CodigoPipe } from './pipes/codigo.pipe';
 import { TipoFilasDirective } from './directivas/tipo-filas.directive';
 import { EstadoFilaDirective } from './directivas/estado-fila.directive';
 import { MostrarFotoPipe } from './pipes/mostrar-foto.pipe';
@@ -71,8 +59,21 @@ import { PedidoBartenderComponent } from './filtros/pedido-bartender/pedido-bart
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { PedidoCerveceroComponent } from './filtros/pedido-cervecero/pedido-cervecero.component';
 import { PedidoCocineroComponent } from './filtros/pedido-cocinero/pedido-cocinero.component';
-import { ExcelComponent } from './componentes/excel/excel.component';
-
+import { ProductoTipoComponent } from './filtros/producto-tipo/producto-tipo.component';
+import { ExcelMesasComponent } from './componentes/excel-mesas/excel-mesas.component';
+import { SimpleNotificationsModule } from 'angular2-notifications';
+import { ExcelProductosComponent } from './componentes/excel-productos/excel-productos.component';
+import { ExcelEmpleadosComponent } from './componentes/excel-empleados/excel-empleados.component';
+import { ListadoEmpleadosComponent } from './componentes/listado-empleados/listado-empleados.component';
+import { NgxSpinnerModule } from 'ngx-spinner';
+import { CardReportesComponent } from './componentes/card-reportes/card-reportes.component';
+import { ReportesComponent } from './componentes/reportes/reportes.component';
+import { ExcelClientesComponent } from './componentes/excel-clientes/excel-clientes.component';
+import { CardListadosComponent } from './componentes/card-listados/card-listados.component';
+import { AltasComponent } from './componentes/altas/altas.component';
+import { CardAltasComponent } from './componentes/card-altas/card-altas.component';
+import { ListadosComponent } from './componentes/listados/listados.component';
+import { CardClienteComponent } from './componentes/card-cliente/card-cliente.component';
 
 @NgModule({
   declarations: [
@@ -82,7 +83,7 @@ import { ExcelComponent } from './componentes/excel/excel.component';
     PedidosPendientesComponent,
     AltaDeProductoComponent,
     EncuestaEmpleadoComponent,
-    AltaEmpleadoComponent, 
+    AltaEmpleadoComponent,
     ListadoSupervisorComponent,
     AltaDeMesaComponent,
     ReservaComponent,
@@ -93,21 +94,18 @@ import { ExcelComponent } from './componentes/excel/excel.component';
     ListadoClientesComponent,
     ConfirmarPedidoComponent,
     ListadoMesasComponent,
-    HomeComponent,
-    AltaDeClienteComponent,
     LoginComponent,
     RegistroComponent,
     CabeceraComponent,
     PieComponent,
     BotonSeleccionadoDirectiva,
     PagarFacturaComponent,
-    EncuestaClienteComponent, 
+    EncuestaClienteComponent,
     ConfirmarPagoComponent,
     AltaSocioComponent,
     VerEncuestasComponent,
     CerrarMesaComponent,
     ListadoProductosComponent,
-    VerPedidoClienteComponent,
     ListadoPedidosComponent,
     PedidosPendientesCerveceroComponent,
     PedidosPendientesBartenderComponent,
@@ -118,21 +116,36 @@ import { ExcelComponent } from './componentes/excel/excel.component';
     VerEstadoPedidoComponent,
     CancelarPedidoComponent,
     MesaPipe,
+    CodigoPipe,
     TipoFilasDirective,
     EstadoFilaDirective,
     MostrarFotoPipe,
     ColorPedidoPendienteDirective,
     PedidoBartenderComponent,
     PedidoCerveceroComponent,
+    ProductoTipoComponent,
     PedidoCocineroComponent,
-    ExcelComponent,
+    ExcelMesasComponent,
+    ExcelProductosComponent,
+    ExcelClientesComponent,
+    ExcelEmpleadosComponent,
+    ListadoEmpleadosComponent,
+    CardReportesComponent,
+    ReportesComponent,
+    ExcelClientesComponent,
+    CardListadosComponent,    
+    AltasComponent,
+    CardAltasComponent,
+    ListadosComponent,
+    CardClienteComponent,
   ],
   imports: [
     FormsModule,
+    NgxSpinnerModule,
     MaterialModule,
     RecaptchaModule,
     BrowserAnimationsModule,
-    ReactiveFormsModule,  
+    ReactiveFormsModule,
     BrowserModule,
     AppRoutingModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
@@ -140,11 +153,20 @@ import { ExcelComponent } from './componentes/excel/excel.component';
     AngularFireAuthModule,
     AngularFireStorageModule,
     AngularFirestoreModule,
-    HttpClientModule
+    HttpClientModule,
+    SimpleNotificationsModule,
+    SimpleNotificationsModule.forRoot({
+      position: ['top', 'right'],
+      timeOut: 4000,
+      showProgressBar: true,
+      pauseOnHover: true,
+      clickToClose: true
+    }),
 
   ],
   exports: [
-    MaterialModule
+    MaterialModule,
+    SimpleNotificationsModule
   ],
   providers: [AuthProvider],
   bootstrap: [AppComponent]
