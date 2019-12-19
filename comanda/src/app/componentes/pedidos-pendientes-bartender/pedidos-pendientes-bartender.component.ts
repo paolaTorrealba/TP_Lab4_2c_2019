@@ -27,7 +27,7 @@ export class PedidosPendientesBartenderComponent implements OnInit {
   public barra = TipoProducto.barra;
   public info:boolean;
 
-  private columsPedido: string[] = [ 'Codigo Pedido' ,'Detalle','Tiempo Elaboracion'];
+  private columsPedido: string[] = [ 'Codigo Pedido', 'Estado','Detalle','Tiempo Elaboracion'];
   private columsProductoPedido: string[] = [ 'Tipo','Descripcion' ,'Precio','Empleado','Estado Producto','Tiempo Promedio Elaboracion','Tomar Pedido','Foto'];
   private dataSource = new MatTableDataSource(this.pedidosAceptados);
   private noData = this.dataSource.connect().pipe(map((data: any[]) => data.length === 0));
@@ -50,6 +50,7 @@ export class PedidosPendientesBartenderComponent implements OnInit {
   ngOnInit() {}
 
   obtenerPedidos(){
+    console.log("------------------------")
     this.data.getListaPedidos("pedidos").subscribe(lista => {
         this.pedidos=lista;
              
@@ -59,8 +60,9 @@ export class PedidosPendientesBartenderComponent implements OnInit {
             }
           }          
                 
-        this.vacia=this.pedidosAceptados.length==0;     
-        this.dataSource = new MatTableDataSource(this.pedidosAceptados);      
+          this.vacia=this.pedidosAceptados.length==0; 
+          console.log ("pedidos:", this.pedidosAceptados)    
+          this.dataSource = new MatTableDataSource(this.pedidosAceptados);      
     });    
    }
 

@@ -81,12 +81,14 @@ export class FinalizarPedidoBartenderComponent implements OnInit {
       this.pedidos=lista;
       for (let i=0; i<=this.pedidos.length-1;i++){
         if(this.pedidos[i].estado==EstadoPedido.aceptado){ 
-          this.pedidosAceptados.push(this.pedidos[i])
-           this.vacia=this.pedidos.length==0;
+          this.pedidosAceptados.push(this.pedidos[i])          
         }
       }
+      this.vacia=this.pedidosAceptados.length==0; 
+      console.log ("pedidos:", this.pedidosAceptados)    
+      this.dataSource = new MatTableDataSource(this.pedidosAceptados);      
     });
-    console.log("pedidos: ",this.pedidos)
+    
    }
    quePuedeCerrar(){
     if(this.perfil==Perfil.bartender)

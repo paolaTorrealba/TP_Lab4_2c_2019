@@ -21,24 +21,24 @@
     <table mat-table [dataSource]="mesas">
         <tr>
                 <ng-container matColumnDef="Numero Mesa">
-                        <th style="color: black;font-size: x-large;" mat-header-cell *matHeaderCellDef  > Numero Mesa </th>
-                        <td mat-cell *matCellDef="let element"> {{element.numero}} </td>
+                        <th style="color: black;font-size: x-large;" mat-header-cell *matHeaderCellDef  > Número Mesa </th>
+                        <td style="color: black;font-size: large;" mat-cell *matCellDef="let element"> {{element.numero}} </td>
                 </ng-container>
                 <ng-container matColumnDef="Codigo Mesa">
-                        <th style="color: black;font-size: x-large;" mat-header-cell *matHeaderCellDef  > Codigo Mesa </th>
-                        <td mat-cell *matCellDef="let element"> {{element.codigo}} </td>
+                        <th style="color: black;font-size: x-large;" mat-header-cell *matHeaderCellDef  > Código Mesa </th>
+                        <td style="color: black;font-size: large;" mat-cell *matCellDef="let element"> {{element.codigo}} </td>
                 </ng-container>     
                 <ng-container matColumnDef="Estado">
                         <th style="color: black;font-size: x-large;" mat-header-cell *matHeaderCellDef  > Estado </th>
-                        <td mat-cell *matCellDef="let element"> {{element.estado | mesa}} </td>
+                        <td style="color: black;font-size: large;" mat-cell *matCellDef="let element"> {{element.estado | mesa}} </td>
                 </ng-container> 
                 <ng-container matColumnDef="Cantidad Comensales">
                         <th style="color: black;font-size: x-large;" mat-header-cell *matHeaderCellDef > Cantidad Comensales </th>
-                        <td mat-cell *matCellDef="let element"> {{element.cantidadComensales}} </td>
+                        <td style="color: black;font-size: large;" mat-cell *matCellDef="let element"> {{element.cantidadComensales}} </td>
                 </ng-container> 
                 <ng-container matColumnDef="Seleccionar Mesa">
                         <th style="color: black;font-size: x-large;" mat-header-cell *matHeaderCellDef  > Seleccionar Mesa </th>
-                        <td mat-cell *matCellDef="let element">
+                        <td style="color: black;font-size: large;" mat-cell *matCellDef="let element">
                         <button *ngIf="element.estado=='cerrada'"  mat-icon-button (click)="seleccionarMesa(element)">
                             <mat-icon>check_circle</mat-icon>
                         </button> 

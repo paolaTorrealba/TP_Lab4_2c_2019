@@ -1,22 +1,29 @@
 <app-principal></app-principal>
 <br>
-<table mat-table [dataSource]="mesas">
-<tr>
-    <ng-container matColumnDef="Numero">
-        <th mat-header-cell *matHeaderCellDef> Numero </th>
-        <td mat-cell *matCellDef="let element"> {{element.numero}} </td>
-    </ng-container>     
-    <ng-container matColumnDef="Estado">
-        <th mat-header-cell *matHeaderCellDef> Estado </th>
-        <td mat-cell *matCellDef="let element"> {{element.estado}} </td>
-    </ng-container>       
+<div *ngIf="vacia == undefined" class="d-flex justify-content-center">
+        <div class="spinner-grow text-primary" style="width: 3rem; height: 3rem; margin-top: 10%;" role="status">
+              <span class="sr-only">Loading...</span>
+        </div>
+</div>
+<div *ngIf="vacia != undefined" >
+<h3 *ngIf="vacia == true" >
+      <p class= "no-resultados"> No hay mesas para mostrar <i class="far fa-thumbs-up"></i></p>
+</h3>
+<div *ngIf="vacia == false" >
+  <table mat-table [dataSource]="mesasParaCerrar">
+     <tr>
+  
     <ng-container matColumnDef="Codigo">
-        <th mat-header-cell *matHeaderCellDef> Codigo </th>
-        <td mat-cell *matCellDef="let element">{{element.codigo}} </td>
+        <th style="color: black;font-size: x-large;" mat-header-cell *matHeaderCellDef> Código </th>
+        <td style="color: black;font-size: large;" mat-cell *matCellDef="let element">{{element.codigo}} </td>
     </ng-container> 
+    <ng-container matColumnDef="Estado">
+            <th style="color: black;font-size: x-large;" mat-header-cell *matHeaderCellDef> Estado </th>
+            <td style="color: black;font-size: large;" mat-cell *matCellDef="let element">{{element.estado}} </td>
+        </ng-container> 
     <ng-container matColumnDef="Cerrar">
-        <th mat-header-cell *matHeaderCellDef> Cerrar </th>
-        <td mat-cell *matCellDef="let element">
+        <th style="color: black;font-size: x-large;" mat-header-cell *matHeaderCellDef> Cerrar </th>
+        <td style="color: black;font-size: large;" mat-cell *matCellDef="let element">
         <button *ngIf="element.estado!='cerrada'" mat-icon-button (click)="cerrarMesa(element)">
            <mat-icon>check_circle</mat-icon>
         </button> 
@@ -28,14 +35,5 @@
         <tr mat-row *matRowDef="let row; columns: columsMesa;"  ></tr>
 </div>
 </table>
+</div>
 
-<!-- <h1>Mesas Pendientes de Cierre</h1>
-<ul *ngFor="let item of mesas">
-        <div *ngIf="item.estado!=this.estado">
-                   <p >Nro: {{item.numero}}</p>
-                   <p >Estado: {{item.estado}}</p> 
-                   <button (click)="cerrarMesa(item)">Cerrar</button>     
-                                  
-                   <p >======================</p>   
-        </div>
-       </ul>  -->
