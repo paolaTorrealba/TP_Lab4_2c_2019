@@ -1,5 +1,11 @@
 <app-principal></app-principal>
 <br><br>
+<div *ngIf="vacia == undefined" class="d-flex justify-content-center">
+    <div class="spinner-grow text-primary" style="width: 3rem; height: 3rem; margin-top: 10%;" role="status">
+      <span class="sr-only">Loading...</span>
+    </div>
+</div>
+<div *ngIf="vacia != undefined" >
 <h3 *ngIf="vacia == true" >
         <p class= "no-resultados"> No hay pedidos para mostrar <i class="far fa-thumbs-up"></i></p>
 </h3>
@@ -41,5 +47,6 @@
 </div>
 </div>
 </section>
+</div>
 </div>
 

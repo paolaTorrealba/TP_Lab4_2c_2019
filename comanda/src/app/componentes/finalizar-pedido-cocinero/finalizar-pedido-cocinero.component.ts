@@ -24,6 +24,7 @@ export class FinalizarPedidoCocineroComponent implements OnInit {
   public vacia:boolean;
   public listoParaServir:string="listoParaServir";  
   public pedidosEnPreparacion:Array<any> = [];
+  public pedidosAceptados:Array<any> = [];
   public info:boolean;
   public tarea:string;
   public pedidoSeleccionado:any;
@@ -31,9 +32,9 @@ export class FinalizarPedidoCocineroComponent implements OnInit {
   public perfil: Perfil;
   public nombre: string;
   public productos:Array<any> = [];
-  private columsPedido: string[] = [ 'Codigo Pedido' ,  'Estado','Detalle'];
-  private columsProductoPedido: string[] = [ 'Tipo','Descripcion' , 'Empleado', 'Estado Producto','Finalizar'];
-  private dataSource = new MatTableDataSource(this.pedidosEnPreparacion);
+  private columsPedido: string[] = [ 'Codigo Pedido' ,'Estado','Detalle'];
+  private columsProductoPedido: string[] = [ 'Tipo','Descripcion' , 'Estado Producto','Empleado','Finalizar'];
+  private dataSource = new MatTableDataSource(this.pedidosAceptados);
   private noData = this.dataSource.connect().pipe(map((data: any[]) => data.length === 0));
   private dataSourceProd : any;
   private noDataProd: any;
@@ -80,7 +81,8 @@ export class FinalizarPedidoCocineroComponent implements OnInit {
       this.pedidos=lista;
       for (let i=0; i<=this.pedidos.length-1;i++){
         if(this.pedidos[i].estado==EstadoPedido.aceptado){ 
-           this.vacia=this.pedidos.length==0;
+          this.pedidosAceptados.push(this.pedidos[i]); 
+          this.vacia=this.pedidos.length==0;
         }
       }
     });
@@ -149,14 +151,10 @@ cerrarPedido(producto){
        this.pedidoListo=false; //no esta listo aun
        }
    }
-   if (this.pedidoListo){
-    console.log("el pedido esta listo: ",this.pedidoListo)
+   if (this.pedidoListo){   
     item.estado=EstadoPedido.listoParaServir;
-    console.log("item.estado: ",item.estado)
-    console.log("item a guardar: ",item)
-    // this.auth.actualizarPedido(item).then(res => {
-    //   console.log("pedido listo para servir")
-    // });
+   
+  
    }
    console.log("el pedido aun no esta listo :(")
           

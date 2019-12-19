@@ -1,5 +1,11 @@
 <app-principal></app-principal>
 <br><br>
+<div *ngIf="tieneReserva == undefined" class="d-flex justify-content-center">
+    <div class="spinner-grow text-primary" style="width: 3rem; height: 3rem; margin-top: 10%;" role="status">
+      <span class="sr-only">Loading...</span>
+    </div>
+</div>
+<div *ngIf="tieneReserva != undefined" >
 <h3 *ngIf="tieneReserva == false && !this.correo == ''" >
         <p class= "no-resultados"> Aún no reservaste mesa! </p>
         <button  type="button" class="btn btn-warning" 
@@ -106,22 +112,9 @@
         </table>
     </div>
 </div>
+</div>
         
-        
-        <!-- <div *ngIf="!pedidoRealizado">
-            <ul *ngFor="let item of productos">
-                <p *ngIf="item.tipo===this.tipo">nombre: {{item.nombre}}</p>
-                <p *ngIf="item.tipo===this.tipo">descripcion: {{item.descripcion}}</p>   
-                <p *ngIf="item.tipo===this.tipo">precio: {{item.precio}}</p>
-                <input *ngIf="item.tipo===this.tipo" type="checkbox" ng-model="item" (click)="agregarPedido(item)">
-                <input *ngIf="item.tipo===this.tipo" type="checkbox" ng-model="item" (click)="quitarPedido(item)">
-                <p *ngIf="item.tipo===this.tipo">======================</p>   
-            
-            </ul> 
-        </div> 
-        
-        <button  *ngIf="!pedidoRealizado" (click)="guardarPedido()">Aceptar</button>  -->
-<!-- </div>          -->
+  
          <!-- EL MOZO AGREGA UNA FOTO-->
 
         

@@ -26,7 +26,7 @@ export class PedidosPendientesCocineroComponent implements OnInit {
   public plato = TipoProducto.plato;
   public info:boolean;
 
-  private columsPedido: string[] = [ 'Codigo Pedido' ,'Detalle','Tiempo Elaboracion'];
+  private columsPedido: string[] = [ 'Codigo Pedido' ,'Estado','Detalle','Tiempo Elaboracion'];
   private columsProductoPedido: string[] = [ 'Tipo','Descripcion' ,'Precio','Empleado','Estado Producto','Tiempo Promedio Elaboracion','Tomar Pedido','Foto'];
   private dataSource = new MatTableDataSource(this.pedidosAceptados);
   private noData = this.dataSource.connect().pipe(map((data: any[]) => data.length === 0));

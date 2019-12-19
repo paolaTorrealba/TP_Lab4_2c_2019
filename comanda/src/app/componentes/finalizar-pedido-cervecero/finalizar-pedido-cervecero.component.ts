@@ -15,6 +15,7 @@ import { map } from 'rxjs/operators';
 export class FinalizarPedidoCerveceroComponent implements OnInit {
   public pedidos:Array<any> = [];
   public pedidosEnPreparacion:Array<any> = [];
+  public pedidosAceptados:Array<any> = [];
   public vacia:boolean;
   public productos:Array<any> = [];
   public pendiente:string="pendiente";
@@ -32,7 +33,7 @@ export class FinalizarPedidoCerveceroComponent implements OnInit {
   public nombre: string;
    
   private columsPedido: string[] = [ 'Codigo Pedido' ,  'Estado','Detalle'];
-  private columsProductoPedido: string[] = [ 'Tipo','Descripcion' , 'Empleado', 'Estado Producto','Finalizar'];
+  private columsProductoPedido: string[] = [ 'Tipo','Descripcion' , 'Estado Producto','Empleado','Finalizar'];
   private dataSource = new MatTableDataSource(this.pedidosEnPreparacion);
   private noData = this.dataSource.connect().pipe(map((data: any[]) => data.length === 0));
   private dataSourceProd : any;
@@ -79,6 +80,7 @@ export class FinalizarPedidoCerveceroComponent implements OnInit {
       this.pedidos=lista;
       for (let i=0; i<=this.pedidos.length-1;i++){
         if(this.pedidos[i].estado==EstadoPedido.aceptado){ 
+          this.pedidosAceptados.push(this.pedidos[i]);
            this.vacia=this.pedidos.length==0;
         }
       }
