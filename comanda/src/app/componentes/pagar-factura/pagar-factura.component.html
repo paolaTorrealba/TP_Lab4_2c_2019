@@ -9,7 +9,7 @@
 <h3 *ngIf="vacia == true" >
         <p class= "no-resultados"> No hay pedidos para mostrar <i class="far fa-thumbs-up"></i></p>
 </h3>
-<div  *ngIf="!vacia == true ">
+<div  *ngIf="vacia == false ">
 <section class="h-100 registro-pagina">
 <div class="container h-100">
    <div class="row justify-content-md-center h-100" style="margin-left: -30%;">
@@ -34,9 +34,9 @@
                     <h5  style="margin-left: 25%;" >No hay pedido para facturar</h5> 
                 </div>  
                 <!-- <div  *ngIf="item.estado!='recibido' && item.estado!='pagado'" > -->
-                <div  *ngIf="miPedido.estado!='recibido' && miPedido.estado!='pagado'" >
+                <!-- <div  *ngIf="miPedido.estado!='recibido' && miPedido.estado!='pagado'" >
                     <p>El pedido no se puede abonar porque esta en estado {{item.estado}} </p>
-                </div>
+                </div> -->
                 <div  *ngIf="pagado" >
                     <br><p style="margin-right: 35%; margin-left: 40%;background-color: chartreuse; color:black;"> PAGO RECIBIDO </p>
                 </div>  

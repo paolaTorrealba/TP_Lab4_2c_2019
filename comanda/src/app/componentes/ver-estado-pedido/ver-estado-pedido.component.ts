@@ -142,22 +142,21 @@ cancelarReservas(item) {
 // CANCELAR PEDIDO ---- FIN
   obtenerPedidos(){
     this.data.getListaPedidos("pedidos").subscribe(lista => {
-      this.pedidos=lista; 
-      console.log("1------- ",this.pedidos)
-      console.log("2 ",this.pedidos.length)
+      this.pedidos=lista;     
       for (let i=0; i<=this.pedidos.length-1; i++){
         if(this.pedidos[i].correoCliente==this.correo
           && this.pedidos[i].estado!=EstadoPedido.cancelado){
     
           this.misPedidos.push( this.pedidos[i])
-          console.log("4 ",this.pedidos)
-          console.log("5 ",this.misPedidos)
-        }
-      }
-   
-      this.vacia=this.misPedidos.length==0; 
-      console.log(this.vacia)  
+          this.vacia=this.misPedidos.length==0; 
       
+        }
+      }    
+      if ( this.misPedidos==undefined || this.misPedidos.length==0 )
+      {
+        this.vacia=true;
+      }    
+      console.log(this.vacia)      
        this.dataSource = new MatTableDataSource(this.misPedidos);      
           
     });
