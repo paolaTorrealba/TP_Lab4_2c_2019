@@ -7,6 +7,7 @@ import { map } from 'rxjs/operators';
 import { UsuarioService } from 'src/app/servicios/usuario.service';
 import { DataApiService } from 'src/app/servicios/data-api.service';
 import { take } from 'rxjs/operators';
+import { CerrarMesaComponent } from '../cerrar-mesa/cerrar-mesa.component';
 
 
 @Component({
@@ -52,6 +53,7 @@ export class ConfirmarPagoComponent implements OnInit {
       this.auth.actualizarPedido(item).then(res => {
         console.log("pedido cerrado")
       });
+    
    }
 
    showInfo(item){

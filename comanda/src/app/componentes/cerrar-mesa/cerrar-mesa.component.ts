@@ -79,20 +79,20 @@ export class CerrarMesaComponent implements OnInit {
       this.mesas=lista;
       for (let j=0; j<=this.pedidosCerrados.length-1;j++){
          for (let i=0; i<=this.mesas.length-1;i++){      
-            if(this.mesas[i].codigo==this.pedidosCerrados[j].codigoMesa){ 
+            if(this.mesas[i].codigo==this.pedidosCerrados[j].codigoMesa
+              && this.mesas[i].estado != EstadoMesa.cerrada){ 
               this.mesasParaCerrar.push(this.mesas[i])
                 this.vacia=this.mesasParaCerrar.length==0;           
             }
           }
-      } 
-      if (this.mesasParaCerrar==undefined ||this.mesasParaCerrar.length==0 )
-      {
-        this.vacia=true;
-      }
-      console.log ("mesasParaCerrar:", this.mesasParaCerrar)    
-      this.dataSource = new MatTableDataSource(this.mesasParaCerrar);      
-      console.log("mesasParaCerrar: ",this.mesasParaCerrar); 
+      }      
+     
     });
+    if (this.mesasParaCerrar==undefined ||this.mesasParaCerrar.length==0 ){
+      this.vacia=true;
+    }  
+      this.dataSource = new MatTableDataSource(this.mesasParaCerrar); 
+          
     console.log("mesasParaCerrar: ",this.mesasParaCerrar)
    }
 

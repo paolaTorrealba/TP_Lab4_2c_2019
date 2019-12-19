@@ -90,43 +90,50 @@ export class VerEstadoPedidoComponent implements OnInit {
     }); 
     
     this.cancelarReservas(item); 
-    this.cerrarMesa(item); 
+    
+  
     this.obtenerPedidos(); 
  }
 
- cerrarMesa(item){    
-  console.log(item)
+ cerrarMesa(pedido){    
+ console.log("cierro la mesa para: ",pedido)
  this.data.getListaMesas("mesas").subscribe(lista => {
-       this.mesas=lista; 
-       console.log(this.mesas)        
+       this.mesas=lista;       
        for(let i=0; i<=this.mesas.length-1; i++){
          if(this.mesas[i].estado==EstadoMesa.reservada &&
-           this.mesas[i].codigo==item.codigoMesa 
-           ){
-           this.miMesa=this.mesas[i];                     
+           this.mesas[i].codigo==pedido.codigoMesa ){
+           this.miMesa=this.mesas[i];            
+           if (this.miMesa !=undefined ){
+            this.miMesa.estado=EstadoMesa.cerrada;
+            console.log("cierro la mesa",this.miMesa )              
+            this.auth.actualizarMesa(this.miMesa).then(res => {
+            }).catch(error => {          
+            });   
+    
+        }                     
          }
-       }         
-       this.miMesa.estado=EstadoMesa.cerrada;
-       console.log("cierro la mesa",this.miMesa )              
-       this.auth.actualizarMesa(this.miMesa).then(res => {
-           
-       });
+       }    
+       
  }) 
+    
+      console.log("mesa cerrada") 
 }
  
-cancelarReservas(item) { 
-  console.log("cancelo la reserva",item )
+cancelarReservas(pedido) { 
+ console.log("cancelo la reserva para el pedido",pedido )
  this.tieneReserva=false; 
  this.data.getListaReservas("reservas").subscribe(lista => {
      this.reservas=lista;         
      for(let i=0; i<=this.reservas.length-1; i++){
        if(this.reservas[i].correo==this.correo &&
-         this.reservas[i].estado=="activa" &&
-         this.reservas[i].codigoMesa==item.codigoMesa ){
+         this.reservas[i].estado==EstadoReserva.activa &&
+         this.reservas[i].codigoMesa==pedido.codigoMesa ){
+
          this.miReserva=this.reservas[i]; 
          this.tieneReserva=true;              
        }
      }         
+    //  obtuve la reserva
      if (this.tieneReserva ){
          this.miReserva.estado=EstadoReserva.finalizada; 
          console.log("actualizo la reserva", this.miReserva)      
@@ -136,6 +143,7 @@ cancelarReservas(item) {
          });          
      }              
  });
+ this.cerrarMesa(pedido);
  console.log("reservas: ",this.reservas); 
 } 
 
@@ -148,22 +156,15 @@ cancelarReservas(item) {
           && this.pedidos[i].estado!=EstadoPedido.cancelado){
     
           this.misPedidos.push( this.pedidos[i])
-          this.vacia=this.misPedidos.length==0; 
-      
+          this.vacia=this.misPedidos.length==0;     
         }
-      }    
-      if ( this.misPedidos==undefined || this.misPedidos.length==0 )
-      {
-        this.vacia=true;
-      }    
-      console.log(this.vacia)      
-       this.dataSource = new MatTableDataSource(this.misPedidos);      
-          
+      }   
     });
     if ( this.misPedidos==undefined || this.misPedidos.length==0 )
     {
       this.vacia=true;
     } 
+    this.dataSource = new MatTableDataSource(this.misPedidos);      
   }
 
    
