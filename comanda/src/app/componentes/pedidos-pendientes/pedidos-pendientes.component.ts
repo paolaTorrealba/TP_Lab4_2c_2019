@@ -34,6 +34,7 @@ export class PedidosPendientesComponent implements OnInit {
   public urlImagen: Observable<string>=undefined; 
   public imagenUrl : any;
   public noCargando = true;
+  public cargoImagen:boolean;
   public codigo = '';
   public codigoMesa:string;
 
@@ -44,6 +45,7 @@ export class PedidosPendientesComponent implements OnInit {
       this.info=false;
       this.imgName = "Seleccionar imágen..";
       this.obtenerPedidos();
+      this.cargoImagen=false;
     }
 
   ngOnInit() {
@@ -89,6 +91,7 @@ export class PedidosPendientesComponent implements OnInit {
    }
 
    ImagenCargada(e,item) {
+    this.cargoImagen=true;
      this.codigoMesa=item.codigoMesa;
     console.log("cargar imagen", item)
     this.noCargando = false;

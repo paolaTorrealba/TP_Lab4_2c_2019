@@ -49,8 +49,23 @@
           <ng-container matColumnDef="Imágen">
             <th style="color: black;font-size: x-large;" mat-header-cell *matHeaderCellDef> Imágen Mesa </th>
             <td style="color: black;font-size: large;"  mat-cell *matCellDef="let element">                   
-                <input *ngIf="element.foto=='' && (urlImagen==undefined || codigoMesa!=element.codigoMesa ) " (change)="ImagenCargada($event,element)" #fileInput type="file" id="file">
-                <button *ngIf="urlImagen!=undefined && element.foto=='' && codigoMesa==element.codigoMesa " type="button" mat-raised-button (click)="actualizarPedido(element)">Actualizar</button>
+                <!-- *ngIf="element.foto=='' && (urlImagen==undefined || codigoMesa!=element.codigoMesa ) "} -->
+                <input  *ngIf="element.foto=='' 
+                     && (urlImagen==undefined 
+                    || codigoMesa!=element.codigoMesa )" (change)="ImagenCargada($event,element)" #fileInput type="file" id="file">
+               
+               
+                <div *ngIf="urlImagen==undefined && cargoImagen " class="d-flex justify-content-center">
+                    <div class="spinner-grow text-primary" style="width: 3rem; height: 3rem; margin-top: 10%;" role="status">
+                      <span class="sr-only">Loading...</span>
+                    </div>
+                  </div>
+                  <!-- *ngIf="urlImagen!=undefined && element.foto=='' && codigoMesa==element.codigoMesa " -->
+
+                <button *ngIf="urlImagen!=undefined 
+                               && element.foto==''
+                               && codigoMesa==element.codigoMesa" type="button" mat-raised-button
+                              (click)="actualizarPedido(element)">Actualizar</button>
                 <img *ngIf="!element.foto=='' " style="width: 100px;" src="{{element.foto}}" class="md-card-image" alt="image caption"/>
             </td>    
           </ng-container> 
@@ -58,33 +73,15 @@
           <ng-container matColumnDef="Aceptar">
               <th style="color: black;font-size: x-large;" mat-header-cell *matHeaderCellDef> Aceptar Pedido </th>
               <td style="color: black;font-size: large;"mat-cell *matCellDef="let element">
-                  <button *ngIf="element.estado=='pendiente' && !element.codigoPedido=='' && !element.foto==''"  mat-icon-button (click)="aceptarPedido(element)">
+                <!-- *ngIf="element.estado=='pendiente' && element.codigoPedido!='' && element.foto!=''"  -->
+                  <button *ngIf="element.estado=='pendiente' 
+                                && element.codigoPedido!=''
+                                && element.foto!='' " mat-icon-button (click)="aceptarPedido(element)">
                       <mat-icon>check_circle</mat-icon>
                   </button> 
                  
               </td>    
             </ng-container>  
-          <!-- <ng-container matColumnDef="File">
-                <th mat-header-cell *matHeaderCellDef> Archivo </th>
-                <td mat-cell *matCellDef="let element"  style="padding-top: 1%;padding-bottom: 1%;">
-                    <img *ngIf="!element.foto=='' " style="width: 100px;" src="{{element.foto}}" class="md-card-image" alt="image caption"/>
-                </td>
-        </ng-container>           -->
-       
-
-
-             <!-- <ng-container matColumnDef="Importe">
-              <th mat-header-cell *matHeaderCellDef> Monto Total </th>
-              <td mat-cell *matCellDef="let element"> {{element.montoTotal}} </td>
-          </ng-container> -->     
-           <!-- <ng-container matColumnDef="Tiempo Elaboracion">
-              <th mat-header-cell *matHeaderCellDef> Tiempo Elaboracion </th>
-              <td mat-cell *matCellDef="let element"> {{element.tiempoElaboracion}} </td>
-          </ng-container>  -->
-          <!-- <ng-container matColumnDef="Cliente">
-            <th mat-header-cell *matHeaderCellDef> Cliente </th>
-            <td mat-cell *matCellDef="let element"> {{element.cliente}} </td>
-          </ng-container>  -->
      </tr>
      <div>
           <tr mat-header-row *matHeaderRowDef="columsPedido"></tr>

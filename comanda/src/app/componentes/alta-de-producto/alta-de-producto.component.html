@@ -84,7 +84,11 @@
                  </form>  
                  <form class="margin-bottom">
                  </form>
-   
+                 <div *ngIf="urlImagen == undefined  && cargoImagen" class="d-flex justify-content-center">
+                  <div class="spinner-grow text-primary" style="width: 3rem; height: 3rem; margin-top: 10%;" role="status">
+                    <span class="sr-only">Loading...</span>
+                  </div>
+                 </div>
                  <div *ngIf="urlImagen!=undefined" class="form-group no-margin">
                     <div class="form-group no-margin">
                       <button type="submit" class="btn btn-primary btn-block">

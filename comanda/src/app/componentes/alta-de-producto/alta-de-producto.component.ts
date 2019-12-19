@@ -26,6 +26,7 @@ export class AltaDeProductoComponent implements OnInit {
   public numeroProducto:number;
   public porcentajeUpload: Observable<number>;
   public noCargando = true;
+  public cargoImagen: boolean;
   public productos:Array<any> = [];
 
   public imgName: string;
@@ -40,6 +41,7 @@ export class AltaDeProductoComponent implements OnInit {
 
         this.imgName = "Seleccionar imágen..";
         this.obtenerProductos();
+        this.cargoImagen=false;
  }
 
  obtenerProductos(){  
@@ -71,7 +73,8 @@ export class AltaDeProductoComponent implements OnInit {
       this.router.navigate(['/principal']);
     }
 
-  ImagenCargada(e) {    
+  ImagenCargada(e) { 
+    this.cargoImagen=true;   
     this.noCargando = false;
     const img = e.target.files[0];
     console.log("cargar imagen")

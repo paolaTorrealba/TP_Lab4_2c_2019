@@ -26,6 +26,7 @@ export class CerrarMesaComponent implements OnInit {
   public estado:string=EstadoMesa.cerrada;
   public activa:string="activa";
   public vacia: boolean;
+  public obtubeMesas:boolean;
   public correo:string;
   public perfil: Perfil;
   public nombre: string;
@@ -39,6 +40,7 @@ export class CerrarMesaComponent implements OnInit {
     private auth: AuthProvider) { 
     this.obtenerUsuario();
     this.obtenerMesas();
+    this.obtubeMesas=false;
   }
 
   ngOnInit() {}
@@ -72,6 +74,7 @@ export class CerrarMesaComponent implements OnInit {
     });
   }
   obtenerMesas(){
+    this.obtubeMesas=true;
     this.data.getListaPedidos("mesas").subscribe(lista => {
       this.mesas=lista;
       for (let j=0; j<=this.pedidosCerrados.length-1;j++){
@@ -82,6 +85,10 @@ export class CerrarMesaComponent implements OnInit {
             }
           }
       } 
+      if (this.mesasParaCerrar==undefined ||this.mesasParaCerrar.length==0 )
+      {
+        this.vacia=true;
+      }
       console.log ("mesasParaCerrar:", this.mesasParaCerrar)    
       this.dataSource = new MatTableDataSource(this.mesasParaCerrar);      
       console.log("mesasParaCerrar: ",this.mesasParaCerrar); 
@@ -104,13 +111,8 @@ export class CerrarMesaComponent implements OnInit {
     });
     
    }
-   cerrarMesa(item){   
-    // this.data.getListaMesas("mesas").subscribe(lista => {
-    //   this.mesas=lista;
-    //   for (let i=0; i<=this.mesas.length-1;i++){
-    //     if(this.mesas[i].codigo==item.codigoMesa){ 
-    //       this.mesa=this.mesas[i];
-    //       console.log("la mesa", this.mesa);
+   cerrarMesa(item){  
+
           item.estado=EstadoMesa.cerrada;
           console.log("actualizo esta mesa: ",item)
           this.auth.actualizarMesa(item).then(res => {
@@ -118,11 +120,7 @@ export class CerrarMesaComponent implements OnInit {
           });  
           console.log("actualizo reservas") 
           this.actualizarReservas(item);      
-      //   }
-      // }
-      
-    // });
-    
+         
    }
 
 

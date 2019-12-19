@@ -86,8 +86,7 @@ export class VerEstadoPedidoComponent implements OnInit {
 // CANCELAR PEDIDOS--------------
   cancelarPedido(item){   
     item.estado=EstadoPedido.cancelado;
-    this.auth.actualizarPedido(item).then(res => {
-      
+    this.auth.actualizarPedido(item).then(res => {      
     }); 
     
     this.cancelarReservas(item); 
@@ -102,11 +101,13 @@ export class VerEstadoPedidoComponent implements OnInit {
        console.log(this.mesas)        
        for(let i=0; i<=this.mesas.length-1; i++){
          if(this.mesas[i].estado==EstadoMesa.reservada &&
-           this.mesas[i].codigo==item.codigoMesa ){
+           this.mesas[i].codigo==item.codigoMesa 
+           ){
            this.miMesa=this.mesas[i];                     
          }
        }         
-       this.miMesa.estado=EstadoMesa.cerrada;              
+       this.miMesa.estado=EstadoMesa.cerrada;
+       console.log("cierro la mesa",this.miMesa )              
        this.auth.actualizarMesa(this.miMesa).then(res => {
            
        });
@@ -114,6 +115,7 @@ export class VerEstadoPedidoComponent implements OnInit {
 }
  
 cancelarReservas(item) { 
+  console.log("cancelo la reserva",item )
  this.tieneReserva=false; 
  this.data.getListaReservas("reservas").subscribe(lista => {
      this.reservas=lista;         
@@ -126,7 +128,8 @@ cancelarReservas(item) {
        }
      }         
      if (this.tieneReserva ){
-         this.miReserva.estado=EstadoReserva.finalizada;       
+         this.miReserva.estado=EstadoReserva.finalizada; 
+         console.log("actualizo la reserva", this.miReserva)      
          this.auth.actualizarReserva(this.miReserva).then(res =>{
          }).catch(error => {
           

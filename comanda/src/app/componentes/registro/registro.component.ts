@@ -27,6 +27,7 @@ export class RegistroComponent implements OnInit {
   public passwordModel: string;
   public captchaVerificado: boolean;
   public accepted: boolean;
+  public cargoImagen:boolean;
   public noCargando = true;
   public porcentajeUpload: Observable<number>;
 
@@ -42,6 +43,7 @@ export class RegistroComponent implements OnInit {
 
     this.imgName = "Seleccionar imágen..";
     this.usuario = this.auth.usuarioVacio();
+    this.cargoImagen=false;
     // this.captchaVerificado = false;
   }
 
@@ -69,6 +71,7 @@ export class RegistroComponent implements OnInit {
  
 
    ImagenCargada(e) {
+    this.cargoImagen=true;
     this.noCargando = false;
     const img = e.target.files[0];
     console.log("img: ", img)

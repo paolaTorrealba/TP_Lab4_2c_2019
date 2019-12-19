@@ -27,6 +27,7 @@ export class AltaEmpleadoComponent implements OnInit {
   public accepted: boolean;
   public porcentajeUpload: Observable<number>;
   public noCargando = true;
+  public cargoImagen:boolean;
 
   public imgName: string;
   public urlImagen: Observable<string>=undefined;
@@ -40,6 +41,7 @@ export class AltaEmpleadoComponent implements OnInit {
 
     this.imgName = "Seleccionar imágen..";
     this.usuario = this.auth.usuarioVacio();
+    this.cargoImagen=false;
     }
 
   ngOnInit() { }
@@ -70,6 +72,7 @@ export class AltaEmpleadoComponent implements OnInit {
   }
 
   ImagenCargada(e) {
+    this.cargoImagen=true;
     this.noCargando = false;
     const img = e.target.files[0];
     console.log("img: ", img)
